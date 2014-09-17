@@ -1,0 +1,41 @@
+package net.waqassiddiqi.app.crew.util;
+
+import java.util.prefs.Preferences;
+
+public class PrefsUtil {
+	
+	public static final String PREF_SERVER_IP = "pref_server_ip";
+	public static final String PREF_SERVER_PORT = "pref_server_port";
+	public static final String PREF_APP_SERVER_MODE = "pref_app_server_mode";
+	
+	public static String getString(String key, String defaultValue) {
+		Preferences prefs = Preferences.userNodeForPackage(net.waqassiddiqi.app.crew.ui.MainFrame.class);
+		return prefs.get(key, defaultValue);
+	}
+	
+	public static void setString(String key, String value) {
+		Preferences prefs = Preferences.userNodeForPackage(net.waqassiddiqi.app.crew.ui.MainFrame.class);
+		prefs.put(key, value);
+	}
+	
+	public static int getInt(String key, int defaultValue) {
+		Preferences prefs = Preferences.userNodeForPackage(net.waqassiddiqi.app.crew.ui.MainFrame.class);
+		return prefs.getInt(key, defaultValue);
+	}
+	
+	public static void setInt(String key, int value) {
+		Preferences prefs = Preferences.userNodeForPackage(net.waqassiddiqi.app.crew.ui.MainFrame.class);
+		prefs.putInt(key, value);
+	}
+	
+	public static boolean getBoolean(String key, boolean defaultValue) {
+		Preferences prefs = Preferences.userNodeForPackage(net.waqassiddiqi.app.crew.ui.MainFrame.class);
+		return prefs.getBoolean(key, defaultValue);
+	}
+	
+	public static void setBoolean(String key, boolean value) {
+		Preferences prefs = Preferences.userNodeForPackage(net.waqassiddiqi.app.crew.ui.MainFrame.class);
+		prefs.putBoolean(key, value);
+	}
+	
+}
