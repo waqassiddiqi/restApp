@@ -13,8 +13,9 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JTabbedPane;
 
+import net.waqassiddiqi.app.crew.controller.CrewFactory;
+import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.ui.AddCrewFrame;
-import net.waqassiddiqi.app.crew.ui.AddVesselFrame;
 import net.waqassiddiqi.app.crew.ui.ListVesselFrame;
 import net.waqassiddiqi.app.crew.ui.MainFrame;
 import net.waqassiddiqi.app.crew.ui.ServerSettingsDialog;
@@ -46,7 +47,6 @@ public class RibbonbarTabControl {
 	private int margin = 0;
 	
 	private ListVesselFrame listVesselFrame = null;
-	private AddVesselFrame addVesselFrame = null;
 	private AddCrewFrame addCrewFrame = null;
 	
 	public RibbonbarTabControl(MainFrame owner, int margin) {
@@ -70,7 +70,7 @@ public class RibbonbarTabControl {
 	}
 	
 	public void setupCrwTab(final JTabbedPane tabbedPane) {
-		tabbedPane.addTab("Crew", new GroupPanel(4,
+		tabbedPane.addTab("  Crew  ", new GroupPanel(4,
 				manageCrewPanel()));
 	}
 	
@@ -110,7 +110,7 @@ public class RibbonbarTabControl {
 		separator.setDrawSideLines(true);
 		separator.setDrawTrailingLine(true);
 
-		WebButton btnListVessel = new WebButton("List Vessels",
+		WebButton btnListVessel = new WebButton("List Crew Members",
 				this.iconsHelper.loadIcon(getClass(), "ribbonbar/vessel_view_32x32.png"));
 
 		btnListVessel.setRolloverDecoratedOnly(true);
@@ -122,13 +122,7 @@ public class RibbonbarTabControl {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				if(listVesselFrame == null) {
-					listVesselFrame = new ListVesselFrame(owner, "List all vessel", 
-							true, true, true, true);
-				}
-				
-				openDesktopFrame(listVesselFrame, true);
+				owner.openDesktopChild((WebInternalFrame) CrewFactory.getInstance().get(), true);
 			}
 		});
 
@@ -140,7 +134,10 @@ public class RibbonbarTabControl {
 	}
 	
 	public void setupVesselsTab(final JTabbedPane tabbedPane) {
-		tabbedPane.addTab("Vessel", new GroupPanel(4,
+		
+		VesselFactory.getInstance().setOwner(owner);
+		
+		tabbedPane.addTab("  Vessel  ", new GroupPanel(4,
 				createVesselsPanel()));
 	}
 	
@@ -168,11 +165,7 @@ public class RibbonbarTabControl {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				if(addVesselFrame == null) {
-					addVesselFrame = new AddVesselFrame(owner, "Add new vessel", false, true, false, true);
-				}
-				
-				openDesktopFrame(addVesselFrame, false);
+				owner.openDesktopChild((WebInternalFrame) VesselFactory.getInstance().getAdd(), false);
 			}
 		});
 		
@@ -210,7 +203,7 @@ public class RibbonbarTabControl {
 	}
 	
 	public void setupSettingsTab(final JTabbedPane tabbedPane) {
-		tabbedPane.addTab("Settings", new GroupPanel(4,
+		tabbedPane.addTab("  Settings  ", new GroupPanel(4,
 				createGeneralSettingsPanel(), getVerticalSeparator(), createServerSettingsPanel()));
 	}
 	

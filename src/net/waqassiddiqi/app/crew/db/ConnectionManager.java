@@ -55,11 +55,11 @@ public class ConnectionManager {
                 + "id bigint auto_increment, "
                 + "vessel_id bigint, "
                 + "first_name VARCHAR(30), " 
-                + "last_name VARCHAR(30) " 
-                + "rank VARCHAR(30) "
-                + "nationality VARCHAR(30) "
-                + "book_number_or_passport VARCHAR(30) "
-                + "signon_date VARCHAR(30) "
+                + "last_name VARCHAR(30), " 
+                + "rank VARCHAR(30), "
+                + "nationality VARCHAR(30), "
+                + "book_number_or_passport VARCHAR(30), "
+                + "signon_date bigint, "
                 + "is_watch_keeper BOOLEAN "
                 + ")";	
 		

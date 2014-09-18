@@ -3,6 +3,8 @@ package net.waqassiddiqi.app.crew.ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JTextField;
+
 import net.waqassiddiqi.app.crew.db.VesselDAO;
 import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.util.NotificationManager;
@@ -11,7 +13,6 @@ import com.alee.extended.layout.TableLayout;
 import com.alee.extended.panel.CenterPanel;
 import com.alee.extended.panel.GroupPanel;
 import com.alee.laf.button.WebButton;
-import com.alee.laf.desktoppane.WebInternalFrame;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.rootpane.WebDialog;
@@ -20,7 +21,7 @@ import com.alee.managers.hotkey.Hotkey;
 import com.alee.managers.hotkey.HotkeyManager;
 import com.alee.utils.SwingUtils;
 
-public class AddVesselFrame extends WebInternalFrame {
+public class AddVesselFrame extends BaseChildFrame {
 	private static final long serialVersionUID = 1L;
 	private WebTextField txtVesselName;
 	private WebTextField txtIMO;
@@ -29,7 +30,7 @@ public class AddVesselFrame extends WebInternalFrame {
 	public AddVesselFrame(final MainFrame owner, String title, boolean resizeable, boolean closeable,
 			boolean maximizeable, boolean iconfiable) {
 		
-		super(title, resizeable, closeable, maximizeable, iconfiable);
+		super(owner, title, resizeable, closeable, maximizeable, iconfiable);
 		
 		setDefaultCloseOperation(WebDialog.DISPOSE_ON_CLOSE);
 
@@ -46,6 +47,8 @@ public class AddVesselFrame extends WebInternalFrame {
 		txtVesselName = new WebTextField(15);
 		txtIMO = new WebTextField(15);
 		txtFlag = new WebTextField(15);
+		
+		addInputField(txtVesselName, txtIMO, txtFlag);
 		
 		content.add(new WebLabel("Vessel Name", WebLabel.TRAILING), "0,0");		
 		content.add(txtVesselName, "1,0");
@@ -64,38 +67,21 @@ public class AddVesselFrame extends WebInternalFrame {
 				
 				if( ((WebButton) e.getSource()) == login ) {
 					
-					if(!validate(txtVesselName.getText())) {
+					if( !validateInput(new JTextField[] { txtVesselName, txtIMO }, "This field is required") ) {
+						boolean bAdded = new VesselDAO().addVessel(
+								new Vessel() { { 
+									setName(txtVesselName.getText());
+									setImo(txtIMO.getText());
+									setFlag(txtFlag.getText());
+								} });
 						
-						NotificationManager.showPopup(owner, 
-								txtVesselName, new String[] { "Vessel name cannot be empty" });
-						
-						txtVesselName.requestFocusInWindow();
-						
-						return;
-					} 
-					
-					if(!validate(txtIMO.getText())) {
-						
-						NotificationManager.showPopup(owner, 
-								txtIMO, new String[] { "IMO cannot be empty" });
-						
-						txtIMO.requestFocusInWindow();
-						
-						return;
+						if(bAdded) {
+							NotificationManager.showNotification("New vessel has been added");						
+							close();
+						}					
 					}
-					
-					boolean bAdded = new VesselDAO().addVessel(
-							new Vessel() { { 
-								setName(txtVesselName.getText());
-								setImo(txtIMO.getText());
-								setFlag(txtFlag.getText());
-							} });
-					
-					if(bAdded) {
-						NotificationManager.showNotification("New vessel has been added");
-						
-						setVisible(false);
-					}
+				} else {
+					close();
 				}
 				
 			}
@@ -111,14 +97,6 @@ public class AddVesselFrame extends WebInternalFrame {
 		HotkeyManager.registerHotkey(this, cancel, Hotkey.ESCAPE);
 		HotkeyManager.registerHotkey(this, login, Hotkey.ENTER);
 	}
-
-	private boolean validate(String val) {
-		if(val == null)
-			return false;
-		
-		if(val.trim().isEmpty())
-			return false;
-		
-		return true;
-	}
+	
+	
 }
