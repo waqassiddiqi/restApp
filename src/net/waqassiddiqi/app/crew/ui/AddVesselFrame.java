@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import net.waqassiddiqi.app.crew.db.VesselDAO;
 import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.util.NotificationManager;
+import net.waqassiddiqi.app.crew.util.PrefsUtil;
 
 import com.alee.extended.layout.TableLayout;
 import com.alee.extended.panel.CenterPanel;
@@ -67,7 +68,7 @@ public class AddVesselFrame extends BaseChildFrame {
 				
 				if( ((WebButton) e.getSource()) == login ) {
 					
-					if( !validateInput(new JTextField[] { txtVesselName, txtIMO }, "This field is required") ) {
+					if( validateInput(new JTextField[] { txtVesselName, txtIMO }, "This field is required") ) {
 						boolean bAdded = new VesselDAO().addVessel(
 								new Vessel() { { 
 									setName(txtVesselName.getText());
@@ -76,7 +77,8 @@ public class AddVesselFrame extends BaseChildFrame {
 								} });
 						
 						if(bAdded) {
-							NotificationManager.showNotification("New vessel has been added");						
+							NotificationManager.showNotification("Vessel details has been saved.");
+							PrefsUtil.setBoolean(PrefsUtil.PREF_VESSEL_ADDED, true);
 							close();
 						}					
 					}

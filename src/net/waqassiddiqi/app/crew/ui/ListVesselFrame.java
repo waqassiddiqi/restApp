@@ -97,7 +97,7 @@ public class ListVesselFrame extends WebInternalFrame {
 				});
 		
 		
-		final GroupPanel titlePanel = new GroupPanel (GroupingType.fillFirst, 5, new WebLabel("<html><b>Vessels List</b></html"), 
+		final GroupPanel titlePanel = new GroupPanel (GroupingType.fillFirst, 5, new WebLabel("<html><b>Vessels List</b></html>"), 
 				btnSaveChanges, restore);
 		
 		initColumnSizes (table);

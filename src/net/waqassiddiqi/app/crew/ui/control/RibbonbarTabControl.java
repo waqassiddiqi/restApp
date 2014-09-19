@@ -61,8 +61,8 @@ public class RibbonbarTabControl {
 		
 		ribbonBarPan.setBackground(new Color(221, 211, 238));
 		
-		setupVesselsTab(ribbonBarPan);
-		setupCrwTab(ribbonBarPan);
+		//setupVesselsTab(ribbonBarPan);
+		setupCrewTab(ribbonBarPan);
 		setupSettingsTab(ribbonBarPan);
 		
 		ribbonBarPan.setFocusable(false);
@@ -72,24 +72,31 @@ public class RibbonbarTabControl {
 				ribbonBarPan) { { setBackground(new Color(252, 248, 252)); setOpaque(true); setFocusable(false); } }.setMargin(this.margin);
 	}
 	
-	public void setupCrwTab(final JTabbedPane tabbedPane) {
+	public void setupCrewTab(final JTabbedPane tabbedPane) {
 		tabbedPane.addTab("  Crew  ", new GroupPanel(4,
 				manageCrewPanel()));
 	}
 	
-	private WebPanel manageCrewPanel() {
+	private WebPanel getRibbonPanel(String panelTitle) {
 		final WebPanel panel = new WebPanel();
 		panel.setUndecorated(false);
 		panel.setLayout(new BorderLayout());
 		panel.setWebColoredBackground(false);
-
+		panel.setBackground(new Color(235, 211, 238));
+		
 		final WebPanel southPanel = new WebPanel();
 		southPanel.setPaintSides(true, false, false, false);
-		setupPanel(southPanel, "Manage Crew");
+		setupPanel(southPanel, panelTitle);
 		panel.add(southPanel, BorderLayout.SOUTH);
+		
+		return panel;
+	}
+	
+	private WebPanel manageCrewPanel() {
+		
 
 		WebButton btnAddVessel = new WebButton("Add Crew",
-				this.iconsHelper.loadIcon(getClass(), "ribbonbar/add_32x32.png"));
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/crew_add_32x32.png"));
 
 		btnAddVessel.setRolloverDecoratedOnly(true);
 		btnAddVessel.setDrawFocus(false);
@@ -108,13 +115,9 @@ public class RibbonbarTabControl {
 				openDesktopFrame(addCrewFrame, false);
 			}
 		});
-		
-		final WebSeparator separator = new WebSeparator(WebSeparator.VERTICAL);
-		separator.setDrawSideLines(true);
-		separator.setDrawTrailingLine(true);
 
-		WebButton btnListVessel = new WebButton("List Crew Members",
-				this.iconsHelper.loadIcon(getClass(), "ribbonbar/vessel_view_32x32.png"));
+		WebButton btnListVessel = new WebButton("Edit Crew",
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/crew_edit_32x32.png"));
 
 		btnListVessel.setRolloverDecoratedOnly(true);
 		btnListVessel.setDrawFocus(false);
@@ -128,9 +131,26 @@ public class RibbonbarTabControl {
 				owner.openDesktopChild((WebInternalFrame) CrewFactory.getInstance().get(), true);
 			}
 		});
+		
+		WebButton btnDeleteCrew = new WebButton("Delete Crew",
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/crew_delete_32x32.png"));
 
-		GroupPanel gpanel = new GroupPanel(4, btnAddVessel, getVerticalSeparator(), btnListVessel);
+		btnDeleteCrew.setRolloverDecoratedOnly(true);
+		btnDeleteCrew.setDrawFocus(false);
+		btnDeleteCrew.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnDeleteCrew.setVerticalTextPosition(AbstractButton.BOTTOM);
+		
+		btnDeleteCrew.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 
+		GroupPanel gpanel = new GroupPanel(4, btnAddVessel, btnListVessel, btnDeleteCrew);
+
+		WebPanel panel = getRibbonPanel("Manage Crew");
 		panel.add(gpanel, BorderLayout.CENTER);
 
 		return panel;
@@ -145,18 +165,6 @@ public class RibbonbarTabControl {
 	}
 	
 	private WebPanel createVesselsPanel() {
-		final WebPanel panel = new WebPanel();
-		panel.setUndecorated(true);
-		
-		panel.setLayout(new BorderLayout());
-		panel.setWebColoredBackground(false);
-		panel.setOpaque(false);
-
-		final WebPanel southPanel = new WebPanel();
-		southPanel.setPaintSides(true, true, true, true);
-		setupPanel(southPanel, "Manage Vessels");
-		panel.add(southPanel, BorderLayout.SOUTH);
-
 		WebButton btnAddVessel = new WebButton("Add Vessel",
 				this.iconsHelper.loadIcon(getClass(), "ribbonbar/add_32x32.png"));
 
@@ -204,6 +212,7 @@ public class RibbonbarTabControl {
 
 		GroupPanel gpanel = new GroupPanel(4, btnAddVessel, getVerticalSeparator(), btnListVessel);
 
+		WebPanel panel = getRibbonPanel("Manage Vessel");
 		panel.add(gpanel, BorderLayout.CENTER);
 
 		return panel;

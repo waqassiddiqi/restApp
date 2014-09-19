@@ -3,15 +3,19 @@ package net.waqassiddiqi.app.crew.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
 import net.waqassiddiqi.app.crew.style.skin.DefaultSkin;
 import net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl;
+import net.waqassiddiqi.app.crew.util.PrefsUtil;
 
 import org.apache.log4j.Logger;
 
@@ -24,6 +28,7 @@ import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.rootpane.WebFrame;
 import com.alee.managers.notification.NotificationManager;
+import com.alee.managers.settings.SettingsManager;
 import com.alee.managers.style.StyleManager;
 import com.alee.utils.ThreadUtils;
 
@@ -69,6 +74,22 @@ public class MainFrame extends WebFrame {
 		pack();
 		setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 		
+		if(!PrefsUtil.getBoolean(PrefsUtil.PREF_VESSEL_ADDED, false)) {
+			net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, MainFrame.this, "No Vessel Found",
+					new String[] { 
+						"In order to continue, vessel details should be entered first",
+						"Click on the button below to enter vessel details"
+					}, 
+						"Add new vessel", 
+					new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							openDesktopChild((WebInternalFrame) VesselFactory.getInstance().getAdd(), false);
+							//NotificationManager.showNotification("Vessel details has been added, you can always edit them from Vessels options");
+						}
+					});
+		}
 		
 	}
 	
@@ -136,10 +157,10 @@ public class MainFrame extends WebFrame {
 		
 		ConnectionManager.getInstance().setupDatabase();
 		
-		StyleManager.setDefaultSkin(DefaultSkin.class.getCanonicalName());
-		
+		StyleManager.setDefaultSkin(DefaultSkin.class.getCanonicalName());		
 		WebLookAndFeel.install();
 		MainFrame.getInstance().display();
+
 	}
 	
 	public static void main(String[] args) throws SQLException {

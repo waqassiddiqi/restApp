@@ -7,6 +7,7 @@ public class PrefsUtil {
 	public static final String PREF_SERVER_IP = "pref_server_ip";
 	public static final String PREF_SERVER_PORT = "pref_server_port";
 	public static final String PREF_APP_SERVER_MODE = "pref_app_server_mode";
+	public static final String PREF_VESSEL_ADDED = "pref_vessel_added";
 	
 	public static String getString(String key, String defaultValue) {
 		Preferences prefs = Preferences.userNodeForPackage(net.waqassiddiqi.app.crew.ui.MainFrame.class);
