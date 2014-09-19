@@ -59,14 +59,17 @@ public class RibbonbarTabControl {
 	public Component getComponent() {
 		final WebTabbedPane ribbonBarPan = new WebTabbedPane ();
 		
+		ribbonBarPan.setBackground(new Color(221, 211, 238));
+		
 		setupVesselsTab(ribbonBarPan);
 		setupCrwTab(ribbonBarPan);
 		setupSettingsTab(ribbonBarPan);
 		
 		ribbonBarPan.setFocusable(false);
+		
 		return new GroupPanel(
 				GroupingType.fillAll, 
-				ribbonBarPan) { { setBackground(Color.white); setOpaque(true); setFocusable(false); } }.setMargin(this.margin);
+				ribbonBarPan) { { setBackground(new Color(252, 248, 252)); setOpaque(true); setFocusable(false); } }.setMargin(this.margin);
 	}
 	
 	public void setupCrwTab(final JTabbedPane tabbedPane) {
@@ -143,12 +146,14 @@ public class RibbonbarTabControl {
 	
 	private WebPanel createVesselsPanel() {
 		final WebPanel panel = new WebPanel();
-		panel.setUndecorated(false);
+		panel.setUndecorated(true);
+		
 		panel.setLayout(new BorderLayout());
 		panel.setWebColoredBackground(false);
+		panel.setOpaque(false);
 
 		final WebPanel southPanel = new WebPanel();
-		southPanel.setPaintSides(true, false, false, false);
+		southPanel.setPaintSides(true, true, true, true);
 		setupPanel(southPanel, "Manage Vessels");
 		panel.add(southPanel, BorderLayout.SOUTH);
 
@@ -160,6 +165,8 @@ public class RibbonbarTabControl {
 		btnAddVessel.setHorizontalTextPosition(AbstractButton.CENTER);
 		btnAddVessel.setVerticalTextPosition(AbstractButton.BOTTOM);
 
+		btnAddVessel.setBackground(new Color(235, 211, 238));
+		
 		btnAddVessel.addActionListener(new ActionListener() {
 			
 			@Override
@@ -209,12 +216,13 @@ public class RibbonbarTabControl {
 	
 	private WebPanel createGeneralSettingsPanel() {
 		final WebPanel panel = new WebPanel();
-		panel.setUndecorated(false);
+		panel.setUndecorated(true);
 		panel.setLayout(new BorderLayout());
 		panel.setWebColoredBackground(false);
+		panel.setOpaque(false);
 
 		final WebPanel southPanel = new WebPanel();
-		southPanel.setPaintSides(true, false, false, false);
+		southPanel.setPaintSides(true, true, true, true);
 		setupPanel(southPanel, "General Settings");
 		panel.add(southPanel, BorderLayout.SOUTH);
 
@@ -272,12 +280,14 @@ public class RibbonbarTabControl {
 	
 	private WebPanel createServerSettingsPanel() {
 		serverSettingsPanel = new WebPanel();
-		serverSettingsPanel.setUndecorated(false);
+		serverSettingsPanel.setUndecorated(true);
 		serverSettingsPanel.setLayout(new BorderLayout());
-		serverSettingsPanel.setWebColoredBackground(false);
+		serverSettingsPanel.setWebColoredBackground(true);
 
+		serverSettingsPanel.setOpaque(false);
+		
 		final WebPanel southPanel = new WebPanel();
-		southPanel.setPaintSides(true, false, false, false);
+		southPanel.setPaintSides(true, true, true, true);
 		setupPanel(southPanel, "Server Settings");
 		serverSettingsPanel.add(southPanel, BorderLayout.SOUTH);
 
@@ -311,7 +321,7 @@ public class RibbonbarTabControl {
 	private void setupPanel(final WebPanel panel, String text) {
 		panel.setUndecorated(false);
 		panel.setMargin(new Insets(3, 3, 3, 3));
-		panel.setRound(StyleConstants.largeRound);
+		panel.setRound(StyleConstants.borderWidth);
 
 		panel.add(new WebLabel(text, WebLabel.CENTER));
 	}

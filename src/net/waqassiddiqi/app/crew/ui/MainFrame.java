@@ -59,7 +59,7 @@ public class MainFrame extends WebFrame {
 		
 		desktopPane = new WebDesktopPane();        
         desktopPane.setOpaque (true);
-        desktopPane.setBackground(Color.white);        
+        desktopPane.setBackground(new Color(252, 248, 252));        
         
         contentPane.add(desktopPane, BorderLayout.CENTER);
         contentPane.add(createRibbonBar(), BorderLayout.NORTH);
