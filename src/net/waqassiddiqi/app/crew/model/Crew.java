@@ -12,6 +12,8 @@ public class Crew {
 	private String passportNumber;
 	private Date signOnDate;
 	private boolean isWatchKeeper;
+	private ScheduleTemplate scheduleOnSea;
+	private ScheduleTemplate scheduleOnPort;
 	
 	public int getId() {
 		return id;
@@ -74,5 +76,93 @@ public class Crew {
 	}
 	public void setWatchKeeper(boolean isWatchKeeper) {
 		this.isWatchKeeper = isWatchKeeper;
+	}
+	
+	public ScheduleTemplate getScheduleOnSea() {
+		return scheduleOnSea;
+	}
+	public void setScheduleOnSea(ScheduleTemplate scheduleOnSea) {
+		this.scheduleOnSea = scheduleOnSea;
+	}
+	
+	public ScheduleTemplate getScheduleOnPort() {
+		return scheduleOnPort;
+	}
+	public void setScheduleOnPort(ScheduleTemplate scheduleOnPort) {
+		this.scheduleOnPort = scheduleOnPort;
+	}	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + id;
+		result = prime * result + (isWatchKeeper ? 1231 : 1237);
+		result = prime * result
+				+ ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result
+				+ ((nationality == null) ? 0 : nationality.hashCode());
+		result = prime * result
+				+ ((passportNumber == null) ? 0 : passportNumber.hashCode());
+		result = prime * result + ((rank == null) ? 0 : rank.hashCode());
+		result = prime * result
+				+ ((signOnDate == null) ? 0 : signOnDate.hashCode());
+		result = prime * result + vesselId;
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Crew other = (Crew) obj;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (id != other.id)
+			return false;
+		if (isWatchKeeper != other.isWatchKeeper)
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (nationality == null) {
+			if (other.nationality != null)
+				return false;
+		} else if (!nationality.equals(other.nationality))
+			return false;
+		if (passportNumber == null) {
+			if (other.passportNumber != null)
+				return false;
+		} else if (!passportNumber.equals(other.passportNumber))
+			return false;
+		if (rank == null) {
+			if (other.rank != null)
+				return false;
+		} else if (!rank.equals(other.rank))
+			return false;
+		if (signOnDate == null) {
+			if (other.signOnDate != null)
+				return false;
+		} else if (!signOnDate.equals(other.signOnDate))
+			return false;
+		if (vesselId != other.vesselId)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return lastName + ", " + firstName;
 	}
 }

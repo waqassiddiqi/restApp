@@ -18,9 +18,9 @@ public class CrewDAO {
 		db = ConnectionManager.getInstance();
 	}
 	
-	public boolean addCrew(Crew crew) {
+	public int addCrew(Crew crew) {
 		
-		int rowCount = db.executeUpdate("INSERT INTO crews(vessel_id, first_name, last_name, " +
+		int generatedId = db.executeInsert("INSERT INTO crews(vessel_id, first_name, last_name, " +
 				"rank, nationality, " +
 				"book_number_or_passport, signon_date, is_watch_keeper) " +
 				"VALUES(?, ?, ?, ?, ?, ?, ?, ?);", 
@@ -32,13 +32,28 @@ public class CrewDAO {
 					});
 		
 		if(log.isDebugEnabled()) {
-			log.debug("Rows affected: " + rowCount);
+			log.debug("Generated ID: " + generatedId);
 		}
 		
-		if(rowCount > 0) 
-			return true;
+		return generatedId;
+	}
+	
+	public int updateCrew(Crew crew) {
 		
-		return false;
+		int generatedId = db.executeUpdate("UPDATE crews SET first_name = ?, last_name = ?, " +
+				"rank = ?, nationality = ?, " +
+				"book_number_or_passport = ?, signon_date = ?, is_watch_keeper = ? WHERE id = ?",
+					new String[] { crew.getFirstName(), crew.getLastName(),
+						crew.getRank(), crew.getNationality(), crew.getPassportNumber(),
+						Long.toString(crew.getSignOnDate().getTime()), 
+						crew.isWatchKeeper() == true ? "1" : "0", Integer.toString(crew.getId())
+					});
+		
+		if(log.isDebugEnabled()) {
+			log.debug("Generated ID: " + generatedId);
+		}
+		
+		return generatedId;
 	}
 	
 	public List<Crew> getAll() {

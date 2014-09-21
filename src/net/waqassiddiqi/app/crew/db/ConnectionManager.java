@@ -64,6 +64,39 @@ public class ConnectionManager {
                 + ")";	
 		
 		executeUpdate(strSqlCrew);
+		
+		String strSqlScheduleTemplate = "CREATE TABLE IF NOT EXISTS schedule_templates("
+                + "id bigint auto_increment, "
+                + "schedule VARCHAR(48), "
+                + "is_on_port BOOLEAN "
+                + ")";	
+		
+		executeUpdate(strSqlScheduleTemplate);
+		
+		String strSqlScheduleRank = "CREATE TABLE IF NOT EXISTS ranks("
+                + "id bigint auto_increment, "
+                + "rank VARCHAR(30) "
+                + ")";	
+		
+		executeUpdate(strSqlScheduleRank);
+		
+		String strSqlRankScheduleTemplate = "CREATE TABLE IF NOT EXISTS ranks_schedule_template("
+                + "id bigint auto_increment, "
+                + "rank_id bigint, "
+                + "schedule_id bigint, "
+                + "is_on_port BOOLEAN "
+                + ")";	
+		
+		executeUpdate(strSqlRankScheduleTemplate);
+		
+		String strSqlCrewScheduleTemplate = "CREATE TABLE IF NOT EXISTS crew_schedule_template("
+                + "id bigint auto_increment, "
+                + "crew_id bigint, "
+                + "schedule_id bigint, "
+                + "is_on_port BOOLEAN "
+                + ")";	
+		
+		executeUpdate(strSqlCrewScheduleTemplate);
 	}
 	
 	public ResultSet executeQuery(String strSql) {
@@ -115,6 +148,50 @@ public class ConnectionManager {
 		return result;
 	}
 	
+	public int executeInsert(String strSql, String... args) {		
+		PreparedStatement stmt = null;
+		
+		if(log.isDebugEnabled()) {
+			StringBuilder sb = new StringBuilder("Executing: " + strSql + " with parameters: [ ");
+			
+			for(String arg : args) {
+				sb.append(arg + ", ");
+			}
+			
+			sb.setLength(sb.length()-2);
+			sb.append(" ]");
+			
+			log.debug(sb.toString());
+		}
+		
+		try {
+			stmt = this.getConnection().prepareStatement(strSql);
+			
+			for(int i=1; i<= args.length; i++) {
+				stmt.setString(i, args[i-1]);
+			}
+			
+			if(stmt.executeUpdate() > 0) {
+				
+				ResultSet generatedKeys = stmt.getGeneratedKeys();
+				if (generatedKeys.next()) {
+					return generatedKeys.getInt(1);
+				}
+				
+			}
+		} catch (SQLException e) {
+			log.error("executeUpdate failed: " + e.getMessage(), e);
+		} finally {
+			try {
+				if (stmt != null) stmt.close();
+			} catch (SQLException ex) {
+				log.error("failed to close db resources: " + ex.getMessage(), ex);
+			}
+		}
+		
+		return -1;
+	}
+	
 	public int executeUpdate(String strSql, String... args) {		
 		PreparedStatement stmt = null;
 		
@@ -125,8 +202,8 @@ public class ConnectionManager {
 				sb.append(arg + ", ");
 			}
 			
-			sb.setLength(sb.length() -1);
-			sb.append("]");
+			sb.setLength(sb.length()-2);
+			sb.append(" ]");
 			
 			log.debug(sb.toString());
 		}
@@ -139,6 +216,7 @@ public class ConnectionManager {
 			}
 			
 			return stmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			log.error("executeUpdate failed: " + e.getMessage(), e);
 		} finally {

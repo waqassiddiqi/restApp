@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import net.waqassiddiqi.app.crew.controller.CrewFactory;
+import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
 import net.waqassiddiqi.app.crew.style.skin.DefaultSkin;
@@ -28,7 +30,6 @@ import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.rootpane.WebFrame;
 import com.alee.managers.notification.NotificationManager;
-import com.alee.managers.settings.SettingsManager;
 import com.alee.managers.style.StyleManager;
 import com.alee.utils.ThreadUtils;
 
@@ -36,7 +37,8 @@ public class MainFrame extends WebFrame {
 	private static final long serialVersionUID = 1L;
 	private Logger log = Logger.getLogger(getClass().getName());
 	private static MainFrame instance = null;
-		
+	
+	private final WebPanel contentPane;
 	private WebMemoryBar memoryBar;
 	private final WebDesktopPane desktopPane;
 	
@@ -51,6 +53,11 @@ public class MainFrame extends WebFrame {
 		return new RibbonbarTabControl(MainFrame.this, 5).getComponent();
 	}
 	
+	private void initFactories() {
+		RankFactory.getInstance().setOwner(this);
+		CrewFactory.getInstance().setOwner(this);
+	}
+	
 	public MainFrame() {
 		super();
 		
@@ -58,7 +65,9 @@ public class MainFrame extends WebFrame {
         
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
-		final WebPanel contentPane = new WebPanel();		
+        initFactories();
+        
+		contentPane = new WebPanel();		
 		setLayout (new BorderLayout());		
 		contentPane.add (createStatusBar(), BorderLayout.SOUTH);
 		
@@ -66,13 +75,21 @@ public class MainFrame extends WebFrame {
         desktopPane.setOpaque (true);
         desktopPane.setBackground(new Color(252, 248, 252));        
         
-        contentPane.add(desktopPane, BorderLayout.CENTER);
+        getContentPane().setBackground(new Color(252, 248, 252));
+        contentPane.setOpaque(false);
+        
+        
+        //desktopPane.add();
+        
+        
         contentPane.add(createRibbonBar(), BorderLayout.NORTH);
         
 		add(contentPane, BorderLayout.CENTER);
 		ThreadUtils.sleepSafely(500);
 		pack();
 		setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+		
+		PrefsUtil.setBoolean(PrefsUtil.PREF_VESSEL_ADDED, true);
 		
 		if(!PrefsUtil.getBoolean(PrefsUtil.PREF_VESSEL_ADDED, false)) {
 			net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, MainFrame.this, "No Vessel Found",
@@ -91,6 +108,25 @@ public class MainFrame extends WebFrame {
 					});
 		}
 		
+	}
+	
+	public void addContent(Component view) {
+		
+		if(activeComponent == null)
+			contentPane.add(view, BorderLayout.CENTER);
+		else {
+			removeContent(activeComponent);
+			contentPane.add(view, BorderLayout.CENTER);
+		}
+		
+		activeComponent = view;
+	}
+	
+	private Component activeComponent = null; 
+	
+	public void removeContent(Component view) {
+		contentPane.remove(view);
+		contentPane.revalidate();
 	}
 	
 	public void openDesktopChild(WebInternalFrame childFrame, boolean openMaximum) {

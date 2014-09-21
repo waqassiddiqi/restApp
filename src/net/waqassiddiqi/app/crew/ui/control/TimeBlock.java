@@ -28,6 +28,10 @@ public class TimeBlock extends JComponent {
 
 	protected BlockType blockType = BlockType.WORK;
 
+	protected int id;
+	
+	protected int rowId;
+	
 	/**
 	 * Preview image corners rounding.
 	 */
@@ -83,7 +87,7 @@ public class TimeBlock extends JComponent {
 	 *            preview image area height
 	 */
 	public TimeBlock(final int width, final int height) {
-		this(width, height, null, BlockType.REST);
+		this(width, height, null, BlockType.WORK);
 	}
 
 	/**
@@ -289,5 +293,21 @@ public class TimeBlock extends JComponent {
 
 	public BlockType getBlockType() {
 		return this.blockType;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return this.id;
+	}
+	
+	public void setRowId(int rowId) {
+		this.rowId = rowId;;
+	}
+	
+	public int getRowId() {
+		return this.rowId;
 	}
 }

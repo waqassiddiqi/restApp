@@ -1,17 +1,13 @@
 package net.waqassiddiqi.app.crew.controller;
 
 import java.awt.Component;
-import java.security.InvalidParameterException;
 
 import net.waqassiddiqi.app.crew.ui.AddVesselFrame;
-import net.waqassiddiqi.app.crew.ui.MainFrame;
 
 public class VesselFactory extends BaseFactory {
 
 	private static VesselFactory instance = null;
 	private AddVesselFrame addVesselFrame = null;
-	
-	private MainFrame owner = null;
 	
 	private VesselFactory() { }
 	
@@ -21,13 +17,6 @@ public class VesselFactory extends BaseFactory {
 		}
 		
 		return instance;
-	}
-	
-	public void setOwner(MainFrame owner) {
-		if(owner != null)
-			this.owner = owner;
-		else
-			throw new InvalidParameterException("Owner cannot be set more than once");
 	}
 	
 	@Override
@@ -48,10 +37,9 @@ public class VesselFactory extends BaseFactory {
 	@Override
 	public Component getAdd() {
 		if(addVesselFrame == null) {
-			addVesselFrame = new AddVesselFrame(owner, "Add new vessel", false, true, false, true);
+			addVesselFrame = new AddVesselFrame(getOwner(), "Add new vessel", false, true, false, true);
 		}
 		
 		return addVesselFrame;
 	}
-	
 }

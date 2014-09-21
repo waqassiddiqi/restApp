@@ -1,10 +1,14 @@
 package net.waqassiddiqi.app.crew.controller;
 
 import java.awt.Component;
+import java.security.InvalidParameterException;
+
+import net.waqassiddiqi.app.crew.ui.MainFrame;
 
 public abstract class BaseFactory {
 	
 	public enum ControllerAction { Get, GetById, Edit, Add };
+	private MainFrame owner = null;
 	
 	public Component getView(ControllerAction action, Object... params) {
 		
@@ -20,8 +24,18 @@ public abstract class BaseFactory {
 			
 			default:
 				return get();
-		}
-		
+		}	
+	}
+	
+	public void setOwner(MainFrame owner) {
+		if(owner != null)
+			this.owner = owner;
+		else
+			throw new InvalidParameterException("Owner cannot be set more than once");
+	}
+	
+	public MainFrame getOwner() {
+		return this.owner;
 	}
 	
 	public abstract Component get();

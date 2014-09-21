@@ -7,16 +7,15 @@ import java.awt.Insets;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JTabbedPane;
 
 import net.waqassiddiqi.app.crew.controller.CrewFactory;
+import net.waqassiddiqi.app.crew.controller.RankFactory;
+import net.waqassiddiqi.app.crew.controller.ReportingFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
-import net.waqassiddiqi.app.crew.ui.AddCrewFrame;
-import net.waqassiddiqi.app.crew.ui.ListVesselFrame;
 import net.waqassiddiqi.app.crew.ui.MainFrame;
 import net.waqassiddiqi.app.crew.ui.ServerSettingsDialog;
 import net.waqassiddiqi.app.crew.ui.icons.IconsHelper;
@@ -28,9 +27,7 @@ import com.alee.extended.button.WebSplitButton;
 import com.alee.extended.panel.GroupPanel;
 import com.alee.extended.panel.GroupingType;
 import com.alee.global.StyleConstants;
-import com.alee.laf.WebLookAndFeel;
 import com.alee.laf.button.WebButton;
-import com.alee.laf.desktoppane.WebInternalFrame;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.menu.WebPopupMenu;
 import com.alee.laf.menu.WebRadioButtonMenuItem;
@@ -46,10 +43,10 @@ public class RibbonbarTabControl {
 	private Logger log = Logger.getLogger(getClass().getName());
 	private int margin = 0;
 	
-	private ListVesselFrame listVesselFrame = null;
-	private AddCrewFrame addCrewFrame = null;
-	
 	public RibbonbarTabControl(MainFrame owner, int margin) {
+		
+		log.info("Initializing RibbonbarTabControl");
+		
 		this.margin = margin;
 		this.iconsHelper = new IconsHelper();
 		this.owner = owner;
@@ -61,9 +58,11 @@ public class RibbonbarTabControl {
 		
 		ribbonBarPan.setBackground(new Color(221, 211, 238));
 		
-		//setupVesselsTab(ribbonBarPan);
+		setupVesselsTab(ribbonBarPan);
 		setupCrewTab(ribbonBarPan);
 		setupSettingsTab(ribbonBarPan);
+		
+		ribbonBarPan.setSelectedIndex(1);
 		
 		ribbonBarPan.setFocusable(false);
 		
@@ -74,61 +73,41 @@ public class RibbonbarTabControl {
 	
 	public void setupCrewTab(final JTabbedPane tabbedPane) {
 		tabbedPane.addTab("  Crew  ", new GroupPanel(4,
-				manageCrewPanel()));
+				createManageCrewPanel(), getVerticalSeparator(), createManageRanksPanel(),
+				getVerticalSeparator(), createCrewReportingPanel()));
 	}
 	
-	private WebPanel getRibbonPanel(String panelTitle) {
-		final WebPanel panel = new WebPanel();
-		panel.setUndecorated(false);
-		panel.setLayout(new BorderLayout());
-		panel.setWebColoredBackground(false);
-		panel.setBackground(new Color(235, 211, 238));
-		
-		final WebPanel southPanel = new WebPanel();
-		southPanel.setPaintSides(true, false, false, false);
-		setupPanel(southPanel, panelTitle);
-		panel.add(southPanel, BorderLayout.SOUTH);
-		
-		return panel;
-	}
-	
-	private WebPanel manageCrewPanel() {
-		
+	private WebPanel createManageCrewPanel() {
 
-		WebButton btnAddVessel = new WebButton("Add Crew",
+		WebButton btnAddCrew = new WebButton("Add Crew",
 				this.iconsHelper.loadIcon(getClass(), "ribbonbar/crew_add_32x32.png"));
 
-		btnAddVessel.setRolloverDecoratedOnly(true);
-		btnAddVessel.setDrawFocus(false);
-		btnAddVessel.setHorizontalTextPosition(AbstractButton.CENTER);
-		btnAddVessel.setVerticalTextPosition(AbstractButton.BOTTOM);
+		btnAddCrew.setRolloverDecoratedOnly(true);
+		btnAddCrew.setDrawFocus(false);
+		btnAddCrew.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnAddCrew.setVerticalTextPosition(AbstractButton.BOTTOM);
 
-		btnAddVessel.addActionListener(new ActionListener() {
+		btnAddCrew.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				if(addCrewFrame == null) {
-					addCrewFrame = new AddCrewFrame(owner, "Add new crew member", false, true, false, true);
-				}
-				
-				openDesktopFrame(addCrewFrame, false);
+				owner.addContent(CrewFactory.getInstance().getAdd());
 			}
 		});
 
-		WebButton btnListVessel = new WebButton("Edit Crew",
+		WebButton btnListCrew = new WebButton("Edit Crew",
 				this.iconsHelper.loadIcon(getClass(), "ribbonbar/crew_edit_32x32.png"));
 
-		btnListVessel.setRolloverDecoratedOnly(true);
-		btnListVessel.setDrawFocus(false);
-		btnListVessel.setHorizontalTextPosition(AbstractButton.CENTER);
-		btnListVessel.setVerticalTextPosition(AbstractButton.BOTTOM);
+		btnListCrew.setRolloverDecoratedOnly(true);
+		btnListCrew.setDrawFocus(false);
+		btnListCrew.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnListCrew.setVerticalTextPosition(AbstractButton.BOTTOM);
 		
-		btnListVessel.addActionListener(new ActionListener() {
+		btnListCrew.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				owner.openDesktopChild((WebInternalFrame) CrewFactory.getInstance().get(), true);
+				owner.addContent(CrewFactory.getInstance().get());
 			}
 		});
 		
@@ -148,9 +127,77 @@ public class RibbonbarTabControl {
 			}
 		});
 
-		GroupPanel gpanel = new GroupPanel(4, btnAddVessel, btnListVessel, btnDeleteCrew);
+		GroupPanel gpanel = new GroupPanel(4, btnAddCrew, btnListCrew, btnDeleteCrew);
 
 		WebPanel panel = getRibbonPanel("Manage Crew");
+		panel.add(gpanel, BorderLayout.CENTER);
+
+		return panel;
+	}
+	
+	private WebPanel createManageRanksPanel() {
+
+		WebButton btnRank = new WebButton("Add Rank",
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/rank_32x32.png"));
+
+		btnRank.setRolloverDecoratedOnly(true);
+		btnRank.setDrawFocus(false);
+		btnRank.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnRank.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnRank.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(RankFactory.getInstance().getAdd());
+			}
+		});
+
+		WebButton btnListRanks = new WebButton("List Ranks",
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/list_32x32.png"));
+
+		btnListRanks.setRolloverDecoratedOnly(true);
+		btnListRanks.setDrawFocus(false);
+		btnListRanks.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnListRanks.setVerticalTextPosition(AbstractButton.BOTTOM);
+		
+		btnListRanks.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(RankFactory.getInstance().get());
+			}
+		});
+
+		GroupPanel gpanel = new GroupPanel(4, btnRank, btnListRanks);
+
+		WebPanel panel = getRibbonPanel("Manage Ranks");
+		panel.add(gpanel, BorderLayout.CENTER);
+
+		return panel;
+	}
+	
+	private WebPanel createCrewReportingPanel() {
+
+		WebButton btnAddRestHour = new WebButton("Enter Hours",
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/add_rest_hours_32x32.png"));
+
+		btnAddRestHour.setRolloverDecoratedOnly(true);
+		btnAddRestHour.setDrawFocus(false);
+		btnAddRestHour.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnAddRestHour.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnAddRestHour.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(ReportingFactory.getInstance().getAdd());
+			}
+		});
+
+		GroupPanel gpanel = new GroupPanel(4, btnAddRestHour);
+
+		WebPanel panel = getRibbonPanel("Reporting");
 		panel.add(gpanel, BorderLayout.CENTER);
 
 		return panel;
@@ -160,8 +207,7 @@ public class RibbonbarTabControl {
 		
 		VesselFactory.getInstance().setOwner(owner);
 		
-		tabbedPane.addTab("  Vessel  ", new GroupPanel(4,
-				createVesselsPanel()));
+		tabbedPane.addTab("  Home  ", new GroupPanel(4, new WebLabel()));
 	}
 	
 	private WebPanel createVesselsPanel() {
@@ -179,8 +225,7 @@ public class RibbonbarTabControl {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				owner.openDesktopChild((WebInternalFrame) VesselFactory.getInstance().getAdd(), false);
+				owner.addContent(RankFactory.getInstance().getAdd());
 			}
 		});
 		
@@ -200,13 +245,6 @@ public class RibbonbarTabControl {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				if(listVesselFrame == null) {
-					listVesselFrame = new ListVesselFrame(owner, "List all vessel", 
-							true, true, true, true);
-				}
-				
-				openDesktopFrame(listVesselFrame, true);
 			}
 		});
 
@@ -343,28 +381,18 @@ public class RibbonbarTabControl {
         return separator;
 	}
 	
-	private void openDesktopFrame(WebInternalFrame childFrame, boolean openMaximum) {
+	private WebPanel getRibbonPanel(String panelTitle) {
+		final WebPanel panel = new WebPanel();
+		panel.setUndecorated(false);
+		panel.setLayout(new BorderLayout());
+		panel.setWebColoredBackground(false);
+		panel.setBackground(new Color(235, 211, 238));
 		
-		WebLookAndFeel.setDecorateFrames ( false );
+		final WebPanel southPanel = new WebPanel();
+		southPanel.setPaintSides(true, false, false, false);
+		setupPanel(southPanel, panelTitle);
+		panel.add(southPanel, BorderLayout.SOUTH);
 		
-		childFrame.pack();
-		
-		if(childFrame.isVisible() == false) {
-			owner.addChildDesktopContent(childFrame);
-			childFrame.setVisible(true);
-		} else {
-			owner.activateChildDesktopFrame(childFrame);
-		}
-		
-		
-		if(openMaximum) {
-			try {
-				childFrame.setMaximum(true);
-			} catch (PropertyVetoException e1) {
-				log.warn(e1.getMessage(), e1);
-			}
-		}
-		
-		WebLookAndFeel.setDecorateFrames(false);
+		return panel;
 	}
 }

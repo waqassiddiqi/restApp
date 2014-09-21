@@ -7,10 +7,13 @@ import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 
 import net.waqassiddiqi.app.crew.ui.control.TimeBlock.BlockType;
 
@@ -27,24 +30,58 @@ import com.alee.utils.SwingUtils;
 public class TimeSheet {
 	
 	protected BlockType selectedBlockType;
+	protected Date[] dates;
+	protected Date startDate = null;
+	protected int rows = 1;
+	protected Boolean[] scheduleList = new Boolean[48];
+	protected TimeBlock[] timeBlocks = new TimeBlock[48];
+	private boolean showLegend = true;
+	private int blockSize = 25;
+	private Component view;
+	private float totalRest = 0.0f;
+	private float totalWork = 24.0f;
 	
-	public TimeSheet() {
-		this.selectedBlockType = BlockType.WORK;
+	private ChangeListener changeListener = null;
+	
+	public TimeSheet(int blockSize) {
+		this(blockSize, BlockType.WORK, true, true, 1, new Date());
+	}
+	
+	public TimeSheet(int blockSize, BlockType blockType, boolean showTitles, boolean showLegend, int days, Date startDate) {
+		this.selectedBlockType = blockType;
+		rows = days;
+		this.startDate = startDate;
+		this.showLegend = showLegend;
+		this.blockSize = blockSize;
+		
+		initView();
+	}
+	
+	public Boolean[] getSchedule() {
+		return scheduleList;
+	}
+	
+	private void initView() {
+		if(this.showLegend) {
+			final GroupPanel legendPanel = new GroupPanel(1, false, getLegendPanel()); 
+			final GroupPanel titlePanel = new GroupPanel ( GroupingType.fillFirst, 5, legendPanel);
+			
+			view = new GroupPanel(GroupingType.fillLast, 10, false, getGrid(rows), titlePanel.setMargin(6)).setMargin(10);
+		} else {
+			view = new GroupPanel(GroupingType.fillLast, 10, false, getGrid(rows)).setMargin(10);
+		}
 	}
 	
 	public Component getView() {
+		if(view == null)
+			initView();
 		
-		
-		
-		final GroupPanel legendPanel = new GroupPanel(1, false, getLegendPanel()); 
-		final GroupPanel titlePanel = new GroupPanel ( GroupingType.fillFirst, 5, legendPanel);
-		
-		return new GroupPanel ( GroupingType.fillLast, 10, false, getGrid(2), titlePanel.setMargin(6) ).setMargin ( 10 );
+		return view;
 	}
 	
-	private Component getLegendPanel() {;;
+	private Component getLegendPanel() {
         
-        TimeBlock workBlock = new TimeBlock(25, 25, BlockType.WORK);
+        TimeBlock workBlock = new TimeBlock(blockSize, blockSize, BlockType.WORK);
 		TooltipManager.setTooltip ( workBlock, "Double click to select", TooltipWay.down );
 		workBlock.addMouseListener(new MouseListener() {
 			
@@ -66,7 +103,7 @@ public class TimeSheet {
 			public void mouseClicked(MouseEvent e) { }
 		});
 		
-		TimeBlock restBlock = new TimeBlock(25, 25, BlockType.REST);
+		TimeBlock restBlock = new TimeBlock(blockSize, blockSize, BlockType.REST);
 		TooltipManager.setTooltip ( restBlock, "Double click to select", TooltipWay.down );
 		restBlock.addMouseListener(new MouseListener() {
 			
@@ -95,21 +132,26 @@ public class TimeSheet {
 	}
 	
 	private Component getGrid(int rowsCount) {
+		
+		Arrays.fill(scheduleList, Boolean.TRUE);
+		
 		final WebPanel groupPanel = new WebPanel();
 		groupPanel.putClientProperty(SwingUtils.HANDLES_ENABLE_STATE, true);
 		groupPanel.setOpaque(true);
     	
-		int size = rowsCount;
+		dates = new Date[rowsCount];
+		
+		int size = rowsCount + 1;
 		
 		final int rowsAmount = size > 1 ? size * 2 - 1 : 1;
         final double[] rows = new double[ 6 + rowsAmount ];
         rows[ 0 ] = TableLayout.FILL;
         rows[ 1 ] = 20;
         rows[ 2 ] = TableLayout.PREFERRED;
-        for ( int i = 3; i < rows.length - 3; i++ )
-        {
-            rows[ i ] = TableLayout.PREFERRED;
-        }
+		for (int i = 3; i < rows.length - 3; i++) {
+			rows[i] = TableLayout.PREFERRED;
+		}
+		
         rows[ rows.length - 3 ] = TableLayout.PREFERRED;
         rows[ rows.length - 2 ] = 20;
         rows[ rows.length - 1 ] = TableLayout.FILL;
@@ -137,104 +179,47 @@ public class TimeSheet {
         	groupPanel.add(getLabel("|" + (i-2)), i + ",1");
         }
         
+        MouseAdapter ma = new MouseAdapter() {
+        	@Override
+			public void mousePressed(MouseEvent e) {
+				if(((TimeBlock) e.getComponent()).getBlockType() == BlockType.REST) {
+					TimeSheet.this.selectedBlockType = BlockType.WORK;
+					
+					//TimeSheet.this.scheduleList.get(
+					//		((TimeBlock) e.getComponent()).getRowId())[((TimeBlock) e.getComponent()).getId()] = true;
+					
+				} else {
+					TimeSheet.this.selectedBlockType = BlockType.REST;
+					
+					//TimeSheet.this.scheduleList.get(
+					//		((TimeBlock) e.getComponent()).getRowId())[((TimeBlock) e.getComponent()).getId()] = false;
+				}
+				
+				
+			}
+		};
+        
         for(int i=1; i<size; i++) {        	        	
-        	//groupPanel.add(getLabel(sdf.format(cal.getTime())), 0 + "," + row);        	
-        	//cal.add(Calendar.DAY_OF_MONTH, 1);
-        	
-        	
+        	int blockId = 0;
         	for(int j=2; j<26; j++) {
-        		//WebToggleButton b1 = new WebToggleButton(loadIcon("buttons/spacerL.JPG"));    		
-        		//b1.setSelectedIcon(loadIcon("buttons/gray.png"));
+        		TimeBlock firstBlock = new TimeBlock (this.blockSize, this.blockSize);
+        		firstBlock.setId(blockId);
+        		firstBlock.setRowId(i-1);
+        		firstBlock.addMouseListener(ma);
         		
-        		//WebToggleButton b2 = new WebToggleButton(loadIcon("buttons/spacerL.JPG"));    		
-        		//b2.setSelectedIcon(loadIcon("buttons/gray.png"));
+        		timeBlocks[blockId++] = firstBlock;
         		
+        		TimeBlock secondBlock = new TimeBlock(this.blockSize, this.blockSize);
+        		secondBlock.setId(blockId);
+        		secondBlock.setRowId(i-1);
+        		secondBlock.addMouseListener(ma);
         		
-                //iconsGroup.setButtonsDrawFocus (false);
-        		TimeBlock x321 = new TimeBlock ( 25, 25 );
+        		timeBlocks[blockId++] = secondBlock;
         		
-        		x321.addMouseListener(new MouseListener() {
-					
-					@Override
-					public void mouseReleased(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void mousePressed(MouseEvent e) {
-						if(((TimeBlock) e.getComponent()).getBlockType() == BlockType.REST) {
-							TimeSheet.this.selectedBlockType = BlockType.WORK;
-						} else {
-							TimeSheet.this.selectedBlockType = BlockType.REST;
-						}
-					}
-					
-					@Override
-					public void mouseExited(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void mouseEntered(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-				});
+        		new TimeBlockDragDropTargetListener(firstBlock);
+        		new TimeBlockDragDropTargetListener(secondBlock);
         		
-        		TimeBlock x322 = new TimeBlock ( 25, 25 );
-        		x322.addMouseListener(new MouseListener() {
-					
-					@Override
-					public void mouseReleased(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void mousePressed(MouseEvent e) {
-						if(((TimeBlock) e.getComponent()).getBlockType() == BlockType.REST) {
-							TimeSheet.this.selectedBlockType = BlockType.WORK;
-						} else {
-							TimeSheet.this.selectedBlockType = BlockType.REST;
-						}
-					}
-					
-					@Override
-					public void mouseExited(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void mouseEntered(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-				});
-
-        		
-        		
-        		new TimeBlockDragDropTargetListener(x321);
-        		new TimeBlockDragDropTargetListener(x322);
-        		
-        		//WebButtonGroup dropGroup = new WebButtonGroup ( false, x321, x322 );
-        		
-        		GroupPanel dropGroup = new GroupPanel ( 0, x321, x322);
-        		
+        		GroupPanel dropGroup = new GroupPanel ( 0, firstBlock, secondBlock);	
                 groupPanel.add(dropGroup, j + "," + row);
         	}
         	
@@ -295,8 +280,74 @@ public class TimeSheet {
 			if(component.getBlockType() != selectedBlockType) {
 				component.setBlockType(selectedBlockType);
 				component.repaint();
+				
+				if(component.getBlockType() == BlockType.WORK) {
+					totalRest -= 0.5;
+					totalWork = 24 - totalRest;
+				} else {
+					totalWork -= 0.5;
+					totalRest = 24 - totalWork;
+				}
 			}
-		}
+			
+			int blockId = component.getId();
+			boolean bWork = false;
+			
+			if(selectedBlockType == BlockType.WORK) {
+				bWork = true;
+			}
+			
+			setSchedule(blockId, bWork);
+		}	
+	}
+	
+	public void setSchedule(int rowId, Boolean[] scheduleArray) {
+		BlockType type = BlockType.REST;
 		
+		for(int i=0; i<scheduleArray.length; i++) {
+			if(scheduleArray[i]) {
+				type = BlockType.WORK;
+			} else {
+				type = BlockType.REST;
+			}
+			
+			if(timeBlocks[i].getBlockType() != type) {
+				timeBlocks[i].setBlockType(type);
+				timeBlocks[i].repaint();
+				
+				if(scheduleArray[i]) {
+					totalRest -= 0.5;
+					totalWork = 24 - totalRest;
+				} else {
+					totalWork -= 0.5;
+					totalRest = 24 - totalWork;
+				}
+			}
+			
+			setSchedule(timeBlocks[i].getId(), scheduleArray[i]);
+		}
+	}
+	
+	public float getTotalRest() {
+		return this.totalRest;
+	}
+	
+	public float getTotalWork() {
+		return this.totalWork;
+	}
+	
+	private void setSchedule(int blockId, boolean isWork) {
+		this.scheduleList[blockId] = isWork;
+		
+		if(this.changeListener != null)
+			changeListener.changed(totalRest, totalWork);
+	}
+	
+	public void setChangeListener(ChangeListener listener) {
+		this.changeListener = listener;
+	}
+	
+	public interface ChangeListener {
+		public void changed(float totalRest, float totalWork);
 	}
 }

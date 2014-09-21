@@ -1,19 +1,13 @@
 package net.waqassiddiqi.app.crew.controller;
 
 import java.awt.Component;
-import java.security.InvalidParameterException;
 
-import net.waqassiddiqi.app.crew.ui.AddCrewFrame;
-import net.waqassiddiqi.app.crew.ui.ListCrewFrame;
-import net.waqassiddiqi.app.crew.ui.MainFrame;
+import net.waqassiddiqi.app.crew.ui.AddCrewForm;
+import net.waqassiddiqi.app.crew.ui.ListCrewForm;
 
 public class CrewFactory extends BaseFactory {
 
 	private static CrewFactory instance = null;
-	private AddCrewFrame addCrewFrame = null;
-	private ListCrewFrame listCrewFrame = null;
-	
-	private MainFrame owner = null;
 	
 	private CrewFactory() { }
 	
@@ -25,21 +19,9 @@ public class CrewFactory extends BaseFactory {
 		return instance;
 	}
 	
-	public void setOwner(MainFrame owner) {
-		if(owner != null)
-			this.owner = owner;
-		else
-			throw new InvalidParameterException("Owner cannot be set more than once");
-	}
-	
 	@Override
 	public Component get() {
-		if(listCrewFrame == null) {
-			listCrewFrame = new ListCrewFrame(owner, "List all crew members", 
-					true, true, true, true);
-		}
-		
-		return listCrewFrame;
+		return new ListCrewForm(getOwner()).getView();
 	}
 
 	@Override
@@ -54,11 +36,7 @@ public class CrewFactory extends BaseFactory {
 
 	@Override
 	public Component getAdd() {
-		if(addCrewFrame == null) {
-			addCrewFrame = new AddCrewFrame(owner, "Add new crew", false, true, false, true);
-		}
-		
-		return addCrewFrame;
+		return new AddCrewForm(getOwner()).getView();
 	}
 	
 }
