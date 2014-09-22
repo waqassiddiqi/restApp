@@ -12,8 +12,7 @@ public class Crew {
 	private String passportNumber;
 	private Date signOnDate;
 	private boolean isWatchKeeper;
-	private ScheduleTemplate scheduleOnSea;
-	private ScheduleTemplate scheduleOnPort;
+	private ScheduleTemplate scheduleTemplate;
 	
 	public int getId() {
 		return id;
@@ -78,19 +77,12 @@ public class Crew {
 		this.isWatchKeeper = isWatchKeeper;
 	}
 	
-	public ScheduleTemplate getScheduleOnSea() {
-		return scheduleOnSea;
+	public ScheduleTemplate getScheduleTemplate() {
+		return scheduleTemplate;
 	}
-	public void setScheduleOnSea(ScheduleTemplate scheduleOnSea) {
-		this.scheduleOnSea = scheduleOnSea;
+	public void setScheduleTemplate(ScheduleTemplate scheduleTemplate) {
+		this.scheduleTemplate = scheduleTemplate;
 	}
-	
-	public ScheduleTemplate getScheduleOnPort() {
-		return scheduleOnPort;
-	}
-	public void setScheduleOnPort(ScheduleTemplate scheduleOnPort) {
-		this.scheduleOnPort = scheduleOnPort;
-	}	
 	
 	@Override
 	public int hashCode() {

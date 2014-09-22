@@ -38,6 +38,16 @@ public class ScheduleTemplate {
 		
 		return sb.toString();
 	}
+	
+	public static String getScheduleString(Boolean[] scheduleArray) {
+		StringBuilder sb = new StringBuilder();
+		
+		for(Boolean b : scheduleArray) {
+			sb.append( (b == true) ? 1 : 0);
+		}
+		
+		return sb.toString();	
+	}
 
 	public boolean isOnPort() {
 		return isOnPort;

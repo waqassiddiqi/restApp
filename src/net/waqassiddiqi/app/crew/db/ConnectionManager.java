@@ -97,6 +97,19 @@ public class ConnectionManager {
                 + ")";	
 		
 		executeUpdate(strSqlCrewScheduleTemplate);
+		
+		String strSqlEntryTime = "CREATE TABLE IF NOT EXISTS entry_times("
+                + "id bigint auto_increment, "
+                + "crew_id bigint, "
+                + "entry_date bigint, "
+                + "schedule VARCHAR(48), "
+                + "is_on_port BOOLEAN, "
+                + "work_in_24_hours REAL, "
+                + "rest_in_24_hours REAL, "
+                + "comments VARCHAR(500) "
+                + ")";	
+		
+		executeUpdate(strSqlEntryTime);
 	}
 	
 	public ResultSet executeQuery(String strSql) {

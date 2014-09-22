@@ -13,6 +13,7 @@ import javax.swing.SwingUtilities;
 
 import net.waqassiddiqi.app.crew.controller.CrewFactory;
 import net.waqassiddiqi.app.crew.controller.RankFactory;
+import net.waqassiddiqi.app.crew.controller.ReportingFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
 import net.waqassiddiqi.app.crew.style.skin.DefaultSkin;
@@ -85,6 +86,9 @@ public class MainFrame extends WebFrame {
         contentPane.add(createRibbonBar(), BorderLayout.NORTH);
         
 		add(contentPane, BorderLayout.CENTER);
+		
+		this.addContent(ReportingFactory.getInstance().getById("rest"));
+		
 		ThreadUtils.sleepSafely(500);
 		pack();
 		setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);

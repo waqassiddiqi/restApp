@@ -3,24 +3,25 @@ package net.waqassiddiqi.app.crew.ui;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.JTextField;
-
 import net.waqassiddiqi.app.crew.db.CrewDAO;
+import net.waqassiddiqi.app.crew.db.EntryTimeDAO;
 import net.waqassiddiqi.app.crew.db.ScheduleTemplateDAO;
 import net.waqassiddiqi.app.crew.model.Crew;
-import net.waqassiddiqi.app.crew.model.ScheduleTemplate;
+import net.waqassiddiqi.app.crew.model.EntryTime;
 import net.waqassiddiqi.app.crew.ui.control.TimeSheet;
 import net.waqassiddiqi.app.crew.ui.control.TimeSheet.ChangeListener;
-import net.waqassiddiqi.app.crew.util.InputValidator;
+import net.waqassiddiqi.app.crew.util.CalendarUtil;
 import net.waqassiddiqi.app.crew.util.NotificationManager;
 
+import com.alee.extended.date.DateSelectionListener;
 import com.alee.extended.date.WebCalendar;
-import com.alee.extended.date.WebDateField;
 import com.alee.extended.layout.TableLayout;
 import com.alee.extended.panel.GroupPanel;
+import com.alee.global.StyleConstants;
 import com.alee.laf.button.WebButton;
 import com.alee.laf.checkbox.WebCheckBox;
 import com.alee.laf.combobox.WebComboBox;
@@ -28,35 +29,53 @@ import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.tabbedpane.WebTabbedPane;
 import com.alee.laf.text.WebTextField;
+import com.alee.managers.hotkey.Hotkey;
+import com.alee.managers.hotkey.HotkeyManager;
 
-public class AddRestHourForm extends BaseForm implements ActionListener, ChangeListener {
-	private int id = -1;
+public class AddRestHourForm extends BaseForm implements ActionListener, ChangeListener, DateSelectionListener {
 	
 	private WebComboBox cmbCrew;
 	private WebTextField txtHoursOfRest24Hrs;
 	private WebTextField txtHoursOfWork24Hrs;
-	private WebTextField txtNationality;
-	private WebTextField txtPassport;
-	private WebDateField txtSignonDate;
-	private WebCheckBox chkWatchkeeper;
+	private WebCheckBox chkOnPort;
 	private WebTabbedPane tabPan;
 	private Crew currentCrew = null;
 	private List<Crew> listCrew;
-	private TimeSheet timeSheet;;
+	private TimeSheet timeSheet;
+	private ScheduleTemplateDAO scheduleTemplateDao;
+	private WebCalendar calendar;
+	private WebCheckBox chkAutoSave;
+	private Date currentDate;
 	
 	public AddRestHourForm(MainFrame owner) {
-		super(owner);
+		this(owner, -1);
 	}
 	
 	public AddRestHourForm(MainFrame owner, int id) {
 		super(owner);
-		this.id = id;
+		
+		scheduleTemplateDao = new ScheduleTemplateDAO();
+		currentDate = new Date();
+		calendar = new WebCalendar(currentDate);
 	}
 	
 	@SuppressWarnings("serial")
 	@Override
 	public void setupToolBar() {
-		getToolbar().add(new WebLabel("Repotring") {{ setDrawShade(true); setMargin(10); }});
+		getToolbar().add(new WebLabel("Resting Hour Report Entry") {{ setDrawShade(true); setMargin(10); }});
+		
+		getToolbar().addSeparator();
+		
+		WebButton btnSaveNext = WebButton.createIconWebButton(getIconsHelper().loadIcon("common/save_all_16x16.png"),
+				StyleConstants.smallRound, true);
+		btnSaveNext.putClientProperty("command", "saveAndNext");
+		btnSaveNext.addActionListener(this);
+		btnSaveNext.setToolTipText("Save and move to next date (CTRL + Shift + S)");
+		
+		getToolbar().add(btnSaveNext);
+		
+		HotkeyManager.registerHotkey(getOwner(), btnSaveNext, Hotkey.CTRL_SHIFT_S);
+		
 		super.setupToolBar();
 	}
 	
@@ -74,14 +93,20 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 	@SuppressWarnings("serial")
 	private Component getForm() {	
 		
+		calendar.addDateSelectionListener(this);
+		
 		cmbCrew = new WebComboBox();
+		cmbCrew.setActionCommand("crewSelectedChanged");
+		cmbCrew.addActionListener(this);
+		chkOnPort = new WebCheckBox("on Port?");
+		chkAutoSave = new WebCheckBox("Auto save on change date");
+		
 		refreshData();
 		bindData();
 		
 		GroupPanel leftPanel = new GroupPanel(false, 
-				new WebLabel("Select Crew:"),
-				cmbCrew,
-				new WebCalendar(new Date()));
+				new GroupPanel(10, cmbCrew, chkOnPort),
+				new GroupPanel(10, false, calendar, chkAutoSave));
 		
 		timeSheet = new TimeSheet(22);
 		timeSheet.setChangeListener(this);
@@ -138,28 +163,60 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		WebButton btnSource = (WebButton) e.getSource();
 		
-		if(btnSource.getClientProperty("command").equals("close")) {
+		if(e.getSource() instanceof WebComboBox) {
 			
-		} else if(btnSource.getClientProperty("command").equals("new")) {
-			this.id = -1;
-			this.currentCrew = null;
-			
-			txtHoursOfRest24Hrs.setText("0");
-			txtHoursOfWork24Hrs.setText("0");
-			
-			txtNationality.setText("");
-			txtPassport.setText("");
-			txtSignonDate.setText("");
-			
-		} else if(btnSource.getClientProperty("command").equals("save")) {
-			
-			if(cmbCrew.getSelectedItem() instanceof Crew) {
+			if( ((WebComboBox) e.getSource()).getActionCommand().equals("crewSelectedChanged")) {
 				
-			} else {
-				NotificationManager.showPopup(getOwner(), cmbCrew, new String[] { "Please select crew" });
-				return;
+				if(cmbCrew.getSelectedItem() instanceof Crew) {
+					
+					currentCrew = (Crew) cmbCrew.getSelectedItem();
+					
+					currentCrew.setScheduleTemplate(scheduleTemplateDao.getByCrew(currentCrew));
+					
+					if(currentCrew.getScheduleTemplate() != null) {
+						timeSheet.setSchedule(currentCrew.getScheduleTemplate().getSchedule());
+					}
+				}
+				
+			} 
+			
+		} else {
+			WebButton btnSource = (WebButton) e.getSource();
+			
+			if(btnSource.getClientProperty("command").equals("saveAndNext")) {
+				
+			} else if(btnSource.getClientProperty("command").equals("new")) {
+				
+				
+			} else if(btnSource.getClientProperty("command").equals("save")) {
+				
+				if(currentCrew == null) {
+					NotificationManager.showPopup(getOwner(), cmbCrew, new String[] { "Please select crew" });
+					return;
+				}
+				
+				saveRestingHour();
+			}
+		}
+	}
+	
+	private void saveRestingHour() {
+		
+		if(currentCrew != null) {
+			EntryTime entryTime = new EntryTime();
+			
+			entryTime.setEntryDate(getDate(currentDate));
+			entryTime.setCrewId(currentCrew.getId());
+			entryTime.setComments("");
+			entryTime.setOnPort(chkOnPort.isSelected());
+			entryTime.setSchedule(timeSheet.getSchedule());
+			entryTime.setWorkIn24Hours(timeSheet.getTotalWork());
+			entryTime.setRestIn24Hours(timeSheet.getTotalRest());
+			
+			if(new EntryTimeDAO().addUpdateEntry(entryTime) > 0) {
+				NotificationManager.showNotification("<html>Resting hours has been saved for<br/>" + 
+						CalendarUtil.format("MMM dd, yyyy", getDate(this.calendar.getDate())) + "</html>");
 			}
 		}
 	}
@@ -168,5 +225,31 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 	public void changed(float totalRest, float totalWork) {
 		txtHoursOfRest24Hrs.setText(Float.toString(totalRest));
 		txtHoursOfWork24Hrs.setText(Float.toString(totalWork));
+	}
+
+	@Override
+	public void dateSelected(Date selectedDate) {
+		if(currentCrew != null) {
+			
+			if(chkAutoSave.isSelected()) {
+				saveRestingHour();
+			}
+			
+			EntryTime entry = new EntryTimeDAO().getByDateAndCrew(getDate(selectedDate), currentCrew);
+			
+			if(entry != null) {
+				timeSheet.setSchedule(entry.getSchedule());
+			}
+		}
+		
+		currentDate = selectedDate;
+	}
+	
+	private Date getDate(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		CalendarUtil.toBeginningOfTheDay(cal);
+		
+		return cal.getTime();
 	}
 }

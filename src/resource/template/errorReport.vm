@@ -1,0 +1,91 @@
+
+<style type="text/css">
+<!--
+
+.smallFont{
+font-size:7pt;
+font-family:Arial
+}
+.tableHeader {
+font-size:8pt;
+font-family:Arial
+}
+.BlueFont {
+	color: #0000FF;
+	font-family:Arial
+}
+
+
+-->
+</style>
+
+<!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name></x:Name><x:WorksheetOptions><x:Selected/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+<body>
+	<table width="700" align="center">
+	  <tr>
+	    <th align="40%" colspan="4" scope="col">SEAFARER'S NAME:$!{currentCrew.FirstName} &nbsp; $!{currentCrew.LastName}</th>
+	  </tr><tr>
+	    <th align="left" scope="col">RANK:$!{currentCrew.Rank}</th>
+	    <th align="left"  scope="col">VESSEL NAME:$!{currentVessel.Name}</th>
+	    <th align="left" scope="col">WATCHKEEPER:#if($currentCrew.watchKeeper)YES#{else}NO#end</th>
+	    <th align="left" scope="col">IMO:$!{currentVessel.IMO}</th>
+	  </tr>
+	</table>
+	<table border="0" cellspacing="1" align="center" bgcolor="#000000" width="700" class="smallFont">
+  <tr>
+    <th rowspan="4" align="center" valign="middle" bgcolor="#009999">DAY</th>
+    <th rowspan="4" align="center" valign="middle"bgcolor="#009999" scope="col">DATE</th>
+    <th colspan="4" rowspan="2"bgcolor="#009999" scope="col">HOURS</th>
+    <th colspan="7" align="center" valign="middle"bgcolor="#FFCC00" scope="col">ERRORS</th>
+    <th align="center" valign="middle" bgcolor="#FFCC00" scope="col">EXCEPTIONS</th>
+    </tr>
+  <tr>
+    <td colspan="2" align="center" valign="middle" bgcolor="#FFFFFF">CURRENT DAY </td>
+    <td colspan="2" align="center" valign="middle" bgcolor="#FFFFFF">IN ANY </td>
+    <td colspan="2" align="center" valign="middle" bgcolor="#FFFFFF">REST</td>
+    <td align="center" valign="middle" bgcolor="#FFFFFF">OPA 90 </td>
+    <td rowspan="3" bgcolor="#FFFFFF" align="center" valign="middle">Comments </td>
+    </tr>
+  <tr>
+    <td rowspan="2" align="center" valign="middle" bgcolor="#009999">Work in 24-hour Period </td>
+    <td colspan="3" align="center" bgcolor="#009999">Rest</td>
+    <td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">Total period of REST &gt; 10 Hrs </td>
+    <td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">Total Period of WORK &lt; 14 Hrs </td>
+    <td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">24-hour Total Period of REST &gt; 10 Hrs </td>
+    <td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">7-days Total Period of REST &gt; 77 Hrs </td>
+    <td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">At least one period of rest 6 hours in length </td>
+    <td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">Total Number of Rest Periods More than 2 </td>
+    <td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">Rest Hours &gt; 36 hours in any 3 days  </td>
+    </tr>
+  <tr>
+    <td align="center" valign="middle" bgcolor="#009999">in 24-hour Period </td>
+    <td align="center" valign="middle" bgcolor="#009999">in any 24-hour Period </td>
+    <td align="center" valign="middle" bgcolor="#009999">in any 7 Day Period </td>
+    </tr>
+  
+    
+	#foreach( $entryTime in $lstEntryTimes )
+	#set( $totalWorkHours = 24 -  $entryTime.getTotalRestHours())
+	#set( $restHoursIn24Hours = $host.get24HourRestHours($velocityCount))
+	#set( $restHoursIn7Days = $host.get7DayRestHours($velocityCount))
+	#set( $restPeriodCounter = $host.getRestPeriodCounter($velocityCount))
+	  <tr>
+	    <th align="center" valign="middle" bgcolor="#009999">$velocityCount</th>
+	    <th bgcolor="#FFFFFF" scope="col">$entryTime.getDecorateDate()</th>
+	    <td bgcolor="#FFFFFF">$totalWorkHours</td>
+	    <td bgcolor="#FFFFFF">$entryTime.getTotalRestHours()</td>
+	    <td bgcolor="#FFFFFF">$restHoursIn24Hours</td>
+	    <td bgcolor="#FFFFFF">$restHoursIn7Days</td>
+	    <td bgcolor="#FFFFFF">#if($entryTime.getTotalRestHours()<10)ERROR#end</td>
+	    <td bgcolor="#FFFFFF">#if($totalWorkHours > 14)ERROR#end</td>
+	    <td bgcolor="#FFFFFF">#if($restHoursIn24Hours < 10)ERROR#end</td>
+	    <td bgcolor="#FFFFFF">#if($restHoursIn7Days < 77)ERROR#end</td>
+	    <td bgcolor="#FFFFFF">#if(!$host.contain6HourContinuousRest($velocityCount))ERROR#end</td>
+	    <td bgcolor="#FFFFFF">$restPeriodCounter</td>
+	    <td bgcolor="#FFFFFF">$host.getLast3DayTotalRestHours($velocityCount)</td>
+	    <td bgcolor="#FFFFFF">$!{entryTime.comments}</td>
+      </tr>
+  #end
+</table>
+
+</body>

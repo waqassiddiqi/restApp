@@ -1,0 +1,251 @@
+
+<style type="text/css">
+<!--
+.reportTitle {
+	font-size: 8pt;
+	font-family: Arial
+}
+
+.smallFont {
+	font-size: 7pt;
+	font-family: Arial
+}
+
+.tableHeader {
+	font-size: 7pt;
+	font-family: Arial
+}
+
+.BlueFont {
+	color: #0000FF;
+	font-family: Arial
+}
+
+.STYLE3 {
+	font-family: Arial;
+	font-size: 7px;
+	font-weight: bold;
+}
+
+.STYLE4 {
+	font-family: Arial;
+	font-size: 7px;
+	font-weight: bold;
+}
+-->
+</style>
+
+<body>
+	<table align="center" border="1" width="100%" class="reportTitle">
+
+		<caption class="reportTitlecap">
+			<center>
+				<b>Resting Hours Report</b>
+			</center>
+		</caption>
+		<tbody>
+			<tr>
+				<th align="left" scope="col" colspan="50">SEAFARER'S
+					NAME:$!{currentCrew.FirstName} &nbsp; $!{currentCrew.LastName}</th>
+				<th aligh="left" scope="col" colspan="2">MONTH:$!{month}</th>
+				<th align="left" scope="col" colspan="2">YEAR:$!{year}</th>
+			</tr>
+			<tr>
+				<th align="left" scope="col" colspan="48" valign="top">RANK:$!{currentCrew.Rank}</th>
+				<th align="left" scope="col" colspan="2">VESSEL
+					NAME:$!{currentVessel.Name}</th>
+				<th align="left" scope="col" colspan="2">WATCHKEEPER:#if($currentCrew.watchKeeper)YES#{else}NO#end</th>
+				<th align="left" scope="col" colspan="2">IMO:$!{currentVessel.IMO}</th>
+			</tr>
+		</tbody>
+	</table>
+
+	<table align="center" class="smallFont" bgcolor="#000000" width="100%"
+		border="1">
+		<tbody>
+			<tr>
+				<td rowspan="2" align="center" bgcolor="#FFFFFF"><b>Date</b></td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">3</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">4</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">5</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">6</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">7</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">8</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">9</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">3</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">4</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">5</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">6</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">7</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">8</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">9</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td rowspan="2" align="left" valign="middle" bgcolor="#FFFFFF">3</td>
+				<td rowspan="2" align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+
+				<td rowspan="2" align="left" valign="top" bgcolor="#FFFFFF"><b>Hours<br>of<br>Rest<br>in<br>24hr<br>period
+				</b></td>
+				<td rowspan="2" align="left" valign="top" bgcolor="#FFFFFF"><b>Hours<br>of<br>Work<br>in<br>24hr<br>period
+				</b></td>
+				<td rowspan="2" align="left" valign="top" bgcolor="#FFFFFF"><b>Comments</b></td>
+				<td rowspan="2" align="left" valign="top" bgcolor="#FFFFFF">
+					<center>
+						<b>NOT TO BE<br>COMPLETED<br>BY THE SEAFARER<br>(HR'S)
+						</b>
+					</center>
+					<br>
+					<center>
+						<b>Any 24hr<br>period
+						</b>
+					</center>
+				</td>
+				<td align="left" valign="middle" rowspan="2" bgcolor="#FFFFFF">
+					<center>
+						<b>NOT TO BE<br>COMPLETED<br>BY THE SEAFARER<br>(HR'S)
+						</b>
+					</center>
+					<br>
+					<center>
+						<b>Any 7-day<br>period
+						</b>
+					</center>
+				</td>
+			</tr>
+			<tr>
+
+			</tr>
+
+			#foreach( $entryTime in $lstEntryTimes )
+			<tr>
+				<td align="left" bgcolor="#FFFFFF">$entryTime.getDecorateDate()</td>
+
+				#foreach( $index in [0..47] )
+				<td valign="middle" bgcolor="#FFFFFF">$entryTime.getWokingHourAtIndex($index)</td>
+				#end
+
+				<td align="left" valign="middle" bgcolor="#FFFFFF">$entryTime.getTotalRestHours()</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">#set(
+					$totalRestHours = 24 - $entryTime.getTotalRestHours())
+					$totalRestHours</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">$!{entryTime.comments}</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">$host.get24HourRestHours($velocityCount)</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">$host.get7DayRestHours($velocityCount)</td>
+			</tr>
+			#end
+			<tr>
+				<td align="center" bgcolor="#FFFFFF">Hours</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">3</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">4</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">5</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">6</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">7</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">8</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">9</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">3</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">4</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">5</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">6</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">7</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">8</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">9</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">0</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">1</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">2</td>
+				<td align="left" valign="middle" bgcolor="#FFFFFF">3</td>
+				<td align="right" valign="middle" bgcolor="#FFFFFF">0</td>
+
+				<td align="left" class="BlueFont" bgcolor="#FFFFFF">&nbsp;</td>
+				<td align="left" class="BlueFont" bgcolor="#FFFFFF">&nbsp;</td>
+				<td align="left" class="BlueFont" bgcolor="#FFFFFF">&nbsp;</td>
+				<td align="left" class="BlueFont" bgcolor="#FFFFFF">&nbsp;</td>
+				<td align="left" class="BlueFont" bgcolor="#FFFFFF">&nbsp;</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table width="100%" align="center">
+		<tbody>
+			<tr>
+				<td align="center" colspan="54"><br>
+
+
+					<p>
+						<span class="STYLE3">I AGREE THAT THIS RECORD IS ACCURATE
+							REFLECTION OF THE HOURS OF WORK OR REST OF THE SEAFARER
+							CONCERNED.</span><br>
+						<span class="STYLE4">Name of master or person authorized by
+							master to sign this record: </span>_______________. <span class="STYLE4">Signature
+							of master or authorized person:_______________ Signature of
+							seafarer:_______________. </span>
+					</p>
+					<p>
+						<span class="STYLE4">A copy of this record is to be given
+							to theseafarer This form is subject to examination</span> <span
+							class="STYLE4">and endorsement under procedures
+							established by:____________________<u>as</u>_____________________
+						</span>
+					</p></td>
+			</tr>
+		</tbody>
+	</table>
+</body>

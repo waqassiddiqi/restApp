@@ -301,7 +301,7 @@ public class TimeSheet {
 		}	
 	}
 	
-	public void setSchedule(int rowId, Boolean[] scheduleArray) {
+	public void setSchedule(Boolean[] scheduleArray) {
 		BlockType type = BlockType.REST;
 		
 		for(int i=0; i<scheduleArray.length; i++) {

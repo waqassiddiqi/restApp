@@ -53,7 +53,7 @@ public abstract class BaseForm implements ActionListener {
 				StyleConstants.smallRound, true);
 		btnNew.putClientProperty("command", "new");
 		btnNew.addActionListener(this);
-		btnNew.setToolTipText("New Rank (Ctrl+N)");
+		btnNew.setToolTipText("New (Ctrl+N)");
 		
 		toolbar.add(btnNew);
 		
@@ -62,6 +62,7 @@ public abstract class BaseForm implements ActionListener {
 		btnSave.putClientProperty("command", "save");
 		btnSave.addActionListener(this);
 		btnSave.setToolTipText("Save (Ctrl+S)");
+		btnSave.addHotkey(getOwner(), Hotkey.CTRL_SHIFT_S);
 		
 		toolbar.add(btnSave);
 		

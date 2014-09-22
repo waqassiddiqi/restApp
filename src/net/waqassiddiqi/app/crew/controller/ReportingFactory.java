@@ -2,8 +2,8 @@ package net.waqassiddiqi.app.crew.controller;
 
 import java.awt.Component;
 
-import net.waqassiddiqi.app.crew.ui.AddRankForm;
 import net.waqassiddiqi.app.crew.ui.AddRestHourForm;
+import net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm;
 
 public class ReportingFactory extends BaseFactory {
 
@@ -27,7 +27,10 @@ public class ReportingFactory extends BaseFactory {
 
 	@Override
 	public Component getById(String id) {
-		// TODO Auto-generated method stub
+		if(id.equals("rest")) {
+			return new RestingHourReportForm(getOwner()).getView();
+		}
+		
 		return null;
 	}
 

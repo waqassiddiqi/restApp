@@ -114,7 +114,7 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 						listRanks.get(cmbRank.getSelectedIndex()));
 				
 				if(template != null) {
-					timeSheet.setSchedule(0, template.getSchedule());
+					timeSheet.setSchedule(template.getSchedule());
 				}
 				
 			}
@@ -254,7 +254,7 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 						
 						templateOnSea.setId(scheduleId);
 						
-						this.currentCrew.setScheduleOnSea(templateOnSea);
+						this.currentCrew.setScheduleTemplate(templateOnSea);
 						
 						if(scheduleId > 0) {
 							scheduleDao.associateScheduleTemplate(currentCrew, templateOnSea);
@@ -277,8 +277,8 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 					
 					new CrewDAO().updateCrew(currentCrew);
 					
-					currentCrew.getScheduleOnSea().setSchedule(scheduleArray);
-					scheduleDao.updateScheduleTemplate(currentCrew.getScheduleOnSea());
+					currentCrew.getScheduleTemplate().setSchedule(scheduleArray);
+					scheduleDao.updateScheduleTemplate(currentCrew.getScheduleTemplate());
 					
 					NotificationManager.showNotification("Crew has been updated.");
 				}
