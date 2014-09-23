@@ -37,4 +37,24 @@ public final class CalendarUtil {
     	
     	return sdf.format(date);
     }
+    
+    public static Date getLastDayOfMonth(Date today) {
+    	Calendar calendar = Calendar.getInstance();  
+        calendar.setTime(today);  
+
+        calendar.add(Calendar.MONTH, 1);  
+        calendar.set(Calendar.DAY_OF_MONTH, 1);  
+        calendar.add(Calendar.DATE, -1);  
+
+        return calendar.getTime();
+    }
+    
+    public static Date getFirstDayOfMonth(Date today) {
+    	Calendar calendar = Calendar.getInstance();  
+        calendar.setTime(today);  
+  
+        calendar.set(Calendar.DAY_OF_MONTH, 1);    
+
+        return calendar.getTime();
+    }
 }

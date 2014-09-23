@@ -3,6 +3,8 @@ package net.waqassiddiqi.app.crew.model;
 import java.util.Arrays;
 import java.util.Date;
 
+import net.waqassiddiqi.app.crew.util.CalendarUtil;
+
 public class EntryTime {
 	private int id;
 	private int crewId;
@@ -105,5 +107,9 @@ public class EntryTime {
 				+ ", isOnPort=" + isOnPort + ", workIn24Hours=" + workIn24Hours
 				+ ", restIn24Hours=" + restIn24Hours + ", comments=" + comments
 				+ "]";
+	}
+	
+	public String getFormattedDate() {
+		return CalendarUtil.format("yyyy-MM-dd", this.entryDate);
 	}
 }

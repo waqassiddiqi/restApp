@@ -51,6 +51,41 @@ public class EntryTimeDAO {
 		return entry;
 	}
 	
+	public List<EntryTime> getByYearMonthAndCrew(Date startDate, Date endDate, Crew crew) {
+		List<EntryTime> entryList = new ArrayList<EntryTime>();
+		EntryTime entry;
+		
+		final ResultSet rs = this.db.executeQuery(
+				"SELECT * FROM entry_times WHERE crew_id = " + crew.getId() + " AND entry_date >= " + 
+						startDate.getTime() + " AND entry_date <= " + endDate.getTime() + " ORDER BY entry_date");
+		
+		try {
+			
+			while(rs.next()) {
+				entry = new EntryTime();
+				
+				entry.setEntryDate(new Date(rs.getLong("entry_date")));
+				entry.setCrewId(crew.getId());
+				entry.setComments(rs.getString("comments"));
+				entry.setOnPort(rs.getBoolean("is_on_port"));
+				entry.parseSchedule(rs.getString("schedule"));
+				
+				entryList.add(entry);
+			}
+			
+		} catch (Exception e) {
+			log.error("Error executing EntryTimeDAO.getByYearMonthAndCrew(): " + e.getMessage(), e);
+		} finally {
+			try {
+				if (rs != null) rs.close();
+			} catch (SQLException ex) {
+				log.error("failed to close db resources: " + ex.getMessage(), ex);
+			}
+		}
+		
+		return entryList;
+	}
+	
 	public int addUpdateEntry(EntryTime entry) {
 		
 		

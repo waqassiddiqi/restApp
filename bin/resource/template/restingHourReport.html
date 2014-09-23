@@ -148,10 +148,14 @@
 
 			#foreach( $entryTime in $lstEntryTimes )
 			<tr>
-				<td align="left" bgcolor="#FFFFFF">$entryTime.getDecorateDate()</td>
+				<td align="left" bgcolor="#FFFFFF">$entryTime.getFormattedDate()</td>
 
 				#foreach( $index in [0..47] )
-				<td valign="middle" bgcolor="#FFFFFF">$entryTime.getWokingHourAtIndex($index)</td>
+				<td valign="middle" bgcolor="#FFFFFF">
+					#if( $entryTime.getSchedule()[$index] )
+						x
+					#end	
+				</td>
 				#end
 
 				<td align="left" valign="middle" bgcolor="#FFFFFF">$entryTime.getTotalRestHours()</td>

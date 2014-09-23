@@ -11,17 +11,20 @@ import java.io.FileOutputStream;
 import java.io.StringWriter;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.filechooser.FileFilter;
 
 import net.waqassiddiqi.app.crew.db.CrewDAO;
+import net.waqassiddiqi.app.crew.db.EntryTimeDAO;
 import net.waqassiddiqi.app.crew.model.Crew;
+import net.waqassiddiqi.app.crew.model.EntryTime;
 import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.ui.BaseForm;
 import net.waqassiddiqi.app.crew.ui.MainFrame;
+import net.waqassiddiqi.app.crew.util.CalendarUtil;
 import net.waqassiddiqi.app.crew.util.FilesUtil;
 
 import org.apache.log4j.Logger;
@@ -94,15 +97,20 @@ public class RestingHourReportForm extends BaseForm {
 		btnSaveAsPdf.putClientProperty("command", "pdf");
 		btnSaveAsPdf.addActionListener(this);
 		btnSaveAsPdf.setToolTipText("Save as PDF");
-		
 		getToolbar().add(btnSaveAsPdf);
+		
+		WebButton btnSaveAsXls = WebButton.createIconWebButton(getIconsHelper().loadIcon("common/file_xls_16x16.png"),
+				StyleConstants.smallRound, true);
+		btnSaveAsXls.putClientProperty("command", "xls");
+		btnSaveAsXls.addActionListener(this);
+		btnSaveAsXls.setToolTipText("Save as Excel");
+		getToolbar().add(btnSaveAsXls);
 		
 		getToolbar().addSeparator();
 		
 		getToolbar().add(new WebLabel("Filter: ") {{ setMargin(1); }});
 		
-		WebButton btnFilter = WebButton.createIconWebButton(getIconsHelper().loadIcon("common/search_16x16.png"),
-				StyleConstants.smallRound, true);
+		WebButton btnFilter = new WebButton("Generate Report", getIconsHelper().loadIcon("common/settings_16x16.png"));
 		
 		GroupPanel gp = new GroupPanel(cmbCrew, cmbMonth, cmbYear, btnFilter);
 		
@@ -122,7 +130,24 @@ public class RestingHourReportForm extends BaseForm {
 		VelocityContext localVelocityContext = new VelocityContext();
 		localVelocityContext.put("currentCrew", currentCrew);
 		localVelocityContext.put("currentVessel", currentVessel);
-		localVelocityContext.put("lstEntryTimes", new ArrayList(100));
+		
+		Calendar calStart = Calendar.getInstance();
+		Calendar calEnd = Calendar.getInstance();
+		
+		calStart.setTime(CalendarUtil.getFirstDayOfMonth(new Date()));
+		calEnd.setTime(CalendarUtil.getLastDayOfMonth(new Date()));
+		
+		CalendarUtil.toBeginningOfTheDay(calStart);
+		CalendarUtil.toBeginningOfTheDay(calEnd);
+		
+		
+		List<EntryTime> lstEntryTimes = new EntryTimeDAO().getByYearMonthAndCrew(calStart.getTime(), calEnd.getTime(), new Crew() {{ setId(1); }});
+		
+		for(EntryTime t : lstEntryTimes) {
+			System.out.println(t.getEntryDate());
+		}
+		
+		localVelocityContext.put("lstEntryTimes", lstEntryTimes);
 		
 		Calendar cal = Calendar.getInstance();
 		

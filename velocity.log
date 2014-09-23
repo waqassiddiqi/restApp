@@ -1,241 +1,530 @@
-2014-09-22 20:34:44,366 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-09-22 20:34:44,366 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-09-22 20:34:44,367 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-09-22 20:34:44,367 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-09-22 20:34:44,368 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-09-22 20:34:44,369 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-09-22 20:34:44,370 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-09-22 20:34:44,371 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-09-22 20:34:44,394 - Created '20' parsers.
-2014-09-22 20:34:44,399 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-09-22 20:34:44,399 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-09-22 20:34:44,399 - Velocimacro : Default library not found.
-2014-09-22 20:34:44,399 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-09-22 20:34:44,399 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-09-22 20:34:44,399 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-09-22 20:34:44,399 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-09-22 20:34:44,423 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:34:58,886 - Log4JLogChute initialized using file 'velocity.log'
-2014-09-22 20:34:58,886 - Initializing Velocity, Calling init()...
-2014-09-22 20:34:58,886 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-09-22 20:34:58,886 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-09-22 20:34:58,886 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-09-22 20:34:58,886 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-09-22 20:34:58,886 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:34:58,886 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:34:58,890 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:34:58,900 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-09-22 20:34:58,901 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-09-22 20:34:58,902 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-09-22 20:34:58,902 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-09-22 20:34:58,903 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-09-22 20:34:58,903 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-09-22 20:34:58,904 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-09-22 20:34:58,905 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-09-22 20:34:58,906 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-09-22 20:34:58,907 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-09-22 20:34:58,929 - Created '20' parsers.
-2014-09-22 20:34:58,934 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-09-22 20:34:58,934 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-09-22 20:34:58,934 - Velocimacro : Default library not found.
-2014-09-22 20:34:58,934 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-09-22 20:34:58,934 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-09-22 20:34:58,934 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-09-22 20:34:58,935 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-09-22 20:34:58,959 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:35:20,780 - Log4JLogChute initialized using file 'velocity.log'
-2014-09-22 20:35:20,780 - Initializing Velocity, Calling init()...
-2014-09-22 20:35:20,780 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-09-22 20:35:20,780 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-09-22 20:35:20,780 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-09-22 20:35:20,780 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-09-22 20:35:20,780 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:35:20,780 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:35:20,782 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:35:20,794 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-09-22 20:35:20,795 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-09-22 20:35:20,796 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-09-22 20:35:20,796 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-09-22 20:35:20,797 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-09-22 20:35:20,797 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-09-22 20:35:20,798 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-09-22 20:35:20,800 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-09-22 20:35:20,801 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-09-22 20:35:20,802 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-09-22 20:35:20,827 - Created '20' parsers.
-2014-09-22 20:35:20,832 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-09-22 20:35:20,832 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-09-22 20:35:20,832 - Velocimacro : Default library not found.
-2014-09-22 20:35:20,832 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-09-22 20:35:20,832 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-09-22 20:35:20,832 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-09-22 20:35:20,832 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-09-22 20:35:20,857 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:36:15,377 - Log4JLogChute initialized using file 'velocity.log'
-2014-09-22 20:36:15,378 - Initializing Velocity, Calling init()...
-2014-09-22 20:36:15,378 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-09-22 20:36:15,378 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-09-22 20:36:15,378 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-09-22 20:36:15,378 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-09-22 20:36:15,378 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:36:15,378 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:36:15,383 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:36:15,396 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-09-22 20:36:15,397 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-09-22 20:36:15,398 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-09-22 20:36:15,399 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-09-22 20:36:15,400 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-09-22 20:36:15,400 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-09-22 20:36:15,401 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-09-22 20:36:15,402 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-09-22 20:36:15,403 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-09-22 20:36:15,404 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-09-22 20:36:15,428 - Created '20' parsers.
-2014-09-22 20:36:15,433 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-09-22 20:36:15,434 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-09-22 20:36:15,434 - Velocimacro : Default library not found.
-2014-09-22 20:36:15,434 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-09-22 20:36:15,434 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-09-22 20:36:15,434 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-09-22 20:36:15,434 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-09-22 20:36:15,462 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:37:04,617 - Log4JLogChute initialized using file 'velocity.log'
-2014-09-22 20:37:04,617 - Initializing Velocity, Calling init()...
-2014-09-22 20:37:04,617 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-09-22 20:37:04,617 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-09-22 20:37:04,617 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-09-22 20:37:04,617 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-09-22 20:37:04,617 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:37:04,617 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:37:04,621 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:37:04,630 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-09-22 20:37:04,632 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-09-22 20:37:04,633 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-09-22 20:37:04,633 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-09-22 20:37:04,634 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-09-22 20:37:04,634 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-09-22 20:37:04,635 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-09-22 20:37:04,636 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-09-22 20:37:04,637 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-09-22 20:37:04,638 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-09-22 20:37:04,661 - Created '20' parsers.
-2014-09-22 20:37:04,665 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-09-22 20:37:04,665 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-09-22 20:37:04,666 - Velocimacro : Default library not found.
-2014-09-22 20:37:04,666 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-09-22 20:37:04,666 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-09-22 20:37:04,666 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-09-22 20:37:04,666 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-09-22 20:37:04,690 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:37:22,662 - Log4JLogChute initialized using file 'velocity.log'
-2014-09-22 20:37:22,662 - Initializing Velocity, Calling init()...
-2014-09-22 20:37:22,662 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-09-22 20:37:22,662 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-09-22 20:37:22,663 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-09-22 20:37:22,663 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-09-22 20:37:22,663 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:37:22,663 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:37:22,665 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:37:22,676 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-09-22 20:37:22,677 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-09-22 20:37:22,678 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-09-22 20:37:22,679 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-09-22 20:37:22,680 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-09-22 20:37:22,681 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-09-22 20:37:22,682 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-09-22 20:37:22,683 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-09-22 20:37:22,684 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-09-22 20:37:22,685 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-09-22 20:37:22,709 - Created '20' parsers.
-2014-09-22 20:37:22,713 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-09-22 20:37:22,714 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-09-22 20:37:22,714 - Velocimacro : Default library not found.
-2014-09-22 20:37:22,714 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-09-22 20:37:22,714 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-09-22 20:37:22,714 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-09-22 20:37:22,714 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-09-22 20:37:22,738 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:40:23,730 - Log4JLogChute initialized using file 'velocity.log'
-2014-09-22 20:40:23,731 - Initializing Velocity, Calling init()...
-2014-09-22 20:40:23,731 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-09-22 20:40:23,731 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-09-22 20:40:23,731 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-09-22 20:40:23,731 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-09-22 20:40:23,731 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:40:23,731 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:40:23,734 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:40:23,746 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-09-22 20:40:23,747 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-09-22 20:40:23,748 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-09-22 20:40:23,748 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-09-22 20:40:23,749 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-09-22 20:40:23,749 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-09-22 20:40:23,750 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-09-22 20:40:23,751 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-09-22 20:40:23,753 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-09-22 20:40:23,753 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-09-22 20:40:23,778 - Created '20' parsers.
-2014-09-22 20:40:23,783 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-09-22 20:40:23,784 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-09-22 20:40:23,784 - Velocimacro : Default library not found.
-2014-09-22 20:40:23,784 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-09-22 20:40:23,784 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-09-22 20:40:23,784 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-09-22 20:40:23,784 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-09-22 20:40:23,812 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:40:38,254 - Log4JLogChute initialized using file 'velocity.log'
-2014-09-22 20:40:38,254 - Initializing Velocity, Calling init()...
-2014-09-22 20:40:38,254 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-09-22 20:40:38,254 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-09-22 20:40:38,254 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-09-22 20:40:38,254 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-09-22 20:40:38,255 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:40:38,255 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:40:38,257 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:40:38,267 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-09-22 20:40:38,268 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-09-22 20:40:38,269 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-09-22 20:40:38,270 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-09-22 20:40:38,270 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-09-22 20:40:38,271 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-09-22 20:40:38,272 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-09-22 20:40:38,273 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-09-22 20:40:38,274 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-09-22 20:40:38,275 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-09-22 20:40:38,299 - Created '20' parsers.
-2014-09-22 20:40:38,304 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-09-22 20:40:38,304 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-09-22 20:40:38,304 - Velocimacro : Default library not found.
-2014-09-22 20:40:38,304 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-09-22 20:40:38,304 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-09-22 20:40:38,304 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-09-22 20:40:38,304 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-09-22 20:40:38,328 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:41:21,957 - Log4JLogChute initialized using file 'velocity.log'
-2014-09-22 20:41:21,957 - Initializing Velocity, Calling init()...
-2014-09-22 20:41:21,957 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-09-22 20:41:21,957 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-09-22 20:41:21,957 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-09-22 20:41:21,957 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-09-22 20:41:21,957 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:41:21,957 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-09-22 20:41:21,959 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-09-22 20:41:21,971 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-09-22 20:41:21,972 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-09-22 20:41:21,972 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-09-22 20:41:21,973 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-09-22 20:41:21,973 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-09-22 20:41:21,974 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-09-22 20:41:21,974 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-09-22 20:41:21,975 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-09-22 20:41:21,976 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-09-22 20:41:21,977 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-09-22 20:41:22,000 - Created '20' parsers.
-2014-09-22 20:41:22,005 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-09-22 20:41:22,005 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-09-22 20:41:22,005 - Velocimacro : Default library not found.
-2014-09-22 20:41:22,005 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-09-22 20:41:22,005 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-09-22 20:41:22,005 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-09-22 20:41:22,005 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-09-22 20:41:22,030 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:32:50,906 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:32:50,906 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:32:50,912 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:32:50,960 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2014-09-23 01:32:50,963 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2014-09-23 01:32:50,965 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2014-09-23 01:32:50,966 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2014-09-23 01:32:50,969 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2014-09-23 01:32:50,970 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-09-23 01:32:50,972 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-09-23 01:32:50,974 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-09-23 01:32:50,977 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-09-23 01:32:50,979 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-09-23 01:32:51,123 - Created '20' parsers.
+2014-09-23 01:32:51,132 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2014-09-23 01:32:51,133 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2014-09-23 01:32:51,133 - Velocimacro : Default library not found.
+2014-09-23 01:32:51,134 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-09-23 01:32:51,134 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-09-23 01:32:51,134 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2014-09-23 01:32:51,134 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2014-09-23 01:32:51,195 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:33:26,064 - Log4JLogChute initialized using file 'velocity.log'
+2014-09-23 01:33:26,064 - Initializing Velocity, Calling init()...
+2014-09-23 01:33:26,064 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2014-09-23 01:33:26,065 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2014-09-23 01:33:26,065 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2014-09-23 01:33:26,065 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2014-09-23 01:33:26,065 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:33:26,065 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:33:26,073 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:33:26,123 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2014-09-23 01:33:26,126 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2014-09-23 01:33:26,128 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2014-09-23 01:33:26,129 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2014-09-23 01:33:26,131 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2014-09-23 01:33:26,132 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-09-23 01:33:26,134 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-09-23 01:33:26,136 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-09-23 01:33:26,138 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-09-23 01:33:26,140 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-09-23 01:33:26,283 - Created '20' parsers.
+2014-09-23 01:33:26,292 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2014-09-23 01:33:26,293 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2014-09-23 01:33:26,293 - Velocimacro : Default library not found.
+2014-09-23 01:33:26,293 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-09-23 01:33:26,293 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-09-23 01:33:26,293 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2014-09-23 01:33:26,293 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2014-09-23 01:33:26,357 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:35:45,244 - Log4JLogChute initialized using file 'velocity.log'
+2014-09-23 01:35:45,244 - Initializing Velocity, Calling init()...
+2014-09-23 01:35:45,245 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2014-09-23 01:35:45,245 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2014-09-23 01:35:45,245 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2014-09-23 01:35:45,245 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2014-09-23 01:35:45,245 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:35:45,245 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:35:45,254 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:35:45,306 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2014-09-23 01:35:45,310 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2014-09-23 01:35:45,313 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2014-09-23 01:35:45,315 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2014-09-23 01:35:45,317 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2014-09-23 01:35:45,318 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-09-23 01:35:45,320 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-09-23 01:35:45,323 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-09-23 01:35:45,325 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-09-23 01:35:45,327 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-09-23 01:35:45,467 - Created '20' parsers.
+2014-09-23 01:35:45,477 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2014-09-23 01:35:45,478 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2014-09-23 01:35:45,478 - Velocimacro : Default library not found.
+2014-09-23 01:35:45,478 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-09-23 01:35:45,478 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-09-23 01:35:45,478 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2014-09-23 01:35:45,478 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2014-09-23 01:35:45,538 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:35:45,614 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:35:45,626 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:35:45,627 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:35:45,628 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:35:45,629 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:35:45,629 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,629 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,629 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:35:45,631 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:35:45,631 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:35:45,631 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:35:45,631 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:35:45,631 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,631 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,631 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:35:45,633 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:35:45,633 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:35:45,633 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:35:45,633 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:35:45,634 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,634 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,634 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:35:45,636 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:35:45,636 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:35:45,636 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:35:45,636 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:35:45,636 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,636 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,636 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:35:45,639 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:35:45,639 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:35:45,639 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:35:45,639 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:35:45,640 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,640 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,640 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:35:45,642 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:35:45,642 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:35:45,643 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:35:45,643 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:35:45,643 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,643 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,643 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:35:45,645 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:35:45,645 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:35:45,645 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:35:45,645 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:35:45,645 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,645 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,645 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:35:45,647 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:35:45,647 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:35:45,647 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:35:45,647 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:35:45,647 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:35:45,647 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,511 - Log4JLogChute initialized using file 'velocity.log'
+2014-09-23 01:36:40,511 - Initializing Velocity, Calling init()...
+2014-09-23 01:36:40,511 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2014-09-23 01:36:40,511 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2014-09-23 01:36:40,511 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2014-09-23 01:36:40,511 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2014-09-23 01:36:40,511 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:36:40,511 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:36:40,517 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:36:40,566 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2014-09-23 01:36:40,570 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2014-09-23 01:36:40,574 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2014-09-23 01:36:40,576 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2014-09-23 01:36:40,578 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2014-09-23 01:36:40,579 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-09-23 01:36:40,582 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-09-23 01:36:40,585 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-09-23 01:36:40,588 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-09-23 01:36:40,591 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-09-23 01:36:40,730 - Created '20' parsers.
+2014-09-23 01:36:40,740 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2014-09-23 01:36:40,740 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2014-09-23 01:36:40,740 - Velocimacro : Default library not found.
+2014-09-23 01:36:40,740 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-09-23 01:36:40,741 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-09-23 01:36:40,741 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2014-09-23 01:36:40,741 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2014-09-23 01:36:40,803 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:36:40,837 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:36:40,843 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:36:40,844 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:36:40,845 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:36:40,846 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:36:40,846 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,846 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,846 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:36:40,849 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:36:40,849 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:36:40,849 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:36:40,850 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:36:40,850 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,850 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,850 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:36:40,853 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:36:40,853 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:36:40,853 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:36:40,853 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:36:40,853 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,853 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,854 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:36:40,856 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:36:40,856 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:36:40,857 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:36:40,857 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:36:40,857 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,857 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,857 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:36:40,860 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:36:40,860 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:36:40,860 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:36:40,860 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:36:40,860 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,860 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,860 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:36:40,864 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:36:40,864 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:36:40,864 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:36:40,864 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:36:40,864 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,864 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,864 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:36:40,867 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:36:40,867 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:36:40,867 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:36:40,867 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:36:40,867 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,867 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,867 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $entryTime.getDecorateDate() cannot be resolved.
+2014-09-23 01:36:40,869 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:36:40,869 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:36:40,869 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:36:40,869 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:36:40,870 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:36:40,870 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,077 - Log4JLogChute initialized using file 'velocity.log'
+2014-09-23 01:39:16,078 - Initializing Velocity, Calling init()...
+2014-09-23 01:39:16,078 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2014-09-23 01:39:16,078 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2014-09-23 01:39:16,078 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2014-09-23 01:39:16,078 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2014-09-23 01:39:16,078 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:39:16,078 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:39:16,085 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:39:16,133 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2014-09-23 01:39:16,135 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2014-09-23 01:39:16,137 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2014-09-23 01:39:16,138 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2014-09-23 01:39:16,140 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2014-09-23 01:39:16,141 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-09-23 01:39:16,144 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-09-23 01:39:16,147 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-09-23 01:39:16,150 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-09-23 01:39:16,153 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-09-23 01:39:16,290 - Created '20' parsers.
+2014-09-23 01:39:16,300 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2014-09-23 01:39:16,301 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2014-09-23 01:39:16,301 - Velocimacro : Default library not found.
+2014-09-23 01:39:16,301 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-09-23 01:39:16,301 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-09-23 01:39:16,301 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2014-09-23 01:39:16,301 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2014-09-23 01:39:16,363 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:39:16,403 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:16,403 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:16,404 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:16,405 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:16,405 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,405 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,408 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:16,408 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:16,408 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:16,408 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:16,408 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,409 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,410 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:16,410 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:16,411 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:16,411 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:16,411 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,411 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,413 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:16,413 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:16,413 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:16,413 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:16,414 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,414 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,416 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:16,417 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:16,417 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:16,417 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:16,417 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,417 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,420 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:16,420 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:16,420 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:16,420 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:16,420 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,420 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,423 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:16,423 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:16,423 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:16,423 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:16,423 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,423 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,425 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:16,425 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:16,425 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:16,425 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:16,425 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:16,425 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,017 - Log4JLogChute initialized using file 'velocity.log'
+2014-09-23 01:39:41,018 - Initializing Velocity, Calling init()...
+2014-09-23 01:39:41,018 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2014-09-23 01:39:41,018 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2014-09-23 01:39:41,018 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2014-09-23 01:39:41,018 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2014-09-23 01:39:41,018 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:39:41,018 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:39:41,024 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:39:41,072 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2014-09-23 01:39:41,075 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2014-09-23 01:39:41,077 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2014-09-23 01:39:41,079 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2014-09-23 01:39:41,081 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2014-09-23 01:39:41,082 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-09-23 01:39:41,086 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-09-23 01:39:41,089 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-09-23 01:39:41,092 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-09-23 01:39:41,094 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-09-23 01:39:41,231 - Created '20' parsers.
+2014-09-23 01:39:41,240 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2014-09-23 01:39:41,241 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2014-09-23 01:39:41,241 - Velocimacro : Default library not found.
+2014-09-23 01:39:41,241 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-09-23 01:39:41,241 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-09-23 01:39:41,241 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2014-09-23 01:39:41,241 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2014-09-23 01:39:41,307 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:39:41,323 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $net.waqassiddiqi.app.crew.util.CalendarUtil("yyyy-MM-dd", $entryTime.getEntryDate()) cannot be resolved.
+2014-09-23 01:39:41,348 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:41,349 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:41,350 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:41,350 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:41,351 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,351 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,351 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $net.waqassiddiqi.app.crew.util.CalendarUtil("yyyy-MM-dd", $entryTime.getEntryDate()) cannot be resolved.
+2014-09-23 01:39:41,353 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:41,353 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:41,353 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:41,353 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:41,353 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,353 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,353 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $net.waqassiddiqi.app.crew.util.CalendarUtil("yyyy-MM-dd", $entryTime.getEntryDate()) cannot be resolved.
+2014-09-23 01:39:41,355 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:41,355 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:41,355 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:41,355 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:41,355 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,355 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,355 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $net.waqassiddiqi.app.crew.util.CalendarUtil("yyyy-MM-dd", $entryTime.getEntryDate()) cannot be resolved.
+2014-09-23 01:39:41,357 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:41,357 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:41,357 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:41,357 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:41,358 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,358 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,358 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $net.waqassiddiqi.app.crew.util.CalendarUtil("yyyy-MM-dd", $entryTime.getEntryDate()) cannot be resolved.
+2014-09-23 01:39:41,360 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:41,360 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:41,360 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:41,360 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:41,360 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,360 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,360 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $net.waqassiddiqi.app.crew.util.CalendarUtil("yyyy-MM-dd", $entryTime.getEntryDate()) cannot be resolved.
+2014-09-23 01:39:41,362 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:41,362 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:41,362 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:41,362 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:41,362 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,362 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,362 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $net.waqassiddiqi.app.crew.util.CalendarUtil("yyyy-MM-dd", $entryTime.getEntryDate()) cannot be resolved.
+2014-09-23 01:39:41,364 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:41,364 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:41,365 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:41,365 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:41,365 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,365 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,365 - Null reference [template 'resource/template/restingHourReport.html', line 151, column 68] : $net.waqassiddiqi.app.crew.util.CalendarUtil("yyyy-MM-dd", $entryTime.getEntryDate()) cannot be resolved.
+2014-09-23 01:39:41,367 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:39:41,367 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:39:41,367 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:39:41,367 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:39:41,367 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:39:41,367 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,218 - Log4JLogChute initialized using file 'velocity.log'
+2014-09-23 01:40:48,218 - Initializing Velocity, Calling init()...
+2014-09-23 01:40:48,218 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2014-09-23 01:40:48,218 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2014-09-23 01:40:48,218 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2014-09-23 01:40:48,218 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2014-09-23 01:40:48,218 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:40:48,218 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:40:48,224 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:40:48,273 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2014-09-23 01:40:48,275 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2014-09-23 01:40:48,277 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2014-09-23 01:40:48,279 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2014-09-23 01:40:48,281 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2014-09-23 01:40:48,283 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-09-23 01:40:48,286 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-09-23 01:40:48,288 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-09-23 01:40:48,291 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-09-23 01:40:48,293 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-09-23 01:40:48,447 - Created '20' parsers.
+2014-09-23 01:40:48,457 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2014-09-23 01:40:48,458 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2014-09-23 01:40:48,458 - Velocimacro : Default library not found.
+2014-09-23 01:40:48,458 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-09-23 01:40:48,458 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-09-23 01:40:48,458 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2014-09-23 01:40:48,458 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2014-09-23 01:40:48,529 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:40:48,574 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:48,575 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:48,576 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:48,576 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:48,577 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,577 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,580 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:48,580 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:48,580 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:48,580 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:48,580 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,580 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,582 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:48,582 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:48,582 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:48,583 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:48,583 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,583 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,585 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:48,585 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:48,585 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:48,585 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:48,585 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,585 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,587 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:48,587 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:48,588 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:48,588 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:48,588 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,588 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,590 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:48,590 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:48,590 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:48,590 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:48,590 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,590 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,592 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:48,593 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:48,593 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:48,593 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:48,593 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,593 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,595 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:48,595 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:48,595 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:48,595 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:48,595 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:48,595 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:52,653 - Log4JLogChute initialized using file 'velocity.log'
+2014-09-23 01:40:52,654 - Initializing Velocity, Calling init()...
+2014-09-23 01:40:52,654 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2014-09-23 01:40:52,654 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2014-09-23 01:40:52,654 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2014-09-23 01:40:52,654 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2014-09-23 01:40:52,654 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:40:52,654 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-09-23 01:40:52,663 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:40:52,713 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2014-09-23 01:40:52,716 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2014-09-23 01:40:52,718 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2014-09-23 01:40:52,719 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2014-09-23 01:40:52,721 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2014-09-23 01:40:52,722 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-09-23 01:40:52,724 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-09-23 01:40:52,726 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-09-23 01:40:52,728 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-09-23 01:40:52,730 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-09-23 01:40:52,869 - Created '20' parsers.
+2014-09-23 01:40:52,878 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2014-09-23 01:40:52,879 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2014-09-23 01:40:52,879 - Velocimacro : Default library not found.
+2014-09-23 01:40:52,879 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-09-23 01:40:52,879 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-09-23 01:40:52,879 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2014-09-23 01:40:52,879 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2014-09-23 01:40:52,943 - ResourceManager : found resource/template/restingHourReport.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-09-23 01:40:52,983 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:52,984 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:52,985 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:52,985 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:52,986 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:52,986 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:52,989 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:52,989 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:52,989 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:52,989 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:52,989 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:52,990 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:52,993 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:52,993 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:52,993 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:52,993 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:52,993 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:52,993 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:52,996 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:52,996 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:52,996 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:52,997 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:52,997 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:52,997 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:52,999 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:52,999 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:52,999 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:52,999 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:53,000 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:53,000 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:53,002 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:53,002 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:53,002 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:53,002 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:53,013 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:53,013 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:53,016 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:53,016 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:53,016 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:53,016 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:53,016 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:53,016 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:53,018 - Null reference [template 'resource/template/restingHourReport.html', line 161, column 84] : $entryTime.getTotalRestHours() cannot be resolved.
+2014-09-23 01:40:53,018 - Right side of math operation ($entryTime.getTotalRestHours()) has a null value. resource/template/restingHourReport.html[line 163, column 63]
+2014-09-23 01:40:53,018 - RHS of #set statement is null. Context will not be modified. resource/template/restingHourReport.html[line 162, column 84]
+2014-09-23 01:40:53,018 - Null reference [template 'resource/template/restingHourReport.html', line 164, column 41] : $totalRestHours cannot be resolved.
+2014-09-23 01:40:53,018 - Null reference [template 'resource/template/restingHourReport.html', line 166, column 84] : $host.get24HourRestHours($velocityCount) cannot be resolved.
+2014-09-23 01:40:53,018 - Null reference [template 'resource/template/restingHourReport.html', line 167, column 84] : $host.get7DayRestHours($velocityCount) cannot be resolved.
