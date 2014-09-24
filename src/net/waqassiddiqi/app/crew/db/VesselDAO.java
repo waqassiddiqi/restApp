@@ -17,19 +17,28 @@ public class VesselDAO {
 		db = ConnectionManager.getInstance();
 	}
 	
-	public boolean addVessel(Vessel vessel) {
+	public int addVessel(Vessel vessel) {
 		
-		int rowCount = db.executeUpdate("INSERT INTO vessels(name, imo, flag) VALUES(?, ?, ?);", 
+		int generatedId = db.executeInsert("INSERT INTO vessels(name, imo, flag) VALUES(?, ?, ?);", 
 				new String[] { vessel.getName(), vessel.getImo(), vessel.getFlag() });
 		
 		if(log.isDebugEnabled()) {
-			log.debug("Rows affected: " + rowCount);
+			log.debug("Generated ID: " + generatedId);
 		}
 		
-		if(rowCount > 0) 
-			return true;
+		return generatedId;
+	}
+	
+	public int updateVessel(Vessel vessel) {
 		
-		return false;
+		int rowsUpdated = db.executeUpdate("UPDATE vessels SET name = ?, imo = ?, flag = ? where id = ?;", 
+				new String[] { vessel.getName(), vessel.getImo(), vessel.getFlag(), Integer.toString(vessel.getId()) });
+		
+		if(log.isDebugEnabled()) {
+			log.debug("Rows updated: " + rowsUpdated);
+		}
+		
+		return rowsUpdated;
 	}
 	
 	public List<Vessel> getAll() {

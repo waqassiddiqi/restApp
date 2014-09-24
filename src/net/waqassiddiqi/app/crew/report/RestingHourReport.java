@@ -46,17 +46,43 @@ public class RestingHourReport {
 		CalendarUtil.toBeginningOfTheDay(calStart);
 		CalendarUtil.toBeginningOfTheDay(calEnd);
 		
-		lstEntryTimes = new EntryTimeDAO().getByYearMonthAndCrew(calStart.getTime(), calEnd.getTime(), crew);
+		final Calendar previousCal = Calendar.getInstance();
+		previousCal.setTime(calStart.getTime());
+		previousCal.add(Calendar.DAY_OF_MONTH, -1);
 		
-		if(lstEntryTimes != null && lstEntryTimes.size() < calStart.getActualMaximum(Calendar.DAY_OF_MONTH)) {
-			for(int i=0; calStart.getTime().getTime() <= calEnd.getTime().getTime(); i++) {
-				EntryTime time = new EntryTime() {{ setCrewId(crew.getId()); setEntryDate(calStart.getTime()); }};
+		EntryTimeDAO entryTimeDao = new EntryTimeDAO();
+		
+		lstEntryTimes = entryTimeDao.getByYearMonthAndCrew(calStart.getTime(), calEnd.getTime(), crew);
+		
+		if(lstEntryTimes != null) {
+			
+			previousDay = entryTimeDao.getByDateAndCrew(previousCal.getTime(), crew);
+			if(previousDay != null) {
+				this.last7Day.add(this.previousDay);
+				EntryTime time = null;
 				
-				if(lstEntryTimes.contains(time) == false) {
-					lstEntryTimes.add(i, time);
+				for (int m = 0; m < 6; m++) {
+					previousCal.add(Calendar.DAY_OF_MONTH, -1);
+					time = entryTimeDao.getByDateAndCrew(previousCal.getTime(), crew);
+					if(time == null) {
+						time = new EntryTime() {{ setCrewId(crew.getId()); setEntryDate(previousCal.getTime()); }};
+					}
+						
+					this.last7Day.add(0, time);
 				}
-				
-				calStart.add(Calendar.DAY_OF_MONTH, 1);
+			}
+			
+			if(lstEntryTimes.size() < calStart.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+			
+				for(int i=0; calStart.getTime().getTime() <= calEnd.getTime().getTime(); i++) {
+					EntryTime time = new EntryTime() {{ setCrewId(crew.getId()); setEntryDate(calStart.getTime()); }};
+					
+					if(lstEntryTimes.contains(time) == false) {
+						lstEntryTimes.add(i, time);
+					}
+					
+					calStart.add(Calendar.DAY_OF_MONTH, 1);
+				}
 			}
 		}
 		

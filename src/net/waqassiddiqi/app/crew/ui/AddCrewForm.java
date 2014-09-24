@@ -13,12 +13,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.CrewDAO;
 import net.waqassiddiqi.app.crew.db.RankDAO;
 import net.waqassiddiqi.app.crew.db.ScheduleTemplateDAO;
+import net.waqassiddiqi.app.crew.db.VesselDAO;
 import net.waqassiddiqi.app.crew.model.Crew;
 import net.waqassiddiqi.app.crew.model.Rank;
 import net.waqassiddiqi.app.crew.model.ScheduleTemplate;
+import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.ui.control.TimeSheet;
 import net.waqassiddiqi.app.crew.ui.icons.IconsHelper;
 import net.waqassiddiqi.app.crew.util.InputValidator;
@@ -221,13 +224,36 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		} else if(btnSource.getClientProperty("command").equals("save")) {
 			tabPan.setSelectedIndex(0);
 			
+			final List<Vessel> listVessel = new VesselDAO().getAll();
+			if(listVessel.size() <= 0) {
+				net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(getOwner(), getOwner(), "No Vessel Found",
+						new String[] { 
+							"In order to continue, vessel details should be entered first",
+							"Click on the button below to enter vessel details"
+						}, 
+							"Add new vessel", 
+						new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								getOwner().addContent(VesselFactory.getInstance().getAdd());
+							}
+						});
+				return;
+			}
+			
+			if(listRanks.size() <= 0) {
+				NotificationManager.showPopup(getOwner(), cmbRank, new String[] { "Please add a rank first from Rank Options above" });
+				return;
+			}
+			
 			ScheduleTemplateDAO scheduleDao = new ScheduleTemplateDAO();
 			
 			if(InputValidator.validateInput(getOwner(), new JTextField[] { txtFirstName, txtLastName, txtNationality, txtPassport, txtSignonDate }, 
 					"This field cannot be empty")) {
 				
 				Crew crew = new Crew() {{ 
-					setVesselId(1);
+					setVesselId(listVessel.get(0).getId());
 					setFirstName(txtFirstName.getText().trim());
 					setLastName(txtLastName.getText().trim());
 					setRank(cmbRank.getSelectedItem().toString());

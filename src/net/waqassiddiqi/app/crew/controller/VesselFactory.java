@@ -2,12 +2,11 @@ package net.waqassiddiqi.app.crew.controller;
 
 import java.awt.Component;
 
-import net.waqassiddiqi.app.crew.ui.AddVesselFrame;
+import net.waqassiddiqi.app.crew.ui.AddVesselForm;
 
 public class VesselFactory extends BaseFactory {
 
 	private static VesselFactory instance = null;
-	private AddVesselFrame addVesselFrame = null;
 	
 	private VesselFactory() { }
 	
@@ -36,10 +35,6 @@ public class VesselFactory extends BaseFactory {
 
 	@Override
 	public Component getAdd() {
-		if(addVesselFrame == null) {
-			addVesselFrame = new AddVesselFrame(getOwner(), "Add new vessel", false, true, false, true);
-		}
-		
-		return addVesselFrame;
+		return new AddVesselForm(getOwner()).getView();
 	}
 }

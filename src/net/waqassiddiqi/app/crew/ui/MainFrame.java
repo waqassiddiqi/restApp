@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
@@ -18,15 +17,12 @@ import net.waqassiddiqi.app.crew.db.ConnectionManager;
 import net.waqassiddiqi.app.crew.db.VesselDAO;
 import net.waqassiddiqi.app.crew.style.skin.DefaultSkin;
 import net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl;
-import net.waqassiddiqi.app.crew.util.PrefsUtil;
 
 import org.apache.log4j.Logger;
 
 import com.alee.extended.statusbar.WebMemoryBar;
 import com.alee.extended.statusbar.WebStatusBar;
 import com.alee.laf.WebLookAndFeel;
-import com.alee.laf.desktoppane.WebDesktopPane;
-import com.alee.laf.desktoppane.WebInternalFrame;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.rootpane.WebFrame;
@@ -38,10 +34,8 @@ public class MainFrame extends WebFrame {
 	private static final long serialVersionUID = 1L;
 	private Logger log = Logger.getLogger(getClass().getName());
 	private static MainFrame instance = null;
-	
 	private final WebPanel contentPane;
 	private WebMemoryBar memoryBar;
-	private final WebDesktopPane desktopPane;
 	
 	public static MainFrame getInstance() {
 		if (instance == null) {
@@ -70,24 +64,12 @@ public class MainFrame extends WebFrame {
         
 		contentPane = new WebPanel();		
 		setLayout (new BorderLayout());		
-		contentPane.add (createStatusBar(), BorderLayout.SOUTH);
-		
-		desktopPane = new WebDesktopPane();        
-        desktopPane.setOpaque (true);
-        desktopPane.setBackground(new Color(252, 248, 252));        
-        
+		contentPane.add (createStatusBar(), BorderLayout.SOUTH);              
         getContentPane().setBackground(new Color(252, 248, 252));
         contentPane.setOpaque(false);
-        
-        
-        //desktopPane.add();
-        
-        
         contentPane.add(createRibbonBar(), BorderLayout.NORTH);
         
 		add(contentPane, BorderLayout.CENTER);
-		
-		//this.addContent(ReportingFactory.getInstance().getById("rest"));
 		
 		ThreadUtils.sleepSafely(500);
 		pack();
@@ -106,8 +88,7 @@ public class MainFrame extends WebFrame {
 						
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							openDesktopChild((WebInternalFrame) VesselFactory.getInstance().getAdd(), false);
-							//NotificationManager.showNotification("Vessel details has been added, you can always edit them from Vessels options");
+							addContent(VesselFactory.getInstance().getAdd());
 						}
 					});
 		}
@@ -133,29 +114,6 @@ public class MainFrame extends WebFrame {
 		contentPane.revalidate();
 	}
 	
-	public void openDesktopChild(WebInternalFrame childFrame, boolean openMaximum) {
-		if(childFrame == null)
-			return;
-		
-		childFrame.pack();
-		
-		if(childFrame.isVisible() == false) {
-			this.desktopPane.add(childFrame, 0);
-			this.desktopPane.getDesktopManager().activateFrame(childFrame);
-			childFrame.setVisible(true);
-		} else {
-			this.desktopPane.getDesktopManager().activateFrame(childFrame);
-		}
-		
-		if(openMaximum) {
-			try {
-				childFrame.setMaximum(true);
-			} catch (PropertyVetoException e1) {
-				log.warn(e1.getMessage(), e1);
-			}
-		}
-	}
-	
 	private WebStatusBar createStatusBar() {
 		final WebStatusBar statusBar = new WebStatusBar();
 		statusBar.addSpacing();
@@ -174,6 +132,7 @@ public class MainFrame extends WebFrame {
 	}
 	
 	public void display() {
+		
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
