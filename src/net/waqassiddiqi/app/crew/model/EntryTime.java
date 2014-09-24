@@ -112,4 +112,123 @@ public class EntryTime {
 	public String getFormattedDate() {
 		return CalendarUtil.format("yyyy-MM-dd", this.entryDate);
 	}
+	
+	public double getTotalRestHours() {
+		double d = 0.0D;
+		if (this.schedule != null) {
+			
+			for(int i=0; i<schedule.length; i++) {
+				if(!schedule[i]) {
+					d += 0.5D;
+				}
+			}					
+		}
+		return d;
+	}
+
+	public double getPreviousDaySectionA() {
+		double d = 0.0D;
+		if (this.schedule != null) {
+			for (int i = this.schedule.length - 1; i >= schedule.length - 22; i--) {
+				if (!this.schedule[i]) {
+					d += 0.5D;
+				}
+			}
+		}
+		return d;
+	}
+
+	public double getTodaySectionA() {
+		double d = 0.0D;
+		if (this.schedule != null) {
+			for (int i = 0; i < this.schedule.length - 22; i++) {
+				if (!this.schedule[i]) {
+					d += 0.5D;
+				}
+			}
+		}
+		return d;
+	}
+
+	public double getPreviousDaySectionB() {
+		double d = 0.0D;
+		if (this.schedule != null) {
+			for (int i = this.schedule.length - 1; i >= this.schedule.length - 12; i--) {
+				if (!this.schedule[i]) {
+					d += 0.5D;
+				}
+			}
+		}
+		return d;
+	}
+
+	public double getTodaySectionB() {
+		double d = 0.0D;
+		if (this.schedule != null) {
+			for (int i = 0; i < this.schedule.length - 12; i++) {
+				if (!this.schedule[i]) {
+					d += 0.5D;
+				}
+			}
+		}
+		return d;
+	}
+
+	public double getPreviousDaySectionC() {
+		double d = 0.0D;
+		if (this.schedule != null) {
+			for (int i = this.schedule.length - 1; i >= schedule.length - 36; i--) {
+				if (!this.schedule[i]) {
+					d += 0.5D;
+				}
+			}
+		}
+		return d;
+	}
+
+	public double getTodaySectionC() {
+		double d = 0.0D;
+		if (this.schedule != null) {
+			for (int i = 0; i < this.schedule.length - 36; i++) {
+				if (!this.schedule[i]) {
+					d += 0.5D;
+				}
+			}
+		}
+		return d;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + crewId;
+		result = prime * result
+				+ ((entryDate == null) ? 0 : entryDate.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+
+		EntryTime other = (EntryTime) obj;
+		
+		if (crewId != other.crewId)
+			return false;
+		
+		System.out.println(entryDate.getTime() + " : " + other.entryDate.getTime());
+		
+		if (entryDate == null) {
+			
+			if (other.entryDate != null)
+				return false;
+			
+		} else if (entryDate.getTime() != other.entryDate.getTime())
+			return false;
+		return true;
+	}
 }

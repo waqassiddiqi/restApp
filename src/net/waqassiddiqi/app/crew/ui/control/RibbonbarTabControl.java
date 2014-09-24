@@ -92,6 +92,7 @@ public class RibbonbarTabControl {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				owner.addContent(CrewFactory.getInstance().getAdd());
+				//owner.addContent(ReportingFactory.getInstance().getById("rest"));				
 			}
 		});
 

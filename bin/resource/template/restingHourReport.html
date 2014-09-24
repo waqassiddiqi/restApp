@@ -47,8 +47,8 @@
 			<tr>
 				<th align="left" scope="col" colspan="50">SEAFARER'S
 					NAME:$!{currentCrew.FirstName} &nbsp; $!{currentCrew.LastName}</th>
-				<th aligh="left" scope="col" colspan="2">MONTH:$!{month}</th>
-				<th align="left" scope="col" colspan="2">YEAR:$!{year}</th>
+				<th aligh="left" scope="col" colspan="2">MONTH:$host.getFormattedMonth()</th>
+				<th align="left" scope="col" colspan="2">YEAR:$host.getYear()</th>
 			</tr>
 			<tr>
 				<th align="left" scope="col" colspan="48" valign="top">RANK:$!{currentCrew.Rank}</th>
@@ -152,7 +152,7 @@
 
 				#foreach( $index in [0..47] )
 				<td valign="middle" bgcolor="#FFFFFF">
-					#if( $entryTime.getSchedule()[$index] )
+					#if( !$entryTime.getSchedule()[$index] )
 						x
 					#end	
 				</td>

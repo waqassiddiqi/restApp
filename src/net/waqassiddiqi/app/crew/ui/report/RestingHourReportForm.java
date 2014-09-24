@@ -10,22 +10,19 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.StringWriter;
 import java.text.DateFormatSymbols;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.filechooser.FileFilter;
 
 import net.waqassiddiqi.app.crew.db.CrewDAO;
-import net.waqassiddiqi.app.crew.db.EntryTimeDAO;
 import net.waqassiddiqi.app.crew.model.Crew;
-import net.waqassiddiqi.app.crew.model.EntryTime;
 import net.waqassiddiqi.app.crew.model.Vessel;
+import net.waqassiddiqi.app.crew.report.RestingHourReport;
 import net.waqassiddiqi.app.crew.ui.BaseForm;
 import net.waqassiddiqi.app.crew.ui.MainFrame;
-import net.waqassiddiqi.app.crew.util.CalendarUtil;
 import net.waqassiddiqi.app.crew.util.FilesUtil;
+import net.waqassiddiqi.app.crew.util.NotificationManager;
 
 import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
@@ -57,6 +54,7 @@ public class RestingHourReportForm extends BaseForm {
 	private WebComboBox cmbCrew;
 	private WebComboBox cmbYear;
 	private WebComboBox cmbMonth;
+	private RestingHourReport restingHourReport;
 	
 	@SuppressWarnings("unchecked")
 	public RestingHourReportForm(MainFrame owner) {
@@ -111,7 +109,8 @@ public class RestingHourReportForm extends BaseForm {
 		getToolbar().add(new WebLabel("Filter: ") {{ setMargin(1); }});
 		
 		WebButton btnFilter = new WebButton("Generate Report", getIconsHelper().loadIcon("common/settings_16x16.png"));
-		
+		btnFilter.putClientProperty("command", "filter");
+		btnFilter.addActionListener(this);
 		GroupPanel gp = new GroupPanel(cmbCrew, cmbMonth, cmbYear, btnFilter);
 		
 		getToolbar().add(gp);
@@ -124,36 +123,23 @@ public class RestingHourReportForm extends BaseForm {
 		reportPane.setEditable(false);
 		reportPane.setContentType("text/html");
 		
-		Vessel currentVessel = new Vessel() {{ setImo("IMOPK"); setName("MV S"); }};
-		Crew currentCrew = new Crew() {{ setFirstName("Waqas"); setLastName("Siddiqui"); setRank("Major"); }};
+		
+	    WebScrollPane scrollPane = new WebScrollPane(reportPane);
+	    
+		return scrollPane.setMargin(5);
+	}
+	
+	private void generateReport(Crew crew, Vessel vessel, int month, int year) {
 		
 		VelocityContext localVelocityContext = new VelocityContext();
-		localVelocityContext.put("currentCrew", currentCrew);
-		localVelocityContext.put("currentVessel", currentVessel);
+		localVelocityContext.put("currentCrew", crew);
+		localVelocityContext.put("currentVessel", vessel);
+				
+		restingHourReport = new RestingHourReport(crew, vessel, month, year);
+	    restingHourReport.generateReport();		
 		
-		Calendar calStart = Calendar.getInstance();
-		Calendar calEnd = Calendar.getInstance();
-		
-		calStart.setTime(CalendarUtil.getFirstDayOfMonth(new Date()));
-		calEnd.setTime(CalendarUtil.getLastDayOfMonth(new Date()));
-		
-		CalendarUtil.toBeginningOfTheDay(calStart);
-		CalendarUtil.toBeginningOfTheDay(calEnd);
-		
-		
-		List<EntryTime> lstEntryTimes = new EntryTimeDAO().getByYearMonthAndCrew(calStart.getTime(), calEnd.getTime(), new Crew() {{ setId(1); }});
-		
-		for(EntryTime t : lstEntryTimes) {
-			System.out.println(t.getEntryDate());
-		}
-		
-		localVelocityContext.put("lstEntryTimes", lstEntryTimes);
-		
-		Calendar cal = Calendar.getInstance();
-		
-	    localVelocityContext.put("month", new SimpleDateFormat("MMM").format(cal.getTime()));
-	    localVelocityContext.put("year", cal.get(Calendar.YEAR));
-	    
+		localVelocityContext.put("lstEntryTimes", restingHourReport.getEntryTimeList());	    
+	    localVelocityContext.put("host", restingHourReport);
 	    
 	    VelocityEngine ve = new VelocityEngine();
 	    ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath"); 
@@ -166,9 +152,6 @@ public class RestingHourReportForm extends BaseForm {
 	    reportTemplate.merge(localVelocityContext, writer);
 	    
 	    reportPane.setText(writer.toString());
-	    WebScrollPane scrollPane = new WebScrollPane(reportPane);
-	    
-		return scrollPane.setMargin(5);
 	}
 	
 	private void generatePdf(String path) {
@@ -212,6 +195,29 @@ public class RestingHourReportForm extends BaseForm {
 		
 		if(btnSource.getClientProperty("command").equals("pdf")) {
 			saveAsPdf();
+		} else if(btnSource.getClientProperty("command").equals("filter")) {
+			
+			if(cmbCrew.getSelectedItem() instanceof Crew) {
+				
+				if(cmbMonth.getSelectedIndex() == 0) {
+					NotificationManager.showPopup(getOwner(), cmbMonth, new String[] { "Please select valid month" });
+					return;
+				}
+				
+				if(cmbYear.getSelectedIndex() == 0) {
+					NotificationManager.showPopup(getOwner(), cmbYear, new String[] { "Please select valid year" });
+					return;
+				}
+				
+				Vessel currentVessel = new Vessel() {{ setImo("IMOPK"); setName("MV S"); }};
+				
+				generateReport( (Crew) cmbCrew.getSelectedItem(), currentVessel, cmbMonth.getSelectedIndex() - 1, 
+						(int) cmbYear.getSelectedItem());
+				
+			} else {
+				NotificationManager.showPopup(getOwner(), cmbCrew, new String[] { "Please select crew" });
+				return;
+			}			
 		}
 	}
 	

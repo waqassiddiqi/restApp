@@ -7,19 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import net.waqassiddiqi.app.crew.controller.CrewFactory;
 import net.waqassiddiqi.app.crew.controller.RankFactory;
-import net.waqassiddiqi.app.crew.controller.ReportingFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
+import net.waqassiddiqi.app.crew.db.VesselDAO;
 import net.waqassiddiqi.app.crew.style.skin.DefaultSkin;
 import net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl;
 import net.waqassiddiqi.app.crew.util.PrefsUtil;
@@ -91,15 +87,15 @@ public class MainFrame extends WebFrame {
         
 		add(contentPane, BorderLayout.CENTER);
 		
-		this.addContent(ReportingFactory.getInstance().getById("rest"));
+		//this.addContent(ReportingFactory.getInstance().getById("rest"));
 		
 		ThreadUtils.sleepSafely(500);
 		pack();
 		setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 		
-		PrefsUtil.setBoolean(PrefsUtil.PREF_VESSEL_ADDED, true);
 		
-		if(!PrefsUtil.getBoolean(PrefsUtil.PREF_VESSEL_ADDED, false)) {
+		
+		if(new VesselDAO().getAll().size() <= 0) {
 			net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, MainFrame.this, "No Vessel Found",
 					new String[] { 
 						"In order to continue, vessel details should be entered first",
@@ -158,17 +154,6 @@ public class MainFrame extends WebFrame {
 				log.warn(e1.getMessage(), e1);
 			}
 		}
-	}
-	
-	@Deprecated
-	public void addChildDesktopContent(WebInternalFrame childFrame) {
-		this.desktopPane.add(childFrame);
-		this.desktopPane.getDesktopManager().activateFrame(childFrame);
-	}
-	
-	@Deprecated
-	public void activateChildDesktopFrame(WebInternalFrame childFrame) {
-		this.desktopPane.getDesktopManager().activateFrame(childFrame);
 	}
 	
 	private WebStatusBar createStatusBar() {
