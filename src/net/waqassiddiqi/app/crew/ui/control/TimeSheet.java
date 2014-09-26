@@ -40,19 +40,25 @@ public class TimeSheet {
 	private Component view;
 	private float totalRest = 0.0f;
 	private float totalWork = 24.0f;
+	private String title = "";
 	
 	private ChangeListener changeListener = null;
 	
 	public TimeSheet(int blockSize) {
-		this(blockSize, BlockType.WORK, true, true, 1, new Date());
+		this(blockSize, BlockType.WORK, "", true, 1, new Date());
 	}
 	
-	public TimeSheet(int blockSize, BlockType blockType, boolean showTitles, boolean showLegend, int days, Date startDate) {
+	public TimeSheet(int blockSize, boolean showLegend, String title) {
+		this(blockSize, BlockType.WORK, title, showLegend, 1, new Date());
+	}
+	
+	public TimeSheet(int blockSize, BlockType blockType, String title, boolean showLegend, int days, Date startDate) {
 		this.selectedBlockType = blockType;
 		rows = days;
 		this.startDate = startDate;
 		this.showLegend = showLegend;
 		this.blockSize = blockSize;
+		this.title = title;
 		
 		initView();
 	}
@@ -61,14 +67,21 @@ public class TimeSheet {
 		return scheduleList;
 	}
 	
+	@SuppressWarnings("serial")
 	private void initView() {
 		if(this.showLegend) {
 			final GroupPanel legendPanel = new GroupPanel(1, false, getLegendPanel()); 
 			final GroupPanel titlePanel = new GroupPanel ( GroupingType.fillFirst, 5, legendPanel);
 			
-			view = new GroupPanel(GroupingType.fillLast, 10, false, getGrid(rows), titlePanel.setMargin(6)).setMargin(10);
+			if(this.title != null && title.trim().length() > 0)
+				view = new GroupPanel(GroupingType.fillLast, 0, false, new WebLabel(title) {{ setDrawShade(true); }}, getGrid(rows), titlePanel.setMargin(6)).setMargin(10);
+			else
+				view = new GroupPanel(GroupingType.fillLast, 0, false, getGrid(rows), titlePanel.setMargin(6)).setMargin(10);
 		} else {
-			view = new GroupPanel(GroupingType.fillLast, 10, false, getGrid(rows)).setMargin(10);
+			if(this.title != null && title.trim().length() > 0)
+				view = new GroupPanel(GroupingType.fillLast, 0, false, new WebLabel(title) {{ setDrawShade(true); }}, getGrid(rows)).setMargin(10);
+			else
+				view = new GroupPanel(GroupingType.fillLast, 0, false, getGrid(rows)).setMargin(10);
 		}
 	}
 	
@@ -152,9 +165,9 @@ public class TimeSheet {
 			rows[i] = TableLayout.PREFERRED;
 		}
 		
-        rows[ rows.length - 3 ] = TableLayout.PREFERRED;
-        rows[ rows.length - 2 ] = 20;
-        rows[ rows.length - 1 ] = TableLayout.FILL;
+        //rows[ rows.length - 3 ] = TableLayout.PREFERRED;
+        //rows[ rows.length - 2 ] = 20;
+        //rows[ rows.length - 1 ] = TableLayout.FILL;
 
         final double[] columns = new double[26];
         
@@ -232,6 +245,8 @@ public class TimeSheet {
         	row += 1;
         }
 		
+        groupPanel.setOpaque(false);
+        
         return groupPanel;
 	}
 	
@@ -326,6 +341,10 @@ public class TimeSheet {
 			
 			setSchedule(timeBlocks[i].getId(), scheduleArray[i]);
 		}
+	}
+	
+	public void setShowLegend(boolean showLegend) {
+		this.showLegend = showLegend;
 	}
 	
 	public float getTotalRest() {

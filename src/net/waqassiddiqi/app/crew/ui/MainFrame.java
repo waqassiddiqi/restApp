@@ -14,9 +14,11 @@ import net.waqassiddiqi.app.crew.controller.CrewFactory;
 import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
-import net.waqassiddiqi.app.crew.db.VesselDAO;
+import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.style.skin.DefaultSkin;
+import net.waqassiddiqi.app.crew.ui.AddVesselForm.ChangeListener;
 import net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl;
+import net.waqassiddiqi.app.crew.util.ConfigurationUtil;
 
 import org.apache.log4j.Logger;
 
@@ -30,12 +32,13 @@ import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.style.StyleManager;
 import com.alee.utils.ThreadUtils;
 
-public class MainFrame extends WebFrame {
+public class MainFrame extends WebFrame implements ChangeListener {
 	private static final long serialVersionUID = 1L;
 	private Logger log = Logger.getLogger(getClass().getName());
 	private static MainFrame instance = null;
 	private final WebPanel contentPane;
 	private WebMemoryBar memoryBar;
+	private RibbonbarTabControl ribbonBar;
 	
 	public static MainFrame getInstance() {
 		if (instance == null) {
@@ -45,12 +48,15 @@ public class MainFrame extends WebFrame {
 	}
 	
 	public Component createRibbonBar() {
-		return new RibbonbarTabControl(MainFrame.this, 5).getComponent();
+		this.ribbonBar = new RibbonbarTabControl(MainFrame.this, 5);
+		
+		return ribbonBar.getComponent();
 	}
 	
 	private void initFactories() {
 		RankFactory.getInstance().setOwner(this);
 		CrewFactory.getInstance().setOwner(this);
+		VesselFactory.getInstance().setOwner(this);
 	}
 	
 	public MainFrame() {
@@ -77,7 +83,10 @@ public class MainFrame extends WebFrame {
 		
 		
 		
-		if(new VesselDAO().getAll().size() <= 0) {
+		if(ConfigurationUtil.isVesselConfigured() == false) {
+			
+			this.ribbonBar.setEnabled(false);
+			
 			net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, MainFrame.this, "No Vessel Found",
 					new String[] { 
 						"In order to continue, vessel details should be entered first",
@@ -153,5 +162,10 @@ public class MainFrame extends WebFrame {
 	
 	public static void main(String[] args) throws SQLException {
 		runApplication(); 
+	}
+
+	@Override
+	public void added(Vessel vessel) {
+		this.ribbonBar.setEnabled(true);
 	}
 }

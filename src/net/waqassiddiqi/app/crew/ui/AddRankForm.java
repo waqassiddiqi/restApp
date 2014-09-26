@@ -23,6 +23,8 @@ import com.alee.global.StyleConstants;
 import com.alee.laf.button.WebButton;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
+import com.alee.laf.scroll.WebScrollPane;
+import com.alee.laf.separator.WebSeparator;
 import com.alee.laf.tabbedpane.WebTabbedPane;
 import com.alee.laf.text.WebTextField;
 import com.alee.laf.toolbar.WebToolBar;
@@ -37,7 +39,12 @@ public class AddRankForm implements ActionListener {
 	private Component thisComponent;
 	private WebTextField txtRankName;
 	private WebTextField txtRankId;
-	private TimeSheet timeSheet;
+	private TimeSheet timeSheetOnSeaWatchkeeping;
+	private TimeSheet timeSheetOnSeaNonWatchkeeping;
+	
+	private TimeSheet timeSheetOnPortWatchKeeping;
+	private TimeSheet timeSheetOnPortNonWatchKeeping;;
+	
 	private WebTabbedPane tabPan;
 	private Rank currentRank = null;
 	private WebButton btnNew;
@@ -115,11 +122,21 @@ public class AddRankForm implements ActionListener {
         
         tabPan.addTab("  Rank Details  ", getForm());
         
-        timeSheet = new TimeSheet(25);
+        timeSheetOnSeaWatchkeeping = new TimeSheet(25, false, "Watchkeeping Hours: ");
+        timeSheetOnSeaNonWatchkeeping = new TimeSheet(25, false, "Watchkeeping Hours: ");
         
-        tabPan.addTab("  Schedule Template ", new GroupPanel(false, 
-				new WebLabel("Rest Hours") {{ setDrawShade(true); }}, 
-				timeSheet.getView()).setMargin(10));
+        timeSheetOnPortWatchKeeping = new TimeSheet(25, false, "Watch keeping Hours: ");
+        timeSheetOnPortNonWatchKeeping = new TimeSheet(25, true, "Non Watch keeping Hours: ");
+        
+        WebScrollPane scrollPane = new WebScrollPane(new GroupPanel(false, 
+				new WebLabel("Rest Hour Templates") {{ setDrawShade(true); }}, 
+				timeSheetOnSeaWatchkeeping.getView(), timeSheetOnSeaNonWatchkeeping.getView(), WebSeparator.createHorizontal(), 
+				new GroupPanel(false, 
+						new WebLabel("Port Hours") {{ setDrawShade(true); }},  
+						timeSheetOnPortWatchKeeping.getView(), 
+						timeSheetOnPortNonWatchKeeping.getView())).setMargin(5));
+        
+        tabPan.addTab("  Schedule Template ", scrollPane);
         
         tabPan.setContentInsets(new Insets(10, 10, 10, 10));
 
@@ -177,8 +194,7 @@ public class AddRankForm implements ActionListener {
 			Rank rank = new Rank();
 			rank.setRank(txtRankName.getText().trim());
 			
-			RankDAO rankDao = new RankDAO();
-			
+			RankDAO rankDao = new RankDAO();			
 			
 			if( (currentRank != null) && currentRank.getRank().equals(rank.getRank()) == false &&
 					rankDao.isExists(rank))  {
@@ -199,7 +215,10 @@ public class AddRankForm implements ActionListener {
 			
 			if(InputValidator.validateInput(owner, new JTextField[] { txtRankName }, "Rank cannot be empty")) {
 				
-				Boolean[] scheduleArray = this.timeSheet.getSchedule();
+				Boolean[] scheduleArrayOnSeaWatchkeeping = this.timeSheetOnSeaWatchkeeping.getSchedule();
+				Boolean[] scheduleArrayOnSeaNonWatchkeeping = this.timeSheetOnSeaNonWatchkeeping.getSchedule();
+				Boolean[] scheduleArrayOnPortWatchkeeping = this.timeSheetOnPortWatchKeeping.getSchedule();
+				Boolean[] scheduleArrayOnPortNonWatchkeeping = this.timeSheetOnPortNonWatchKeeping.getSchedule();
 				
 				if(currentRank == null) {
 					this.id = rankDao.addRank(rank);
@@ -211,8 +230,12 @@ public class AddRankForm implements ActionListener {
 						
 						txtRankId.setText(Integer.toString(this.id));
 						
+						
+						
 						ScheduleTemplate template = new ScheduleTemplate();
-						template.setSchedule(scheduleArray);
+						template.setSchedule(scheduleArrayOnSeaWatchkeeping);
+						template.setOnPort(false);
+						template.setWatchKeeping(true);
 						
 						int scheduleId = scheduleDao.addScheduleTemplate(template);
 						
@@ -222,7 +245,53 @@ public class AddRankForm implements ActionListener {
 							scheduleDao.associateScheduleTemplate(currentRank, template);
 						}
 						
-						currentRank.setScheduleTemplate(template);
+						template = new ScheduleTemplate();
+						template.setSchedule(scheduleArrayOnSeaNonWatchkeeping);
+						template.setOnPort(false);
+						template.setWatchKeeping(false);
+						
+						scheduleId = scheduleDao.addScheduleTemplate(template);
+						
+						template.setId(scheduleId);
+						
+						if(scheduleId > 0) {
+							scheduleDao.associateScheduleTemplate(currentRank, template);
+						}
+						
+						template = new ScheduleTemplate();
+						template.setSchedule(scheduleArrayOnPortWatchkeeping);
+						template.setOnPort(true);
+						template.setWatchKeeping(true);
+						
+						scheduleId = scheduleDao.addScheduleTemplate(template);
+						
+						template.setId(scheduleId);
+						
+						if(scheduleId > 0) {
+							scheduleDao.associateScheduleTemplate(currentRank, template);
+						}
+						
+						template = new ScheduleTemplate();
+						template.setSchedule(scheduleArrayOnPortNonWatchkeeping);
+						template.setOnPort(true);
+						template.setWatchKeeping(false);
+						
+						scheduleId = scheduleDao.addScheduleTemplate(template);
+						
+						template.setId(scheduleId);
+						
+						if(scheduleId > 0) {
+							scheduleDao.associateScheduleTemplate(currentRank, template);
+						}
+						
+						//ScheduleTemplate template = new ScheduleTemplate();
+						//template.setSchedule(scheduleArray);
+						
+						//int scheduleId = scheduleDao.addScheduleTemplate(template);
+						
+						
+						
+						//currentRank.setScheduleTemplate(template);
 						
 						NotificationManager.showNotification("New rank has been added.");
 						
@@ -235,8 +304,8 @@ public class AddRankForm implements ActionListener {
 					currentRank.setRank(rank.getRank());
 					rankDao.updateRank(currentRank);
 					
-					currentRank.getScheduleTemplate().setSchedule(scheduleArray);
-					scheduleDao.updateScheduleTemplate(currentRank.getScheduleTemplate());
+					//currentRank.getScheduleTemplate().setSchedule(scheduleArray);
+					//scheduleDao.updateScheduleTemplate(currentRank.getScheduleTemplate());
 					
 					NotificationManager.showNotification("Rank has been updated.");
 				}

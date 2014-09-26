@@ -4,9 +4,12 @@ public class ScheduleTemplate {
 	private int id;
 	private Boolean[] schedule;
 	private boolean isOnPort;
+	private boolean isWatchKeeping;
 	
 	public ScheduleTemplate() {
 		this.schedule = new Boolean[48];
+		isWatchKeeping = true;
+		isOnPort = false;
 	}
 	
 	public int getId() {
@@ -54,5 +57,13 @@ public class ScheduleTemplate {
 	}
 	public void setOnPort(boolean isOnPort) {
 		this.isOnPort = isOnPort;
+	}
+
+	public boolean isWatchKeeping() {
+		return isWatchKeeping;
+	}
+
+	public void setWatchKeeping(boolean isWatchKeeping) {
+		this.isWatchKeeping = isWatchKeeping;
 	}
 }

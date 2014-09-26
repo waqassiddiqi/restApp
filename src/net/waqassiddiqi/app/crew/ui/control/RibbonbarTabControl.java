@@ -6,6 +6,8 @@ import java.awt.Component;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.AbstractButton;
 import javax.swing.JTabbedPane;
@@ -33,6 +35,8 @@ public class RibbonbarTabControl {
 	private MainFrame owner;
 	private Logger log = Logger.getLogger(getClass().getName());
 	private int margin = 0;
+	private final WebTabbedPane ribbonBarPan;
+	private List<WebButton> buttonList = new ArrayList<WebButton>();
 	
 	public RibbonbarTabControl(MainFrame owner, int margin) {
 		
@@ -41,11 +45,13 @@ public class RibbonbarTabControl {
 		this.margin = margin;
 		this.iconsHelper = new IconsHelper();
 		this.owner = owner;
+		
+		ribbonBarPan = new WebTabbedPane();
 	}
 	
 	@SuppressWarnings("serial")
 	public Component getComponent() {
-		final WebTabbedPane ribbonBarPan = new WebTabbedPane ();
+		
 		
 		ribbonBarPan.setBackground(new Color(221, 211, 238));
 		
@@ -85,6 +91,8 @@ public class RibbonbarTabControl {
 			}
 		});
 
+		buttonList.add(btnRestHourReport);
+		
 		GroupPanel gpanel = new GroupPanel(4, new WebLabel(" "), btnRestHourReport);
 
 		WebPanel panel = getRibbonPanel("Application Settings");
@@ -116,7 +124,27 @@ public class RibbonbarTabControl {
 			}
 		});
 
-		GroupPanel gpanel = new GroupPanel(4, btnRestHourReport);
+		buttonList.add(btnRestHourReport);
+		
+		WebButton btnErrorReport = new WebButton("Error Report",
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/view_report_32x32.png"));
+
+		btnErrorReport.setRolloverDecoratedOnly(true);
+		btnErrorReport.setDrawFocus(false);
+		btnErrorReport.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnErrorReport.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnErrorReport.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(ReportingFactory.getInstance().getById("error"));				
+			}
+		});
+
+		buttonList.add(btnErrorReport);
+		
+		GroupPanel gpanel = new GroupPanel(4, btnRestHourReport, btnErrorReport);
 
 		WebPanel panel = getRibbonPanel("Manage Crew");
 		panel.add(gpanel, BorderLayout.CENTER);
@@ -134,7 +162,7 @@ public class RibbonbarTabControl {
 
 		WebButton btnAddCrew = new WebButton("Add Crew",
 				this.iconsHelper.loadIcon(getClass(), "ribbonbar/crew_add_32x32.png"));
-
+		
 		btnAddCrew.setRolloverDecoratedOnly(true);
 		btnAddCrew.setDrawFocus(false);
 		btnAddCrew.setHorizontalTextPosition(AbstractButton.CENTER);
@@ -180,11 +208,16 @@ public class RibbonbarTabControl {
 			}
 		});
 
+		buttonList.add(btnAddCrew);
+		buttonList.add(btnListCrew);
+		buttonList.add(btnDeleteCrew);
+		
 		GroupPanel gpanel = new GroupPanel(4, btnAddCrew, btnListCrew, btnDeleteCrew);
 
 		WebPanel panel = getRibbonPanel("Manage Crew");
 		panel.add(gpanel, BorderLayout.CENTER);
 
+		
 		return panel;
 	}
 	
@@ -222,6 +255,9 @@ public class RibbonbarTabControl {
 			}
 		});
 
+		buttonList.add(btnRank);
+		buttonList.add(btnListRanks);
+		
 		GroupPanel gpanel = new GroupPanel(4, btnRank, btnListRanks);
 
 		WebPanel panel = getRibbonPanel("Manage Ranks");
@@ -248,6 +284,8 @@ public class RibbonbarTabControl {
 			}
 		});
 
+		buttonList.add(btnAddRestHour);
+		
 		GroupPanel gpanel = new GroupPanel(4, btnAddRestHour);
 
 		WebPanel panel = getRibbonPanel("Reporting");
@@ -259,8 +297,6 @@ public class RibbonbarTabControl {
 	public void setupHomeTab(final JTabbedPane tabbedPane) {
 		tabbedPane.addTab("  Home  ", new GroupPanel(4, new WebLabel()));
 	}
-	
-	
 	
 	
 	private void setupPanel(final WebPanel panel, String text) {
@@ -292,5 +328,11 @@ public class RibbonbarTabControl {
 		panel.add(southPanel, BorderLayout.SOUTH);
 		
 		return panel;
+	}
+	
+	public void setEnabled(boolean enable) {
+		for(WebButton btn : buttonList) {
+			btn.setEnabled(enable);
+		}
 	}
 }

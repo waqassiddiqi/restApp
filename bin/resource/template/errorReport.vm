@@ -71,7 +71,7 @@ font-family:Arial
 	#set( $restPeriodCounter = $host.getRestPeriodCounter($velocityCount))
 	  <tr>
 	    <th align="center" valign="middle" bgcolor="#009999">$velocityCount</th>
-	    <th bgcolor="#FFFFFF" scope="col">$entryTime.getDecorateDate()</th>
+	    <th bgcolor="#FFFFFF" scope="col">$entryTime.getFormattedDate()</th>
 	    <td bgcolor="#FFFFFF">$totalWorkHours</td>
 	    <td bgcolor="#FFFFFF">$entryTime.getTotalRestHours()</td>
 	    <td bgcolor="#FFFFFF">$restHoursIn24Hours</td>

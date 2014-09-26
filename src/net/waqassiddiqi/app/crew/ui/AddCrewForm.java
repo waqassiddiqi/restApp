@@ -23,7 +23,6 @@ import net.waqassiddiqi.app.crew.model.Rank;
 import net.waqassiddiqi.app.crew.model.ScheduleTemplate;
 import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.ui.control.TimeSheet;
-import net.waqassiddiqi.app.crew.ui.icons.IconsHelper;
 import net.waqassiddiqi.app.crew.util.InputValidator;
 import net.waqassiddiqi.app.crew.util.NotificationManager;
 
@@ -31,7 +30,6 @@ import com.alee.extended.date.WebDateField;
 import com.alee.extended.image.WebImageDrop;
 import com.alee.extended.layout.TableLayout;
 import com.alee.extended.panel.GroupPanel;
-import com.alee.extended.panel.GroupingType;
 import com.alee.global.GlobalConstants;
 import com.alee.laf.button.WebButton;
 import com.alee.laf.checkbox.WebCheckBox;
@@ -113,13 +111,7 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ScheduleTemplate template = new ScheduleTemplateDAO().getByRank(
-						listRanks.get(cmbRank.getSelectedIndex()));
-				
-				if(template != null) {
-					timeSheet.setSchedule(template.getSchedule());
-				}
-				
+				getDefaultScheduleTemplate();				
 			}
 		});
 		
@@ -129,6 +121,15 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		txtSignonDate.setInputPromptPosition (SwingConstants.CENTER);
 		
 		chkWatchkeeper = new WebCheckBox("Is watchkeeper?");
+		
+		chkWatchkeeper.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				getDefaultScheduleTemplate();
+			}
+		});
+		
 		
 		txtFirstName = new WebTextField(15);
 		txtLastName = new WebTextField(15);
@@ -163,15 +164,7 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		content.add(new WebImageDrop(64, 64) { { setToolTipText("Double click to select crew photo to add"); addMouseListener(ma);  } }, "1,0,LEFT,CENTER");
 
 		content.add(new WebLabel("Rank", WebLabel.TRAILING), "0,1");
-		content.add(new GroupPanel(GroupingType.fillFirst, cmbRank, new WebButton(
-				new IconsHelper().loadIcon(IconsHelper.class,
-						"common/restore_16x16.png"), new ActionListener() {
-					@Override
-					public void actionPerformed(final ActionEvent e) {
-						refreshData();
-						bindData();						
-					}
-				})), "1,1");
+		content.add(cmbRank, "1,1");
 		
 		content.add(new WebLabel("First Name", WebLabel.TRAILING), "0,2");
 		content.add(txtFirstName, "1,2");
@@ -202,6 +195,15 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 	private void bindData() {
 		for(Rank r : listRanks) {
 			cmbRank.addItem(r.getRank());
+		}
+	}
+	
+	private void getDefaultScheduleTemplate() {
+		ScheduleTemplate template = new ScheduleTemplateDAO().getByRank(
+				listRanks.get(cmbRank.getSelectedIndex()),  false, chkWatchkeeper.isSelected());
+		
+		if(template != null) {
+			timeSheet.setSchedule(template.getSchedule());
 		}
 	}
 	
@@ -284,6 +286,20 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 						
 						if(scheduleId > 0) {
 							scheduleDao.associateScheduleTemplate(currentCrew, templateOnSea);
+						}
+						
+						
+						List<ScheduleTemplate> templates = scheduleDao.getAllByRank(
+								listRanks.get(cmbRank.getSelectedIndex()));
+						
+						for(ScheduleTemplate t : templates) {
+							if(t.isOnPort()) {
+								int schId = scheduleDao.addScheduleTemplate(t);
+								if(schId > 0) {
+									t.setId(schId);
+									scheduleDao.associateScheduleTemplate(currentCrew, t);
+								}
+							}
 						}
 						
 						NotificationManager.showNotification("New crew has been added");

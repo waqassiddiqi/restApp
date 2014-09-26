@@ -22,8 +22,8 @@ public class ScheduleTemplateDAO {
 	
 	public int addScheduleTemplate(ScheduleTemplate template) {
 		
-		int generatedId = db.executeInsert("INSERT INTO schedule_templates(schedule, is_on_port) VALUES(?, ?);", 
-				new String[] { template.getScheduleString(), String.valueOf(template.isOnPort()) });
+		int generatedId = db.executeInsert("INSERT INTO schedule_templates(schedule, is_on_port, is_watch_keeping) VALUES(?, ?, ?);", 
+				new String[] { template.getScheduleString(), String.valueOf(template.isOnPort()), String.valueOf(template.isWatchKeeping()) });
 		
 		if(log.isDebugEnabled()) {
 			log.debug("New generated template ID: " + generatedId);
@@ -35,9 +35,9 @@ public class ScheduleTemplateDAO {
 	public int updateScheduleTemplate(ScheduleTemplate template) {
 		
 		int rowsAffected = db.executeUpdate("UPDATE schedule_templates " +
-				"set schedule = ?, is_on_port = ? WHERE id = ?;", 
+				"set schedule = ?, is_on_port = ?, is_watch_keeping = ? WHERE id = ?;", 
 				new String[] { template.getScheduleString(), 
-					String.valueOf(template.isOnPort()), String.valueOf(template.getId()) });
+					String.valueOf(template.isOnPort()), String.valueOf(template.getId()), String.valueOf(template.isWatchKeeping()) });
 		
 		if(log.isDebugEnabled()) {
 			log.debug("Updated: " + rowsAffected);
@@ -70,10 +70,10 @@ public class ScheduleTemplateDAO {
 		return generatedId;
 	}
 	
-	public ScheduleTemplate getByRank(Rank rank) {
+	public ScheduleTemplate getByRank(Rank rank, boolean isOnPort, boolean isWatchkeeping) {
 		final ResultSet rs = this.db.executeQuery("SELECT s.* FROM schedule_templates s " +
 				"INNER JOIN ranks_schedule_template rs " +
-				"ON rs.schedule_id = s.id WHERE rs.rank_id = " + rank.getId());
+				"ON rs.schedule_id = s.id WHERE rs.rank_id = " + rank.getId() + " AND s.is_on_port = " + isOnPort + " AND is_watch_keeping = " + isWatchkeeping);
 		
 		ScheduleTemplate template = null;
 		
@@ -84,6 +84,7 @@ public class ScheduleTemplateDAO {
 						setId(rs.getInt("id"));
 						parseSchedule(rs.getString("schedule"));
 						setOnPort(rs.getBoolean("is_on_port"));
+						setWatchKeeping(rs.getBoolean("is_watch_keeping"));
 					}};
 			}
 			
@@ -98,6 +99,40 @@ public class ScheduleTemplateDAO {
 		}
 		
 		return template;
+	}
+	
+	public List<ScheduleTemplate> getAllByRank(Rank rank) {
+		List<ScheduleTemplate> templateList = new ArrayList<ScheduleTemplate>();		
+		final ResultSet rs = this.db.executeQuery("SELECT s.* FROM schedule_templates s " +
+				"INNER JOIN ranks_schedule_template rs " +
+				"ON rs.schedule_id = s.id WHERE rs.rank_id = " + rank.getId());
+		
+		ScheduleTemplate template = null;
+		
+		try {
+			
+			while(rs.next()) {
+				template = new ScheduleTemplate() {{
+						setId(rs.getInt("id"));
+						parseSchedule(rs.getString("schedule"));
+						setOnPort(rs.getBoolean("is_on_port"));
+						setWatchKeeping(rs.getBoolean("is_watch_keeping"));
+					}};
+				
+					templateList.add(template);
+			}
+			
+		} catch (Exception e) {
+			log.error("Error executing ScheduleTemplateDAO.getByRank(): " + e.getMessage(), e);
+		} finally {
+			try {
+				if (rs != null) rs.close();
+			} catch (SQLException ex) {
+				log.error("failed to close db resources: " + ex.getMessage(), ex);
+			}
+		}
+		
+		return templateList;
 	}
 	
 	public ScheduleTemplate getByCrew(Crew crew) {

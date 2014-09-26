@@ -13,7 +13,6 @@ import net.waqassiddiqi.app.crew.util.CalendarUtil;
 
 public class RestingHourReport {
 	private Crew crew;
-	private Vessel vessel;
 	private int month;
 	private int year;
 	private List<EntryTime> lstEntryTimes;
@@ -22,7 +21,6 @@ public class RestingHourReport {
 	
 	public RestingHourReport(Crew c, Vessel v, int month, int year) {
 		this.crew = c;
-		this.vessel = v;
 		this.month = month;
 		this.year = year;
 	}

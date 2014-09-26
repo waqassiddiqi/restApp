@@ -3,6 +3,7 @@ package net.waqassiddiqi.app.crew.controller;
 import java.awt.Component;
 
 import net.waqassiddiqi.app.crew.ui.AddRestHourForm;
+import net.waqassiddiqi.app.crew.ui.report.ErrorReportForm;
 import net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm;
 
 public class ReportingFactory extends BaseFactory {
@@ -21,7 +22,6 @@ public class ReportingFactory extends BaseFactory {
 	
 	@Override
 	public Component get() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -29,6 +29,8 @@ public class ReportingFactory extends BaseFactory {
 	public Component getById(String id) {
 		if(id.equals("rest")) {
 			return new RestingHourReportForm(getOwner()).getView();
+		} else if(id.equals("error")) {
+			return new ErrorReportForm(getOwner()).getView();
 		}
 		
 		return null;
@@ -36,7 +38,6 @@ public class ReportingFactory extends BaseFactory {
 
 	@Override
 	public Component getEdit(String id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -2,6 +2,7 @@ package net.waqassiddiqi.app.crew.ui;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import net.waqassiddiqi.app.crew.ui.icons.IconsHelper;
 
@@ -14,7 +15,7 @@ import com.alee.laf.toolbar.WebToolBar;
 import com.alee.managers.hotkey.Hotkey;
 import com.alee.managers.hotkey.HotkeyManager;
 
-public abstract class BaseForm implements ActionListener {
+public abstract class BaseForm extends Observable implements ActionListener {
 	
 	private WebButton btnNew;
 	private WebButton btnSave;

@@ -29,12 +29,14 @@ public class AddVesselForm extends BaseForm implements ActionListener {
 	private WebTabbedPane tabPan;
 	
 	public AddVesselForm(MainFrame owner) {
-		super(owner);
+		this(owner, -1);
 	}
 	
 	public AddVesselForm(MainFrame owner, int id) {
 		super(owner);
 		this.id = id;
+		
+		addChangeListener(getOwner());
 	}
 	
 	@SuppressWarnings("serial")
@@ -114,10 +116,16 @@ public class AddVesselForm extends BaseForm implements ActionListener {
 					this.id = new VesselDAO().addVessel(vessel);
 					
 					if(this.id > -1) {
+						
+						txtVesselId.setText(Integer.toString(this.id));
+						
 						vessel.setId(id);
 						this.currentVessel = vessel;
 						
 						NotificationManager.showNotification("Vessel details has been added");
+						
+						if(this.changeListener != null)
+							this.changeListener.added(vessel);
 						
 					} else {
 						NotificationManager.showNotification("An error has occured while adding new rank");
@@ -134,5 +142,15 @@ public class AddVesselForm extends BaseForm implements ActionListener {
 				}
 			}
 		}
+	}
+	
+	public interface ChangeListener {
+		void added(Vessel vessel);
+	}
+	
+	private ChangeListener changeListener = null;
+	
+	public void addChangeListener(ChangeListener l) {
+		changeListener = l;
 	}
 }

@@ -68,7 +68,8 @@ public class ConnectionManager {
 		String strSqlScheduleTemplate = "CREATE TABLE IF NOT EXISTS schedule_templates("
                 + "id bigint auto_increment, "
                 + "schedule VARCHAR(48), "
-                + "is_on_port BOOLEAN "
+                + "is_on_port BOOLEAN, "
+                + "is_watch_keeping BOOLEAN "
                 + ")";	
 		
 		executeUpdate(strSqlScheduleTemplate);
