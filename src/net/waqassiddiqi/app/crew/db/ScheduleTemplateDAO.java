@@ -135,6 +135,37 @@ public class ScheduleTemplateDAO {
 		return templateList;
 	}
 	
+	public ScheduleTemplate getByCrew(Crew crew, boolean isOnPort, boolean isWatchkeeping) {
+		final ResultSet rs = this.db.executeQuery("SELECT s.* FROM schedule_templates s " +
+				"INNER JOIN crew_schedule_template cs " +
+				"ON cs.schedule_id = s.id WHERE cs.crew_id = " + crew.getId() + " AND s.is_on_port = " + isOnPort + " AND is_watch_keeping = " + isWatchkeeping);
+		
+		ScheduleTemplate template = null;
+		
+		try {
+			
+			if(rs.next()) {
+				template = new ScheduleTemplate() {{
+						setId(rs.getInt("id"));
+						parseSchedule(rs.getString("schedule"));
+						setOnPort(rs.getBoolean("is_on_port"));
+						setWatchKeeping(rs.getBoolean("is_watch_keeping"));
+					}};
+			}
+			
+		} catch (Exception e) {
+			log.error("Error executing ScheduleTemplateDAO.getByCrew(): " + e.getMessage(), e);
+		} finally {
+			try {
+				if (rs != null) rs.close();
+			} catch (SQLException ex) {
+				log.error("failed to close db resources: " + ex.getMessage(), ex);
+			}
+		}
+		
+		return template;
+	}
+	
 	public ScheduleTemplate getByCrew(Crew crew) {
 		final ResultSet rs = this.db.executeQuery("SELECT s.* FROM schedule_templates s " +
 				"INNER JOIN crew_schedule_template cs " +

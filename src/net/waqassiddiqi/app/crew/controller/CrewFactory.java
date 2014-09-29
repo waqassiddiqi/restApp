@@ -21,7 +21,10 @@ public class CrewFactory extends BaseFactory {
 	
 	@Override
 	public Component get() {
-		return new ListCrewForm(getOwner()).getView();
+		Component c = new ListCrewForm(getOwner()).getView();
+		c.setName("listCrew");
+		
+		return c;
 	}
 
 	@Override
@@ -36,7 +39,10 @@ public class CrewFactory extends BaseFactory {
 
 	@Override
 	public Component getAdd() {
-		return new AddCrewForm(getOwner()).getView();
+		Component c = new AddCrewForm(getOwner()).getView();
+		c.setName("addCrew");
+		
+		return c;
+		
 	}
-	
 }

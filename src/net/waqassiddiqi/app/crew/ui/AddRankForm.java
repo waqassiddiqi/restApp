@@ -3,7 +3,6 @@ package net.waqassiddiqi.app.crew.ui;
 import java.awt.Component;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 
@@ -12,14 +11,11 @@ import net.waqassiddiqi.app.crew.db.ScheduleTemplateDAO;
 import net.waqassiddiqi.app.crew.model.Rank;
 import net.waqassiddiqi.app.crew.model.ScheduleTemplate;
 import net.waqassiddiqi.app.crew.ui.control.TimeSheet;
-import net.waqassiddiqi.app.crew.ui.icons.IconsHelper;
 import net.waqassiddiqi.app.crew.util.InputValidator;
 import net.waqassiddiqi.app.crew.util.NotificationManager;
 
 import com.alee.extended.layout.TableLayout;
 import com.alee.extended.panel.GroupPanel;
-import com.alee.extended.panel.GroupingType;
-import com.alee.global.StyleConstants;
 import com.alee.laf.button.WebButton;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
@@ -27,15 +23,11 @@ import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.separator.WebSeparator;
 import com.alee.laf.tabbedpane.WebTabbedPane;
 import com.alee.laf.text.WebTextField;
-import com.alee.laf.toolbar.WebToolBar;
-import com.alee.managers.hotkey.Hotkey;
-import com.alee.managers.hotkey.HotkeyManager;
 
-public class AddRankForm implements ActionListener {
+public class AddRankForm extends BaseForm {
 	
 	private MainFrame owner;
 	private int id = -1;
-	private IconsHelper iconsHelper = new IconsHelper();
 	private Component thisComponent;
 	private WebTextField txtRankName;
 	private WebTextField txtRankId;
@@ -47,74 +39,27 @@ public class AddRankForm implements ActionListener {
 	
 	private WebTabbedPane tabPan;
 	private Rank currentRank = null;
-	private WebButton btnNew;
-	private WebButton btnSave;
-	private WebButton btnClose;
 	private WebButton btnCancel;
 	
 	public AddRankForm(MainFrame owner) {
-		this.owner = owner;
+		this(owner, -1);
 	}
 	
 	public AddRankForm(MainFrame owner, int id) {
-		this.owner = owner;
+		super(owner);
 		this.id = id;
 	}
 	
 	@SuppressWarnings("serial")
-	public void setupToolBar(WebToolBar toolbar) {
-		
-		toolbar.add(new WebLabel("Manage Ranks") {{ setDrawShade(true); setMargin(10); }});
-		
-		toolbar.addSeparator();
-		
-		btnNew = WebButton.createIconWebButton(iconsHelper.loadIcon("common/new_16x16.png"),
-				StyleConstants.smallRound, true);
-		btnNew.putClientProperty("command", "new");
-		btnNew.addActionListener(this);
-		btnNew.setToolTipText("New Rank (Ctrl+N)");
-		
-		toolbar.add(btnNew);
-		
-		btnSave = WebButton.createIconWebButton(iconsHelper.loadIcon("common/save.png"),
-				StyleConstants.smallRound, true);
-		btnSave.putClientProperty("command", "save");
-		btnSave.addActionListener(this);
-		btnSave.setToolTipText("Save (Ctrl+S)");
-		
-		toolbar.add(btnSave);
-		
-		btnCancel = WebButton.createIconWebButton(iconsHelper.loadIcon("common/cancel.png"),
-				StyleConstants.smallRound, true);
-		btnCancel.putClientProperty("command", "cancel");
-		btnCancel.addActionListener(this);
-		btnCancel.setToolTipText("Cancel Changes");
-		
-		toolbar.add(btnCancel);
-		
-		toolbar.addSeparator();
-		
-		btnClose = WebButton.createIconWebButton(iconsHelper.loadIcon("common/cross2_16x16.png"),
-				StyleConstants.smallRound, true);
-		btnClose.putClientProperty("command", "close");
-		btnClose.addActionListener(this);
-		btnClose.setToolTipText("Close (Ctrl+F4)");
-		
-		toolbar.addToEnd(btnClose);
-		
-		HotkeyManager.registerHotkey(owner, btnSave, Hotkey.CTRL_S);
-		HotkeyManager.registerHotkey(owner, btnNew, Hotkey.CTRL_N);
+	@Override
+	public void setupToolBar() {
+		getToolbar().add(new WebLabel("Manage Ranks") {{ setDrawShade(true); setMargin(10); }});
+		super.setupToolBar();
 	}
 	
 	@SuppressWarnings("serial")
-	public Component getView() {
-		WebToolBar ut = new WebToolBar ( WebToolBar.HORIZONTAL );
-        ut.setFloatable ( false );
-        setupToolBar (ut);
-        
-        if(this.currentRank == null) {
-        	btnCancel.setEnabled(false);
-        }
+	@Override
+	public Component prepareView() {
         
 		tabPan = new WebTabbedPane ();
         tabPan.setOpaque(false);
@@ -139,11 +84,8 @@ public class AddRankForm implements ActionListener {
         tabPan.addTab("  Schedule Template ", scrollPane);
         
         tabPan.setContentInsets(new Insets(10, 10, 10, 10));
-
-		final GroupPanel titlePanel = new GroupPanel(GroupingType.fillFirst, 5,
-				ut);
-		return new GroupPanel(GroupingType.fillLast, 10, false, titlePanel,
-				tabPan).setMargin(10);
+        
+        return tabPan;
 	}
 	
 	private Component getForm() {
@@ -294,8 +236,6 @@ public class AddRankForm implements ActionListener {
 						//currentRank.setScheduleTemplate(template);
 						
 						NotificationManager.showNotification("New rank has been added.");
-						
-						btnCancel.setEnabled(true);
 						
 					} else {
 						NotificationManager.showNotification("An error has occured while adding new rank");

@@ -250,16 +250,6 @@ public class TimeSheet {
         return groupPanel;
 	}
 	
-	private static WebSeparator createVerticalSeparator() {
-		final WebSeparator separator = new WebSeparator(WebSeparator.VERTICAL);
-		separator.setDrawSideLines(true);
-		separator.setDrawTrailingLine(true);
-
-		separator.setBackground(Color.black);
-
-		return separator;
-	}
-	
 	private static WebSeparator createHorizontalSeparator() {
 		final WebSeparator separator = new WebSeparator(WebSeparator.HORIZONTAL);
 		separator.setDrawSideLines(true);

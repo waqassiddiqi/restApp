@@ -106,21 +106,33 @@ public class MainFrame extends WebFrame implements ChangeListener {
 	
 	public void addContent(Component view) {
 		
-		if(activeComponent == null)
+		if(activeComponent == null) {
 			contentPane.add(view, BorderLayout.CENTER);
-		else {
-			removeContent(activeComponent);
-			contentPane.add(view, BorderLayout.CENTER);
+			activeComponent = view;
+		} else {
+			
+			if(!view.getName().equals(activeComponent.getName())) {
+				removeContent(activeComponent);
+				
+				contentPane.add(view, BorderLayout.CENTER);
+				
+				activeComponent = view;
+			}
 		}
-		
-		activeComponent = view;
 	}
 	
 	private Component activeComponent = null; 
 	
 	public void removeContent(Component view) {
+		if(view instanceof WebPanel) {
+			BaseForm f = (BaseForm) ((WebPanel) view).getClientProperty("host");
+			if(f != null)
+				f.unregisterHotKeys();
+		}
+		
 		contentPane.remove(view);
 		contentPane.revalidate();
+		contentPane.repaint();
 	}
 	
 	private WebStatusBar createStatusBar() {

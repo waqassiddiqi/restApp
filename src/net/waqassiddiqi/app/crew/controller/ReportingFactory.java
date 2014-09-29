@@ -27,13 +27,18 @@ public class ReportingFactory extends BaseFactory {
 
 	@Override
 	public Component getById(String id) {
+		
+		Component c = null;
+		
 		if(id.equals("rest")) {
-			return new RestingHourReportForm(getOwner()).getView();
+			c = new RestingHourReportForm(getOwner()).getView();
+			c.setName("restReport");
 		} else if(id.equals("error")) {
-			return new ErrorReportForm(getOwner()).getView();
+			c = new ErrorReportForm(getOwner()).getView();
+			c.setName("errorReport");
 		}
 		
-		return null;
+		return c;
 	}
 
 	@Override
@@ -43,7 +48,10 @@ public class ReportingFactory extends BaseFactory {
 
 	@Override
 	public Component getAdd() {
-		return new AddRestHourForm(getOwner()).getView();
+		Component c = new AddRestHourForm(getOwner()).getView();
+		c.setName("addRestHour");
+		
+		return c;
 	}
 
 }

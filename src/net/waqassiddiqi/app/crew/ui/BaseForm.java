@@ -89,6 +89,11 @@ public abstract class BaseForm extends Observable implements ActionListener {
 		HotkeyManager.registerHotkey(owner, btnNew, Hotkey.CTRL_N);
 	}
 	
+	public void unregisterHotKeys() {
+		HotkeyManager.unregisterHotkeys(btnSave);
+		HotkeyManager.unregisterHotkeys(btnNew);
+	}
+	
 	public WebPanel getContentPane() {
 		return contentPane;
 	}
@@ -97,7 +102,11 @@ public abstract class BaseForm extends Observable implements ActionListener {
 		setupToolBar();
 		
 		final GroupPanel titlePanel = new GroupPanel(GroupingType.fillFirst, 5, toolbar);
-		return new GroupPanel(GroupingType.fillLast, 10, false, titlePanel, prepareView()).setMargin(10);
+		WebPanel p = new GroupPanel(GroupingType.fillLast, 10, false, titlePanel, prepareView()).setMargin(10);
+		
+		p.putClientProperty("host", this);
+		
+		return p;
 	}
 	
 	public abstract Component prepareView();

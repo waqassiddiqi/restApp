@@ -15,7 +15,6 @@ import net.waqassiddiqi.app.crew.util.CalendarUtil;
 
 public class ErrorReport {
 	private Crew crew;
-	private Vessel vessel;
 	private int month;
 	private int year;
 	private List<EntryTime> lstEntryTimes;
@@ -29,7 +28,6 @@ public class ErrorReport {
 	
 	public ErrorReport(Crew c, Vessel v, int month, int year) {
 		this.crew = c;
-		this.vessel = v;
 		this.month = month;
 		this.year = year;
 	}
@@ -97,14 +95,21 @@ public class ErrorReport {
 				}
 			}
 			
-			for (int i = 0; i < this.lstEntryTimes.size(); i++) {
-		      this.sectionAMapping.put(Integer.valueOf(i), Double.valueOf(count24HSectionA(i)));
-		      this.sectionBMapping.put(Integer.valueOf(i), Double.valueOf(count24HSectionB(i)));
-		      this.sectionCMapping.put(Integer.valueOf(i), Double.valueOf(count24HSectionC(i)));
-		      this.sevenDayMapping.put(Integer.valueOf(i), Double.valueOf(count7DayRestHours(i)));
-		    }
+			refresh();
 		}
 		
+	}
+	
+	public void refresh() {
+		if(this.lstEntryTimes == null)
+			return;
+		
+		for (int i = 0; i < this.lstEntryTimes.size(); i++) {
+			this.sectionAMapping.put(Integer.valueOf(i), Double.valueOf(count24HSectionA(i)));
+			this.sectionBMapping.put(Integer.valueOf(i), Double.valueOf(count24HSectionB(i)));
+			this.sectionCMapping.put(Integer.valueOf(i), Double.valueOf(count24HSectionC(i)));
+			this.sevenDayMapping.put(Integer.valueOf(i), Double.valueOf(count7DayRestHours(i)));
+		}
 	}
 	
 	public double get24HourRestHours(int paramInt) {

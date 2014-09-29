@@ -21,7 +21,9 @@ public class RankFactory extends BaseFactory {
 	
 	@Override
 	public Component get() {
-		return new ListRankForm(getOwner()).getView();
+		Component c = new ListRankForm(getOwner()).getView();
+		c.setName("listRank");
+		return c;
 	}
 
 	@Override
@@ -36,6 +38,8 @@ public class RankFactory extends BaseFactory {
 
 	@Override
 	public Component getAdd() {
-		return new AddRankForm(getOwner()).getView();
+		Component c = new AddRankForm(getOwner()).getView();
+		c.setName("getRank");
+		return c;
 	}
 }

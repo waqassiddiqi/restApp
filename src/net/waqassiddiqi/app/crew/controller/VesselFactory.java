@@ -35,6 +35,9 @@ public class VesselFactory extends BaseFactory {
 
 	@Override
 	public Component getAdd() {
-		return new AddVesselForm(getOwner()).getView();
+		Component c = new AddVesselForm(getOwner()).getView();
+		c.setName("addVessel");
+		
+		return c;
 	}
 }

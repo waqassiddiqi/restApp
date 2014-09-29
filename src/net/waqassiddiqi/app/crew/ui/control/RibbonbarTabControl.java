@@ -127,7 +127,7 @@ public class RibbonbarTabControl {
 		buttonList.add(btnRestHourReport);
 		
 		WebButton btnErrorReport = new WebButton("Error Report",
-				this.iconsHelper.loadIcon(getClass(), "ribbonbar/view_report_32x32.png"));
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/error_report_32x32.gif"));
 
 		btnErrorReport.setRolloverDecoratedOnly(true);
 		btnErrorReport.setDrawFocus(false);
@@ -146,7 +146,7 @@ public class RibbonbarTabControl {
 		
 		GroupPanel gpanel = new GroupPanel(4, btnRestHourReport, btnErrorReport);
 
-		WebPanel panel = getRibbonPanel("Manage Crew");
+		WebPanel panel = getRibbonPanel("Reporting");
 		panel.add(gpanel, BorderLayout.CENTER);
 
 		return panel;

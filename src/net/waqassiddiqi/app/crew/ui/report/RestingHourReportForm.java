@@ -73,6 +73,10 @@ public class RestingHourReportForm extends BaseForm {
 		cmbYear.addItem("Select Year");
 		for(int i=2004; i<currentYear + 10; i++) {
 			cmbYear.addItem(i);
+			
+			if(i == currentYear) {
+				cmbYear.setSelectedIndex(i - 2003);
+			}
 		}
 		
 		cmbMonth = new WebComboBox();
@@ -80,6 +84,10 @@ public class RestingHourReportForm extends BaseForm {
 		String[] months = new DateFormatSymbols().getMonths();
         for (int i = 0; i < months.length && i < 12; i++) {
         	cmbMonth.addItem(months[i]);
+        	
+        	if(i == Calendar.getInstance().get(Calendar.MONTH) + 1) {
+        		cmbMonth.setSelectedIndex(i);
+        	}
         }
 	}
 

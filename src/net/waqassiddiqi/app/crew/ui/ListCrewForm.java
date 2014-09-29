@@ -3,6 +3,7 @@ package net.waqassiddiqi.app.crew.ui;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JTable;
@@ -12,7 +13,9 @@ import javax.swing.table.TableColumn;
 
 import net.waqassiddiqi.app.crew.db.CrewDAO;
 import net.waqassiddiqi.app.crew.model.Crew;
+import net.waqassiddiqi.app.crew.util.NotificationManager;
 
+import com.alee.laf.button.WebButton;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.tabbedpane.WebTabbedPane;
@@ -23,13 +26,17 @@ public class ListCrewForm extends BaseForm implements ActionListener {
 	private CrewTableModel tableModel;
 	private WebTabbedPane tabPan;
 	private WebTable table;
+	private CrewDAO crewDao;
 	
 	private Object[][] data;
 	private String[] columnNames = { "ID", "First Name", "Last Name", "Rank", "Nationality", 
 			"Passport", "SignOn Date", "Watch Keeper" };
+	private List<Crew> crewList = new ArrayList<Crew>();
+	
 	
 	public ListCrewForm(MainFrame owner) {
 		super(owner);
+		crewDao = new CrewDAO();
 	}
 	
 	@SuppressWarnings("serial")
@@ -91,18 +98,18 @@ public class ListCrewForm extends BaseForm implements ActionListener {
 	private Object[][] getData() {
 		this.data = null;
 		
-		List<Crew> list = new CrewDAO().getAll();
-		this.data = new Object[list.size()][columnNames.length];
+		crewList = crewDao.getAll();
+		this.data = new Object[crewList.size()][columnNames.length];
 		
-		for(int i=0; i<list.size(); i++) {
-			data[i][0] = list.get(i).getId();
-			data[i][1] = list.get(i).getFirstName();
-			data[i][2] = list.get(i).getLastName();
-			data[i][3] = list.get(i).getRank();
-			data[i][4] = list.get(i).getNationality();
-			data[i][5] = list.get(i).getPassportNumber();
-			data[i][6] = list.get(i).getSignOnDate();
-			data[i][7] = list.get(i).isWatchKeeper();
+		for(int i=0; i<crewList.size(); i++) {
+			data[i][0] = crewList.get(i).getId();
+			data[i][1] = crewList.get(i).getFirstName();
+			data[i][2] = crewList.get(i).getLastName();
+			data[i][3] = crewList.get(i).getRank();
+			data[i][4] = crewList.get(i).getNationality();
+			data[i][5] = crewList.get(i).getPassportNumber();
+			data[i][6] = crewList.get(i).getSignOnDate();
+			data[i][7] = crewList.get(i).isWatchKeeper();
 		}
 		
 		return this.data;
@@ -110,6 +117,15 @@ public class ListCrewForm extends BaseForm implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		WebButton btnSource = (WebButton) e.getSource();
+		
+		if(btnSource.getClientProperty("command").equals("save")) {
+			for(int i=0; i<crewList.size(); i++) {
+				crewDao.updateCrew(crewList.get(i));
+			}
+			
+			NotificationManager.showNotification("Crew details has been updated.");
+		}
 	}
 	
 	public class CrewTableModel extends DefaultTableModel {
@@ -154,6 +170,24 @@ public class ListCrewForm extends BaseForm implements ActionListener {
 		@Override
 		public void setValueAt(Object value, int row, int col) {
 			data[row][col] = value;
+			
+			Crew c = crewList.get(row);
+			if(col == 1) {
+				c.setFirstName(value.toString().trim());
+			} else if(col == 2) {
+				c.setLastName(value.toString().trim());
+			} else if(col == 3) {
+				c.setRank(value.toString().trim());
+			} else if(col == 4) {
+				c.setNationality(value.toString().trim());
+			} else if(col == 5) {
+				c.setPassportNumber(value.toString().trim());
+			} else if(col == 6) {
+				c.setRank(value.toString().trim());
+			}  else if(col == 7) {
+				c.setWatchKeeper((boolean) value);
+			}
+			
 			fireTableCellUpdated(row, col);
 		}
 	}
