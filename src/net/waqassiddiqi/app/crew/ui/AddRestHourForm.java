@@ -15,6 +15,7 @@ import net.waqassiddiqi.app.crew.model.Crew;
 import net.waqassiddiqi.app.crew.model.EntryTime;
 import net.waqassiddiqi.app.crew.model.ScheduleTemplate;
 import net.waqassiddiqi.app.crew.report.ErrorReport;
+import net.waqassiddiqi.app.crew.ui.control.ExWebCalendar;
 import net.waqassiddiqi.app.crew.ui.control.TimeSheet;
 import net.waqassiddiqi.app.crew.ui.control.TimeSheet.ChangeListener;
 import net.waqassiddiqi.app.crew.util.CalendarUtil;
@@ -47,12 +48,13 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 	private Crew currentCrew = null;
 	private List<Crew> listCrew;
 	private TimeSheet timeSheet;
-	private ScheduleTemplateDAO scheduleTemplateDao;
 	private WebCalendar calendar;
 	private WebCheckBox chkAutoSave;
 	private Date currentDate;
 	private WebLabel lblNonConformities;
 	private ErrorReport errorReport = null;
+	private EntryTimeDAO entryTimeDao;
+	private WebTextArea txtComments;
 	
 	public AddRestHourForm(MainFrame owner) {
 		this(owner, -1);
@@ -60,10 +62,10 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 	
 	public AddRestHourForm(MainFrame owner, int id) {
 		super(owner);
-		
-		scheduleTemplateDao = new ScheduleTemplateDAO();
+				
 		currentDate = new Date();
-		calendar = new WebCalendar(currentDate);
+		calendar = new ExWebCalendar(currentDate);
+		entryTimeDao = new EntryTimeDAO();
 	}
 	
 	@SuppressWarnings("serial")
@@ -106,7 +108,18 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		cmbCrew.setActionCommand("crewSelectedChanged");
 		cmbCrew.addActionListener(this);
 		chkOnPort = new WebCheckBox("on Port?");
+		chkOnPort.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setDefaultCrewScheduleTemplate();
+			}
+		});
+		
 		chkAutoSave = new WebCheckBox("Auto save on change date");
+		
+		chkAutoSave.setSelected(true);
+		chkAutoSave.setEnabled(false);
 		
 		refreshData();
 		bindData();
@@ -118,7 +131,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		timeSheet = new TimeSheet(22);
 		timeSheet.setChangeListener(this);
 		
-		WebTextArea txtComments = new WebTextArea ();
+		txtComments = new WebTextArea ();
 		txtComments.setLineWrap (true);
 		txtComments.setWrapStyleWord(true);
 
@@ -188,6 +201,31 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		}
 	}
 	
+	private void setDefaultCrewScheduleTemplate() {
+		if(currentCrew == null)
+			return;
+		
+		for(ScheduleTemplate t : currentCrew.getScheduleTemplate()) {
+			if(chkOnPort.isSelected() && t.isOnPort()) {
+				if(currentCrew.isWatchKeeper() && t.isWatchKeeping()) {
+					timeSheet.setSchedule(t.getSchedule());
+					break;
+				} else if(!currentCrew.isWatchKeeper() && !t.isWatchKeeping()) {
+					timeSheet.setSchedule(t.getSchedule());
+					break;
+				}
+			} if(!chkOnPort.isSelected() && !t.isOnPort()) {
+				if(currentCrew.isWatchKeeper() && t.isWatchKeeping()) {
+					timeSheet.setSchedule(t.getSchedule());
+					break;
+				} else if(!currentCrew.isWatchKeeper() && !t.isWatchKeeping()) {
+					timeSheet.setSchedule(t.getSchedule());
+					break;
+				}
+			}
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -197,12 +235,19 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 				
 				if(cmbCrew.getSelectedItem() instanceof Crew) {
 					
+					txtComments.setText("");
+					
 					currentCrew = (Crew) cmbCrew.getSelectedItem();
 					
-					currentCrew.setScheduleTemplate(scheduleTemplateDao.getByCrew(currentCrew));
+					EntryTime entry = entryTimeDao.getByDateAndCrew(getDate(currentDate), currentCrew);
 					
-					if(currentCrew.getScheduleTemplate() != null) {
-						timeSheet.setSchedule(currentCrew.getScheduleTemplate().getSchedule());
+					if(entry != null) {
+						timeSheet.setSchedule(entry.getSchedule());
+						txtComments.setText(entry.getComments());
+					} else {
+						
+						currentCrew.setScheduleTemplate(new ScheduleTemplateDAO().getAllByCrew(currentCrew));
+						setDefaultCrewScheduleTemplate();
 					}
 				}
 				
@@ -235,13 +280,13 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 			
 			entryTime.setEntryDate(getDate(currentDate));
 			entryTime.setCrewId(currentCrew.getId());
-			entryTime.setComments("");
+			entryTime.setComments(txtComments.getText());
 			entryTime.setOnPort(chkOnPort.isSelected());
 			entryTime.setSchedule(timeSheet.getSchedule());
 			entryTime.setWorkIn24Hours(timeSheet.getTotalWork());
 			entryTime.setRestIn24Hours(timeSheet.getTotalRest());
 			
-			if(new EntryTimeDAO().addUpdateEntry(entryTime) > 0) {
+			if(entryTimeDao.addUpdateEntry(entryTime) > 0) {
 				NotificationManager.showNotification("<html>Resting hours has been saved for<br/>" + 
 						CalendarUtil.format("MMM dd, yyyy", getDate(this.calendar.getDate())) + "</html>");
 			}
@@ -261,17 +306,26 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		StringBuilder sb = new StringBuilder();
 		sb.append("<html><ul>");
 		
-		if(totalRest > 10) {
+		if(totalRest < 10) {
 			sb.append("<li>Total period of REST > 10 Hours</li>");
 		}
 		
-		if(totalWork < 14) {
+		if(totalWork > 14) {
 			sb.append("<li>Total period of WORK &lt; 14 Hours</li>");
 		}
 		
 		if(currentCrew != null) {
-			errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
-			errorReport.generateReport();
+			
+			if(errorReport == null) {
+				errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
+				errorReport.generateReport();
+			} else {
+				if(errorReport.getMonth() != month || errorReport.getYear() != cal.get(Calendar.YEAR)) {
+					errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
+					errorReport.generateReport();
+				}
+			}
+			
 			errorReport.getEntryTimeList().get(cal.get(Calendar.DAY_OF_MONTH) - 1).setSchedule(timeSheet.getSchedule());
 			errorReport.refresh();
 			
@@ -303,20 +357,23 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 
 	@Override
 	public void dateSelected(Date selectedDate) {
+		
+		txtComments.setText("");
+		
 		if(currentCrew != null) {
 			
 			if(chkAutoSave.isSelected()) {
 				saveRestingHour();
-			}
-			
-			EntryTimeDAO entryTimeDao = new EntryTimeDAO(); 
+			} 
 			
 			EntryTime entry = entryTimeDao.getByDateAndCrew(getDate(selectedDate), currentCrew);
 			
 			if(entry != null) {
 				timeSheet.setSchedule(entry.getSchedule());
+				txtComments.setText(entry.getComments());
 			} else {
-				ScheduleTemplate template = new ScheduleTemplateDAO().getByCrew(currentCrew, chkOnPort.isSelected(), currentCrew.isWatchKeeper());
+				ScheduleTemplate template = new ScheduleTemplateDAO().getByCrew(currentCrew, chkOnPort.isSelected(), 
+						currentCrew.isWatchKeeper());
 				if(template != null)
 					timeSheet.setSchedule(template.getSchedule());
 			}

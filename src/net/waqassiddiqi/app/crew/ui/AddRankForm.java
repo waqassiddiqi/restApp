@@ -31,11 +31,12 @@ public class AddRankForm extends BaseForm {
 	private Component thisComponent;
 	private WebTextField txtRankName;
 	private WebTextField txtRankId;
+	
 	private TimeSheet timeSheetOnSeaWatchkeeping;
 	private TimeSheet timeSheetOnSeaNonWatchkeeping;
 	
 	private TimeSheet timeSheetOnPortWatchKeeping;
-	private TimeSheet timeSheetOnPortNonWatchKeeping;;
+	private TimeSheet timeSheetOnPortNonWatchKeeping;
 	
 	private WebTabbedPane tabPan;
 	private Rank currentRank = null;
@@ -67,14 +68,14 @@ public class AddRankForm extends BaseForm {
         
         tabPan.addTab("  Rank Details  ", getForm());
         
-        timeSheetOnSeaWatchkeeping = new TimeSheet(25, false, "Watchkeeping Hours: ");
-        timeSheetOnSeaNonWatchkeeping = new TimeSheet(25, false, "Watchkeeping Hours: ");
+        timeSheetOnSeaWatchkeeping = new TimeSheet(25, false, "Watch keeping Hours: ");
+        timeSheetOnSeaNonWatchkeeping = new TimeSheet(25, false, "Non Watchkeeping Hours: ");
         
         timeSheetOnPortWatchKeeping = new TimeSheet(25, false, "Watch keeping Hours: ");
         timeSheetOnPortNonWatchKeeping = new TimeSheet(25, true, "Non Watch keeping Hours: ");
         
         WebScrollPane scrollPane = new WebScrollPane(new GroupPanel(false, 
-				new WebLabel("Rest Hour Templates") {{ setDrawShade(true); }}, 
+				new WebLabel("Sea Hours") {{ setDrawShade(true); }}, 
 				timeSheetOnSeaWatchkeeping.getView(), timeSheetOnSeaNonWatchkeeping.getView(), WebSeparator.createHorizontal(), 
 				new GroupPanel(false, 
 						new WebLabel("Port Hours") {{ setDrawShade(true); }},  
@@ -101,10 +102,12 @@ public class AddRankForm extends BaseForm {
 		txtRankId = new WebTextField(15);
 		txtRankId.setEnabled(false);
 		
+		txtRankId.setVisible(false);
+		
 		txtRankName = new WebTextField(15);
 		
-		content.add(new WebLabel("Rank ID", WebLabel.TRAILING), "0,0");		
-		content.add(txtRankId, "1,0");
+		//content.add(new WebLabel("Rank ID", WebLabel.TRAILING), "0,0");		
+		//content.add(txtRankId, "1,0");
 
 		content.add(new WebLabel("Rank", WebLabel.TRAILING), "0,1");
 		content.add(txtRankName, "1,1");
@@ -243,9 +246,6 @@ public class AddRankForm extends BaseForm {
 				} else {
 					currentRank.setRank(rank.getRank());
 					rankDao.updateRank(currentRank);
-					
-					//currentRank.getScheduleTemplate().setSchedule(scheduleArray);
-					//scheduleDao.updateScheduleTemplate(currentRank.getScheduleTemplate());
 					
 					NotificationManager.showNotification("Rank has been updated.");
 				}

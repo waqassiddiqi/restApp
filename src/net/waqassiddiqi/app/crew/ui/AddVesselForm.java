@@ -72,12 +72,14 @@ public class AddVesselForm extends BaseForm implements ActionListener {
 		txtVesselId = new WebTextField(15);
 		txtVesselId.setEnabled(false);
 		
+		txtVesselId.setVisible(false);
+		
 		txtName = new WebTextField(15);
 		txtFlag = new WebTextField(15);
 		txtImo = new WebTextField(15);
 		
-		content.add(new WebLabel("Vessel ID", WebLabel.TRAILING), "0,0");		
-		content.add(txtVesselId, "1,0");
+		//content.add(new WebLabel("Vessel ID", WebLabel.TRAILING), "0,0");		
+		//content.add(txtVesselId, "1,0");
 
 		content.add(new WebLabel("Name", WebLabel.TRAILING), "0,1");
 		content.add(txtName, "1,1");

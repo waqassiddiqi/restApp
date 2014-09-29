@@ -29,7 +29,7 @@ public class ListCrewForm extends BaseForm implements ActionListener {
 	private CrewDAO crewDao;
 	
 	private Object[][] data;
-	private String[] columnNames = { "ID", "First Name", "Last Name", "Rank", "Nationality", 
+	private String[] columnNames = { "S.No.", "First Name", "Last Name", "Rank", "Nationality", 
 			"Passport", "SignOn Date", "Watch Keeper" };
 	private List<Crew> crewList = new ArrayList<Crew>();
 	
@@ -102,7 +102,7 @@ public class ListCrewForm extends BaseForm implements ActionListener {
 		this.data = new Object[crewList.size()][columnNames.length];
 		
 		for(int i=0; i<crewList.size(); i++) {
-			data[i][0] = crewList.get(i).getId();
+			data[i][0] = i + 1;
 			data[i][1] = crewList.get(i).getFirstName();
 			data[i][2] = crewList.get(i).getLastName();
 			data[i][3] = crewList.get(i).getRank();

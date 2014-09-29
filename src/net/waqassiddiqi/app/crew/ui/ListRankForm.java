@@ -25,7 +25,7 @@ public class ListRankForm extends BaseForm implements ActionListener {
 	private WebTable table;
 	
 	private Object[][] data;
-	private String[] columnNames = { "ID", "Rank" };
+	private String[] columnNames = { "S.No.", "Rank" };
 	
 	public ListRankForm(MainFrame owner) {
 		super(owner);
@@ -82,7 +82,7 @@ public class ListRankForm extends BaseForm implements ActionListener {
 					.getTableCellRendererComponent(table, longValues[i], false,
 							false, 0, i);
 			cellWidth = comp.getPreferredSize().width;
-
+			
 			column.setPreferredWidth(Math.max(headerWidth, cellWidth));
 		}
 	}
@@ -94,7 +94,7 @@ public class ListRankForm extends BaseForm implements ActionListener {
 		this.data = new Object[list.size()][columnNames.length];
 		
 		for(int i=0; i<list.size(); i++) {
-			data[i][0] = list.get(i).getId();
+			data[i][0] = i+1;
 			data[i][1] = list.get(i).getRank();
 		}
 		

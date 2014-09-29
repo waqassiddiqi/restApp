@@ -1,6 +1,8 @@
 package net.waqassiddiqi.app.crew.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Crew {
 	private int id;
@@ -12,7 +14,7 @@ public class Crew {
 	private String passportNumber;
 	private Date signOnDate;
 	private boolean isWatchKeeper;
-	private ScheduleTemplate scheduleTemplate;
+	private List<ScheduleTemplate> scheduleTemplates = new ArrayList<ScheduleTemplate>();
 	
 	public int getId() {
 		return id;
@@ -77,11 +79,11 @@ public class Crew {
 		this.isWatchKeeper = isWatchKeeper;
 	}
 	
-	public ScheduleTemplate getScheduleTemplate() {
-		return scheduleTemplate;
+	public List<ScheduleTemplate> getScheduleTemplate() {
+		return scheduleTemplates;
 	}
-	public void setScheduleTemplate(ScheduleTemplate scheduleTemplate) {
-		this.scheduleTemplate = scheduleTemplate;
+	public void setScheduleTemplate(List<ScheduleTemplate> scheduleTemplates) {
+		this.scheduleTemplates = scheduleTemplates;
 	}
 	
 	@Override

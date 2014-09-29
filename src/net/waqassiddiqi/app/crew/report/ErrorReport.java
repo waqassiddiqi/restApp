@@ -318,4 +318,8 @@ public class ErrorReport {
 	public int getYear() {
 		return this.year;
 	}
+	
+	public int getMonth() {
+		return this.month;
+	}
 }

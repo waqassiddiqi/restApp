@@ -166,7 +166,8 @@ public class ScheduleTemplateDAO {
 		return template;
 	}
 	
-	public ScheduleTemplate getByCrew(Crew crew) {
+	public List<ScheduleTemplate> getAllByCrew(Crew crew) {
+		List<ScheduleTemplate> templateList = new ArrayList<ScheduleTemplate>();		
 		final ResultSet rs = this.db.executeQuery("SELECT s.* FROM schedule_templates s " +
 				"INNER JOIN crew_schedule_template cs " +
 				"ON cs.schedule_id = s.id WHERE cs.crew_id = " + crew.getId());
@@ -175,16 +176,19 @@ public class ScheduleTemplateDAO {
 		
 		try {
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				template = new ScheduleTemplate() {{
 						setId(rs.getInt("id"));
 						parseSchedule(rs.getString("schedule"));
 						setOnPort(rs.getBoolean("is_on_port"));
+						setWatchKeeping(rs.getBoolean("is_watch_keeping"));
 					}};
+				
+					templateList.add(template);
 			}
 			
 		} catch (Exception e) {
-			log.error("Error executing ScheduleTemplateDAO.getByCrew(): " + e.getMessage(), e);
+			log.error("Error executing ScheduleTemplateDAO.getByRank(): " + e.getMessage(), e);
 		} finally {
 			try {
 				if (rs != null) rs.close();
@@ -193,7 +197,7 @@ public class ScheduleTemplateDAO {
 			}
 		}
 		
-		return template;
+		return templateList;
 	}
 	
 	public List<Crew> getAll() {

@@ -99,7 +99,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 						public void actionPerformed(ActionEvent e) {
 							addContent(VesselFactory.getInstance().getAdd());
 						}
-					});
+					}, false);
 		}
 		
 	}

@@ -303,6 +303,9 @@ public class TimeSheet {
 			}
 			
 			setSchedule(blockId, bWork);
+			
+			if(changeListener != null)
+				changeListener.changed(totalRest, totalWork);
 		}	
 	}
 	
@@ -331,6 +334,9 @@ public class TimeSheet {
 			
 			setSchedule(timeBlocks[i].getId(), scheduleArray[i]);
 		}
+		
+		if(this.changeListener != null)
+			changeListener.changed(totalRest, totalWork);
 	}
 	
 	public void setShowLegend(boolean showLegend) {
@@ -347,9 +353,7 @@ public class TimeSheet {
 	
 	private void setSchedule(int blockId, boolean isWork) {
 		this.scheduleList[blockId] = isWork;
-		
-		if(this.changeListener != null)
-			changeListener.changed(totalRest, totalWork);
+
 	}
 	
 	public void setChangeListener(ChangeListener listener) {

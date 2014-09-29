@@ -37,7 +37,7 @@ public class NotificationManager {
 
 	public static void showPopup(MainFrame owner, Component target,
 			String title, String[] messages, String actionButtonText,
-			ActionListener action) {
+			ActionListener action, boolean isCloseable) {
 
 		final WebPopOver popOver = new WebPopOver(owner);
 		popOver.setMargin(10);
@@ -54,8 +54,14 @@ public class NotificationManager {
 						popOver.dispose();
 					}
 				}).setUndecorated(true);
-		popOver.add(new GroupPanel(GroupingType.fillMiddle, 4, icon,
-				titleLabel, closeButton).setMargin(0, 0, 10, 0));
+		
+		if(isCloseable) {
+			popOver.add(new GroupPanel(GroupingType.fillMiddle, 4, icon,
+					titleLabel, closeButton).setMargin(0, 0, 10, 0));
+		} else {
+			popOver.add(new GroupPanel(GroupingType.fillMiddle, 4, icon,
+					titleLabel).setMargin(0, 0, 10, 0));
+		}
 
 		for (String message : messages) {
 			popOver.add(new WebLabel(message));

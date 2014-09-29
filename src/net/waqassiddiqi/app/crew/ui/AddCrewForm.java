@@ -1,11 +1,13 @@
 package net.waqassiddiqi.app.crew.ui;
 
 import java.awt.Component;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +39,8 @@ import com.alee.laf.combobox.WebComboBox;
 import com.alee.laf.filechooser.WebFileChooser;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
+import com.alee.laf.scroll.WebScrollPane;
+import com.alee.laf.separator.WebSeparator;
 import com.alee.laf.tabbedpane.WebTabbedPane;
 import com.alee.laf.text.WebTextField;
 import com.alee.utils.ImageUtils;
@@ -55,15 +59,23 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 	private Crew currentCrew = null;
 	private WebFileChooser fileChooser = null;
 	private List<Rank> listRanks;
-	private TimeSheet timeSheet;
+	
+	private TimeSheet timeSheetOnSeaWatchkeeping;
+	private TimeSheet timeSheetOnSeaNonWatchkeeping;
+	
+	private TimeSheet timeSheetOnPortWatchKeeping;
+	private TimeSheet timeSheetOnPortNonWatchKeeping;
+	
+	protected Boolean[] defaultScheduleList = new Boolean[48];
 	
 	public AddCrewForm(MainFrame owner) {
-		super(owner);
+		this(owner, -1);
 	}
 	
 	public AddCrewForm(MainFrame owner, int id) {
 		super(owner);
 		this.id = id;
+		Arrays.fill(defaultScheduleList, Boolean.TRUE);
 	}
 	
 	@SuppressWarnings("serial")
@@ -80,11 +92,24 @@ public class AddCrewForm extends BaseForm implements ActionListener {
         tabPan.setOpaque(false);
         tabPan.setTabPlacement(WebTabbedPane.TOP);
         
+        timeSheetOnSeaWatchkeeping = new TimeSheet(25, false, "Watch keeping Hours: ");
+        timeSheetOnSeaNonWatchkeeping = new TimeSheet(25, false, "Non Watchkeeping Hours: ");
+        
+        timeSheetOnPortWatchKeeping = new TimeSheet(25, false, "Watch keeping Hours: ");
+        timeSheetOnPortNonWatchKeeping = new TimeSheet(25, true, "Non Watch keeping Hours: ");
+        
+        WebScrollPane scrollPane = new WebScrollPane(new GroupPanel(false, 
+				new WebLabel("Sea Hours") {{ setDrawShade(true); }}, 
+				timeSheetOnSeaWatchkeeping.getView(), timeSheetOnSeaNonWatchkeeping.getView(), WebSeparator.createHorizontal(), 
+				new GroupPanel(false, 
+						new WebLabel("Port Hours") {{ setDrawShade(true); }},  
+						timeSheetOnPortWatchKeeping.getView(), 
+						timeSheetOnPortNonWatchKeeping.getView())).setMargin(5));
+        
         tabPan.addTab("  Crew Details   ", getForm());
-        tabPan.addTab("  Schedule Template  ", 
-        		new GroupPanel(false, 
-        				new WebLabel("Rest Hours") {{ setDrawShade(true); }}, 
-        				timeSheet.getView()).setMargin(10));
+        tabPan.addTab("  Schedule Template ", scrollPane);
+        
+        tabPan.setContentInsets(new Insets(10, 10, 10, 10));
         
         return tabPan;
 	}
@@ -101,8 +126,6 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		WebPanel content = new WebPanel(layout);
 		content.setMargin(15, 30, 15, 30);
 		content.setOpaque(false);
-		
-		timeSheet = new TimeSheet(25);
 		
 		refreshData();
 		
@@ -199,11 +222,27 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 	}
 	
 	private void getDefaultScheduleTemplate() {
-		ScheduleTemplate template = new ScheduleTemplateDAO().getByRank(
-				listRanks.get(cmbRank.getSelectedIndex()),  false, chkWatchkeeper.isSelected());
 		
-		if(template != null) {
-			timeSheet.setSchedule(template.getSchedule());
+		timeSheetOnPortWatchKeeping.setSchedule(defaultScheduleList);
+		timeSheetOnPortNonWatchKeeping.setSchedule(defaultScheduleList);
+		timeSheetOnSeaWatchkeeping.setSchedule(defaultScheduleList);
+		timeSheetOnSeaNonWatchkeeping.setSchedule(defaultScheduleList);
+		
+		List<ScheduleTemplate> templates = new ScheduleTemplateDAO().getAllByRank(
+				listRanks.get(cmbRank.getSelectedIndex()));
+		
+		if(templates != null && templates.size() > 0) {
+			for(ScheduleTemplate t : templates) {
+				if(t.isOnPort() && t.isWatchKeeping()) {
+					timeSheetOnPortWatchKeeping.setSchedule(t.getSchedule());
+				} else if(t.isOnPort() && !t.isWatchKeeping()) {
+					timeSheetOnPortNonWatchKeeping.setSchedule(t.getSchedule());
+				} else if(!t.isOnPort() && t.isWatchKeeping()) {
+					timeSheetOnSeaWatchkeeping.setSchedule(t.getSchedule());
+				} else if(!t.isOnPort() && !t.isWatchKeeping()) {
+					timeSheetOnSeaNonWatchkeeping.setSchedule(t.getSchedule());
+				}
+			}
 		}
 	}
 	
@@ -240,7 +279,7 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 							public void actionPerformed(ActionEvent e) {
 								getOwner().addContent(VesselFactory.getInstance().getAdd());
 							}
-						});
+						}, true);
 				return;
 			}
 			
@@ -265,7 +304,10 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 					setWatchKeeper(chkWatchkeeper.isSelected());
 				}};
 				
-				Boolean[] scheduleArray = this.timeSheet.getSchedule();
+				Boolean[] scheduleArrayOnSeaWatchkeeping = this.timeSheetOnSeaWatchkeeping.getSchedule();
+				Boolean[] scheduleArrayOnSeaNonWatchkeeping = this.timeSheetOnSeaNonWatchkeeping.getSchedule();
+				Boolean[] scheduleArrayOnPortWatchkeeping = this.timeSheetOnPortWatchKeeping.getSchedule();
+				Boolean[] scheduleArrayOnPortNonWatchkeeping = this.timeSheetOnPortNonWatchKeeping.getSchedule();
 				
 				if(currentCrew == null) {
 					
@@ -275,31 +317,56 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 						crew.setId(id);
 						this.currentCrew = crew;
 						
-						ScheduleTemplate templateOnSea = new ScheduleTemplate();
-						templateOnSea.setSchedule(scheduleArray);
+						ScheduleTemplate template = new ScheduleTemplate();
+						template.setSchedule(scheduleArrayOnSeaWatchkeeping);
+						template.setOnPort(false);
+						template.setWatchKeeping(true);
 						
-						int scheduleId = scheduleDao.addScheduleTemplate(templateOnSea);
+						int scheduleId = scheduleDao.addScheduleTemplate(template);
 						
-						templateOnSea.setId(scheduleId);
-						
-						this.currentCrew.setScheduleTemplate(templateOnSea);
+						template.setId(scheduleId);
 						
 						if(scheduleId > 0) {
-							scheduleDao.associateScheduleTemplate(currentCrew, templateOnSea);
+							scheduleDao.associateScheduleTemplate(currentCrew, template);
 						}
 						
+						template = new ScheduleTemplate();
+						template.setSchedule(scheduleArrayOnSeaNonWatchkeeping);
+						template.setOnPort(false);
+						template.setWatchKeeping(false);
 						
-						List<ScheduleTemplate> templates = scheduleDao.getAllByRank(
-								listRanks.get(cmbRank.getSelectedIndex()));
+						scheduleId = scheduleDao.addScheduleTemplate(template);
 						
-						for(ScheduleTemplate t : templates) {
-							if(t.isOnPort()) {
-								int schId = scheduleDao.addScheduleTemplate(t);
-								if(schId > 0) {
-									t.setId(schId);
-									scheduleDao.associateScheduleTemplate(currentCrew, t);
-								}
-							}
+						template.setId(scheduleId);
+						
+						if(scheduleId > 0) {
+							scheduleDao.associateScheduleTemplate(currentCrew, template);
+						}
+						
+						template = new ScheduleTemplate();
+						template.setSchedule(scheduleArrayOnPortWatchkeeping);
+						template.setOnPort(true);
+						template.setWatchKeeping(true);
+						
+						scheduleId = scheduleDao.addScheduleTemplate(template);
+						
+						template.setId(scheduleId);
+						
+						if(scheduleId > 0) {
+							scheduleDao.associateScheduleTemplate(currentCrew, template);
+						}
+						
+						template = new ScheduleTemplate();
+						template.setSchedule(scheduleArrayOnPortNonWatchkeeping);
+						template.setOnPort(true);
+						template.setWatchKeeping(false);
+						
+						scheduleId = scheduleDao.addScheduleTemplate(template);
+						
+						template.setId(scheduleId);
+						
+						if(scheduleId > 0) {
+							scheduleDao.associateScheduleTemplate(currentCrew, template);
 						}
 						
 						NotificationManager.showNotification("New crew has been added");
@@ -318,9 +385,6 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 					currentCrew.setWatchKeeper(chkWatchkeeper.isSelected());
 					
 					new CrewDAO().updateCrew(currentCrew);
-					
-					currentCrew.getScheduleTemplate().setSchedule(scheduleArray);
-					scheduleDao.updateScheduleTemplate(currentCrew.getScheduleTemplate());
 					
 					NotificationManager.showNotification("Crew has been updated.");
 				}
