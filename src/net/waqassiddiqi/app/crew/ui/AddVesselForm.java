@@ -54,6 +54,7 @@ public class AddVesselForm extends BaseForm implements ActionListener {
         
         tabPan.addTab("  Vessel Details   ", getForm());
         
+        enableToolbar(false); 
         return tabPan;
 	}
 	
@@ -77,9 +78,6 @@ public class AddVesselForm extends BaseForm implements ActionListener {
 		txtName = new WebTextField(15);
 		txtFlag = new WebTextField(15);
 		txtImo = new WebTextField(15);
-		
-		//content.add(new WebLabel("Vessel ID", WebLabel.TRAILING), "0,0");		
-		//content.add(txtVesselId, "1,0");
 
 		content.add(new WebLabel("Name", WebLabel.TRAILING), "0,1");
 		content.add(txtName, "1,1");
@@ -89,10 +87,23 @@ public class AddVesselForm extends BaseForm implements ActionListener {
 		
 		content.add(new WebLabel("Flag", WebLabel.TRAILING), "0,3");
 		content.add(txtFlag, "1,3");
-		
-		
+
+		bindData();
 		
 		return content;
+	}
+	
+	private void bindData() {
+		if(this.id > 0) {
+			currentVessel = new VesselDAO().getById(id);
+			txtName.setText(currentVessel.getName());
+			txtFlag.setText(currentVessel.getFlag());
+			txtImo.setText(currentVessel.getImo());
+			
+			txtName.setEnabled(false);
+			txtFlag.setEnabled(false);
+			txtImo.setEnabled(false);
+		}
 	}
 	
 	@Override

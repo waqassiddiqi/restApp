@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -59,6 +60,7 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 	private Crew currentCrew = null;
 	private WebFileChooser fileChooser = null;
 	private List<Rank> listRanks;
+	private ScheduleTemplateDAO scheduleDao;
 	
 	private TimeSheet timeSheetOnSeaWatchkeeping;
 	private TimeSheet timeSheetOnSeaNonWatchkeeping;
@@ -76,6 +78,7 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		super(owner);
 		this.id = id;
 		Arrays.fill(defaultScheduleList, Boolean.TRUE);
+		scheduleDao = new ScheduleTemplateDAO();
 	}
 	
 	@SuppressWarnings("serial")
@@ -216,9 +219,33 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 	
 	@SuppressWarnings("unchecked")
 	private void bindData() {
+		
+		if(this.id > 0) {
+			currentCrew = new CrewDAO().getById(id);
+			
+			if(currentCrew != null) {
+				txtFirstName.setText(currentCrew.getFirstName());
+				txtLastName.setText(currentCrew.getLastName());
+				txtNationality.setText(currentCrew.getNationality());
+				txtPassport.setText(currentCrew.getPassportNumber());
+				txtSignonDate.setDate(currentCrew.getSignOnDate());
+				chkWatchkeeper.setSelected(currentCrew.isWatchKeeper());
+			}
+		}
+		
+		int i = 0;
 		for(Rank r : listRanks) {
 			cmbRank.addItem(r.getRank());
+			
+			if(currentCrew != null) {
+				if(r.getRank().equals(currentCrew.getRank())) {
+					cmbRank.setSelectedIndex(i);
+				}
+			}
+			
+			i++;
 		}
+		
 	}
 	
 	private void getDefaultScheduleTemplate() {
@@ -228,8 +255,14 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		timeSheetOnSeaWatchkeeping.setSchedule(defaultScheduleList);
 		timeSheetOnSeaNonWatchkeeping.setSchedule(defaultScheduleList);
 		
-		List<ScheduleTemplate> templates = new ScheduleTemplateDAO().getAllByRank(
-				listRanks.get(cmbRank.getSelectedIndex()));
+		
+		List<ScheduleTemplate> templates = new ArrayList<ScheduleTemplate>(); 
+		if(currentCrew != null)
+			templates = new ScheduleTemplateDAO().getAllByCrew(currentCrew);
+		
+		if(templates.size() <= 0)
+			templates = new ScheduleTemplateDAO().getAllByRank(
+					listRanks.get(cmbRank.getSelectedIndex()));
 		
 		if(templates != null && templates.size() > 0) {
 			for(ScheduleTemplate t : templates) {
@@ -253,6 +286,9 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		if(btnSource.getClientProperty("command").equals("close")) {
 			
 		} else if(btnSource.getClientProperty("command").equals("new")) {
+			
+			save();
+			
 			this.id = -1;
 			this.currentCrew = null;
 			
@@ -261,134 +297,155 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 			txtNationality.setText("");
 			txtPassport.setText("");
 			txtSignonDate.setText("");
+						
 			
 		} else if(btnSource.getClientProperty("command").equals("save")) {
-			tabPan.setSelectedIndex(0);
+			save();
+		}
+	}
+	
+	private void save() {
+		tabPan.setSelectedIndex(0);
+		
+		final List<Vessel> listVessel = new VesselDAO().getAll();
+		if(listVessel.size() <= 0) {
+			net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(getOwner(), getOwner(), "No Vessel Found",
+					new String[] { 
+						"In order to continue, vessel details should be entered first",
+						"Click on the button below to enter vessel details"
+					}, 
+						"Add new vessel", 
+					new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							getOwner().addContent(VesselFactory.getInstance().getAdd());
+						}
+					}, true);
+			return;
+		}
+		
+		if(listRanks.size() <= 0) {
+			NotificationManager.showPopup(getOwner(), cmbRank, new String[] { "Please add a rank first from Rank Options above" });
+			return;
+		}	
+		
+		CrewDAO crewDao = new CrewDAO();
+		
+		if(crewDao.isPassportExists(txtPassport.getText().trim())) {
+			NotificationManager.showPopup(getOwner(), txtPassport, new String[] { "Passport / Book number must be unique" });
+			return;
+		}
+		
+		if(InputValidator.validateInput(getOwner(), new JTextField[] { txtFirstName, txtLastName, txtNationality, txtPassport, txtSignonDate }, 
+				"This field cannot be empty")) {
 			
-			final List<Vessel> listVessel = new VesselDAO().getAll();
-			if(listVessel.size() <= 0) {
-				net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(getOwner(), getOwner(), "No Vessel Found",
-						new String[] { 
-							"In order to continue, vessel details should be entered first",
-							"Click on the button below to enter vessel details"
-						}, 
-							"Add new vessel", 
-						new ActionListener() {
-							
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								getOwner().addContent(VesselFactory.getInstance().getAdd());
-							}
-						}, true);
-				return;
-			}
+			Crew crew = new Crew() {{ 
+				setVesselId(listVessel.get(0).getId());
+				setFirstName(txtFirstName.getText().trim());
+				setLastName(txtLastName.getText().trim());
+				setRank(cmbRank.getSelectedItem().toString());
+				setNationality(txtNationality.getText().trim());
+				setPassportNumber(txtPassport.getText().trim());
+				setSignOnDate(txtSignonDate.getDate());
+				setWatchKeeper(chkWatchkeeper.isSelected());
+			}};
 			
-			if(listRanks.size() <= 0) {
-				NotificationManager.showPopup(getOwner(), cmbRank, new String[] { "Please add a rank first from Rank Options above" });
-				return;
-			}
 			
-			ScheduleTemplateDAO scheduleDao = new ScheduleTemplateDAO();
 			
-			if(InputValidator.validateInput(getOwner(), new JTextField[] { txtFirstName, txtLastName, txtNationality, txtPassport, txtSignonDate }, 
-					"This field cannot be empty")) {
+			if(currentCrew == null) {
 				
-				Crew crew = new Crew() {{ 
-					setVesselId(listVessel.get(0).getId());
-					setFirstName(txtFirstName.getText().trim());
-					setLastName(txtLastName.getText().trim());
-					setRank(cmbRank.getSelectedItem().toString());
-					setNationality(txtNationality.getText().trim());
-					setPassportNumber(txtPassport.getText().trim());
-					setSignOnDate(txtSignonDate.getDate());
-					setWatchKeeper(chkWatchkeeper.isSelected());
-				}};
+				this.id = crewDao.addCrew(crew);
 				
-				Boolean[] scheduleArrayOnSeaWatchkeeping = this.timeSheetOnSeaWatchkeeping.getSchedule();
-				Boolean[] scheduleArrayOnSeaNonWatchkeeping = this.timeSheetOnSeaNonWatchkeeping.getSchedule();
-				Boolean[] scheduleArrayOnPortWatchkeeping = this.timeSheetOnPortWatchKeeping.getSchedule();
-				Boolean[] scheduleArrayOnPortNonWatchkeeping = this.timeSheetOnPortNonWatchKeeping.getSchedule();
-				
-				if(currentCrew == null) {
+				if(this.id > -1) {
+					crew.setId(id);
+					this.currentCrew = crew;
 					
-					this.id = new CrewDAO().addCrew(crew);
+					associateDefaultTemplates();
 					
-					if(this.id > -1) {
-						crew.setId(id);
-						this.currentCrew = crew;
-						
-						ScheduleTemplate template = new ScheduleTemplate();
-						template.setSchedule(scheduleArrayOnSeaWatchkeeping);
-						template.setOnPort(false);
-						template.setWatchKeeping(true);
-						
-						int scheduleId = scheduleDao.addScheduleTemplate(template);
-						
-						template.setId(scheduleId);
-						
-						if(scheduleId > 0) {
-							scheduleDao.associateScheduleTemplate(currentCrew, template);
-						}
-						
-						template = new ScheduleTemplate();
-						template.setSchedule(scheduleArrayOnSeaNonWatchkeeping);
-						template.setOnPort(false);
-						template.setWatchKeeping(false);
-						
-						scheduleId = scheduleDao.addScheduleTemplate(template);
-						
-						template.setId(scheduleId);
-						
-						if(scheduleId > 0) {
-							scheduleDao.associateScheduleTemplate(currentCrew, template);
-						}
-						
-						template = new ScheduleTemplate();
-						template.setSchedule(scheduleArrayOnPortWatchkeeping);
-						template.setOnPort(true);
-						template.setWatchKeeping(true);
-						
-						scheduleId = scheduleDao.addScheduleTemplate(template);
-						
-						template.setId(scheduleId);
-						
-						if(scheduleId > 0) {
-							scheduleDao.associateScheduleTemplate(currentCrew, template);
-						}
-						
-						template = new ScheduleTemplate();
-						template.setSchedule(scheduleArrayOnPortNonWatchkeeping);
-						template.setOnPort(true);
-						template.setWatchKeeping(false);
-						
-						scheduleId = scheduleDao.addScheduleTemplate(template);
-						
-						template.setId(scheduleId);
-						
-						if(scheduleId > 0) {
-							scheduleDao.associateScheduleTemplate(currentCrew, template);
-						}
-						
-						NotificationManager.showNotification("New crew has been added");
-						
-					} else {
-						NotificationManager.showNotification("An error has occured while adding new rank");
-					}
+					NotificationManager.showNotification("New crew has been added");
 					
 				} else {
-					currentCrew.setFirstName(txtFirstName.getText().trim());
-					currentCrew.setLastName(txtLastName.getText().trim());
-					currentCrew.setRank(cmbRank.getSelectedItem().toString());
-					currentCrew.setNationality(txtNationality.getText().trim());
-					currentCrew.setPassportNumber(txtPassport.getText().trim());
-					currentCrew.setSignOnDate(txtSignonDate.getDate());
-					currentCrew.setWatchKeeper(chkWatchkeeper.isSelected());
-					
-					new CrewDAO().updateCrew(currentCrew);
-					
-					NotificationManager.showNotification("Crew has been updated.");
+					NotificationManager.showNotification("An error has occured while adding new rank");
 				}
+				
+			} else {
+				currentCrew.setFirstName(txtFirstName.getText().trim());
+				currentCrew.setLastName(txtLastName.getText().trim());
+				currentCrew.setRank(cmbRank.getSelectedItem().toString());
+				currentCrew.setNationality(txtNationality.getText().trim());
+				currentCrew.setPassportNumber(txtPassport.getText().trim());
+				currentCrew.setSignOnDate(txtSignonDate.getDate());
+				currentCrew.setWatchKeeper(chkWatchkeeper.isSelected());
+				
+				new CrewDAO().updateCrew(currentCrew);
+				scheduleDao.removeScheduleTemplateByCrew(currentCrew);
+				
+				associateDefaultTemplates();
+				
+				NotificationManager.showNotification("Crew has been updated.");
 			}
+		}
+	}
+	
+	private void associateDefaultTemplates() {
+		Boolean[] scheduleArrayOnSeaWatchkeeping = this.timeSheetOnSeaWatchkeeping.getSchedule();
+		Boolean[] scheduleArrayOnSeaNonWatchkeeping = this.timeSheetOnSeaNonWatchkeeping.getSchedule();
+		Boolean[] scheduleArrayOnPortWatchkeeping = this.timeSheetOnPortWatchKeeping.getSchedule();
+		Boolean[] scheduleArrayOnPortNonWatchkeeping = this.timeSheetOnPortNonWatchKeeping.getSchedule();
+		
+		scheduleDao = new ScheduleTemplateDAO();
+		
+		ScheduleTemplate template = new ScheduleTemplate();
+		template.setSchedule(scheduleArrayOnSeaWatchkeeping);
+		template.setOnPort(false);
+		template.setWatchKeeping(true);
+		
+		int scheduleId = scheduleDao.addScheduleTemplate(template);
+		
+		template.setId(scheduleId);
+		
+		if(scheduleId > 0) {
+			scheduleDao.associateScheduleTemplate(currentCrew, template);
+		}
+		
+		template = new ScheduleTemplate();
+		template.setSchedule(scheduleArrayOnSeaNonWatchkeeping);
+		template.setOnPort(false);
+		template.setWatchKeeping(false);
+		
+		scheduleId = scheduleDao.addScheduleTemplate(template);
+		
+		template.setId(scheduleId);
+		
+		if(scheduleId > 0) {
+			scheduleDao.associateScheduleTemplate(currentCrew, template);
+		}
+		
+		template = new ScheduleTemplate();
+		template.setSchedule(scheduleArrayOnPortWatchkeeping);
+		template.setOnPort(true);
+		template.setWatchKeeping(true);
+		
+		scheduleId = scheduleDao.addScheduleTemplate(template);
+		
+		template.setId(scheduleId);
+		
+		if(scheduleId > 0) {
+			scheduleDao.associateScheduleTemplate(currentCrew, template);
+		}
+		
+		template = new ScheduleTemplate();
+		template.setSchedule(scheduleArrayOnPortNonWatchkeeping);
+		template.setOnPort(true);
+		template.setWatchKeeping(false);
+		
+		scheduleId = scheduleDao.addScheduleTemplate(template);
+		
+		template.setId(scheduleId);
+		
+		if(scheduleId > 0) {
+			scheduleDao.associateScheduleTemplate(currentCrew, template);
 		}
 	}
 }

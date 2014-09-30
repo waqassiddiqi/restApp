@@ -3,40 +3,59 @@ package net.waqassiddiqi.app.crew.ui;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import net.waqassiddiqi.app.crew.controller.CrewFactory;
 import net.waqassiddiqi.app.crew.db.CrewDAO;
+import net.waqassiddiqi.app.crew.db.RankDAO;
 import net.waqassiddiqi.app.crew.model.Crew;
+import net.waqassiddiqi.app.crew.model.Rank;
 import net.waqassiddiqi.app.crew.util.NotificationManager;
 
+import com.alee.extended.date.WebDateField;
 import com.alee.laf.button.WebButton;
+import com.alee.laf.combobox.WebComboBox;
 import com.alee.laf.label.WebLabel;
+import com.alee.laf.menu.WebMenuItem;
+import com.alee.laf.menu.WebPopupMenu;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.tabbedpane.WebTabbedPane;
 import com.alee.laf.table.WebTable;
+import com.alee.utils.swing.WebDefaultCellEditor;
 
-public class ListCrewForm extends BaseForm implements ActionListener {
+public class ListCrewForm extends BaseForm implements ActionListener, TableModelListener {
 	
 	private CrewTableModel tableModel;
 	private WebTabbedPane tabPan;
 	private WebTable table;
 	private CrewDAO crewDao;
-	
+	private SimpleDateFormat sdf;
 	private Object[][] data;
 	private String[] columnNames = { "S.No.", "First Name", "Last Name", "Rank", "Nationality", 
 			"Passport", "SignOn Date", "Watch Keeper" };
 	private List<Crew> crewList = new ArrayList<Crew>();
+	private Boolean[] listModifiedCrewIndex;
 	
 	
 	public ListCrewForm(MainFrame owner) {
 		super(owner);
 		crewDao = new CrewDAO();
+		sdf = new SimpleDateFormat("dd.MM.yyyy");
 	}
 	
 	@SuppressWarnings("serial")
@@ -57,9 +76,27 @@ public class ListCrewForm extends BaseForm implements ActionListener {
         return tabPan;
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Component getGrid() {
 		tableModel = new CrewTableModel(getData(), columnNames);
+		tableModel.addTableModelListener(this);
+		
 		table = new WebTable(tableModel);
+		
+		TableColumn column = table.getColumnModel().getColumn(3);
+		WebComboBox cmbRank = new WebComboBox ();
+		List<Rank> listRanks = new RankDAO().getAll();
+		for(Rank r : listRanks) {
+			cmbRank.addItem(r.getRank());
+		}
+		column.setCellEditor (new WebDefaultCellEditor(cmbRank));
+		
+		
+		column = table.getColumnModel().getColumn(6);
+		WebDateField dateField = new WebDateField ();
+        dateField.setHorizontalAlignment ( SwingConstants.LEFT );
+        dateField.setDateFormat(sdf);
+		column.setCellEditor (new WebDefaultCellEditor(dateField));
 		
 		WebScrollPane scrollPane = new WebScrollPane(table);
 		
@@ -67,7 +104,44 @@ public class ListCrewForm extends BaseForm implements ActionListener {
 		
 		table.setFocusable(false);
 		
+		table.addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseReleased(MouseEvent e) {
+		        int r = table.rowAtPoint(e.getPoint());
+		        if (r >= 0 && r < table.getRowCount()) {
+		            table.setRowSelectionInterval(r, r);
+		        } else {
+		            table.clearSelection();
+		        }
+
+		        int rowindex = table.getSelectedRow();
+		        if (rowindex < 0)
+		            return;
+		        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+		            JPopupMenu popup = getActionMenu(crewList.get(rowindex).getId());
+		            popup.show(e.getComponent(), e.getX(), e.getY());
+		        }
+		    }
+		});
+		
 		return scrollPane;
+	}
+	
+	private WebPopupMenu getActionMenu(int crewId) {
+		final WebPopupMenu popupMenu = new WebPopupMenu ();
+		popupMenu.add(getPopupMeunuItem("Edit details", Integer.toString(crewId)));
+		popupMenu.add(getPopupMeunuItem("Edit rest hour template", Integer.toString(crewId)));
+		//popupMenu.add(getPopupMeunuItem("Delete", Integer.toString(crewId)));
+        
+        return popupMenu;
+	}
+	
+	private WebMenuItem getPopupMeunuItem(String name, String crewId) {
+		WebMenuItem item = new WebMenuItem (name);
+		item.addActionListener(ListCrewForm.this);
+		item.putClientProperty("crewId", crewId);
+		
+		return item;
 	}
 	
 	private void initColumnSizes(JTable table) {
@@ -99,7 +173,11 @@ public class ListCrewForm extends BaseForm implements ActionListener {
 		this.data = null;
 		
 		crewList = crewDao.getAll();
+		listModifiedCrewIndex = new Boolean[crewList.size()];
+		Arrays.fill(listModifiedCrewIndex, Boolean.FALSE);
+		
 		this.data = new Object[crewList.size()][columnNames.length];
+		
 		
 		for(int i=0; i<crewList.size(); i++) {
 			data[i][0] = i + 1;
@@ -108,7 +186,7 @@ public class ListCrewForm extends BaseForm implements ActionListener {
 			data[i][3] = crewList.get(i).getRank();
 			data[i][4] = crewList.get(i).getNationality();
 			data[i][5] = crewList.get(i).getPassportNumber();
-			data[i][6] = crewList.get(i).getSignOnDate();
+			data[i][6] = sdf.format(crewList.get(i).getSignOnDate());
 			data[i][7] = crewList.get(i).isWatchKeeper();
 		}
 		
@@ -117,14 +195,27 @@ public class ListCrewForm extends BaseForm implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		WebButton btnSource = (WebButton) e.getSource();
 		
-		if(btnSource.getClientProperty("command").equals("save")) {
-			for(int i=0; i<crewList.size(); i++) {
-				crewDao.updateCrew(crewList.get(i));
-			}
+		if(e.getSource() instanceof WebMenuItem) {
+			WebMenuItem item = (WebMenuItem) e.getSource();
 			
-			NotificationManager.showNotification("Crew details has been updated.");
+			//if(item.getActionCommand().equals("Edit details")) {
+				getOwner().addContent(CrewFactory.getInstance().getEdit((String) item.getClientProperty("crewId")));
+			//}
+			
+			
+		} else if(e.getSource() instanceof WebButton) {
+			WebButton btnSource = (WebButton) e.getSource();
+			
+			if(btnSource.getClientProperty("command").equals("save")) {
+				for(int i=0; i<listModifiedCrewIndex.length; i++) {
+					if(listModifiedCrewIndex[i]) {
+						crewDao.updateCrew(crewList.get(i));
+					}
+				}
+				
+				NotificationManager.showNotification("Crew data has been saved");
+			}
 		}
 	}
 	
@@ -182,13 +273,30 @@ public class ListCrewForm extends BaseForm implements ActionListener {
 				c.setNationality(value.toString().trim());
 			} else if(col == 5) {
 				c.setPassportNumber(value.toString().trim());
-			} else if(col == 6) {
-				c.setRank(value.toString().trim());
-			}  else if(col == 7) {
+			} else if(col == 6) {		
+				try {
+					c.setSignOnDate(sdf.parse((String) value));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			} else if(col == 7) {
 				c.setWatchKeeper((boolean) value);
 			}
 			
+			listModifiedCrewIndex[row] = true;
+			
 			fireTableCellUpdated(row, col);
 		}
+	}
+
+	@Override
+	public void tableChanged(TableModelEvent e) {
+		int row = e.getFirstRow();    
+        
+        Crew c = crewList.get(row);
+        if(crewDao.updateCrew(c) > 0) {
+        	listModifiedCrewIndex[row] = false;
+        }
+        
 	}
 }

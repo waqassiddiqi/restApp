@@ -1,6 +1,7 @@
 package net.waqassiddiqi.app.crew.controller;
 
 import java.awt.Component;
+import java.util.Map;
 
 import net.waqassiddiqi.app.crew.ui.AddRankForm;
 import net.waqassiddiqi.app.crew.ui.ListRankForm;
@@ -41,5 +42,11 @@ public class RankFactory extends BaseFactory {
 		Component c = new AddRankForm(getOwner()).getView();
 		c.setName("getRank");
 		return c;
+	}
+
+	@Override
+	public Component getEdit(String id, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

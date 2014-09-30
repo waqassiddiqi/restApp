@@ -89,6 +89,13 @@ public abstract class BaseForm extends Observable implements ActionListener {
 		HotkeyManager.registerHotkey(owner, btnNew, Hotkey.CTRL_N);
 	}
 	
+	public void enableToolbar(boolean enable) {
+		this.btnCancel.setEnabled(enable);
+		this.btnSave.setEnabled(enable);
+		this.btnNew.setEnabled(enable);
+		
+	}
+	
 	public void unregisterHotKeys() {
 		HotkeyManager.unregisterHotkeys(btnSave);
 		HotkeyManager.unregisterHotkeys(btnNew);

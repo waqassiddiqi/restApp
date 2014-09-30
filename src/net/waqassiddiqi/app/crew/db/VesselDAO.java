@@ -41,6 +41,32 @@ public class VesselDAO {
 		return rowsUpdated;
 	}
 	
+	public Vessel getById(int id) {
+		
+		Vessel v = null;
+		final ResultSet rs = this.db.executeQuery("SELECT * FROM vessels where id = " + id);
+		
+		try {
+			if (rs.next()) {
+				v = new Vessel(); 
+				v.setId(rs.getInt("id"));
+				v.setName(rs.getString("name"));
+				v.setImo(rs.getString("imo"));
+				v.setFlag(rs.getString("flag"));
+			}
+		} catch (Exception e) {
+			log.error("Error executing VesselDAO.getById(): " + e.getMessage(), e);
+		} finally {
+			try {
+				if (rs != null) rs.close();
+			} catch (SQLException ex) {
+				log.error("failed to close db resources: " + ex.getMessage(), ex);
+			}
+		}
+		
+		return v;
+	}
+	
 	public List<Vessel> getAll() {
 		
 		List<Vessel> list = new ArrayList<Vessel>();

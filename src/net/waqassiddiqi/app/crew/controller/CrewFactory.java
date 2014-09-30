@@ -1,6 +1,7 @@
 package net.waqassiddiqi.app.crew.controller;
 
 import java.awt.Component;
+import java.util.Map;
 
 import net.waqassiddiqi.app.crew.ui.AddCrewForm;
 import net.waqassiddiqi.app.crew.ui.ListCrewForm;
@@ -34,7 +35,10 @@ public class CrewFactory extends BaseFactory {
 
 	@Override
 	public Component getEdit(String id) {
-		return null;
+		Component c = new AddCrewForm(getOwner(), Integer.parseInt(id)).getView();
+		c.setName("addCrew");
+		
+		return c;
 	}
 
 	@Override
@@ -44,5 +48,13 @@ public class CrewFactory extends BaseFactory {
 		
 		return c;
 		
+	}
+
+	@Override
+	public Component getEdit(String id, Map<String, Object> params) {
+		Component c = new AddCrewForm(getOwner(), Integer.parseInt(id)).getView();
+		c.setName("addCrew");
+		
+		return c;
 	}
 }

@@ -157,6 +157,6 @@ public class Crew {
 
 	@Override
 	public String toString() {
-		return lastName + ", " + firstName;
+		return lastName + ", " + firstName + ", " + rank;
 	}
 }

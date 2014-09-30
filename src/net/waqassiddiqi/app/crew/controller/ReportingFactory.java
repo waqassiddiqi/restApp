@@ -1,6 +1,7 @@
 package net.waqassiddiqi.app.crew.controller;
 
 import java.awt.Component;
+import java.util.Map;
 
 import net.waqassiddiqi.app.crew.ui.AddRestHourForm;
 import net.waqassiddiqi.app.crew.ui.report.ErrorReportForm;
@@ -52,6 +53,12 @@ public class ReportingFactory extends BaseFactory {
 		c.setName("addRestHour");
 		
 		return c;
+	}
+
+	@Override
+	public Component getEdit(String id, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

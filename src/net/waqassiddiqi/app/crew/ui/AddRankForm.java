@@ -40,7 +40,6 @@ public class AddRankForm extends BaseForm {
 	
 	private WebTabbedPane tabPan;
 	private Rank currentRank = null;
-	private WebButton btnCancel;
 	
 	public AddRankForm(MainFrame owner) {
 		this(owner, -1);
@@ -117,6 +116,118 @@ public class AddRankForm extends BaseForm {
 		return content;
 	}
 
+	private void save() {
+		if(txtRankName.getText().trim().isEmpty()) {
+			tabPan.setSelectedIndex(0);
+		}
+		
+		Rank rank = new Rank();
+		rank.setRank(txtRankName.getText().trim());
+		
+		RankDAO rankDao = new RankDAO();			
+		
+		if( (currentRank != null) && currentRank.getRank().equals(rank.getRank()) == false &&
+				rankDao.isExists(rank))  {
+			
+			NotificationManager.showPopup(owner, 
+					txtRankName, new String[] { txtRankName.getText().trim() + " already exists" });
+			return;
+			
+		} else if(rankDao.isExists(rank) && currentRank == null) {
+			
+			NotificationManager.showPopup(owner, 
+					txtRankName, new String[] { txtRankName.getText().trim() + " already exists" });
+			
+			return;
+		}
+		
+		ScheduleTemplateDAO scheduleDao = new ScheduleTemplateDAO();
+		
+		if(InputValidator.validateInput(owner, new JTextField[] { txtRankName }, "Rank cannot be empty")) {
+			
+			Boolean[] scheduleArrayOnSeaWatchkeeping = this.timeSheetOnSeaWatchkeeping.getSchedule();
+			Boolean[] scheduleArrayOnSeaNonWatchkeeping = this.timeSheetOnSeaNonWatchkeeping.getSchedule();
+			Boolean[] scheduleArrayOnPortWatchkeeping = this.timeSheetOnPortWatchKeeping.getSchedule();
+			Boolean[] scheduleArrayOnPortNonWatchkeeping = this.timeSheetOnPortNonWatchKeeping.getSchedule();
+			
+			if(currentRank == null) {
+				this.id = rankDao.addRank(rank);
+				
+				if(this.id > 0) {
+					currentRank = new Rank();
+					currentRank.setId(id);
+					currentRank.setRank(rank.getRank());
+					
+					txtRankId.setText(Integer.toString(this.id));
+					
+					
+					
+					ScheduleTemplate template = new ScheduleTemplate();
+					template.setSchedule(scheduleArrayOnSeaWatchkeeping);
+					template.setOnPort(false);
+					template.setWatchKeeping(true);
+					
+					int scheduleId = scheduleDao.addScheduleTemplate(template);
+					
+					template.setId(scheduleId);
+					
+					if(scheduleId > 0) {
+						scheduleDao.associateScheduleTemplate(currentRank, template);
+					}
+					
+					template = new ScheduleTemplate();
+					template.setSchedule(scheduleArrayOnSeaNonWatchkeeping);
+					template.setOnPort(false);
+					template.setWatchKeeping(false);
+					
+					scheduleId = scheduleDao.addScheduleTemplate(template);
+					
+					template.setId(scheduleId);
+					
+					if(scheduleId > 0) {
+						scheduleDao.associateScheduleTemplate(currentRank, template);
+					}
+					
+					template = new ScheduleTemplate();
+					template.setSchedule(scheduleArrayOnPortWatchkeeping);
+					template.setOnPort(true);
+					template.setWatchKeeping(true);
+					
+					scheduleId = scheduleDao.addScheduleTemplate(template);
+					
+					template.setId(scheduleId);
+					
+					if(scheduleId > 0) {
+						scheduleDao.associateScheduleTemplate(currentRank, template);
+					}
+					
+					template = new ScheduleTemplate();
+					template.setSchedule(scheduleArrayOnPortNonWatchkeeping);
+					template.setOnPort(true);
+					template.setWatchKeeping(false);
+					
+					scheduleId = scheduleDao.addScheduleTemplate(template);
+					
+					template.setId(scheduleId);
+					
+					if(scheduleId > 0) {
+						scheduleDao.associateScheduleTemplate(currentRank, template);
+					}
+					
+					NotificationManager.showNotification("New rank has been added.");
+					
+				} else {
+					NotificationManager.showNotification("An error has occured while adding new rank");
+				}
+			} else {
+				currentRank.setRank(rank.getRank());
+				rankDao.updateRank(currentRank);
+				
+				NotificationManager.showNotification("Rank has been updated.");
+			}
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		WebButton btnSource = (WebButton) e.getSource();
@@ -124,6 +235,9 @@ public class AddRankForm extends BaseForm {
 		if(btnSource.getClientProperty("command").equals("close")) {
 			owner.removeContent(thisComponent);
 		} else if(btnSource.getClientProperty("command").equals("new")) {
+			
+			save();
+			
 			this.id = -1;
 			this.currentRank = null;
 			
@@ -131,125 +245,7 @@ public class AddRankForm extends BaseForm {
 			txtRankName.setText("");
 			
 		} else if(btnSource.getClientProperty("command").equals("save")) {
-			
-			if(txtRankName.getText().trim().isEmpty()) {
-				tabPan.setSelectedIndex(0);
-			}
-			
-			Rank rank = new Rank();
-			rank.setRank(txtRankName.getText().trim());
-			
-			RankDAO rankDao = new RankDAO();			
-			
-			if( (currentRank != null) && currentRank.getRank().equals(rank.getRank()) == false &&
-					rankDao.isExists(rank))  {
-				
-				NotificationManager.showPopup(owner, 
-						txtRankName, new String[] { txtRankName.getText().trim() + " already exists" });
-				return;
-				
-			} else if(rankDao.isExists(rank) && currentRank == null) {
-				
-				NotificationManager.showPopup(owner, 
-						txtRankName, new String[] { txtRankName.getText().trim() + " already exists" });
-				
-				return;
-			}
-			
-			ScheduleTemplateDAO scheduleDao = new ScheduleTemplateDAO();
-			
-			if(InputValidator.validateInput(owner, new JTextField[] { txtRankName }, "Rank cannot be empty")) {
-				
-				Boolean[] scheduleArrayOnSeaWatchkeeping = this.timeSheetOnSeaWatchkeeping.getSchedule();
-				Boolean[] scheduleArrayOnSeaNonWatchkeeping = this.timeSheetOnSeaNonWatchkeeping.getSchedule();
-				Boolean[] scheduleArrayOnPortWatchkeeping = this.timeSheetOnPortWatchKeeping.getSchedule();
-				Boolean[] scheduleArrayOnPortNonWatchkeeping = this.timeSheetOnPortNonWatchKeeping.getSchedule();
-				
-				if(currentRank == null) {
-					this.id = rankDao.addRank(rank);
-					
-					if(this.id > 0) {
-						currentRank = new Rank();
-						currentRank.setId(id);
-						currentRank.setRank(rank.getRank());
-						
-						txtRankId.setText(Integer.toString(this.id));
-						
-						
-						
-						ScheduleTemplate template = new ScheduleTemplate();
-						template.setSchedule(scheduleArrayOnSeaWatchkeeping);
-						template.setOnPort(false);
-						template.setWatchKeeping(true);
-						
-						int scheduleId = scheduleDao.addScheduleTemplate(template);
-						
-						template.setId(scheduleId);
-						
-						if(scheduleId > 0) {
-							scheduleDao.associateScheduleTemplate(currentRank, template);
-						}
-						
-						template = new ScheduleTemplate();
-						template.setSchedule(scheduleArrayOnSeaNonWatchkeeping);
-						template.setOnPort(false);
-						template.setWatchKeeping(false);
-						
-						scheduleId = scheduleDao.addScheduleTemplate(template);
-						
-						template.setId(scheduleId);
-						
-						if(scheduleId > 0) {
-							scheduleDao.associateScheduleTemplate(currentRank, template);
-						}
-						
-						template = new ScheduleTemplate();
-						template.setSchedule(scheduleArrayOnPortWatchkeeping);
-						template.setOnPort(true);
-						template.setWatchKeeping(true);
-						
-						scheduleId = scheduleDao.addScheduleTemplate(template);
-						
-						template.setId(scheduleId);
-						
-						if(scheduleId > 0) {
-							scheduleDao.associateScheduleTemplate(currentRank, template);
-						}
-						
-						template = new ScheduleTemplate();
-						template.setSchedule(scheduleArrayOnPortNonWatchkeeping);
-						template.setOnPort(true);
-						template.setWatchKeeping(false);
-						
-						scheduleId = scheduleDao.addScheduleTemplate(template);
-						
-						template.setId(scheduleId);
-						
-						if(scheduleId > 0) {
-							scheduleDao.associateScheduleTemplate(currentRank, template);
-						}
-						
-						//ScheduleTemplate template = new ScheduleTemplate();
-						//template.setSchedule(scheduleArray);
-						
-						//int scheduleId = scheduleDao.addScheduleTemplate(template);
-						
-						
-						
-						//currentRank.setScheduleTemplate(template);
-						
-						NotificationManager.showNotification("New rank has been added.");
-						
-					} else {
-						NotificationManager.showNotification("An error has occured while adding new rank");
-					}
-				} else {
-					currentRank.setRank(rank.getRank());
-					rankDao.updateRank(currentRank);
-					
-					NotificationManager.showNotification("Rank has been updated.");
-				}
-			}
+			save();			
 		}
 	}
 }

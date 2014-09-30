@@ -153,12 +153,14 @@ public class ExWebCalendar extends WebCalendar {
 
 			int thisCurrentYear = calendar.get(Calendar.YEAR);
 			int thisCurrentMonth = calendar.get(Calendar.MONTH);
-
-			if (actualCurrentYear < thisCurrentYear
-					|| ((actualCurrentYear >= thisCurrentYear) && actualCurrentMonth < thisCurrentMonth)) {
+			
+			if(actualCurrentYear != thisCurrentYear) {
 				day.setEnabled(false);
+			} else {
+				if( (actualCurrentMonth != thisCurrentMonth) && ((actualCurrentMonth-1) != thisCurrentMonth)) {
+					day.setEnabled(false);
+				}
 			}
-
 			dates.add(day);
 
 			if (selected) {

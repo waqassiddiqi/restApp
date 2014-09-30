@@ -128,7 +128,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 				new GroupPanel(10, cmbCrew, chkOnPort),
 				new GroupPanel(10, false, calendar, chkAutoSave));
 		
-		timeSheet = new TimeSheet(22);
+		timeSheet = new TimeSheet(20);
 		timeSheet.setChangeListener(this);
 		
 		txtComments = new WebTextArea ();
@@ -235,6 +235,10 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 				
 				if(cmbCrew.getSelectedItem() instanceof Crew) {
 					
+					if(currentCrew != null && chkAutoSave.isSelected()) {
+						saveRestingHour();
+					}
+					
 					txtComments.setText("");
 					
 					currentCrew = (Crew) cmbCrew.getSelectedItem();
@@ -340,12 +344,12 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 			
 			double restHoursIn24Hours = errorReport.get24HourRestHours(cal.get(Calendar.DAY_OF_MONTH));
 			if(restHoursIn24Hours < 10) {
-				sb.append("<li>24-hour Total Period of REST &gt; 10 Hours</li>");
+				sb.append("<li>Any 24-hour Total Period of REST &gt; 10 Hours</li>");
 			}
 			
 			double restHoursIn7Days = errorReport.get7DayRestHours(cal.get(Calendar.DAY_OF_MONTH));
 			if(restHoursIn7Days < 77) {
-				sb.append("<li>7-days Total Period of REST &gt; 77 Hours</li>");
+				sb.append("<li>Any 7-days Total Period of REST &gt; 77 Hours</li>");
 			}
 		}
 		
@@ -357,14 +361,13 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 
 	@Override
 	public void dateSelected(Date selectedDate) {
-		
-		txtComments.setText("");
-		
 		if(currentCrew != null) {
 			
 			if(chkAutoSave.isSelected()) {
 				saveRestingHour();
-			} 
+			}
+			
+			txtComments.setText("");
 			
 			EntryTime entry = entryTimeDao.getByDateAndCrew(getDate(selectedDate), currentCrew);
 			

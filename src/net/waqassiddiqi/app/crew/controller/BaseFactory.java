@@ -2,6 +2,7 @@ package net.waqassiddiqi.app.crew.controller;
 
 import java.awt.Component;
 import java.security.InvalidParameterException;
+import java.util.Map;
 
 import net.waqassiddiqi.app.crew.ui.MainFrame;
 
@@ -41,5 +42,6 @@ public abstract class BaseFactory {
 	public abstract Component get();
 	public abstract Component getById(String id);
 	public abstract Component getEdit(String id);
+	public abstract Component getEdit(String id, Map<String, Object> params);
 	public abstract Component getAdd();
 }

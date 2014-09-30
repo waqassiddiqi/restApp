@@ -1,6 +1,7 @@
 package net.waqassiddiqi.app.crew.controller;
 
 import java.awt.Component;
+import java.util.Map;
 
 import net.waqassiddiqi.app.crew.ui.AddVesselForm;
 
@@ -30,7 +31,10 @@ public class VesselFactory extends BaseFactory {
 
 	@Override
 	public Component getEdit(String id) {
-		return null;
+		Component c = new AddVesselForm(getOwner(), Integer.parseInt(id)).getView();
+		c.setName("addVessel");
+		
+		return c;
 	}
 
 	@Override
@@ -39,5 +43,10 @@ public class VesselFactory extends BaseFactory {
 		c.setName("addVessel");
 		
 		return c;
+	}
+
+	@Override
+	public Component getEdit(String id, Map<String, Object> params) {
+		return null;
 	}
 }

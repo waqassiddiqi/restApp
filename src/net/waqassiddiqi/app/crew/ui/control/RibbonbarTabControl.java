@@ -15,6 +15,8 @@ import javax.swing.JTabbedPane;
 import net.waqassiddiqi.app.crew.controller.CrewFactory;
 import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.ReportingFactory;
+import net.waqassiddiqi.app.crew.controller.VesselFactory;
+import net.waqassiddiqi.app.crew.db.VesselDAO;
 import net.waqassiddiqi.app.crew.ui.MainFrame;
 import net.waqassiddiqi.app.crew.ui.icons.IconsHelper;
 
@@ -87,7 +89,9 @@ public class RibbonbarTabControl {
 		btnRestHourReport.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {	
+				owner.addContent(VesselFactory.getInstance().getEdit(
+						Integer.toString(new VesselDAO().getAll().get(0).getId())));
 			}
 		});
 
@@ -120,7 +124,7 @@ public class RibbonbarTabControl {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				owner.addContent(ReportingFactory.getInstance().getById("rest"));				
+				owner.addContent(ReportingFactory.getInstance().getById("rest"));
 			}
 		});
 

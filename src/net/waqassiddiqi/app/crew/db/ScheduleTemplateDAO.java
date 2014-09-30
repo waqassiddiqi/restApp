@@ -20,6 +20,15 @@ public class ScheduleTemplateDAO {
 		db = ConnectionManager.getInstance();
 	}
 	
+	public int removeScheduleTemplateByCrew(Crew c) {
+		int rows = db.executeUpdate("DELETE FROM SCHEDULE_TEMPLATES s WHERE s.id IN(SELECT SCHEDULE_ID " +
+				"FROM CREW_SCHEDULE_TEMPLATE WHERE CREW_ID = ?);", new String[] { Integer.toString(c.getId()) });
+		
+		rows = db.executeUpdate("DELETE FROM CREW_SCHEDULE_TEMPLATE WHERE WHERE CREW_ID = ?", new String[] { Integer.toString(c.getId()) });
+		
+		return rows;
+	}
+	
 	public int addScheduleTemplate(ScheduleTemplate template) {
 		
 		int generatedId = db.executeInsert("INSERT INTO schedule_templates(schedule, is_on_port, is_watch_keeping) VALUES(?, ?, ?);", 
