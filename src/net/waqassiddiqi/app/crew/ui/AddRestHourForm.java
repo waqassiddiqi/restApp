@@ -15,6 +15,7 @@ import net.waqassiddiqi.app.crew.model.Crew;
 import net.waqassiddiqi.app.crew.model.EntryTime;
 import net.waqassiddiqi.app.crew.model.ScheduleTemplate;
 import net.waqassiddiqi.app.crew.report.ErrorReport;
+import net.waqassiddiqi.app.crew.ui.control.BoundsPopupMenuListener;
 import net.waqassiddiqi.app.crew.ui.control.ExWebCalendar;
 import net.waqassiddiqi.app.crew.ui.control.TimeSheet;
 import net.waqassiddiqi.app.crew.ui.control.TimeSheet.ChangeListener;
@@ -25,6 +26,7 @@ import com.alee.extended.date.DateSelectionListener;
 import com.alee.extended.date.WebCalendar;
 import com.alee.extended.layout.TableLayout;
 import com.alee.extended.panel.GroupPanel;
+import com.alee.extended.panel.GroupingType;
 import com.alee.global.StyleConstants;
 import com.alee.laf.button.WebButton;
 import com.alee.laf.checkbox.WebCheckBox;
@@ -154,7 +156,8 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 				timeSheet.getView(), new GroupPanel(30, getGrid(), new GroupPanel(false, new WebLabel("Comments: "), areaScroll)), panelNonConformity);
 		
 		
-		return new GroupPanel(20, leftPanel, rightPanel).setMargin(10);
+		
+		return new GroupPanel(GroupingType.fillLast, 20, leftPanel, rightPanel).setMargin(10);
 	}
 	
 	private Component getGrid() {
@@ -199,6 +202,10 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		for(Crew c : listCrew) {
 			cmbCrew.addItem(c);
 		}
+		
+		BoundsPopupMenuListener listener = new BoundsPopupMenuListener(true, false);
+		cmbCrew.addPopupMenuListener( listener );
+		cmbCrew.setPrototypeDisplayValue("Last Name, First Name, Rank");
 	}
 	
 	private void setDefaultCrewScheduleTemplate() {
