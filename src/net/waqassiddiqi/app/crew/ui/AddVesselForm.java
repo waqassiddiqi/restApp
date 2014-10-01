@@ -54,7 +54,8 @@ public class AddVesselForm extends BaseForm implements ActionListener {
         
         tabPan.addTab("  Vessel Details   ", getForm());
         
-        enableToolbar(false); 
+        if(new VesselDAO().getAll().size() > 0)
+        	enableToolbar(false); 	
         return tabPan;
 	}
 	
