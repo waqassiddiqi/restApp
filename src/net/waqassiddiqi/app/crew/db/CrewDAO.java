@@ -22,13 +22,14 @@ public class CrewDAO {
 		
 		int generatedId = db.executeInsert("INSERT INTO crews(vessel_id, first_name, last_name, " +
 				"rank, nationality, " +
-				"book_number_or_passport, signon_date, is_watch_keeper) " +
-				"VALUES(?, ?, ?, ?, ?, ?, ?, ?);", 
+				"book_number_or_passport, signon_date, is_watch_keeper, is_active) " +
+				"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);", 
 				
 				new String[] { Integer.toString(crew.getVesselId()), crew.getFirstName(), crew.getLastName(),
 						crew.getRank(), crew.getNationality(), crew.getPassportNumber(),
 						Long.toString(crew.getSignOnDate().getTime()), 
-						crew.isWatchKeeper() == true ? "1" : "0"
+						crew.isWatchKeeper() == true ? "1" : "0",
+						crew.isActive() == true ? "1" : "0"
 					});
 		
 		if(log.isDebugEnabled()) {
@@ -42,11 +43,12 @@ public class CrewDAO {
 		
 		int generatedId = db.executeUpdate("UPDATE crews SET first_name = ?, last_name = ?, " +
 				"rank = ?, nationality = ?, " +
-				"book_number_or_passport = ?, signon_date = ?, is_watch_keeper = ? WHERE id = ?",
+				"book_number_or_passport = ?, signon_date = ?, is_watch_keeper = ?, is_active = ? WHERE id = ?",
 					new String[] { crew.getFirstName(), crew.getLastName(),
 						crew.getRank(), crew.getNationality(), crew.getPassportNumber(),
 						Long.toString(crew.getSignOnDate().getTime()), 
-						crew.isWatchKeeper() == true ? "1" : "0", Integer.toString(crew.getId())
+						crew.isWatchKeeper() == true ? "1" : "0", 
+						crew.isActive() == true ? "1" : "0", Integer.toString(crew.getId())
 					});
 		
 		if(log.isDebugEnabled()) {
@@ -73,6 +75,40 @@ public class CrewDAO {
 					setPassportNumber(rs.getString("book_number_or_passport"));
 					setSignOnDate(new Date(rs.getLong("signon_date")));
 					setWatchKeeper(rs.getBoolean("is_watch_keeper"));
+					setActive(rs.getBoolean("is_active"));
+				} });
+			}
+		} catch (Exception e) {
+			log.error("Error executing CrewDAO.getAll(): " + e.getMessage(), e);
+		} finally {
+			try {
+				if (rs != null) rs.close();
+			} catch (SQLException ex) {
+				log.error("failed to close db resources: " + ex.getMessage(), ex);
+			}
+		}
+		
+		return list;
+	}
+	
+	public List<Crew> getAllActive() {
+		
+		List<Crew> list = new ArrayList<Crew>();
+		final ResultSet rs = this.db.executeQuery("SELECT * FROM crews where is_active = true ORDER BY id");
+		
+		try {
+			while (rs.next()) {
+				list.add(new Crew() { { 
+					setId(rs.getInt("id"));
+					setVesselId(rs.getInt("vessel_id"));
+					setFirstName(rs.getString("first_name"));
+					setLastName(rs.getString("last_name"));
+					setRank(rs.getString("rank"));
+					setNationality(rs.getString("nationality"));
+					setPassportNumber(rs.getString("book_number_or_passport"));
+					setSignOnDate(new Date(rs.getLong("signon_date")));
+					setWatchKeeper(rs.getBoolean("is_watch_keeper"));
+					setActive(rs.getBoolean("is_active"));
 				} });
 			}
 		} catch (Exception e) {
@@ -89,9 +125,16 @@ public class CrewDAO {
 	}
 	
 
-	public boolean isPassportExists(String passportNumber) {
-		final ResultSet rs = this.db.executeQuery("SELECT * FROM crews where book_number_or_passport = '" 
-				+ passportNumber + "'");
+	public boolean isPassportExists(String passportNumber, int crewId) {
+		
+		String strSql = "SELECT * FROM crews where book_number_or_passport = '" 
+				+ passportNumber + "'";
+		
+		if(crewId > 0) {
+			strSql += " AND id != " + crewId;
+		}
+		
+		final ResultSet rs = this.db.executeQuery(strSql);
 		
 		try {			
 			
@@ -142,6 +185,7 @@ public class CrewDAO {
 						setPassportNumber(rs.getString("book_number_or_passport"));
 						setSignOnDate(new Date(rs.getLong("signon_date")));
 						setWatchKeeper(rs.getBoolean("is_watch_keeper")); 
+						setActive(rs.getBoolean("is_active"));
 					}};	
 			}
 				

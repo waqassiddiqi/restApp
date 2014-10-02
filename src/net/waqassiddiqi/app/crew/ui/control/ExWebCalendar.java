@@ -4,8 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
@@ -20,10 +22,30 @@ import com.alee.utils.TimeUtils;
 public class ExWebCalendar extends WebCalendar {
 	private static final long serialVersionUID = 1L;
 
+	private List<WebToggleButton> currentMonthButtons;
+	
+	public ExWebCalendar() {
+		this(null);
+	}
+	
 	public ExWebCalendar(Date currentDate) {
-		super(currentDate);
+		super(currentDate);		
 	}
 
+	public void moveToNext() {
+		Calendar calNext = Calendar.getInstance();
+		calNext.setTime(date);
+		calNext.add(Calendar.DAY_OF_MONTH, 1);
+		
+		date = calNext.getTime();
+		
+		WebToggleButton btnToSelect = currentMonthButtons.get(calNext.get(Calendar.DAY_OF_MONTH) - 1);
+		if(btnToSelect != null) {
+			btnToSelect.putClientProperty("fireEvent", false);
+			btnToSelect.setSelected(true);
+		}			
+	}
+	
 	@Override
 	protected void updateMonth (final JPanel monthDays) {
 		monthDays.removeAll();
@@ -122,6 +144,11 @@ public class ExWebCalendar extends WebCalendar {
 			}
 		}
 
+		if(currentMonthButtons == null)
+			currentMonthButtons = new ArrayList<WebToggleButton>();
+		else
+			currentMonthButtons.clear();
+		
 		// Current month
 		do {
 			final boolean weekend = calendar.get(Calendar.DAY_OF_WEEK) == 1
@@ -143,9 +170,21 @@ public class ExWebCalendar extends WebCalendar {
 				@Override
 				public void actionPerformed(final ActionEvent e) {
 					lastSelectedDayButton = (WebToggleButton) e.getSource();
-					setDateImpl(thisDate);
+					
+					if( lastSelectedDayButton.getClientProperty("fireEvent") != null && 
+							(boolean) lastSelectedDayButton.getClientProperty("fireEvent") == false ) {
+						
+						lastSelectedDayButton.putClientProperty("fireEvent", true);
+						
+					} else {
+						setDateImpl(thisDate);
+					}
 				}
 			});
+			
+			
+			currentMonthButtons.add(day);
+			
 			if (dateCustomizer != null) {
 				dateCustomizer.customize(day, thisDate);
 			}

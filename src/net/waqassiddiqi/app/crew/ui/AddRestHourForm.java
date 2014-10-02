@@ -23,7 +23,6 @@ import net.waqassiddiqi.app.crew.util.CalendarUtil;
 import net.waqassiddiqi.app.crew.util.NotificationManager;
 
 import com.alee.extended.date.DateSelectionListener;
-import com.alee.extended.date.WebCalendar;
 import com.alee.extended.layout.TableLayout;
 import com.alee.extended.panel.GroupPanel;
 import com.alee.extended.panel.GroupingType;
@@ -50,13 +49,14 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 	private Crew currentCrew = null;
 	private List<Crew> listCrew;
 	private TimeSheet timeSheet;
-	private WebCalendar calendar;
+	private ExWebCalendar calendar;
 	private WebCheckBox chkAutoSave;
 	private Date currentDate;
 	private WebLabel lblNonConformities;
 	private ErrorReport errorReport = null;
 	private EntryTimeDAO entryTimeDao;
 	private WebTextArea txtComments;
+	private boolean bShowInstantMessageHack = true;
 	
 	public AddRestHourForm(MainFrame owner) {
 		this(owner, -1);
@@ -114,7 +114,11 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setDefaultCrewScheduleTemplate();
+				bShowInstantMessageHack = false;
+				
+				getSchedule(currentDate);
+				
+				bShowInstantMessageHack = true;
 			}
 		});
 		
@@ -191,7 +195,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 	}
 
 	private void refreshData() {
-		listCrew = new CrewDAO().getAll();
+		listCrew = new CrewDAO().getAllActive();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -200,37 +204,12 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		cmbCrew.addItem("Select Crew");
 		
 		for(Crew c : listCrew) {
-			cmbCrew.addItem(c);
+				cmbCrew.addItem(c);
 		}
 		
 		BoundsPopupMenuListener listener = new BoundsPopupMenuListener(true, false);
 		cmbCrew.addPopupMenuListener( listener );
 		cmbCrew.setPrototypeDisplayValue("Last Name, First Name, Rank");
-	}
-	
-	private void setDefaultCrewScheduleTemplate() {
-		if(currentCrew == null)
-			return;
-		
-		for(ScheduleTemplate t : currentCrew.getScheduleTemplate()) {
-			if(chkOnPort.isSelected() && t.isOnPort()) {
-				if(currentCrew.isWatchKeeper() && t.isWatchKeeping()) {
-					timeSheet.setSchedule(t.getSchedule());
-					break;
-				} else if(!currentCrew.isWatchKeeper() && !t.isWatchKeeping()) {
-					timeSheet.setSchedule(t.getSchedule());
-					break;
-				}
-			} if(!chkOnPort.isSelected() && !t.isOnPort()) {
-				if(currentCrew.isWatchKeeper() && t.isWatchKeeping()) {
-					timeSheet.setSchedule(t.getSchedule());
-					break;
-				} else if(!currentCrew.isWatchKeeper() && !t.isWatchKeeping()) {
-					timeSheet.setSchedule(t.getSchedule());
-					break;
-				}
-			}
-		}
 	}
 	
 	@Override
@@ -239,28 +218,18 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		if(e.getSource() instanceof WebComboBox) {
 			
 			if( ((WebComboBox) e.getSource()).getActionCommand().equals("crewSelectedChanged")) {
-				
 				if(cmbCrew.getSelectedItem() instanceof Crew) {
+
+					bShowInstantMessageHack = false;
 					
-					if(currentCrew != null && chkAutoSave.isSelected()) {
-						saveRestingHour();
-					}
-					
-					txtComments.setText("");
+					autoSave();
 					
 					currentCrew = (Crew) cmbCrew.getSelectedItem();
 					
-					EntryTime entry = entryTimeDao.getByDateAndCrew(getDate(currentDate), currentCrew);
+					getSchedule(currentDate);		
 					
-					if(entry != null) {
-						timeSheet.setSchedule(entry.getSchedule());
-						txtComments.setText(entry.getComments());
-					} else {
-						
-						currentCrew.setScheduleTemplate(new ScheduleTemplateDAO().getAllByCrew(currentCrew));
-						setDefaultCrewScheduleTemplate();
-					}
-				}
+					bShowInstantMessageHack = true;
+				} 
 				
 			} 
 			
@@ -268,6 +237,19 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 			WebButton btnSource = (WebButton) e.getSource();
 			
 			if(btnSource.getClientProperty("command").equals("saveAndNext")) {
+				
+				if(currentCrew == null) {
+					NotificationManager.showPopup(getOwner(), cmbCrew, new String[] { "Please select crew" });
+					return;
+				}
+				
+				//saveRestingHour();
+				//calendar.moveToNext();
+				//Calendar calNext = Calendar.getInstance();
+				//calNext.setTime(currentDate);
+				//calNext.add(Calendar.DAY_OF_MONTH, 1);
+				
+				//calendar.setDate(calNext.getTime());
 				
 			} else if(btnSource.getClientProperty("command").equals("new")) {
 				
@@ -317,46 +299,49 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		StringBuilder sb = new StringBuilder();
 		sb.append("<html><ul>");
 		
-		if(totalRest < 10) {
-			sb.append("<li>Total period of REST > 10 Hours</li>");
-		}
+		if(bShowInstantMessageHack) {
 		
-		if(totalWork > 14) {
-			sb.append("<li>Total period of WORK &lt; 14 Hours</li>");
-		}
-		
-		if(currentCrew != null) {
+			if(totalRest < 10) {
+				sb.append("<li>Total period of REST > 10 Hours</li>");
+			}
 			
-			if(errorReport == null) {
-				errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
-				errorReport.generateReport();
-			} else {
-				if(errorReport.getMonth() != month || errorReport.getYear() != cal.get(Calendar.YEAR)) {
+			if(totalWork > 14) {
+				sb.append("<li>Total period of WORK &lt; 14 Hours</li>");
+			}
+			
+			if(currentCrew != null) {
+				
+				if(errorReport == null) {
 					errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
 					errorReport.generateReport();
+				} else {
+					if(errorReport.getMonth() != month || errorReport.getYear() != cal.get(Calendar.YEAR)) {
+						errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
+						errorReport.generateReport();
+					}
 				}
-			}
-			
-			errorReport.getEntryTimeList().get(cal.get(Calendar.DAY_OF_MONTH) - 1).setSchedule(timeSheet.getSchedule());
-			errorReport.refresh();
-			
-			if(errorReport.getRestPeriodCounter(cal.get(Calendar.DAY_OF_MONTH)) > 2) {
-				sb.append("<li>Total number of REST period is more than 2</li>");
-			}
-			
-			if(!errorReport.contain6HourContinuousRest(cal.get(Calendar.DAY_OF_MONTH))) {
-				sb.append("<li>At least one period of rest must be of 6 hours in length</li>");
-			}
-			
-			
-			double restHoursIn24Hours = errorReport.get24HourRestHours(cal.get(Calendar.DAY_OF_MONTH));
-			if(restHoursIn24Hours < 10) {
-				sb.append("<li>Any 24-hour Total Period of REST &gt; 10 Hours</li>");
-			}
-			
-			double restHoursIn7Days = errorReport.get7DayRestHours(cal.get(Calendar.DAY_OF_MONTH));
-			if(restHoursIn7Days < 77) {
-				sb.append("<li>Any 7-days Total Period of REST &gt; 77 Hours</li>");
+				
+				errorReport.getEntryTimeList().get(cal.get(Calendar.DAY_OF_MONTH) - 1).setSchedule(timeSheet.getSchedule());
+				errorReport.refresh();
+				
+				if(errorReport.getRestPeriodCounter(cal.get(Calendar.DAY_OF_MONTH)) > 2) {
+					sb.append("<li>Total number of REST period is more than 2</li>");
+				}
+				
+				if(!errorReport.contain6HourContinuousRest(cal.get(Calendar.DAY_OF_MONTH))) {
+					sb.append("<li>At least one period of rest must be of 6 hours in length</li>");
+				}
+				
+				
+				double restHoursIn24Hours = errorReport.get24HourRestHours(cal.get(Calendar.DAY_OF_MONTH));
+				if(restHoursIn24Hours < 10) {
+					sb.append("<li>Any 24-hour Total Period of REST &gt; 10 Hours</li>");
+				}
+				
+				double restHoursIn7Days = errorReport.get7DayRestHours(cal.get(Calendar.DAY_OF_MONTH));
+				if(restHoursIn7Days < 77) {
+					sb.append("<li>Any 7-days Total Period of REST &gt; 77 Hours</li>");
+				}
 			}
 		}
 		
@@ -368,28 +353,36 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 
 	@Override
 	public void dateSelected(Date selectedDate) {
-		if(currentCrew != null) {
-			
-			if(chkAutoSave.isSelected()) {
-				saveRestingHour();
-			}
+		
+		bShowInstantMessageHack = false;
+		
+		autoSave();
+		getSchedule(selectedDate);
+		currentDate = selectedDate;
+		
+		bShowInstantMessageHack = true;
+	}
+	
+	private void autoSave() {
+		if(currentCrew != null && chkAutoSave.isSelected()) {
+			saveRestingHour();
 			
 			txtComments.setText("");
-			
+		}
+	}
+	
+	private void getSchedule(Date selectedDate) {
+		if(currentCrew != null) {
 			EntryTime entry = entryTimeDao.getByDateAndCrew(getDate(selectedDate), currentCrew);
-			
 			if(entry != null) {
 				timeSheet.setSchedule(entry.getSchedule());
 				txtComments.setText(entry.getComments());
 			} else {
-				ScheduleTemplate template = new ScheduleTemplateDAO().getByCrew(currentCrew, chkOnPort.isSelected(), 
-						currentCrew.isWatchKeeper());
+				ScheduleTemplate template = new ScheduleTemplateDAO().getByCrew(currentCrew, chkOnPort.isSelected(), currentCrew.isWatchKeeper());
 				if(template != null)
 					timeSheet.setSchedule(template.getSchedule());
-			}
+			}			
 		}
-		
-		currentDate = selectedDate;
 	}
 	
 	private Date getDate(Date date) {

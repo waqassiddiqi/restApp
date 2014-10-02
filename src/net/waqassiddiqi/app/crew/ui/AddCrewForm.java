@@ -56,6 +56,7 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 	private WebTextField txtPassport;
 	private WebDateField txtSignonDate;
 	private WebCheckBox chkWatchkeeper;
+	private WebCheckBox chkActive;
 	private WebTabbedPane tabPan;
 	private Crew currentCrew = null;
 	private WebFileChooser fileChooser = null;
@@ -146,8 +147,10 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		txtSignonDate.setDate(new Date());
 		txtSignonDate.setInputPromptPosition (SwingConstants.CENTER);
 		
-		chkWatchkeeper = new WebCheckBox("Is watchkeeper?");
+		chkActive = new WebCheckBox("Is Active?");
+		chkActive.setSelected(true);
 		
+		chkWatchkeeper = new WebCheckBox("Is watchkeeper?");		
 		chkWatchkeeper.addActionListener(new ActionListener() {
 			
 			@Override
@@ -210,6 +213,9 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		content.add(new WebLabel("", WebLabel.TRAILING), "0,7");
 		content.add(chkWatchkeeper, "1,7");
 		
+		content.add(new WebLabel("", WebLabel.TRAILING), "0,8");
+		content.add(chkActive, "1,8");
+		
 		return content;
 	}
 
@@ -230,6 +236,7 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 				txtPassport.setText(currentCrew.getPassportNumber());
 				txtSignonDate.setDate(currentCrew.getSignOnDate());
 				chkWatchkeeper.setSelected(currentCrew.isWatchKeeper());
+				chkActive.setSelected(currentCrew.isActive());
 			}
 		}
 		
@@ -332,28 +339,27 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		
 		CrewDAO crewDao = new CrewDAO();
 		
-		if(crewDao.isPassportExists(txtPassport.getText().trim())) {
-			NotificationManager.showPopup(getOwner(), txtPassport, new String[] { "Passport / Book number must be unique" });
-			return;
-		}
-		
 		if(InputValidator.validateInput(getOwner(), new JTextField[] { txtFirstName, txtLastName, txtNationality, txtPassport, txtSignonDate }, 
 				"This field cannot be empty")) {
 			
-			Crew crew = new Crew() {{ 
-				setVesselId(listVessel.get(0).getId());
-				setFirstName(txtFirstName.getText().trim());
-				setLastName(txtLastName.getText().trim());
-				setRank(cmbRank.getSelectedItem().toString());
-				setNationality(txtNationality.getText().trim());
-				setPassportNumber(txtPassport.getText().trim());
-				setSignOnDate(txtSignonDate.getDate());
-				setWatchKeeper(chkWatchkeeper.isSelected());
-			}};
-			
-			
-			
 			if(currentCrew == null) {
+				
+				Crew crew = new Crew() {{ 
+					setVesselId(listVessel.get(0).getId());
+					setFirstName(txtFirstName.getText().trim());
+					setLastName(txtLastName.getText().trim());
+					setRank(cmbRank.getSelectedItem().toString());
+					setNationality(txtNationality.getText().trim());
+					setPassportNumber(txtPassport.getText().trim());
+					setSignOnDate(txtSignonDate.getDate());
+					setWatchKeeper(chkWatchkeeper.isSelected());
+					setActive(chkActive.isSelected());
+				}};
+				
+				if(crewDao.isPassportExists(txtPassport.getText().trim(), 0)) {
+					NotificationManager.showPopup(getOwner(), txtPassport, new String[] { "Passport / Book number must be unique" });
+					return;
+				}
 				
 				this.id = crewDao.addCrew(crew);
 				
@@ -370,6 +376,12 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 				}
 				
 			} else {
+				
+				if(crewDao.isPassportExists(txtPassport.getText().trim(), currentCrew.getId())) {
+					NotificationManager.showPopup(getOwner(), txtPassport, new String[] { "This passport number is already associated with other member of crew" });
+					return;
+				}
+				
 				currentCrew.setFirstName(txtFirstName.getText().trim());
 				currentCrew.setLastName(txtLastName.getText().trim());
 				currentCrew.setRank(cmbRank.getSelectedItem().toString());
@@ -377,6 +389,7 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 				currentCrew.setPassportNumber(txtPassport.getText().trim());
 				currentCrew.setSignOnDate(txtSignonDate.getDate());
 				currentCrew.setWatchKeeper(chkWatchkeeper.isSelected());
+				currentCrew.setActive(chkActive.isSelected());
 				
 				new CrewDAO().updateCrew(currentCrew);
 				scheduleDao.removeScheduleTemplateByCrew(currentCrew);

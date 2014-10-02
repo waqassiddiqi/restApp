@@ -14,6 +14,7 @@ public class Crew {
 	private String passportNumber;
 	private Date signOnDate;
 	private boolean isWatchKeeper;
+	private boolean isActive;
 	private List<ScheduleTemplate> scheduleTemplates = new ArrayList<ScheduleTemplate>();
 	
 	public int getId() {
@@ -84,6 +85,13 @@ public class Crew {
 	}
 	public void setScheduleTemplate(List<ScheduleTemplate> scheduleTemplates) {
 		this.scheduleTemplates = scheduleTemplates;
+	}
+	
+	public boolean isActive() {
+		return isActive;
+	}
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 	
 	@Override

@@ -60,7 +60,8 @@ public class ConnectionManager {
                 + "nationality VARCHAR(30), "
                 + "book_number_or_passport VARCHAR(30), "
                 + "signon_date bigint, "
-                + "is_watch_keeper BOOLEAN "
+                + "is_watch_keeper BOOLEAN, "
+                + "is_active BOOLEAN DEFAULT true"
                 + ")";	
 		
 		executeUpdate(strSqlCrew);

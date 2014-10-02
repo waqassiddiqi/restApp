@@ -47,7 +47,7 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 	private SimpleDateFormat sdf;
 	private Object[][] data;
 	private String[] columnNames = { "S.No.", "First Name", "Last Name", "Rank", "Nationality", 
-			"Passport", "SignOn Date", "Watch Keeper" };
+			"Passport", "SignOn Date", "Watch Keeper", "Is Active" };
 	private List<Crew> crewList = new ArrayList<Crew>();
 	private Boolean[] listModifiedCrewIndex;
 	
@@ -188,6 +188,7 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 			data[i][5] = crewList.get(i).getPassportNumber();
 			data[i][6] = sdf.format(crewList.get(i).getSignOnDate());
 			data[i][7] = crewList.get(i).isWatchKeeper();
+			data[i][8] = crewList.get(i).isActive();
 		}
 		
 		return this.data;
@@ -221,7 +222,7 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 	
 	public class CrewTableModel extends DefaultTableModel {
 		private static final long serialVersionUID = 1L;
-		public final Object[] longValues = { 0, "", "", "", "", "", "", Boolean.FALSE };
+		public final Object[] longValues = { 0, "", "", "", "", "", "", Boolean.FALSE, Boolean.TRUE };
 		
 		public CrewTableModel(Object[][] data, Object[] columnNames) {
 			super(data, columnNames);
@@ -281,6 +282,8 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 				}
 			} else if(col == 7) {
 				c.setWatchKeeper((boolean) value);
+			} else if(col == 8) {
+				c.setActive((boolean) value);
 			}
 			
 			listModifiedCrewIndex[row] = true;
