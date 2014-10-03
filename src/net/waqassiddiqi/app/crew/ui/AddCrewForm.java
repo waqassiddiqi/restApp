@@ -71,6 +71,8 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 	
 	protected Boolean[] defaultScheduleList = new Boolean[48];
 	
+	private int defaultTabIndex = 0;
+	
 	public AddCrewForm(MainFrame owner) {
 		this(owner, -1);
 	}
@@ -80,6 +82,10 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		this.id = id;
 		Arrays.fill(defaultScheduleList, Boolean.TRUE);
 		scheduleDao = new ScheduleTemplateDAO();
+	}
+	
+	public void setDefaultTabIndex(int index) {
+		this.defaultTabIndex = index;
 	}
 	
 	@SuppressWarnings("serial")
@@ -112,6 +118,8 @@ public class AddCrewForm extends BaseForm implements ActionListener {
         
         tabPan.addTab("  Crew Details   ", getForm());
         tabPan.addTab("  Schedule Template ", scrollPane);
+        
+        tabPan.setSelectedIndex(defaultTabIndex);
         
         tabPan.setContentInsets(new Insets(10, 10, 10, 10));
         

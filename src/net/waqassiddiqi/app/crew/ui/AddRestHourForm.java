@@ -281,7 +281,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 			
 			if(entryTimeDao.addUpdateEntry(entryTime) > 0) {
 				NotificationManager.showNotification("<html>Resting hours has been saved for<br/>" + 
-						CalendarUtil.format("MMM dd, yyyy", getDate(this.calendar.getDate())) + "</html>");
+						CalendarUtil.format("MMM dd, yyyy", getDate(currentDate)) + "</html>");
 			}
 		}
 	}

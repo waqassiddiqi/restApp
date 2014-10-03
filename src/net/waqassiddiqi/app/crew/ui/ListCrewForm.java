@@ -3,22 +3,28 @@ package net.waqassiddiqi.app.crew.ui;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableRowSorter;
 
 import net.waqassiddiqi.app.crew.controller.CrewFactory;
 import net.waqassiddiqi.app.crew.db.CrewDAO;
@@ -28,6 +34,7 @@ import net.waqassiddiqi.app.crew.model.Rank;
 import net.waqassiddiqi.app.crew.util.NotificationManager;
 
 import com.alee.extended.date.WebDateField;
+import com.alee.extended.panel.GroupPanel;
 import com.alee.laf.button.WebButton;
 import com.alee.laf.combobox.WebComboBox;
 import com.alee.laf.label.WebLabel;
@@ -36,9 +43,10 @@ import com.alee.laf.menu.WebPopupMenu;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.tabbedpane.WebTabbedPane;
 import com.alee.laf.table.WebTable;
+import com.alee.laf.text.WebTextField;
 import com.alee.utils.swing.WebDefaultCellEditor;
 
-public class ListCrewForm extends BaseForm implements ActionListener, TableModelListener {
+public class ListCrewForm extends BaseForm implements ActionListener, TableModelListener, KeyListener {
 	
 	private CrewTableModel tableModel;
 	private WebTabbedPane tabPan;
@@ -50,7 +58,9 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 			"Passport", "SignOn Date", "Watch Keeper", "Is Active" };
 	private List<Crew> crewList = new ArrayList<Crew>();
 	private Boolean[] listModifiedCrewIndex;
-	
+	private WebTextField txtNameFilter;
+	private WebTextField txtLastNameFilter;
+	TableRowSorter<CrewTableModel> mSorter;
 	
 	public ListCrewForm(MainFrame owner) {
 		super(owner);
@@ -63,6 +73,21 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 	public void setupToolBar() {
 		getToolbar().add(new WebLabel("Crew List") {{ setDrawShade(true); setMargin(10); }});
 		super.setupToolBar();
+		
+		getToolbar().add(new WebLabel("Filter: ") {{ setMargin(1); }});
+		
+		txtNameFilter = new WebTextField(15);
+		txtNameFilter.addKeyListener(ListCrewForm.this);
+		
+		txtLastNameFilter = new WebTextField(15);
+		txtLastNameFilter.addKeyListener(ListCrewForm.this);
+				
+		GroupPanel gp = new GroupPanel(new WebLabel("First Name") {{ setDrawShade(true); setMargin(10); }}, 
+				txtNameFilter, 
+				new WebLabel("Last Name") {{ setDrawShade(true); setMargin(10); }}, 
+				txtLastNameFilter);
+		
+		getToolbar().add(gp);
 	}
 	
 	@Override
@@ -81,7 +106,12 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 		tableModel = new CrewTableModel(getData(), columnNames);
 		tableModel.addTableModelListener(this);
 		
+		
+		mSorter = new TableRowSorter<CrewTableModel>(tableModel);
+		
 		table = new WebTable(tableModel);
+		
+		table.setRowSorter(mSorter);
 		
 		TableColumn column = table.getColumnModel().getColumn(3);
 		WebComboBox cmbRank = new WebComboBox ();
@@ -125,6 +155,20 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 		});
 		
 		return scrollPane;
+	}
+	
+	private void newFilter(String value, int columnIndex) {
+	    RowFilter<CrewTableModel, Object> rf = null;
+
+	    try {
+
+	    	rf = RowFilter.regexFilter(value, columnIndex);
+	    	
+	    } catch (java.util.regex.PatternSyntaxException e) {
+	        return;
+	    }
+	    
+	    mSorter.setRowFilter(rf);
 	}
 	
 	private WebPopupMenu getActionMenu(int crewId) {
@@ -200,9 +244,14 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 		if(e.getSource() instanceof WebMenuItem) {
 			WebMenuItem item = (WebMenuItem) e.getSource();
 			
-			//if(item.getActionCommand().equals("Edit details")) {
+			if(item.getActionCommand().equals("Edit details")) {
 				getOwner().addContent(CrewFactory.getInstance().getEdit((String) item.getClientProperty("crewId")));
-			//}
+			} else if(item.getActionCommand().equals("Edit rest hour template")) {
+				Map<String, Object> params = new HashMap<String , Object>();
+				params.put("defaultView", 1);
+				
+				getOwner().addContent(CrewFactory.getInstance().getEdit((String) item.getClientProperty("crewId"), params));
+			}
 			
 			
 		} else if(e.getSource() instanceof WebButton) {
@@ -301,5 +350,21 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
         	listModifiedCrewIndex[row] = false;
         }
         
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if(e.getSource() == txtNameFilter)
+			newFilter(txtNameFilter.getText(), 1);
+		else if(e.getSource() == txtLastNameFilter)
+			newFilter(txtLastNameFilter.getText(), 2);		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
 	}
 }

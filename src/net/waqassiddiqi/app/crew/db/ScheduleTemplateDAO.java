@@ -24,7 +24,7 @@ public class ScheduleTemplateDAO {
 		int rows = db.executeUpdate("DELETE FROM SCHEDULE_TEMPLATES s WHERE s.id IN(SELECT SCHEDULE_ID " +
 				"FROM CREW_SCHEDULE_TEMPLATE WHERE CREW_ID = ?);", new String[] { Integer.toString(c.getId()) });
 		
-		rows = db.executeUpdate("DELETE FROM CREW_SCHEDULE_TEMPLATE WHERE WHERE CREW_ID = ?", new String[] { Integer.toString(c.getId()) });
+		rows = db.executeUpdate("DELETE FROM CREW_SCHEDULE_TEMPLATE WHERE CREW_ID = ?", new String[] { Integer.toString(c.getId()) });
 		
 		return rows;
 	}

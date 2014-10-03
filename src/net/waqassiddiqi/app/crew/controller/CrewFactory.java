@@ -52,7 +52,12 @@ public class CrewFactory extends BaseFactory {
 
 	@Override
 	public Component getEdit(String id, Map<String, Object> params) {
-		Component c = new AddCrewForm(getOwner(), Integer.parseInt(id)).getView();
+		AddCrewForm f = new AddCrewForm(getOwner(), Integer.parseInt(id));
+		
+		if(params.containsKey("defaultView"))
+			f.setDefaultTabIndex((int) params.get("defaultView"));
+		
+		Component c = f.getView();
 		c.setName("addCrew");
 		
 		return c;
