@@ -3,10 +3,8 @@ package net.waqassiddiqi.app.crew.db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import net.waqassiddiqi.app.crew.model.Crew;
 import net.waqassiddiqi.app.crew.model.Rank;
 
 import org.apache.log4j.Logger;

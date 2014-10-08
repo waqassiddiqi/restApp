@@ -220,15 +220,16 @@ public class EntryTime {
 		if (crewId != other.crewId)
 			return false;
 		
-		System.out.println(entryDate.getTime() + " : " + other.entryDate.getTime());
-		
 		if (entryDate == null) {
 			
 			if (other.entryDate != null)
 				return false;
 			
-		} else if (entryDate.getTime() != other.entryDate.getTime())
-			return false;
+		} else {
+			if (entryDate.getTime() != other.entryDate.getTime())
+				return false;
+		}
+			
 		return true;
 	}
 }

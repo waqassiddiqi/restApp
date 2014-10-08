@@ -3,7 +3,6 @@ package net.waqassiddiqi.app.crew.ui.report;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.StringWriter;
@@ -16,11 +15,9 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileFilter;
 
-import net.waqassiddiqi.app.crew.db.CrewDAO;
 import net.waqassiddiqi.app.crew.db.VesselDAO;
-import net.waqassiddiqi.app.crew.model.Crew;
 import net.waqassiddiqi.app.crew.model.Vessel;
-import net.waqassiddiqi.app.crew.report.RestingHourReport;
+import net.waqassiddiqi.app.crew.report.PotentialNCReport;
 import net.waqassiddiqi.app.crew.ui.BaseForm;
 import net.waqassiddiqi.app.crew.ui.MainFrame;
 import net.waqassiddiqi.app.crew.util.FilesUtil;
@@ -43,22 +40,16 @@ import com.alee.laf.filechooser.WebFileChooser;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.text.WebTextPane;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.pdf.PdfWriter;
 
-public class RestingHourReportForm extends BaseForm {
+public class PotentialNCReportForm extends BaseForm {
 
 	private Logger log = Logger.getLogger(getClass().getName());
 	private WebFileChooser fileChooser = null;
-	private static String sourceImage = "";
 	private File saveFileTarget = null;
 	private WebTextPane reportPane;
-	private WebComboBox cmbCrew;
 	private WebComboBox cmbYear;
 	private WebComboBox cmbMonth;
-	private RestingHourReport restingHourReport;
+	private PotentialNCReport pNcReport;
 	private String generatedHtml = "";
 	private final WebProgressOverlay progressOverlay;
 	private final WebProgressOverlay poBtnPdf;
@@ -68,15 +59,8 @@ public class RestingHourReportForm extends BaseForm {
 	private String logoPath;
 	
 	@SuppressWarnings("unchecked")
-	public RestingHourReportForm(MainFrame owner) {
+	public PotentialNCReportForm(MainFrame owner) {
 		super(owner);
-		
-		cmbCrew = new WebComboBox();
-		cmbCrew.addItem("Select Crew");
-		List<Crew> listCrew = new CrewDAO().getAll();
-		for(Crew c : listCrew) {
-			cmbCrew.addItem(c);
-		}
 		
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		
@@ -111,7 +95,7 @@ public class RestingHourReportForm extends BaseForm {
 	@SuppressWarnings("serial")
 	@Override
 	public void setupToolBar() {
-		getToolbar().add(new WebLabel("Resting Hour Report") {{ setDrawShade(true); setMargin(10); }});
+		getToolbar().add(new WebLabel("Potential Non-Conformities") {{ setDrawShade(true); setMargin(10); }});
 		
 		getToolbar().addSeparator();
 		
@@ -135,7 +119,7 @@ public class RestingHourReportForm extends BaseForm {
 		btnFilter.addActionListener(this);		
 		progressOverlay.setComponent(btnFilter);
 		
-		GroupPanel gp = new GroupPanel(cmbCrew, cmbMonth, cmbYear, progressOverlay);
+		GroupPanel gp = new GroupPanel(cmbMonth, cmbYear, progressOverlay);
 		
 		getToolbar().add(gp);
 	}
@@ -153,10 +137,9 @@ public class RestingHourReportForm extends BaseForm {
 		return scrollPane.setMargin(5);
 	}
 	
-	private String generateReport(Crew crew, Vessel vessel, int month, int year) {
+	private String generateReport(Vessel vessel, int month, int year) {
 		
 		VelocityContext localVelocityContext = new VelocityContext();
-		localVelocityContext.put("currentCrew", crew);
 		localVelocityContext.put("currentVessel", vessel);
 		
 		if(this.logoPath == null) {
@@ -166,17 +149,18 @@ public class RestingHourReportForm extends BaseForm {
 		
 		localVelocityContext.put("logo", logoPath);
 		
-		restingHourReport = new RestingHourReport(crew, vessel, month, year);
-	    restingHourReport.generateReport();		
 		
-		localVelocityContext.put("lstEntryTimes", restingHourReport.getEntryTimeList());	    
-	    localVelocityContext.put("host", restingHourReport);
+		
+		pNcReport = new PotentialNCReport(month, year);
+		List<String[]> data = pNcReport.generateReport();		
+		
+		localVelocityContext.put("data", data);
 	    
 	    VelocityEngine ve = new VelocityEngine();
 	    ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath"); 
 	    ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
 	    
-	    Template reportTemplate = ve.getTemplate("resource/template/restinghour_report.html");
+	    Template reportTemplate = ve.getTemplate("resource/template/potential_nc_detailed_report.html");
 	    
 	    StringWriter writer = new StringWriter();
 	    
@@ -224,42 +208,6 @@ public class RestingHourReportForm extends BaseForm {
 		return filePath;
 	}
 	
-	@SuppressWarnings("unused")
-	private void _generatePdf(String path) {
-		ByteArrayOutputStream localByteArrayOutputStream = null;
-		Document localDocument = null;
-		PdfWriter localPdfWriter = null;
-		
-		try {
-
-			localByteArrayOutputStream = new ByteArrayOutputStream();
-			localDocument = new Document(PageSize.A4_LANDSCAPE.rotate());
-
-			localPdfWriter = PdfWriter.getInstance(localDocument, new FileOutputStream(path));
-			localPdfWriter.setStrictImageSequence(true);
-			localDocument.open();
-			Image localImage = Image.getInstance(sourceImage + ".png");
-			localImage.scaleToFit(650.0F, 600.0F);
-			localDocument.add(localImage);
-			localDocument.close();
-			localByteArrayOutputStream.flush();
-
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-		
-		try {
-			File localFile = new File(sourceImage + ".png");
-			if (localFile.delete()) {
-				log.info(localFile.getName() + " is deleted!");
-			} else {
-				log.info("Delete operation is failed.");
-			}
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		WebButton btnSource = (WebButton) e.getSource();
@@ -273,42 +221,33 @@ public class RestingHourReportForm extends BaseForm {
 			
 		} else if(btnSource.getClientProperty("command").equals("filter")) {
 			
-			if(cmbCrew.getSelectedItem() instanceof Crew) {
-				
-				if(cmbMonth.getSelectedIndex() == 0) {
-					NotificationManager.showPopup(getOwner(), cmbMonth, new String[] { "Please select valid month" });
-					return;
-				}
-				
-				if(cmbYear.getSelectedIndex() == 0) {
-					NotificationManager.showPopup(getOwner(), cmbYear, new String[] { "Please select valid year" });
-					return;
-				}
-				
-				Vessel currentVessel = new VesselDAO().getAll().get(0);
-				
-				
-				progressOverlay.setShowLoad(!progressOverlay.isShowLoad());
-				
-				new GenerateReportTask((Crew) cmbCrew.getSelectedItem(), currentVessel, cmbMonth.getSelectedIndex() - 1, 
-						(int) cmbYear.getSelectedItem()).execute();
-				
-			} else {
-				NotificationManager.showPopup(getOwner(), cmbCrew, new String[] { "Please select crew" });
+			if(cmbMonth.getSelectedIndex() == 0) {
+				NotificationManager.showPopup(getOwner(), cmbMonth, new String[] { "Please select valid month" });
 				return;
-			}			
+			}
+			
+			if(cmbYear.getSelectedIndex() == 0) {
+				NotificationManager.showPopup(getOwner(), cmbYear, new String[] { "Please select valid year" });
+				return;
+			}
+			
+			Vessel currentVessel = new VesselDAO().getAll().get(0);
+			
+			
+			progressOverlay.setShowLoad(!progressOverlay.isShowLoad());
+			
+			new GenerateReportTask(currentVessel, cmbMonth.getSelectedIndex() - 1, 
+					(int) cmbYear.getSelectedItem()).execute();
 		}
 	}
 	
 	public final class GenerateReportTask extends SwingWorker<String, Void> {
 
-		private Crew crew;
 		private Vessel vessel;
 		private int month;
 		private int year;
 		
-		public GenerateReportTask(Crew c, Vessel v, int month, int year) {
-			this.crew = c;
+		public GenerateReportTask(Vessel v, int month, int year) {
 			this.vessel = v;
 			this.month = month;
 			this.year = year;
@@ -317,7 +256,7 @@ public class RestingHourReportForm extends BaseForm {
 		@Override
 		protected String doInBackground() throws Exception {
 			
-			return generateReport(crew, vessel, month, year);
+			return generateReport(vessel, month, year);
 		}
 		
 		@Override
@@ -339,14 +278,14 @@ public class RestingHourReportForm extends BaseForm {
 		fileChooser = new  WebFileChooser() {
 			public void approveSelection() {
 				super.approveSelection();
-				RestingHourReportForm.this.saveFileTarget = getSelectedFile();
+				PotentialNCReportForm.this.saveFileTarget = getSelectedFile();
 				
-				if (!FilesUtil.getExtension(RestingHourReportForm.this.saveFileTarget).equalsIgnoreCase(".pdf")) {					
+				if (!FilesUtil.getExtension(PotentialNCReportForm.this.saveFileTarget).equalsIgnoreCase(".pdf")) {					
 					SwingWorker<String, Void> worker = new SwingWorker<String, Void>() {
 
 						@Override
 						protected String doInBackground() throws Exception {
-							return generatePdf(RestingHourReportForm.this.saveFileTarget.toString());
+							return generatePdf(PotentialNCReportForm.this.saveFileTarget.toString());
 						}
 						
 						@Override

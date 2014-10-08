@@ -112,6 +112,36 @@ public class ConnectionManager {
                 + ")";	
 		
 		executeUpdate(strSqlEntryTime);
+		
+		String strRegistrationDetail = "CREATE TABLE IF NOT EXISTS reg_settings("
+                + "id bigint auto_increment, "
+                + "username VARCHAR(250), "
+                + "is_registered BOOLEAN, "
+                + "expiry bigint, "
+                + "product_key VARCHAR(24), "
+                + "app_used REAL, "
+                + "registered_on bigint "
+                + ")";	
+		
+		executeUpdate(strRegistrationDetail);
+		
+		String strPivotReport = "CREATE TABLE IF NOT EXISTS error_report(" +
+				"id bigint auto_increment, " +
+				"crew_id bigint, " +
+				"entry_date bigint, " +
+				"work_24hr REAL, " +
+				"rest_24hr REAL, " +
+				"any_rest_24hr REAL, " +
+				"rest_7days REAL, " +
+				"rest_greater_10hrs BOOLEAN, " +
+				"work_less_14hrs BOOLEAN, " +
+				"total_rest_24hr_greater_10hrs BOOLEAN, " +
+				"total_rest_7days_greater_77hrs BOOLEAN, " +
+				"one_rest_period_6hrs BOOLEAN, " +
+				"total_rest_periods BIGINT, " +
+				"rest_hrs_greater_36_3_days REAL)";
+		
+		executeUpdate(strPivotReport);
 	}
 	
 	public ResultSet executeQuery(String strSql) {

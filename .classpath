@@ -10,5 +10,10 @@
 	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/html2image-0.9.jar"/>
+	<classpathentry kind="lib" path="lib/core-renderer.jar"/>
+	<classpathentry kind="lib" path="lib/core-renderer-minimal.jar"/>
+	<classpathentry kind="lib" path="lib/xml-apis-xerces-2.9.1.jar"/>
+	<classpathentry kind="lib" path="lib/iText-2.0.8.jar"/>
+	<classpathentry kind="lib" path="lib/opencsv-3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

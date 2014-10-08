@@ -10,9 +10,11 @@ import java.util.List;
 
 import net.waqassiddiqi.app.crew.db.CrewDAO;
 import net.waqassiddiqi.app.crew.db.EntryTimeDAO;
+import net.waqassiddiqi.app.crew.db.ErrorReportDAO;
 import net.waqassiddiqi.app.crew.db.ScheduleTemplateDAO;
 import net.waqassiddiqi.app.crew.model.Crew;
 import net.waqassiddiqi.app.crew.model.EntryTime;
+import net.waqassiddiqi.app.crew.model.ErrorReportEntry;
 import net.waqassiddiqi.app.crew.model.ScheduleTemplate;
 import net.waqassiddiqi.app.crew.report.ErrorReport;
 import net.waqassiddiqi.app.crew.ui.control.BoundsPopupMenuListener;
@@ -56,7 +58,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 	private ErrorReport errorReport = null;
 	private EntryTimeDAO entryTimeDao;
 	private WebTextArea txtComments;
-	private boolean bShowInstantMessageHack = true;
+	private ErrorReportEntry errorReportEntry;	
 	
 	public AddRestHourForm(MainFrame owner) {
 		this(owner, -1);
@@ -114,11 +116,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				bShowInstantMessageHack = false;
-				
 				getSchedule(currentDate);
-				
-				bShowInstantMessageHack = true;
 			}
 		});
 		
@@ -220,15 +218,17 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 			if( ((WebComboBox) e.getSource()).getActionCommand().equals("crewSelectedChanged")) {
 				if(cmbCrew.getSelectedItem() instanceof Crew) {
 
-					bShowInstantMessageHack = false;
-					
 					autoSave();
 					
 					currentCrew = (Crew) cmbCrew.getSelectedItem();
+
+					if(currentCrew != null) {
+						errorReportEntry = new ErrorReportEntry();
+						errorReportEntry.setEntryDate(getDate(currentDate));
+						errorReportEntry.setCrew(currentCrew);
+					}
 					
-					getSchedule(currentDate);		
-					
-					bShowInstantMessageHack = true;
+					getSchedule(currentDate);
 				} 
 				
 			} 
@@ -280,6 +280,10 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 			entryTime.setRestIn24Hours(timeSheet.getTotalRest());
 			
 			if(entryTimeDao.addUpdateEntry(entryTime) > 0) {
+				
+				if(errorReportEntry != null)
+					new ErrorReportDAO().addEntry(errorReportEntry);
+				
 				NotificationManager.showNotification("<html>Resting hours has been saved for<br/>" + 
 						CalendarUtil.format("MMM dd, yyyy", getDate(currentDate)) + "</html>");
 			}
@@ -294,54 +298,72 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(currentDate);
 		
-		int month = cal.get(Calendar.MONTH);		
+		int month = cal.get(Calendar.MONTH);	
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("<html><ul>");
 		
-		if(bShowInstantMessageHack) {
-		
-			if(totalRest < 10) {
+		if(currentCrew != null) {
+				
+			EntryTime time = new EntryTime();
+			time.setSchedule(timeSheet.getSchedule());
+			
+			double totalWorkHours = 24 - time.getTotalRestHours();
+			
+			
+			errorReportEntry.setRestIn24hours(time.getTotalRestHours());
+			errorReportEntry.setWorkIn24hours(totalWorkHours);
+			
+			if(time.getTotalRestHours() < 10) {
 				sb.append("<li>Total period of REST > 10 Hours</li>");
+				
+				errorReportEntry.setRestGreater10hrs(true);
 			}
 			
-			if(totalWork > 14) {
+			if(totalWorkHours > 14) {
 				sb.append("<li>Total period of WORK &lt; 14 Hours</li>");
+				
+				errorReportEntry.setWorkLess14hrs(true);
 			}
 			
-			if(currentCrew != null) {
+			//if(errorReport == null) {
+				errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
+				errorReport.generateReport();
+			//}// else {
+				//if(errorReport.getMonth() != month || errorReport.getYear() != cal.get(Calendar.YEAR)) {
+				//	errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
+				//	errorReport.generateReport();
+				//}
+			//}
+			
+			errorReport.getEntryTimeList().get(cal.get(Calendar.DAY_OF_MONTH) - 1).setSchedule(timeSheet.getSchedule());
+			//errorReport.refresh();
+			
+			if(errorReport.getRestPeriodCounter(cal.get(Calendar.DAY_OF_MONTH)) > 2) {
+				sb.append("<li>Total number of REST period is more than 2</li>");
 				
-				if(errorReport == null) {
-					errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
-					errorReport.generateReport();
-				} else {
-					if(errorReport.getMonth() != month || errorReport.getYear() != cal.get(Calendar.YEAR)) {
-						errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
-						errorReport.generateReport();
-					}
-				}
+				errorReportEntry.setTotalRestPeriods(errorReport.getRestPeriodCounter(cal.get(Calendar.DAY_OF_MONTH)));
+			}
+			
+			if(!errorReport.contain6HourContinuousRest(cal.get(Calendar.DAY_OF_MONTH))) {
+				sb.append("<li>At least one period of rest must be of 6 hours in length</li>");
 				
-				errorReport.getEntryTimeList().get(cal.get(Calendar.DAY_OF_MONTH) - 1).setSchedule(timeSheet.getSchedule());
-				errorReport.refresh();
+				errorReportEntry.setOneRestPeriod6hrs(true);
+			}
+			
+			
+			double restHoursIn24Hours = errorReport.get24HourRestHours(cal.get(Calendar.DAY_OF_MONTH));
+			if(restHoursIn24Hours < 10) {
+				sb.append("<li>Any 24-hour Total Period of REST &gt; 10 Hours</li>");
 				
-				if(errorReport.getRestPeriodCounter(cal.get(Calendar.DAY_OF_MONTH)) > 2) {
-					sb.append("<li>Total number of REST period is more than 2</li>");
-				}
+				errorReportEntry.setTotalRest24hrsGreater10hrs(true);
+			}
+			
+			double restHoursIn7Days = errorReport.get7DayRestHours(cal.get(Calendar.DAY_OF_MONTH));
+			if(restHoursIn7Days < 77) {
+				sb.append("<li>Any 7-days Total Period of REST &gt; 77 Hours</li>");
 				
-				if(!errorReport.contain6HourContinuousRest(cal.get(Calendar.DAY_OF_MONTH))) {
-					sb.append("<li>At least one period of rest must be of 6 hours in length</li>");
-				}
-				
-				
-				double restHoursIn24Hours = errorReport.get24HourRestHours(cal.get(Calendar.DAY_OF_MONTH));
-				if(restHoursIn24Hours < 10) {
-					sb.append("<li>Any 24-hour Total Period of REST &gt; 10 Hours</li>");
-				}
-				
-				double restHoursIn7Days = errorReport.get7DayRestHours(cal.get(Calendar.DAY_OF_MONTH));
-				if(restHoursIn7Days < 77) {
-					sb.append("<li>Any 7-days Total Period of REST &gt; 77 Hours</li>");
-				}
+				errorReportEntry.setTotalRest7daysGreater77hrs(true);
 			}
 		}
 		
@@ -354,13 +376,17 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 	@Override
 	public void dateSelected(Date selectedDate) {
 		
-		bShowInstantMessageHack = false;
-		
 		autoSave();
-		getSchedule(selectedDate);
 		currentDate = selectedDate;
 		
-		bShowInstantMessageHack = true;
+		if(currentCrew != null) {
+			errorReportEntry = new ErrorReportEntry();
+			errorReportEntry.setEntryDate(getDate(currentDate));
+			errorReportEntry.setCrew(currentCrew);
+		}
+		
+		getSchedule(selectedDate);
+		
 	}
 	
 	private void autoSave() {
@@ -381,7 +407,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 				ScheduleTemplate template = new ScheduleTemplateDAO().getByCrew(currentCrew, chkOnPort.isSelected(), currentCrew.isWatchKeeper());
 				if(template != null)
 					timeSheet.setSchedule(template.getSchedule());
-			}			
+			}
 		}
 	}
 	

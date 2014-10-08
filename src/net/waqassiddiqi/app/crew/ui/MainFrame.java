@@ -3,21 +3,30 @@ package net.waqassiddiqi.app.crew.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import net.waqassiddiqi.app.crew.controller.CrewFactory;
 import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
+import net.waqassiddiqi.app.crew.license.LicenseManager;
+import net.waqassiddiqi.app.crew.model.RegistrationSetting;
 import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.style.skin.DefaultSkin;
 import net.waqassiddiqi.app.crew.ui.AddVesselForm.ChangeListener;
 import net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl;
+import net.waqassiddiqi.app.crew.util.CalendarUtil;
 import net.waqassiddiqi.app.crew.util.ConfigurationUtil;
 
 import org.apache.log4j.Logger;
@@ -139,7 +148,11 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		final WebStatusBar statusBar = new WebStatusBar();
 		statusBar.addSpacing();
 
-		statusBar.add(new WebLabel("This is an evaluation version"));
+		RegistrationSetting settings = LicenseManager.getRegistationDetail();
+		
+		if(!settings.isRegistered())
+			statusBar.add(new WebLabel("This is an evaluation version and will expire on " + 
+					CalendarUtil.format("dd MMM yyyy", settings.getExpiry())));
 		
 		statusBar.addSeparatorToEnd();
 		
@@ -168,8 +181,53 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		
 		StyleManager.setDefaultSkin(DefaultSkin.class.getCanonicalName());		
 		WebLookAndFeel.install();
+		setFont();
 		MainFrame.getInstance().display();
-
+	}
+	
+	private static void setFont() {
+		
+		try {
+			URL l = ClassLoader.class.getResource("/resource/template/CarroisGothic-Regular.ttf");
+			Font font = Font.createFont(Font.TRUETYPE_FONT, l.openStream());
+	        font = font.deriveFont(Font.PLAIN, 13);
+	        GraphicsEnvironment ge =
+	            GraphicsEnvironment.getLocalGraphicsEnvironment();
+	        ge.registerFont(font);
+	        
+	        UIManager.put("Button.font", font);
+			UIManager.put("ToggleButton.font", font);
+			UIManager.put("RadioButton.font", font);
+			UIManager.put("CheckBox.font", font);
+			UIManager.put("ColorChooser.font", font);
+			UIManager.put("ComboBox.font", font);
+			UIManager.put("Label.font", font);
+			UIManager.put("List.font", font);
+			UIManager.put("MenuBar.font", font);
+			UIManager.put("MenuItem.font", font);
+			UIManager.put("RadioButtonMenuItem.font", font);
+			UIManager.put("CheckBoxMenuItem.font", font);
+			UIManager.put("Menu.font", font);
+			UIManager.put("PopupMenu.font", font);
+			UIManager.put("OptionPane.font", font);
+			UIManager.put("Panel.font", font);
+			UIManager.put("ProgressBar.font", font);
+			UIManager.put("ScrollPane.font", font);
+			UIManager.put("Viewport.font", font);
+			UIManager.put("TabbedPane.font", font);
+			UIManager.put("Table.font", font);
+			UIManager.put("TableHeader.font", font);
+			UIManager.put("TextField.font", font);
+			UIManager.put("PasswordField.font", font);
+			UIManager.put("TextArea.font", font);
+			UIManager.put("TextPane.font", font);
+			UIManager.put("EditorPane.font", font);
+			UIManager.put("TitledBorder.font", font);
+			UIManager.put("ToolBar.font", font);
+			UIManager.put("ToolTip.font", font);
+			UIManager.put("Tree.font", font);
+	        
+		} catch (Exception e) { e.printStackTrace(); }
 	}
 	
 	public static void main(String[] args) throws SQLException {

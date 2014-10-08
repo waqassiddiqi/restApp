@@ -148,7 +148,43 @@ public class RibbonbarTabControl {
 
 		buttonList.add(btnErrorReport);
 		
-		GroupPanel gpanel = new GroupPanel(4, btnRestHourReport, btnErrorReport);
+		WebButton btnPivotReport = new WebButton("Pivot Report",
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/pivot_report_32x32.png"));
+
+		btnPivotReport.setRolloverDecoratedOnly(true);
+		btnPivotReport.setDrawFocus(false);
+		btnPivotReport.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnPivotReport.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnPivotReport.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(ReportingFactory.getInstance().getById("pivot"));				
+			}
+		});
+
+		buttonList.add(btnPivotReport);
+		
+		WebButton btnPotentialNCReport = new WebButton("Potential Non-Conformities Report",
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/view_report_32x32.png"));
+
+		btnPotentialNCReport.setRolloverDecoratedOnly(true);
+		btnPotentialNCReport.setDrawFocus(false);
+		btnPotentialNCReport.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnPotentialNCReport.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnPotentialNCReport.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(ReportingFactory.getInstance().getById("potential"));
+			}
+		});
+
+		buttonList.add(btnPotentialNCReport);
+		
+		GroupPanel gpanel = new GroupPanel(4, btnRestHourReport, btnErrorReport, btnPivotReport, btnPotentialNCReport);
 
 		WebPanel panel = getRibbonPanel("Reporting");
 		panel.add(gpanel, BorderLayout.CENTER);
@@ -299,9 +335,35 @@ public class RibbonbarTabControl {
 	}
 	
 	public void setupHomeTab(final JTabbedPane tabbedPane) {
-		tabbedPane.addTab("  Home  ", new GroupPanel(4, new WebLabel()));
+		tabbedPane.addTab("  Home  ", new GroupPanel(4, createRegistrationPanel()));
 	}
 	
+	private WebPanel createRegistrationPanel() {
+
+		WebButton btnProductReg = new WebButton("License Details");
+
+		btnProductReg.setRolloverDecoratedOnly(true);
+		btnProductReg.setDrawFocus(false);
+		btnProductReg.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnProductReg.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnProductReg.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(ReportingFactory.getInstance().getById("rest"));
+			}
+		});
+
+		buttonList.add(btnProductReg);
+		
+		GroupPanel gpanel = new GroupPanel(GroupingType.fillAll, 4, btnProductReg);
+
+		WebPanel panel = getRibbonPanel("Product Registation");
+		panel.add(gpanel, BorderLayout.CENTER);
+
+		return panel;
+	}
 	
 	private void setupPanel(final WebPanel panel, String text) {
 		panel.setUndecorated(false);

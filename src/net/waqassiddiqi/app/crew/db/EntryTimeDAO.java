@@ -26,6 +26,10 @@ public class EntryTimeDAO {
 		final ResultSet rs = this.db.executeQuery(
 				"SELECT * FROM entry_times WHERE crew_id = " + crew.getId() + " AND entry_date = " + date.getTime());
 		
+		if(log.isDebugEnabled()) {
+			log.debug("Fetching entry for: " + date.toString());
+		}
+		
 		try {
 			
 			if(rs.next()) {
@@ -86,8 +90,33 @@ public class EntryTimeDAO {
 		return entryList;
 	}
 	
+	public int updateEntry(EntryTime entry) {
+		
+		int count = db.executeUpdate("UPDATE entry_times SET schedule = ?, is_on_port = ?, work_in_24_hours = ?, " +
+				"rest_in_24_hours = ?, comments = ?, entry_date = ? WHERE id = ?",
+				new String[] {
+					ScheduleTemplate.getScheduleString(entry.getSchedule()),
+					entry.isOnPort() == true ? "1" : "0",
+					Float.toString(entry.getWorkIn24Hours()),
+					Float.toString(entry.getRestIn24Hours()),
+					entry.getComments(),
+					Long.toString(entry.getEntryDate().getTime()),
+					Integer.toString(entry.getId())
+				});
+		
+		
+		if(log.isDebugEnabled()) {
+			if(count > 0)
+				log.debug("Resting hours entry has been updated: " + entry);
+		}
+		
+		return count;
+	}
+	
 	public int addUpdateEntry(EntryTime entry) {
 		
+		
+		System.out.println("---> " + entry.getEntryDate().toString() + " <---");
 		
 		int count = db.executeUpdate("UPDATE entry_times SET schedule = ?, is_on_port = ?, work_in_24_hours = ?, " +
 				"rest_in_24_hours = ?, comments = ? WHERE crew_id = ? AND entry_date = ?",
@@ -127,27 +156,27 @@ public class EntryTimeDAO {
 		return count;
 	}
 	
-	public List<Crew> getAll() {
+	public List<EntryTime> getAll() {
 		
-		List<Crew> list = new ArrayList<Crew>();
-		final ResultSet rs = this.db.executeQuery("SELECT * FROM crews");
+		List<EntryTime> list = new ArrayList<EntryTime>();
+		EntryTime entry = null;
+		final ResultSet rs = this.db.executeQuery("SELECT * FROM entry_times");
 		
 		try {
-			while (rs.next()) {
-				list.add(new Crew() { { 
-					setId(rs.getInt("id"));
-					setVesselId(rs.getInt("vessel_id"));
-					setFirstName(rs.getString("first_name"));
-					setLastName(rs.getString("last_name"));
-					setRank(rs.getString("rank"));
-					setNationality(rs.getString("nationality"));
-					setPassportNumber(rs.getString("book_number_or_passport"));
-					setSignOnDate(new Date(rs.getLong("signon_date")));
-					setWatchKeeper(rs.getBoolean("is_watch_keeper"));
-				} });
+			while(rs.next()) {
+				entry = new EntryTime();
+				
+				entry.setId(rs.getInt("id"));
+				entry.setEntryDate(new Date(rs.getLong("entry_date")));
+				entry.setCrewId(rs.getInt("crew_id"));
+				entry.setComments(rs.getString("comments"));
+				entry.setOnPort(rs.getBoolean("is_on_port"));
+				entry.parseSchedule(rs.getString("schedule"));
+				
+				list.add(entry);
 			}
 		} catch (Exception e) {
-			log.error("Error executing CrewDAO.getAll(): " + e.getMessage(), e);
+			log.error("Error executing EntryTimeDAO.getAll(): " + e.getMessage(), e);
 		} finally {
 			try {
 				if (rs != null) rs.close();

@@ -106,12 +106,19 @@ public class ErrorReportForm extends BaseForm {
 		btnSaveAsPdf.setToolTipText("Save as PDF");
 		getToolbar().add(btnSaveAsPdf);
 		
-		WebButton btnSaveAsXls = WebButton.createIconWebButton(getIconsHelper().loadIcon("common/file_xls_16x16.png"),
+		WebButton btnSaveAsXls = WebButton.createIconWebButton(getIconsHelper().loadIcon("common/file_extension_xls_16x16.png"),
 				StyleConstants.smallRound, true);
 		btnSaveAsXls.putClientProperty("command", "xls");
 		btnSaveAsXls.addActionListener(this);
 		btnSaveAsXls.setToolTipText("Save as Excel");
 		getToolbar().add(btnSaveAsXls);
+		
+		WebButton btnSaveCsv = WebButton.createIconWebButton(getIconsHelper().loadIcon("common/file_extension_csv_16x16.png"),
+				StyleConstants.smallRound, true);
+		btnSaveCsv.putClientProperty("command", "csv");
+		btnSaveCsv.addActionListener(this);
+		btnSaveCsv.setToolTipText("Export as CSV");
+		getToolbar().add(btnSaveCsv);
 		
 		getToolbar().addSeparator();
 		

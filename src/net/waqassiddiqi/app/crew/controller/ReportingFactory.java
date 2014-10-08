@@ -5,6 +5,8 @@ import java.util.Map;
 
 import net.waqassiddiqi.app.crew.ui.AddRestHourForm;
 import net.waqassiddiqi.app.crew.ui.report.ErrorReportForm;
+import net.waqassiddiqi.app.crew.ui.report.PivotReportForm;
+import net.waqassiddiqi.app.crew.ui.report.PotentialNCReportForm;
 import net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm;
 
 public class ReportingFactory extends BaseFactory {
@@ -37,6 +39,12 @@ public class ReportingFactory extends BaseFactory {
 		} else if(id.equals("error")) {
 			c = new ErrorReportForm(getOwner()).getView();
 			c.setName("errorReport");
+		} else if(id.equals("pivot")) {
+			c = new PivotReportForm(getOwner()).getView();
+			c.setName("pivotReport");
+		} else if(id.equals("potential")) {
+			c = new PotentialNCReportForm(getOwner()).getView();
+			c.setName("potentialReport");
 		}
 		
 		return c;

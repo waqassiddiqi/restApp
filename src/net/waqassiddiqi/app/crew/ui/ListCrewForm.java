@@ -33,6 +33,8 @@ import net.waqassiddiqi.app.crew.model.Crew;
 import net.waqassiddiqi.app.crew.model.Rank;
 import net.waqassiddiqi.app.crew.util.NotificationManager;
 
+import org.apache.commons.lang.ArrayUtils;
+
 import com.alee.extended.date.WebDateField;
 import com.alee.extended.panel.GroupPanel;
 import com.alee.laf.button.WebButton;
@@ -40,6 +42,7 @@ import com.alee.laf.combobox.WebComboBox;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.menu.WebMenuItem;
 import com.alee.laf.menu.WebPopupMenu;
+import com.alee.laf.optionpane.WebOptionPane;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.tabbedpane.WebTabbedPane;
 import com.alee.laf.table.WebTable;
@@ -148,7 +151,7 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 		        if (rowindex < 0)
 		            return;
 		        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
-		            JPopupMenu popup = getActionMenu(crewList.get(rowindex).getId());
+		            JPopupMenu popup = getActionMenu(crewList.get(rowindex).getId(), rowindex);
 		            popup.show(e.getComponent(), e.getX(), e.getY());
 		        }
 		    }
@@ -162,7 +165,7 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 
 	    try {
 
-	    	rf = RowFilter.regexFilter(value, columnIndex);
+	    	rf = RowFilter.regexFilter("(?i)" + value, columnIndex);
 	    	
 	    } catch (java.util.regex.PatternSyntaxException e) {
 	        return;
@@ -171,19 +174,20 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 	    mSorter.setRowFilter(rf);
 	}
 	
-	private WebPopupMenu getActionMenu(int crewId) {
+	private WebPopupMenu getActionMenu(int crewId, int selectedRowIndex) {
 		final WebPopupMenu popupMenu = new WebPopupMenu ();
-		popupMenu.add(getPopupMeunuItem("Edit details", Integer.toString(crewId)));
-		popupMenu.add(getPopupMeunuItem("Edit rest hour template", Integer.toString(crewId)));
-		//popupMenu.add(getPopupMeunuItem("Delete", Integer.toString(crewId)));
+		popupMenu.add(getPopupMeunuItem("Edit details", Integer.toString(crewId), selectedRowIndex));
+		popupMenu.add(getPopupMeunuItem("Edit rest hour template", Integer.toString(crewId), selectedRowIndex));
+		popupMenu.add(getPopupMeunuItem("Delete", Integer.toString(crewId), selectedRowIndex));
         
         return popupMenu;
 	}
 	
-	private WebMenuItem getPopupMeunuItem(String name, String crewId) {
+	private WebMenuItem getPopupMeunuItem(String name, String crewId, int rowIndex) {
 		WebMenuItem item = new WebMenuItem (name);
 		item.addActionListener(ListCrewForm.this);
 		item.putClientProperty("crewId", crewId);
+		item.putClientProperty("rowIndex", rowIndex);
 		
 		return item;
 	}
@@ -251,6 +255,16 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 				params.put("defaultView", 1);
 				
 				getOwner().addContent(CrewFactory.getInstance().getEdit((String) item.getClientProperty("crewId"), params));
+			} else {
+				int returnCode = WebOptionPane.showConfirmDialog(getOwner(), "Are you sure to delete select crew?", "Confirm", 
+						WebOptionPane.YES_NO_OPTION, WebOptionPane.QUESTION_MESSAGE);
+				
+				if(returnCode == 0) {
+					crewDao.delete(Integer.parseInt(item.getClientProperty("crewId").toString()));
+					
+					NotificationManager.showNotification("Crew has been deleted");
+					tableModel.deleteRow(Integer.parseInt(item.getClientProperty("rowIndex").toString()));
+				}
 			}
 			
 			
@@ -308,11 +322,40 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 			return col >= 1;
 		}
 
+		public void deleteRow(int row) {
+			data = (Object[][]) ArrayUtils.remove(data, row);
+			
+			fireTableRowsDeleted(row, row);
+		}
+		
+		public <T> List<T> twoDArrayToList(T[][] twoDArray) {
+		    List<T> list = new ArrayList<T>();
+		    for (T[] array : twoDArray) {
+		        list.addAll(Arrays.asList(array));
+		    }
+		    return list;
+		}
+		
 		@Override
 		public void setValueAt(Object value, int row, int col) {
-			data[row][col] = value;
+			
 			
 			Crew c = crewList.get(row);
+			
+			if(col == 5) {
+				
+				Component comp = table.getDefaultRenderer(tableModel.getColumnClass(col))
+						.getTableCellRendererComponent(table, longValues[col], false,
+								false, 0, col);
+				
+				if(crewDao.isPassportExists(value.toString().trim().trim(), c.getId())) {
+					NotificationManager.showPopup(getOwner(), comp, new String[] { "This passport number is already associated with other member of crew" });
+					return;
+				}
+			}
+			
+			data[row][col] = value;
+			
 			if(col == 1) {
 				c.setFirstName(value.toString().trim());
 			} else if(col == 2) {
@@ -322,6 +365,7 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 			} else if(col == 4) {
 				c.setNationality(value.toString().trim());
 			} else if(col == 5) {
+				
 				c.setPassportNumber(value.toString().trim());
 			} else if(col == 6) {		
 				try {
