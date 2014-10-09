@@ -149,13 +149,13 @@ public class PotentialNCReportForm extends BaseForm {
 		
 		localVelocityContext.put("logo", logoPath);
 		
-		
-		
 		pNcReport = new PotentialNCReport(month, year);
 		List<String[]> data = pNcReport.generateReport();		
 		
 		localVelocityContext.put("data", data);
 	    
+		localVelocityContext.put("host", pNcReport);
+		
 	    VelocityEngine ve = new VelocityEngine();
 	    ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath"); 
 	    ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());

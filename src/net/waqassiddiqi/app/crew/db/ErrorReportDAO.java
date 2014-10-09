@@ -127,7 +127,8 @@ public class ErrorReportDAO {
 				"(CASE WHEN TOTAL_REST_7DAYS_GREATER_77HRS = true THEN '7-days Total Period of REST > 77 Hrs' ELSE '' END) AS \"7-days Total Period of REST > 77 Hrs\", " +
 				"(CASE WHEN ONE_REST_PERIOD_6HRS = true THEN 'At least one period of rest 6 hours in length' ELSE '' END) AS \"At least one period of rest 6 hours in length\", " +
 				"(CASE WHEN TOTAL_REST_PERIODS > 2 THEN 'Total Number of Rest Periods More than 2' ELSE '' END) \"Total Number of Rest Periods More than 2\", " +
-				"(CASE WHEN REST_HRS_GREATER_36_3_DAYS > 36 THEN 'Rest Hours > 36 hours in any 3 days' ELSE '' END) AS \"Rest Hours > 36 hours in any 3 days\" " +
+				"(CASE WHEN REST_HRS_GREATER_36_3_DAYS > 36 THEN 'Rest Hours > 36 hours in any 3 days' ELSE '' END) AS \"Rest Hours > 36 hours in any 3 days\", " +
+				"e.entry_date " +
 				"FROM ERROR_REPORT e INNER JOIN CREWS c ON c.id = e.crew_id INNER JOIN entry_times t ON c.id = t.crew_id " + 
 				"WHERE c.is_active = true AND " + 
 				"e.entry_date >= " + startDate.getTime() + " AND e.entry_date <= " + endDate.getTime() + " and e.entry_date = t.entry_date ORDER BY e.entry_date";
@@ -137,7 +138,7 @@ public class ErrorReportDAO {
 			rs = db.executeQuery(strSql);
 			while(rs.next()) {
 				sb.setLength(0);
-				row = new String[4];
+				row = new String[5];
 				
 				row[0] = rs.getString(1);
 				row[1] = rs.getString(2);
@@ -152,7 +153,7 @@ public class ErrorReportDAO {
 				}
 				
 				row[3] = sb.toString();
-				
+				row[4] = rs.getString(11);
 				data.add(row);
 			}
 			

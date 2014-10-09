@@ -4,15 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
 
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -36,6 +40,7 @@ import com.alee.extended.statusbar.WebStatusBar;
 import com.alee.laf.WebLookAndFeel;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
+import com.alee.laf.progressbar.WebProgressBar;
 import com.alee.laf.rootpane.WebFrame;
 import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.style.StyleManager;
@@ -175,14 +180,49 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		});
 	}
 	
+	private static JDialog dialog;
+	
+	
+	static void hideSplashScreen() {
+        dialog.setVisible(false);
+        dialog.dispose();
+    }
+
+    static void showSplashScreen() throws MalformedURLException {
+        dialog = new JDialog((Frame) null);
+        dialog.setModal(false);
+        dialog.setUndecorated(true);
+        JLabel background = new JLabel(new ImageIcon(new URL("http://blogs.dirteam.com/photos/sanderberkouwer/images/2157/original.aspx")));
+        background.setLayout(new BorderLayout());
+        dialog.setLayout(new BorderLayout());
+        dialog.add(background, BorderLayout.CENTER);
+        
+        WebProgressBar progressBar3 = new WebProgressBar ();
+        progressBar3.setIndeterminate ( true );
+        progressBar3.setStringPainted ( true );
+        progressBar3.setString ( "Please wait..." );
+        
+        background.add(progressBar3, BorderLayout.SOUTH);
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }
+	
 	public static void runApplication() throws SQLException {
-		
+		try {
+			showSplashScreen();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ConnectionManager.getInstance().setupDatabase();
 		
 		StyleManager.setDefaultSkin(DefaultSkin.class.getCanonicalName());		
 		WebLookAndFeel.install();
 		setFont();
 		MainFrame.getInstance().display();
+		
+		hideSplashScreen();
 	}
 	
 	private static void setFont() {

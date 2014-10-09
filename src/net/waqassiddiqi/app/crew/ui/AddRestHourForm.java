@@ -411,7 +411,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		}
 	}
 	
-	private Date getDate(Date date) {
+	public static Date getDate(Date date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		CalendarUtil.toBeginningOfTheDay(cal);

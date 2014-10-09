@@ -23,6 +23,10 @@
 		.mediumFont {
 			font-size: 11pt;
 		}
+		
+		.future {
+			font-style: italic;
+		}
 	</style>
 </head>	
 <body style="font-family: Carrois Gothic;">
@@ -57,55 +61,42 @@
 		</tr>
 	</table>
 	
-	<table border="0" cellpadding="0" cellspacing="0" style="width:100%; border:solid 1px black;">
+	<table border="0" cellpadding="0" cellspacing="0" style="width:100%; border:solid 1px black;" class="mediumFont">
 		<tr class="value">
-			<td><b>Potential non-conformities for $host.getFormattedMonth() $host.getYear()</b></td>
+			<td style="padding: 3px; border-bottom: solid 1px black;" ><b>Potential non-conformities for $host.getFormattedMonth() $host.getYear()</b></td>
 		</tr>
 		<tr>
-			<table border="0" cellpadding="0" cellspacing="0" style="width:100%; border:none;">
-				<tr class="value">
-					<td width="5%" style="border-left: solid 0px black;" align="center"><b>Date</b></td>
-					<td width="10%" style="border-left: solid 0px black;" align="center"><b>Name / Rank</b></td>
-					<td style="border-left: solid 0px black;" align="center"><b>Non-conformity description</b></td>
-					<td width="25%" style="border-left: solid 0px black;" align="center"><b>Comments</b></td>
-				</tr>
-				
-				#foreach( $d in $data )
-				<tr>
-					<td width="5%" align="center">$d[0]</td>
-					<td width="10%" style="border-left: solid 1px black;" align="center">$d[1]</td>
-					<td style="border-left: solid 1px black;" align="center">$d[3]</td>
-					<td width="25%" style="border-left: solid 1px black; " align="center"><b>$d[2]</b></td>
-				</tr>
-				#end
-			</table>
+			<td>
+				<table border="0" cellpadding="0" cellspacing="0" style="width:100%; border:none;">
+					<tr class="value">
+						<td width="5%" style="border-left: solid 0px black;" align="center"><b>Date</b></td>
+						<td width="10%" style="border-left: solid 0px black;" align="center"><b>Name / Rank</b></td>
+						<td style="border-left: solid 0px black;" align="center"><b>Non-conformity description</b></td>
+						<td width="25%" style="border-left: solid 0px black;" align="center"><b>Comments</b></td>
+					</tr>
+					
+					#foreach( $d in $data )
+						#if($host.isInFuture($d[4])) #set($str = "class='future'")  #else  #set($str = "")  #end
+					<tr>
+						<td $str width="5%" align="center" style="border-top: solid 1px black;">$d[0]</td>
+						<td $str width="10%" style="border-top: solid 1px black; border-left: solid 1px black;" align="center">$d[1]</td>
+						<td $str style="border-top: solid 1px black; padding:10px; border-left: solid 1px black;" align="center">$d[3].replace("<", "&lt;").replace(">", "&gt;").replaceAll("\n", "<br/>")</td>
+						<td $str width="25%" style="border-top: solid 1px black; border-left: solid 1px black; " align="center"><b>$d[2]</b></td>
+					</tr>
+					#end
+				</table>
+			</td>
 		</tr>
 	</table>
 	
 	
 	 	
-	<table width="100%" align="center" class="mediumFont" style="font-size: 12px;">
+	<table width="100%" cellpadding="5" align="center" class="mediumFont" style="font-size: 12px;">
 		<tbody>
 			<tr>
-				<td align="center" >
-
-
-					<p>
-						<span class="STYLE3">I AGREE THAT THIS RECORD IS ACCURATE
-							REFLECTION OF THE HOURS OF WORK OR REST OF THE SEAFARER
-							CONCERNED.</span><br/>
-						<span class="STYLE4">Name of master or person authorized by
-							master to sign this record: </span>_______________. <span class="STYLE4">Signature
-							of master or authorized person:_______________ Signature of
-							seafarer:_______________. </span>
-					</p>
-					<p>
-						<span class="STYLE4">A copy of this record is to be given
-							to theseafarer This form is subject to examination</span> <span
-							class="STYLE4">and endorsement under procedures
-							established by:____________________<u>as</u>_____________________
-						</span>
-					</p></td>
+				<td align="left" >
+					Lines in italics represent potential non-conformities for future days
+				</td>
 			</tr>
 		</tbody>
 	</table>

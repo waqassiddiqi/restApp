@@ -2,6 +2,7 @@ package net.waqassiddiqi.app.crew.report;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import net.waqassiddiqi.app.crew.db.ErrorReportDAO;
@@ -49,6 +50,19 @@ public class PotentialNCReport {
 		cal.set(Calendar.MONTH, month);
 		
 		return new SimpleDateFormat("MMM").format(cal.getTime());
+	}
+	
+	public boolean isInFuture(String date) {
+		Calendar cal = Calendar.getInstance();
+		CalendarUtil.toBeginningOfTheDay(cal);
+		
+		Date toCompare = new Date(Long.parseLong(date));
+		
+		if(toCompare.getTime() > cal.getTime().getTime()) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public int getYear() {
