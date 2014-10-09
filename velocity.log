@@ -1,775 +1,94 @@
-2014-10-08 17:03:06,939 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:03:06,939 - Initializing Velocity, Calling init()...
-2014-10-08 17:03:06,939 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:03:06,939 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:03:06,939 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:03:06,939 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:03:06,940 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:03:06,940 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:03:06,948 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:03:07,016 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:03:07,019 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:03:07,021 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:03:07,022 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:03:07,024 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:03:07,025 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:03:07,027 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:03:07,029 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:03:07,031 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:03:07,033 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:03:07,201 - Created '20' parsers.
-2014-10-08 17:03:07,211 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:03:07,213 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:03:07,213 - Velocimacro : Default library not found.
-2014-10-08 17:03:07,213 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:03:07,213 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:03:07,214 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:03:07,214 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:03:07,283 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:03:07,324 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,324 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,324 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,327 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,327 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,327 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,327 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,327 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,328 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,328 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,328 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,328 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,329 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,329 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,329 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,329 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,329 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,329 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,329 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,330 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,330 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,330 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,330 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:03:07,330 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:03:32,395 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:03:32,396 - Initializing Velocity, Calling init()...
-2014-10-08 17:03:32,396 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:03:32,396 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:03:32,396 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:03:32,396 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:03:32,396 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:03:32,396 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:03:32,404 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:03:32,486 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:03:32,489 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:03:32,491 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:03:32,493 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:03:32,495 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:03:32,496 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:03:32,499 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:03:32,501 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:03:32,503 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:03:32,505 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:03:32,674 - Created '20' parsers.
-2014-10-08 17:03:32,690 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:03:32,692 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:03:32,692 - Velocimacro : Default library not found.
-2014-10-08 17:03:32,692 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:03:32,692 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:03:32,692 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:03:32,692 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:03:32,741 - Parser Exception: resource/template/potential_nc_detailed_report.html
-org.apache.velocity.runtime.parser.ParseException: Encountered "future" at line 79, column 99.
-Was expecting one of:
-    <RPAREN> ...
-    <WHITESPACE> ...
-    "-" ...
-    "+" ...
-    "*" ...
-    "/" ...
-    "%" ...
-    <LOGICAL_AND> ...
-    <LOGICAL_OR> ...
-    <LOGICAL_LT> ...
-    <LOGICAL_LE> ...
-    <LOGICAL_GT> ...
-    <LOGICAL_GE> ...
-    <LOGICAL_EQUALS> ...
-    <LOGICAL_NOT_EQUALS> ...
-    
-	at org.apache.velocity.runtime.parser.Parser.generateParseException(Parser.java:3679)
-	at org.apache.velocity.runtime.parser.Parser.jj_consume_token(Parser.java:3558)
-	at org.apache.velocity.runtime.parser.Parser.SetDirective(Parser.java:1972)
-	at org.apache.velocity.runtime.parser.Parser.Statement(Parser.java:369)
-	at org.apache.velocity.runtime.parser.Parser.IfStatement(Parser.java:1692)
-	at org.apache.velocity.runtime.parser.Parser.Statement(Parser.java:352)
-	at org.apache.velocity.runtime.parser.Parser.Directive(Parser.java:918)
-	at org.apache.velocity.runtime.parser.Parser.Statement(Parser.java:379)
-	at org.apache.velocity.runtime.parser.Parser.process(Parser.java:317)
-	at org.apache.velocity.runtime.parser.Parser.parse(Parser.java:117)
-	at org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:1226)
-	at org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:1181)
-	at org.apache.velocity.Template.process(Template.java:134)
-	at org.apache.velocity.runtime.resource.ResourceManagerImpl.loadResource(ResourceManagerImpl.java:437)
-	at org.apache.velocity.runtime.resource.ResourceManagerImpl.getResource(ResourceManagerImpl.java:352)
-	at org.apache.velocity.runtime.RuntimeInstance.getTemplate(RuntimeInstance.java:1533)
-	at org.apache.velocity.runtime.RuntimeInstance.getTemplate(RuntimeInstance.java:1514)
-	at org.apache.velocity.app.VelocityEngine.getTemplate(VelocityEngine.java:373)
-	at net.waqassiddiqi.app.crew.ui.report.PotentialNCReportForm.generateReport(PotentialNCReportForm.java:163)
-	at net.waqassiddiqi.app.crew.ui.report.PotentialNCReportForm.access$0(PotentialNCReportForm.java:140)
-	at net.waqassiddiqi.app.crew.ui.report.PotentialNCReportForm$GenerateReportTask.doInBackground(PotentialNCReportForm.java:259)
-	at net.waqassiddiqi.app.crew.ui.report.PotentialNCReportForm$GenerateReportTask.doInBackground(PotentialNCReportForm.java:1)
-	at javax.swing.SwingWorker$1.call(Unknown Source)
-	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
-	at java.util.concurrent.FutureTask.run(Unknown Source)
-	at javax.swing.SwingWorker.run(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-2014-10-08 17:03:32,745 - ResourceManager.getResource() parse exception
-org.apache.velocity.exception.ParseErrorException: Encountered "future" at resource/template/potential_nc_detailed_report.html[line 79, column 99]
-Was expecting one of:
-    <RPAREN> ...
-    <WHITESPACE> ...
-    "-" ...
-    "+" ...
-    "*" ...
-    "/" ...
-    "%" ...
-    <LOGICAL_AND> ...
-    <LOGICAL_OR> ...
-    <LOGICAL_LT> ...
-    <LOGICAL_LE> ...
-    <LOGICAL_GT> ...
-    <LOGICAL_GE> ...
-    <LOGICAL_EQUALS> ...
-    <LOGICAL_NOT_EQUALS> ...
-    
-	at org.apache.velocity.Template.process(Template.java:151)
-	at org.apache.velocity.runtime.resource.ResourceManagerImpl.loadResource(ResourceManagerImpl.java:437)
-	at org.apache.velocity.runtime.resource.ResourceManagerImpl.getResource(ResourceManagerImpl.java:352)
-	at org.apache.velocity.runtime.RuntimeInstance.getTemplate(RuntimeInstance.java:1533)
-	at org.apache.velocity.runtime.RuntimeInstance.getTemplate(RuntimeInstance.java:1514)
-	at org.apache.velocity.app.VelocityEngine.getTemplate(VelocityEngine.java:373)
-	at net.waqassiddiqi.app.crew.ui.report.PotentialNCReportForm.generateReport(PotentialNCReportForm.java:163)
-	at net.waqassiddiqi.app.crew.ui.report.PotentialNCReportForm.access$0(PotentialNCReportForm.java:140)
-	at net.waqassiddiqi.app.crew.ui.report.PotentialNCReportForm$GenerateReportTask.doInBackground(PotentialNCReportForm.java:259)
-	at net.waqassiddiqi.app.crew.ui.report.PotentialNCReportForm$GenerateReportTask.doInBackground(PotentialNCReportForm.java:1)
-	at javax.swing.SwingWorker$1.call(Unknown Source)
-	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
-	at java.util.concurrent.FutureTask.run(Unknown Source)
-	at javax.swing.SwingWorker.run(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-2014-10-08 17:03:52,129 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:03:52,130 - Initializing Velocity, Calling init()...
-2014-10-08 17:03:52,130 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:03:52,130 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:03:52,130 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:03:52,130 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:03:52,130 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:03:52,130 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:03:52,136 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:03:52,199 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:03:52,202 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:03:52,204 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:03:52,205 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:03:52,206 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:03:52,207 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:03:52,209 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:03:52,214 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:03:52,217 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:03:52,220 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:03:52,386 - Created '20' parsers.
-2014-10-08 17:03:52,395 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:03:52,396 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:03:52,396 - Velocimacro : Default library not found.
-2014-10-08 17:03:52,396 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:03:52,396 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:03:52,396 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:03:52,396 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:03:52,450 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:03:52,492 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,492 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,492 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,496 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,496 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,496 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,496 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,496 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,497 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,497 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,497 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,497 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,498 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,498 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,498 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,498 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,499 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,499 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,499 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,499 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,499 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,500 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,500 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:03:52,500 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,289 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:05:07,289 - Initializing Velocity, Calling init()...
-2014-10-08 17:05:07,289 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:05:07,290 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:05:07,290 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:05:07,290 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:05:07,290 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:05:07,290 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:05:07,297 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:05:07,355 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:05:07,358 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:05:07,360 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:05:07,361 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:05:07,363 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:05:07,364 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:05:07,366 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:05:07,368 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:05:07,370 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:05:07,372 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:05:07,514 - Created '20' parsers.
-2014-10-08 17:05:07,523 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:05:07,524 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:05:07,524 - Velocimacro : Default library not found.
-2014-10-08 17:05:07,524 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:05:07,524 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:05:07,524 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:05:07,524 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:05:07,576 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:05:07,610 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,610 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,610 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,614 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,614 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,614 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,615 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,615 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,615 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,615 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,615 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,616 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,617 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,617 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,617 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,617 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,617 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,618 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,618 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,618 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,618 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,618 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,618 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:05:07,618 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,147 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:06:27,148 - Initializing Velocity, Calling init()...
-2014-10-08 17:06:27,148 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:06:27,148 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:06:27,148 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:06:27,148 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:06:27,148 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:06:27,148 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:06:27,157 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:06:27,218 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:06:27,221 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:06:27,223 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:06:27,224 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:06:27,226 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:06:27,227 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:06:27,229 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:06:27,231 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:06:27,234 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:06:27,235 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:06:27,396 - Created '20' parsers.
-2014-10-08 17:06:27,405 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:06:27,406 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:06:27,406 - Velocimacro : Default library not found.
-2014-10-08 17:06:27,406 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:06:27,406 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:06:27,406 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:06:27,406 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:06:27,469 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:06:27,505 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,505 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,505 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,509 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,509 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,510 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,510 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,510 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,510 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,510 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,510 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,511 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,512 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,512 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,512 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,513 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,513 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,514 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,514 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,514 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,514 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,514 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,514 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:06:27,514 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,576 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:07:35,576 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:07:35,576 - Initializing Velocity, Calling init()...
-2014-10-08 17:07:35,576 - Initializing Velocity, Calling init()...
-2014-10-08 17:07:35,576 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:07:35,576 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:07:35,576 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:07:35,576 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:07:35,576 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:07:35,576 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:07:35,577 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:07:35,577 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:07:35,577 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:07:35,577 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:07:35,577 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:07:35,577 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:07:35,577 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:07:35,577 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:07:35,579 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:07:35,579 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:07:35,580 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:07:35,581 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:07:35,581 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:07:35,581 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:07:35,581 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:07:35,583 - Created '20' parsers.
-2014-10-08 17:07:35,583 - Created '20' parsers.
-2014-10-08 17:07:35,583 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:07:35,583 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:07:35,583 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:07:35,583 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:07:35,584 - Velocimacro : Default library not found.
-2014-10-08 17:07:35,584 - Velocimacro : Default library not found.
-2014-10-08 17:07:35,584 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:07:35,584 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:07:35,584 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:07:35,584 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:07:35,584 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:07:35,584 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:07:35,584 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:07:35,584 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:07:35,595 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:07:35,595 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:07:35,598 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,598 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,598 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,598 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,598 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,598 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,599 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,599 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,600 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,600 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,600 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,600 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,600 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,600 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,600 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,600 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,601 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,601 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,601 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,601 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,601 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,601 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,601 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,601 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,602 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,602 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,602 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,602 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,602 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,602 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,602 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,602 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,603 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,604 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:35,604 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,248 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:07:43,248 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:07:43,249 - Initializing Velocity, Calling init()...
-2014-10-08 17:07:43,249 - Initializing Velocity, Calling init()...
-2014-10-08 17:07:43,249 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:07:43,249 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:07:43,249 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:07:43,249 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:07:43,249 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:07:43,249 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:07:43,249 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:07:43,249 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:07:43,249 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:07:43,249 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:07:43,249 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:07:43,249 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:07:43,250 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:07:43,250 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:07:43,250 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:07:43,250 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:07:43,251 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:07:43,251 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:07:43,251 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:07:43,251 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:07:43,251 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:07:43,251 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:07:43,251 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:07:43,251 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:07:43,251 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:07:43,251 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:07:43,251 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:07:43,251 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:07:43,252 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:07:43,252 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:07:43,252 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:07:43,252 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:07:43,252 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:07:43,252 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:07:43,254 - Created '20' parsers.
-2014-10-08 17:07:43,254 - Created '20' parsers.
-2014-10-08 17:07:43,254 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:07:43,254 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:07:43,255 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:07:43,255 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:07:43,255 - Velocimacro : Default library not found.
-2014-10-08 17:07:43,255 - Velocimacro : Default library not found.
-2014-10-08 17:07:43,255 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:07:43,255 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:07:43,255 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:07:43,255 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:07:43,255 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:07:43,255 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:07:43,255 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:07:43,255 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:07:43,266 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:07:43,266 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:07:43,269 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,269 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,269 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,269 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,269 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,269 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,271 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,271 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,271 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,271 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,271 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,271 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,271 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,271 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,272 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,272 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,272 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,272 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,272 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,272 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,272 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,272 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,273 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,273 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,273 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,273 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,273 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,273 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,273 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,273 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,274 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,274 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,274 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,274 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,274 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,274 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,274 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,274 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,275 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,275 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,275 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,275 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,275 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,275 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,275 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,275 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,275 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:07:43,275 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:09:08,675 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:09:08,676 - Initializing Velocity, Calling init()...
-2014-10-08 17:09:08,676 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:09:08,676 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:09:08,676 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:09:08,676 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:09:08,676 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:09:08,676 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:09:08,685 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:09:08,742 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:09:08,746 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:09:08,749 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:09:08,751 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:09:08,752 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:09:08,753 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:09:08,755 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:09:08,757 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:09:08,760 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:09:08,762 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:09:08,919 - Created '20' parsers.
-2014-10-08 17:09:08,929 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:09:08,930 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:09:08,930 - Velocimacro : Default library not found.
-2014-10-08 17:09:08,930 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:09:08,930 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:09:08,930 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:09:08,930 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:09:08,987 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:09:09,025 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,025 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,025 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,028 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,029 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,029 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,029 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,029 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,029 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,029 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,029 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,029 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,030 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,030 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,030 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,030 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,031 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,031 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,031 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,031 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,031 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 81, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,031 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 82, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,031 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 83, column 53] : $str cannot be resolved.
-2014-10-08 17:09:09,031 - Null reference [template 'resource/template/potential_nc_detailed_report.html', line 84, column 53] : $str cannot be resolved.
-2014-10-08 17:09:44,833 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:09:44,833 - Initializing Velocity, Calling init()...
-2014-10-08 17:09:44,833 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:09:44,834 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:09:44,834 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:09:44,834 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:09:44,834 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:09:44,834 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:09:44,842 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:09:44,904 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:09:44,906 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:09:44,908 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:09:44,909 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:09:44,912 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:09:44,914 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:09:44,917 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:09:44,920 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:09:44,922 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:09:44,924 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:09:45,080 - Created '20' parsers.
-2014-10-08 17:09:45,091 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:09:45,092 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:09:45,092 - Velocimacro : Default library not found.
-2014-10-08 17:09:45,092 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:09:45,092 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:09:45,092 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:09:45,092 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:09:45,143 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:10:32,443 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:10:32,444 - Initializing Velocity, Calling init()...
-2014-10-08 17:10:32,444 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:10:32,444 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:10:32,444 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:10:32,444 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:10:32,444 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:10:32,444 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:10:32,454 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:10:32,518 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:10:32,521 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:10:32,523 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:10:32,524 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:10:32,526 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:10:32,527 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:10:32,529 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:10:32,531 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:10:32,534 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:10:32,536 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:10:32,694 - Created '20' parsers.
-2014-10-08 17:10:32,706 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:10:32,707 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:10:32,707 - Velocimacro : Default library not found.
-2014-10-08 17:10:32,707 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:10:32,707 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:10:32,707 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:10:32,707 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:10:32,766 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:12:10,252 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:12:10,253 - Initializing Velocity, Calling init()...
-2014-10-08 17:12:10,253 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:12:10,253 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:12:10,253 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:12:10,253 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:12:10,253 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:12:10,253 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:12:10,262 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:12:10,325 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:12:10,328 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:12:10,330 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:12:10,331 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:12:10,333 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:12:10,334 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:12:10,336 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:12:10,338 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:12:10,341 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:12:10,343 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:12:10,524 - Created '20' parsers.
-2014-10-08 17:12:10,534 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:12:10,535 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:12:10,535 - Velocimacro : Default library not found.
-2014-10-08 17:12:10,535 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:12:10,535 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:12:10,535 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:12:10,535 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:12:10,586 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:15:03,207 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:15:03,207 - Initializing Velocity, Calling init()...
-2014-10-08 17:15:03,207 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:15:03,207 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:15:03,207 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:15:03,208 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:15:03,208 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:15:03,208 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:15:03,217 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:15:03,290 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:15:03,293 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:15:03,295 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:15:03,297 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:15:03,298 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:15:03,299 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:15:03,301 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:15:03,303 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:15:03,305 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:15:03,308 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:15:03,467 - Created '20' parsers.
-2014-10-08 17:15:03,477 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:15:03,478 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:15:03,478 - Velocimacro : Default library not found.
-2014-10-08 17:15:03,479 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:15:03,479 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:15:03,479 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:15:03,479 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:15:03,531 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:19:09,427 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:19:09,428 - Initializing Velocity, Calling init()...
-2014-10-08 17:19:09,428 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:19:09,428 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:19:09,428 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:19:09,428 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:19:09,428 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:19:09,428 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:19:09,435 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:19:09,502 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:19:09,504 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:19:09,507 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:19:09,508 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:19:09,509 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:19:09,510 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:19:09,513 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:19:09,516 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:19:09,519 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:19:09,520 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:19:09,672 - Created '20' parsers.
-2014-10-08 17:19:09,684 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:19:09,686 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:19:09,686 - Velocimacro : Default library not found.
-2014-10-08 17:19:09,686 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:19:09,686 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:19:09,686 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:19:09,686 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:19:09,736 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:19:47,597 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:19:47,598 - Initializing Velocity, Calling init()...
-2014-10-08 17:19:47,598 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:19:47,598 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:19:47,598 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:19:47,598 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:19:47,598 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:19:47,598 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:19:47,609 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:19:47,685 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:19:47,687 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:19:47,689 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:19:47,691 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:19:47,692 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:19:47,693 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:19:47,696 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:19:47,698 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:19:47,702 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:19:47,706 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:19:47,874 - Created '20' parsers.
-2014-10-08 17:19:47,888 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:19:47,889 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:19:47,889 - Velocimacro : Default library not found.
-2014-10-08 17:19:47,889 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:19:47,889 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:19:47,889 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:19:47,889 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:19:47,952 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:25:49,211 - Log4JLogChute initialized using file 'velocity.log'
-2014-10-08 17:25:49,212 - Initializing Velocity, Calling init()...
-2014-10-08 17:25:49,212 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
-2014-10-08 17:25:49,212 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-2014-10-08 17:25:49,212 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-2014-10-08 17:25:49,212 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
-2014-10-08 17:25:49,212 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:25:49,213 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
-2014-10-08 17:25:49,224 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-2014-10-08 17:25:49,304 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
-2014-10-08 17:25:49,308 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
-2014-10-08 17:25:49,311 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
-2014-10-08 17:25:49,313 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
-2014-10-08 17:25:49,316 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
-2014-10-08 17:25:49,319 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-2014-10-08 17:25:49,323 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-2014-10-08 17:25:49,326 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-2014-10-08 17:25:49,332 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
-2014-10-08 17:25:49,335 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-2014-10-08 17:25:49,507 - Created '20' parsers.
-2014-10-08 17:25:49,517 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-2014-10-08 17:25:49,518 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
-2014-10-08 17:25:49,518 - Velocimacro : Default library not found.
-2014-10-08 17:25:49,518 - Velocimacro : allowInline = true : VMs can be defined inline in templates
-2014-10-08 17:25:49,518 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-2014-10-08 17:25:49,518 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-2014-10-08 17:25:49,518 - Velocimacro : autoload off : VM system will not automatically reload global library macros
-2014-10-08 17:25:49,588 - ResourceManager : found resource/template/potential_nc_detailed_report.html with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-10-09 15:54:56,289 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-10-09 15:54:56,562 - Created '20' parsers.
+2014-10-09 15:54:56,580 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2014-10-09 15:54:56,582 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2014-10-09 15:54:56,582 - Velocimacro : Default library not found.
+2014-10-09 15:54:56,583 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-10-09 15:54:56,583 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-10-09 15:54:56,583 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2014-10-09 15:54:56,583 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2014-10-09 15:54:56,638 - ResourceManager : found resource/template/EULA.htm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-10-09 15:59:10,200 - Log4JLogChute initialized using file 'velocity.log'
+2014-10-09 15:59:10,201 - Initializing Velocity, Calling init()...
+2014-10-09 15:59:10,201 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2014-10-09 15:59:10,201 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2014-10-09 15:59:10,201 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2014-10-09 15:59:10,201 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2014-10-09 15:59:10,202 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-10-09 15:59:10,202 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-10-09 15:59:10,218 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-10-09 15:59:10,326 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2014-10-09 15:59:10,333 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2014-10-09 15:59:10,337 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2014-10-09 15:59:10,340 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2014-10-09 15:59:10,342 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2014-10-09 15:59:10,344 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-10-09 15:59:10,348 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-10-09 15:59:10,352 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-10-09 15:59:10,356 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-10-09 15:59:10,360 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-10-09 15:59:10,653 - Created '20' parsers.
+2014-10-09 15:59:10,673 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2014-10-09 15:59:10,675 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2014-10-09 15:59:10,675 - Velocimacro : Default library not found.
+2014-10-09 15:59:10,676 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-10-09 15:59:10,676 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-10-09 15:59:10,676 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2014-10-09 15:59:10,676 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2014-10-09 15:59:10,742 - ResourceManager : found resource/template/EULA.htm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-10-09 17:05:23,888 - Log4JLogChute initialized using file 'velocity.log'
+2014-10-09 17:05:23,889 - Initializing Velocity, Calling init()...
+2014-10-09 17:05:23,889 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2014-10-09 17:05:23,889 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2014-10-09 17:05:23,889 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2014-10-09 17:05:23,889 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2014-10-09 17:05:23,889 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-10-09 17:05:23,889 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-10-09 17:05:23,903 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-10-09 17:05:24,013 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2014-10-09 17:05:24,019 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2014-10-09 17:05:24,023 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2014-10-09 17:05:24,025 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2014-10-09 17:05:24,028 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2014-10-09 17:05:24,030 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-10-09 17:05:24,035 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-10-09 17:05:24,042 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-10-09 17:05:24,046 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-10-09 17:05:24,050 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-10-09 17:05:24,344 - Created '20' parsers.
+2014-10-09 17:05:24,365 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2014-10-09 17:05:24,367 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2014-10-09 17:05:24,367 - Velocimacro : Default library not found.
+2014-10-09 17:05:24,367 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-10-09 17:05:24,368 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-10-09 17:05:24,368 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2014-10-09 17:05:24,368 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2014-10-09 17:05:24,429 - ResourceManager : found resource/template/EULA.htm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-10-09 17:26:27,116 - Log4JLogChute initialized using file 'velocity.log'
+2014-10-09 17:26:27,117 - Initializing Velocity, Calling init()...
+2014-10-09 17:26:27,117 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2014-10-09 17:26:27,117 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2014-10-09 17:26:27,117 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2014-10-09 17:26:27,117 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2014-10-09 17:26:27,117 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-10-09 17:26:27,117 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2014-10-09 17:26:27,128 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2014-10-09 17:26:27,224 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2014-10-09 17:26:27,229 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2014-10-09 17:26:27,233 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2014-10-09 17:26:27,236 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2014-10-09 17:26:27,239 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2014-10-09 17:26:27,240 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-10-09 17:26:27,244 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-10-09 17:26:27,249 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-10-09 17:26:27,252 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-10-09 17:26:27,256 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-10-09 17:26:27,578 - Created '20' parsers.
+2014-10-09 17:26:27,607 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2014-10-09 17:26:27,609 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2014-10-09 17:26:27,610 - Velocimacro : Default library not found.
+2014-10-09 17:26:27,610 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-10-09 17:26:27,610 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-10-09 17:26:27,610 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2014-10-09 17:26:27,611 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2014-10-09 17:26:27,672 - ResourceManager : found resource/template/EULA.htm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader

@@ -17,7 +17,9 @@ import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.ReportingFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.VesselDAO;
+import net.waqassiddiqi.app.crew.ui.EulaForm;
 import net.waqassiddiqi.app.crew.ui.MainFrame;
+import net.waqassiddiqi.app.crew.ui.ProductActivationForm;
 import net.waqassiddiqi.app.crew.ui.icons.IconsHelper;
 
 import org.apache.log4j.Logger;
@@ -340,7 +342,8 @@ public class RibbonbarTabControl {
 	
 	private WebPanel createRegistrationPanel() {
 
-		WebButton btnProductReg = new WebButton("License Details");
+		WebButton btnProductReg = new WebButton("License Details", 
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/license_32x32.png"));
 
 		btnProductReg.setRolloverDecoratedOnly(true);
 		btnProductReg.setDrawFocus(false);
@@ -351,13 +354,35 @@ public class RibbonbarTabControl {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				owner.addContent(ReportingFactory.getInstance().getById("rest"));
+				Component c = new ProductActivationForm(owner).getView();
+				c.setName("license");
+				owner.addContent(c);
 			}
 		});
 
 		buttonList.add(btnProductReg);
 		
-		GroupPanel gpanel = new GroupPanel(GroupingType.fillAll, 4, btnProductReg);
+		WebButton btnAgreement = new WebButton("User Agreement", 
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/eula_32x32.png"));
+
+		btnAgreement.setRolloverDecoratedOnly(true);
+		btnAgreement.setDrawFocus(false);
+		btnAgreement.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnAgreement.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnAgreement.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Component c = new EulaForm(owner).getView();
+				c.setName("eula");
+				owner.addContent(c);
+			}
+		});
+
+		buttonList.add(btnAgreement);
+		
+		GroupPanel gpanel = new GroupPanel(4, btnProductReg, btnAgreement);
 
 		WebPanel panel = getRibbonPanel("Product Registation");
 		panel.add(gpanel, BorderLayout.CENTER);

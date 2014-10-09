@@ -8,15 +8,15 @@ import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowStateListener;
 import java.net.URL;
 import java.sql.SQLException;
 
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -30,17 +30,21 @@ import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.style.skin.DefaultSkin;
 import net.waqassiddiqi.app.crew.ui.AddVesselForm.ChangeListener;
 import net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl;
+import net.waqassiddiqi.app.crew.ui.icons.IconsHelper;
 import net.waqassiddiqi.app.crew.util.CalendarUtil;
 import net.waqassiddiqi.app.crew.util.ConfigurationUtil;
 
 import org.apache.log4j.Logger;
 
+import com.alee.extended.image.WebDecoratedImage;
+import com.alee.extended.panel.GroupPanel;
 import com.alee.extended.statusbar.WebMemoryBar;
 import com.alee.extended.statusbar.WebStatusBar;
 import com.alee.laf.WebLookAndFeel;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.progressbar.WebProgressBar;
+import com.alee.laf.rootpane.WebDialog;
 import com.alee.laf.rootpane.WebFrame;
 import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.style.StyleManager;
@@ -53,6 +57,8 @@ public class MainFrame extends WebFrame implements ChangeListener {
 	private final WebPanel contentPane;
 	private WebMemoryBar memoryBar;
 	private RibbonbarTabControl ribbonBar;
+	private static WebDialog mProgressDialog;
+	private static WebProgressBar mProgressBar;
 	
 	public static MainFrame getInstance() {
 		if (instance == null) {
@@ -76,11 +82,23 @@ public class MainFrame extends WebFrame implements ChangeListener {
 	public MainFrame() {
 		super();
 		
+		//mProgressDialog.setProgress(25);
+		
+		try {
+			ConnectionManager.getInstance().setupDatabase();
+		} catch (SQLException e) {
+			log.error(e.getMessage(), e);
+		}
+		
+		//mProgressDialog.setProgress(50);
+		
 		setTitle("Crew");
         
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         initFactories();
+        
+        //mProgressDialog.setProgress(75);
         
 		contentPane = new WebPanel();		
 		setLayout (new BorderLayout());		
@@ -90,6 +108,8 @@ public class MainFrame extends WebFrame implements ChangeListener {
         contentPane.add(createRibbonBar(), BorderLayout.NORTH);
         
 		add(contentPane, BorderLayout.CENTER);
+		
+		//mProgressDialog.setProgress(90);
 		
 		ThreadUtils.sleepSafely(500);
 		pack();
@@ -114,6 +134,10 @@ public class MainFrame extends WebFrame implements ChangeListener {
 							addContent(VesselFactory.getInstance().getAdd());
 						}
 					}, false);
+		} else {
+			Component c = new ProductActivationForm(this).getView();
+			c.setName("license");
+			addContent(c);
 		}
 		
 	}
@@ -175,54 +199,24 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
+				
+				mProgressDialog.dispose();
+				
 				setVisible(true);
 			}
 		});
 	}
 	
-	private static JDialog dialog;
-	
-	
-	static void hideSplashScreen() {
-        dialog.setVisible(false);
-        dialog.dispose();
-    }
-
-    static void showSplashScreen() throws MalformedURLException {
-        dialog = new JDialog((Frame) null);
-        dialog.setModal(false);
-        dialog.setUndecorated(true);
-        JLabel background = new JLabel(new ImageIcon(new URL("http://blogs.dirteam.com/photos/sanderberkouwer/images/2157/original.aspx")));
-        background.setLayout(new BorderLayout());
-        dialog.setLayout(new BorderLayout());
-        dialog.add(background, BorderLayout.CENTER);
-        
-        WebProgressBar progressBar3 = new WebProgressBar ();
-        progressBar3.setIndeterminate ( true );
-        progressBar3.setStringPainted ( true );
-        progressBar3.setString ( "Please wait..." );
-        
-        background.add(progressBar3, BorderLayout.SOUTH);
-        dialog.pack();
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
-    }
-	
 	public static void runApplication() throws SQLException {
-		try {
-			showSplashScreen();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ConnectionManager.getInstance().setupDatabase();
-		
 		StyleManager.setDefaultSkin(DefaultSkin.class.getCanonicalName());		
 		WebLookAndFeel.install();
-		setFont();
-		MainFrame.getInstance().display();
 		
-		hideSplashScreen();
+		mProgressDialog = getWebProgressDialog();
+		mProgressDialog.setVisible(true);
+		
+		setFont();
+		
+		MainFrame.getInstance().display();
 	}
 	
 	private static void setFont() {
@@ -277,5 +271,37 @@ public class MainFrame extends WebFrame implements ChangeListener {
 	@Override
 	public void added(Vessel vessel) {
 		this.ribbonBar.setEnabled(true);
+	}
+	
+	public static WebDialog getWebProgressDialog() {
+		
+		mProgressDialog = new WebDialog((Frame) null);
+		mProgressDialog.setModal(false);
+		mProgressDialog.setUndecorated(true);
+		
+		WebPanel contentPanel = new WebPanel(new BorderLayout());
+		
+		WebDecoratedImage background = new WebDecoratedImage ( new IconsHelper().loadIcon("common/splash.jpg") );
+		background.setShadeWidth ( 5, false );
+		background.setRound ( 0 );
+		
+		contentPanel.add(background, BorderLayout.CENTER);
+        mProgressBar = new WebProgressBar();
+        
+        mProgressBar.setRound(0);
+        mProgressBar.setIndeterminate(true);
+        
+        GroupPanel p = new GroupPanel(0,  false, background, mProgressBar);
+        contentPanel.setBackground(Color.WHITE);
+        contentPanel.add(p);
+        
+        mProgressDialog.add(contentPanel);
+        
+        mProgressDialog.pack();
+        mProgressDialog.setLocationRelativeTo(null);
+        mProgressDialog.setVisible(true);
+		
+		
+		return mProgressDialog;
 	}
 }
