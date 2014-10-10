@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<title></title>
+<style type="text/css">
+@page {
+	
+	size: A4 landscape;
+}
+
+@font-face {
+	font-family: 'Carrois Gothic';
+	-fs-pdf-font-embed: embed;
+	-fs-pdf-font-encoding: Identity-H;
+}
+
+.value {
+	background-color: #F0F0F0;
+}
+
+.filled {
+	background-color: gray;
+}
+
+.mediumFont {
+	font-size: 11pt;
+}
+
+.future {
+	font-style: italic;
+}
+</style>
+</head>
+<body style="font-family: Carrois Gothic;">
+	<table border="0" cellpadding="0" cellspacing="0"
+		style="width: 100%; border: solid 0px black;" class="mediumFont">
+		<tr>
+			<td style="width: 1px">&nbsp;</td>
+			<td style="padding: 2px;" width="1%"><img alt="" src="$!{logo}"
+				style="width: 80px; height: 80px;" valign="middle" /></td>
+			<td style="width: 60%" valign="middle">
+				<p>
+					<span style="font-size: 20px; font-weight: bold;">Shipboard<br />working
+						arragments
+					</span>
+				</p>
+			</td>
+			<td width="30%">
+				<table border="0" cellpadding="5" cellspacing="5"
+					style="width: 100%; border: solid 0px black;">
+					<tr>
+						<td style="width: 10%">Vessel Name:</td>
+						<td style="width: 20%" class="value">$!{currentVessel.Name}</td>
+					</tr>
+
+					<tr>
+						<td style="width: 10%">IMO:</td>
+						<td style="width: 20%" class="value">$!{currentVessel.Imo}</td>
+					</tr>
+
+					<tr>
+						<td style="width: 10%">Flag:</td>
+						<td style="width: 20%" class="value">$!{currentVessel.Flag}</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<br/><br/>
+	<table border="0" cellpadding="0" cellspacing="0"
+		style="width: 100%; border: solid 1px black;" class="mediumFont">
+		<tr class="value">
+			<td>
+
+				<table border="0" cellpadding="0" cellspacing="0"
+					style="width: 100%; border: none;" class="mediumFont">
+					<tr>
+						<td style="padding: 0px; width:20%"><b>&nbsp;Name
+								/ Rank</b></td>
+						<td
+							style="padding: 0px; border-left: solid 1px black; width:25%;">
+
+							<table border="0" cellpadding="0" cellspacing="0"
+								style="width: 100%; border: none;" class="mediumFont">
+								<tr>
+									<td align="center" style="border-bottom: solid 1px black;">Scheduled daily work hours at sea</td>
+								</tr>
+								<tr>
+									<td>
+										<table border="0" cellpadding="0" cellspacing="0"
+											style="width: 100%; border: none;" class="mediumFont">
+											<tr>
+												<td align="center" style="width:50%">Watchkeeping<br />(from - to)
+												</td>
+												<td align="center" style="border-left: solid 1px black; width:50%">Non-Watchkeeping<br />(from - to)
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+
+						</td>
+						<td
+							style="padding: 0px; border-left: solid 1px black; width:25%;">
+
+							<table border="0" cellpadding="0" cellspacing="0"
+								style="width: 100%; border: none;" class="mediumFont">
+								<tr>
+									<td align="center" style="border-bottom: solid 1px black;">Scheduled daily work hours in port</td>
+								</tr>
+								<tr>
+									<td>
+										<table border="0" cellpadding="0" cellspacing="0"
+											style="width: 100%; border: none;" class="mediumFont">
+											<tr>
+												<td align="center" style="width:50%">Watchkeeping<br />(from - to)
+												</td>
+												<td align="center" style="border-left: solid 1px black; width:50%">Non-Watchkeeping<br />(from - to)
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+
+						</td>
+						<td
+							style="padding: 0px; border-left: solid 1px black; width:20%"
+							align="center"><b>Comments</b></td>
+						<td
+							style="padding: 0px; border-left: solid 1px black; width:10%;">
+							<table border="0" cellpadding="0" cellspacing="0"
+								style="width: 100%; border: none;" class="mediumFont">
+								<tr>
+									<td align="center" style="border-bottom: solid 1px black; ">Total daily hours<br /> of rest
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<table border="0" cellpadding="0" cellspacing="0"
+											style="width: 100%; border: none;" class="mediumFont">
+											<tr>
+												<td align="center" style="width:50%;">At sea</td>
+												<td align="center" style="width:50%; border-left: solid 1px black;">In port</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		#foreach( $d in $data )
+		<tr>
+			<td>
+
+				<table border="0" cellpadding="0" cellspacing="0"
+					style="width: 100%; border: none;" class="mediumFont">
+					<tr>
+						<td style="padding: 0px; border-top: solid 1px black; width:20%"><b>&nbsp;$d[0]</b></td>
+						<td
+							style="padding: 0px; border-top: solid 1px black; border-left: solid 1px black; width:25%;">
+
+							<table border="0" cellpadding="0" cellspacing="0"
+											style="width: 100%; border: none;" class="mediumFont">
+											<tr>
+												<td align="center" style="width:50%">$d[1]
+												</td>
+												<td align="center" style="border-left: solid 1px black; width:50%">$d[2]
+												</td>
+											</tr>
+										</table>
+
+						</td>
+						<td
+							style="padding: 0px; border-top: solid 1px black; border-left: solid 1px black; width:25%;">
+
+							<table border="0" cellpadding="0" cellspacing="0"
+											style="width: 100%; border: none;" class="mediumFont">
+											<tr>
+												<td align="center" style="width:50%">$d[3]
+												</td>
+												<td align="center" style="border-left: solid 1px black; width:50%">$d[4]
+												</td>
+											</tr>
+										</table>
+
+						</td>
+						<td
+							style="padding: 0px; border-top: solid 1px black; border-left: solid 1px black; width:20%"
+							align="center">&nbsp;</td>
+						<td
+							style="padding: 0px; border-top: solid 1px black; border-left: solid 1px black; width:10%;">
+							<table border="0" cellpadding="0" cellspacing="0"
+											style="width: 100%; border: none;" class="mediumFont">
+											<tr>
+												<td align="center" style="width:50%;">$d[6]</td>
+												<td align="center" style="width:50%; border-left: solid 1px black;">$d[7]</td>
+											</tr>
+										</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		#end
+	</table>
+</body>
+</html>

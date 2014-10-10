@@ -3,7 +3,7 @@ package net.waqassiddiqi.app.crew.report;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import net.waqassiddiqi.app.crew.db.ErrorReportDAO;
+import net.waqassiddiqi.app.crew.db.ReportDAO;
 import net.waqassiddiqi.app.crew.util.CalendarUtil;
 
 public class PivotReport {
@@ -36,9 +36,9 @@ public class PivotReport {
 		previousCal.setTime(calStart.getTime());
 		previousCal.add(Calendar.DAY_OF_MONTH, -1);
 		
-		ErrorReportDAO errRptDao = new ErrorReportDAO();
+		ReportDAO errRptDao = new ReportDAO();
 		
-		return errRptDao.getByYearAndMonth(calStart.getTime(), calEnd.getTime());
+		return errRptDao.getPivotDataByYearAndMonth(calStart.getTime(), calEnd.getTime());
 		
 	}
 	

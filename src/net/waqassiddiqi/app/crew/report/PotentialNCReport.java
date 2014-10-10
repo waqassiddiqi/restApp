@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import net.waqassiddiqi.app.crew.db.ErrorReportDAO;
+import net.waqassiddiqi.app.crew.db.ReportDAO;
 import net.waqassiddiqi.app.crew.util.CalendarUtil;
 
 public class PotentialNCReport {
@@ -38,7 +38,7 @@ public class PotentialNCReport {
 		previousCal.setTime(calStart.getTime());
 		previousCal.add(Calendar.DAY_OF_MONTH, -1);
 		
-		ErrorReportDAO errRptDao = new ErrorReportDAO();
+		ReportDAO errRptDao = new ReportDAO();
 		
 		return errRptDao.getPotentialNonConformities(calStart.getTime(), calEnd.getTime());
 		

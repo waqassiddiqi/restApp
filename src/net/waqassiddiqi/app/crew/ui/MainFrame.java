@@ -8,15 +8,15 @@ import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.awt.event.WindowStateListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.SQLException;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -24,6 +24,7 @@ import net.waqassiddiqi.app.crew.controller.CrewFactory;
 import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
+import net.waqassiddiqi.app.crew.db.DatabaseServer;
 import net.waqassiddiqi.app.crew.license.LicenseManager;
 import net.waqassiddiqi.app.crew.model.RegistrationSetting;
 import net.waqassiddiqi.app.crew.model.Vessel;
@@ -48,6 +49,7 @@ import com.alee.laf.rootpane.WebDialog;
 import com.alee.laf.rootpane.WebFrame;
 import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.style.StyleManager;
+import com.alee.utils.ArrayUtils;
 import com.alee.utils.ThreadUtils;
 
 public class MainFrame extends WebFrame implements ChangeListener {
@@ -265,9 +267,52 @@ public class MainFrame extends WebFrame implements ChangeListener {
 	}
 	
 	public static void main(String[] args) throws SQLException {
-		runApplication(); 
+		DatabaseServer tcpServ = new DatabaseServer(); //create a new server object
+        tcpServ.tcpServer();
+		runApplication();
+		//getMotherboardSN();
+		
 	}
 
+	public static byte[] getMotherboardSN() {
+		
+		byte[] motherboardSN = null;
+		
+		if (motherboardSN == null) {
+			String str1 = "";
+			File localFile = null;
+			try {
+				localFile = File.createTempFile("realhowto", ".vbs");
+				localFile.deleteOnExit();
+				FileWriter localFileWriter = new FileWriter(localFile);
+				String str2 = "Set objWMIService = GetObject(\"winmgmts:\\\\.\\root\\cimv2\")\nSet colItems = objWMIService.ExecQuery _ \n   (\"Select * from Win32_BaseBoard\") \nFor Each objItem in colItems \n    Wscript.Echo objItem.SerialNumber \n    exit for  ' do the first cpu only! \nNext \n";
+				localFileWriter.write(str2);
+				localFileWriter.close();
+				Process localProcess = Runtime.getRuntime().exec(
+						"cscript //NoLogo " + localFile.getPath());
+				BufferedReader localBufferedReader = new BufferedReader(
+						new InputStreamReader(localProcess.getInputStream()));
+				String str3;
+				while ((str3 = localBufferedReader.readLine()) != null) {
+					str1 = str1 + str3;
+				}
+				localBufferedReader.close();
+			} catch (IOException localIOException) {
+				//System.out.println("failed to exec realhowto");
+			}
+			motherboardSN = str1.trim().getBytes();
+			if ("none".equalsIgnoreCase(str1.trim())) {
+				//logger.info("none got");
+				//motherboardSN = getUUIDAsMBSN().getBytes();
+			}
+		}
+		//if (ArrayUtils.isEmpty(motherboardSN)) {
+		//	logger.info("empty got");
+		//	motherboardSN = getUUIDAsMBSN().getBytes();
+		//}
+		return motherboardSN;
+	}
+	
 	@Override
 	public void added(Vessel vessel) {
 		this.ribbonBar.setEnabled(true);

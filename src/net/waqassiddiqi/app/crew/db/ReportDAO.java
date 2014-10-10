@@ -8,23 +8,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import net.waqassiddiqi.app.crew.model.EntryTime;
 import net.waqassiddiqi.app.crew.model.ErrorReportEntry;
+import net.waqassiddiqi.app.crew.util.CalendarUtil;
 
 import org.apache.log4j.Logger;
 
 import au.com.bytecode.opencsv.CSVWriter;
 
-public class ErrorReportDAO {
+public class ReportDAO {
 	protected ConnectionManager db;
 	private Logger log = Logger.getLogger(getClass().getName());
 	
-	public ErrorReportDAO() {
+	public ReportDAO() {
 		db = ConnectionManager.getInstance();
 	}
 	
-	public void addEntry(ErrorReportEntry entry) {
+	public void addErrorReportEntry(ErrorReportEntry entry) {
 		
 		db.executeUpdate("DELETE FROM error_report WHERE entry_date = ? AND crew_id = ?", new String[] { 
 				Long.toString(entry.getEntryDate().getTime()), Integer.toString(entry.getCrew().getId()) });
@@ -63,7 +67,7 @@ public class ErrorReportDAO {
 				);
 	}
 	
-	public String getByYearAndMonth(Date startDate, Date endDate) {
+	public String getPivotDataByYearAndMonth(Date startDate, Date endDate) {
 		Writer writer = new StringWriter();
 		CSVWriter csvWriter = new CSVWriter(writer, ',');
 		
@@ -109,6 +113,124 @@ public class ErrorReportDAO {
 		}
 		
 		return writer.toString();
+	}
+	
+	public List<String[]> getWorkingArragements() {
+		String strSql = "SELECT CONCAT(c.FIRST_NAME, ' ', c.LAST_NAME, ' / ', c.RANK) AS CREW, c.id AS CREW_ID, c.is_watch_keeper, t.* " +
+				"FROM SCHEDULE_TEMPLATES t " +
+				"INNER JOIN CREW_SCHEDULE_TEMPLATE ct ON ct.schedule_id = t.id " +
+				"INNER JOIN CREWS c " +
+				"ON c.id = ct.crew_id " +
+				"WHERE c.IS_ACTIVE = false AND c.IS_WATCH_KEEPER = IS_WATCH_KEEPING ORDER BY c.id";
+		
+		Map<Integer, String[]> templateSet = new HashMap<Integer, String[]>();
+		
+		String[] data = null;
+		
+		ResultSet rs = null;
+		
+		try {
+			EntryTime entry = null;
+			
+			rs = db.executeQuery(strSql);
+			while(rs.next()) {
+				
+				
+				if(templateSet.containsKey(rs.getInt("CREW_ID")) == false) {
+					data = new String[8];
+					
+					data[0] = rs.getString("CREW");
+					
+					templateSet.put(rs.getInt("CREW_ID"), data);
+				} else {
+					data = templateSet.get(rs.getInt("CREW_ID"));
+				}
+				
+				entry = new EntryTime();
+				entry.parseSchedule(rs.getString("SCHEDULE"));
+				
+				Calendar cal = Calendar.getInstance();
+				CalendarUtil.toBeginningOfTheDay(cal);
+				
+				boolean currentValue = entry.getSchedule()[0];
+				
+				String startHour = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
+				String endHour = "";
+				String formattedHours = "";
+				Map<Boolean, List<String>> timeMap = new HashMap<Boolean, List<String>>();
+				
+				timeMap.put(true, new ArrayList<String>());
+				timeMap.put(false, new ArrayList<String>());
+				
+				
+				for(int i=1; i<entry.getSchedule().length; i++) {
+					
+					cal.add(Calendar.MINUTE, 30);
+					
+					if(startHour.isEmpty()) {
+						startHour = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
+					}
+					
+					if(currentValue != entry.getSchedule()[i]) {
+						endHour = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
+						
+						formattedHours = startHour + " - " + endHour;
+						
+						System.out.println(entry.getSchedule()[i] + " ---> " + formattedHours);
+						
+						timeMap.get(currentValue).add(formattedHours);
+						
+						startHour = "";
+					}
+					
+					currentValue = entry.getSchedule()[i];					
+				}
+				endHour = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
+				formattedHours = startHour + " - " + endHour;
+				
+				System.out.println(currentValue + " ---> " + formattedHours);
+				
+				timeMap.get(currentValue).add(formattedHours);
+				
+				
+				List<String> workHours = timeMap.get(true);
+				StringBuilder sb = new StringBuilder();
+				
+				for(String w : workHours) {
+					sb.append(w);
+					sb.append("<br/>");
+				}
+				
+				if(rs.getBoolean("IS_ON_PORT")) {					
+					data[7] = Double.toString(entry.getTotalRestHours());	
+					
+					if(rs.getBoolean("is_watch_keeper")) {
+						data[3] = sb.toString();
+						data[4] = "";
+					} else {
+						data[3] = "";
+						data[4] = sb.toString();
+					}
+					
+				} else {					
+					data[6] = Double.toString(entry.getTotalRestHours());
+					
+					if(rs.getBoolean("is_watch_keeper")) {
+						data[1] = sb.toString();
+						data[2] = "";
+					} else {
+						data[2] = sb.toString();
+						data[1] = "";
+					}
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			log.error("Error executing ReportDAO.getWorkingArragements(): " + e.getMessage(), e);
+		}
+		
+		return new ArrayList<String[]>(templateSet.values());
 	}
 	
 	public List<String[]> getPotentialNonConformities(Date startDate, Date endDate) {
@@ -162,47 +284,5 @@ public class ErrorReportDAO {
 		}
 		
 		return data;
-	}
-	
-	public List<ErrorReportEntry> getAll() {
-		List<ErrorReportEntry> entryList = new ArrayList<ErrorReportEntry>();
-		ErrorReportEntry entry;
-		
-		final ResultSet rs = this.db.executeQuery(
-				"select * FROM ERROR_REPORT order by entry_date");
-		
-		try {
-			
-			while(rs.next()) {
-				entry = new ErrorReportEntry();
-				
-				entry.setEntryDate(new Date(rs.getLong("entry_date")));
-				/*entry.setWorkIn24hours(rs.getDouble("WORK_24HR"));
-				entry.setRestIn24hours(rs.getDouble("REST_24HR"));
-				entry.setAnyRest24hours(rs.getDouble("ANY_REST_24HR"));
-				entry.setRest7days(rs.getDouble("REST_7DAYS"));
-				entry.setRestGreater10hrs(rs.getBoolean("REST_GREATER_10HRS"));
-				entry.setWorkLess14hrs(rs.getBoolean("WORK_LESS_14HRS"));
-				entry.setTotalRest24hrsGreater10hrs(rs.getBoolean("TOTAL_REST_24HR_GREATER_10HRS"));
-				entry.setTotalRest7daysGreater77hrs(rs.getBoolean("TOTAL_REST_7DAYS_GREATER_77HRS"));
-				entry.setOneRestPeriod6hrs(rs.getBoolean("ONE_REST_PERIOD_6HRS"));
-				entry.setTotalRestPeriods(rs.getInt("TOTAL_REST_PERIODS"));
-				entry.setRestHour3daysGreater36hrs(rs.getDouble("REST_HRS_GREATER_36_3_DAYS"));*/
-				
-				
-				entryList.add(entry);
-			}
-			
-		} catch (Exception e) {
-			log.error("Error executing EntryTimeDAO.getByYearMonthAndCrew(): " + e.getMessage(), e);
-		} finally {
-			try {
-				if (rs != null) rs.close();
-			} catch (SQLException ex) {
-				log.error("failed to close db resources: " + ex.getMessage(), ex);
-			}
-		}
-		
-		return entryList;
 	}
 }

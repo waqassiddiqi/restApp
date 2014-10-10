@@ -136,7 +136,7 @@ public class ProductActivationForm extends BaseForm {
 	        
 	        
 	        txtUniqueId.setText(serial);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

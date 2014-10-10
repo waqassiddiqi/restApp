@@ -10,7 +10,7 @@ import java.util.List;
 
 import net.waqassiddiqi.app.crew.db.CrewDAO;
 import net.waqassiddiqi.app.crew.db.EntryTimeDAO;
-import net.waqassiddiqi.app.crew.db.ErrorReportDAO;
+import net.waqassiddiqi.app.crew.db.ReportDAO;
 import net.waqassiddiqi.app.crew.db.ScheduleTemplateDAO;
 import net.waqassiddiqi.app.crew.model.Crew;
 import net.waqassiddiqi.app.crew.model.EntryTime;
@@ -282,7 +282,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 			if(entryTimeDao.addUpdateEntry(entryTime) > 0) {
 				
 				if(errorReportEntry != null)
-					new ErrorReportDAO().addEntry(errorReportEntry);
+					new ReportDAO().addErrorReportEntry(errorReportEntry);
 				
 				NotificationManager.showNotification("<html>Resting hours has been saved for<br/>" + 
 						CalendarUtil.format("MMM dd, yyyy", getDate(currentDate)) + "</html>");

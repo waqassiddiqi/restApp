@@ -8,6 +8,7 @@ import net.waqassiddiqi.app.crew.ui.report.ErrorReportForm;
 import net.waqassiddiqi.app.crew.ui.report.PivotReportForm;
 import net.waqassiddiqi.app.crew.ui.report.PotentialNCReportForm;
 import net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm;
+import net.waqassiddiqi.app.crew.ui.report.WorkingArragmentReportForm;
 
 public class ReportingFactory extends BaseFactory {
 
@@ -45,6 +46,9 @@ public class ReportingFactory extends BaseFactory {
 		} else if(id.equals("potential")) {
 			c = new PotentialNCReportForm(getOwner()).getView();
 			c.setName("potentialReport");
+		} else if(id.equals("arragement")) {
+			c = new WorkingArragmentReportForm(getOwner()).getView();
+			c.setName("workArragementReport");
 		}
 		
 		return c;

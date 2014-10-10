@@ -168,7 +168,7 @@ public class RibbonbarTabControl {
 
 		buttonList.add(btnPivotReport);
 		
-		WebButton btnPotentialNCReport = new WebButton("Potential Non-Conformities Report",
+		WebButton btnPotentialNCReport = new WebButton("Non-Conformities Report",
 				this.iconsHelper.loadIcon(getClass(), "ribbonbar/view_report_32x32.png"));
 
 		btnPotentialNCReport.setRolloverDecoratedOnly(true);
@@ -186,7 +186,26 @@ public class RibbonbarTabControl {
 
 		buttonList.add(btnPotentialNCReport);
 		
-		GroupPanel gpanel = new GroupPanel(4, btnRestHourReport, btnErrorReport, btnPivotReport, btnPotentialNCReport);
+		WebButton btnWorkArragementReport = new WebButton("Working Arragements Report",
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/work_arragement_report_32x32.png"));
+
+		btnWorkArragementReport.setRolloverDecoratedOnly(true);
+		btnWorkArragementReport.setDrawFocus(false);
+		btnWorkArragementReport.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnWorkArragementReport.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnWorkArragementReport.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(ReportingFactory.getInstance().getById("arragement"));
+			}
+		});
+
+		buttonList.add(btnWorkArragementReport);
+		
+		GroupPanel gpanel = new GroupPanel(4, btnRestHourReport, btnErrorReport, btnPivotReport, 
+				btnPotentialNCReport, btnWorkArragementReport);
 
 		WebPanel panel = getRibbonPanel("Reporting");
 		panel.add(gpanel, BorderLayout.CENTER);
