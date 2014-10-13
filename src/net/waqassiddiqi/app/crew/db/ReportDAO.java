@@ -115,122 +115,15 @@ public class ReportDAO {
 		return writer.toString();
 	}
 	
-	public List<String[]> getWorkingArragements() {
+	public ResultSet getWorkingArragements() {
 		String strSql = "SELECT CONCAT(c.FIRST_NAME, ' ', c.LAST_NAME, ' / ', c.RANK) AS CREW, c.id AS CREW_ID, c.is_watch_keeper, t.* " +
 				"FROM SCHEDULE_TEMPLATES t " +
 				"INNER JOIN CREW_SCHEDULE_TEMPLATE ct ON ct.schedule_id = t.id " +
 				"INNER JOIN CREWS c " +
 				"ON c.id = ct.crew_id " +
-				"WHERE c.IS_ACTIVE = false AND c.IS_WATCH_KEEPER = IS_WATCH_KEEPING ORDER BY c.id";
+				"WHERE c.IS_ACTIVE = true AND c.IS_WATCH_KEEPER = IS_WATCH_KEEPING ORDER BY c.id";
 		
-		Map<Integer, String[]> templateSet = new HashMap<Integer, String[]>();
-		
-		String[] data = null;
-		
-		ResultSet rs = null;
-		
-		try {
-			EntryTime entry = null;
-			
-			rs = db.executeQuery(strSql);
-			while(rs.next()) {
-				
-				
-				if(templateSet.containsKey(rs.getInt("CREW_ID")) == false) {
-					data = new String[8];
-					
-					data[0] = rs.getString("CREW");
-					
-					templateSet.put(rs.getInt("CREW_ID"), data);
-				} else {
-					data = templateSet.get(rs.getInt("CREW_ID"));
-				}
-				
-				entry = new EntryTime();
-				entry.parseSchedule(rs.getString("SCHEDULE"));
-				
-				Calendar cal = Calendar.getInstance();
-				CalendarUtil.toBeginningOfTheDay(cal);
-				
-				boolean currentValue = entry.getSchedule()[0];
-				
-				String startHour = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
-				String endHour = "";
-				String formattedHours = "";
-				Map<Boolean, List<String>> timeMap = new HashMap<Boolean, List<String>>();
-				
-				timeMap.put(true, new ArrayList<String>());
-				timeMap.put(false, new ArrayList<String>());
-				
-				
-				for(int i=1; i<entry.getSchedule().length; i++) {
-					
-					cal.add(Calendar.MINUTE, 30);
-					
-					if(startHour.isEmpty()) {
-						startHour = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
-					}
-					
-					if(currentValue != entry.getSchedule()[i]) {
-						endHour = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
-						
-						formattedHours = startHour + " - " + endHour;
-						
-						System.out.println(entry.getSchedule()[i] + " ---> " + formattedHours);
-						
-						timeMap.get(currentValue).add(formattedHours);
-						
-						startHour = "";
-					}
-					
-					currentValue = entry.getSchedule()[i];					
-				}
-				endHour = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
-				formattedHours = startHour + " - " + endHour;
-				
-				System.out.println(currentValue + " ---> " + formattedHours);
-				
-				timeMap.get(currentValue).add(formattedHours);
-				
-				
-				List<String> workHours = timeMap.get(true);
-				StringBuilder sb = new StringBuilder();
-				
-				for(String w : workHours) {
-					sb.append(w);
-					sb.append("<br/>");
-				}
-				
-				if(rs.getBoolean("IS_ON_PORT")) {					
-					data[7] = Double.toString(entry.getTotalRestHours());	
-					
-					if(rs.getBoolean("is_watch_keeper")) {
-						data[3] = sb.toString();
-						data[4] = "";
-					} else {
-						data[3] = "";
-						data[4] = sb.toString();
-					}
-					
-				} else {					
-					data[6] = Double.toString(entry.getTotalRestHours());
-					
-					if(rs.getBoolean("is_watch_keeper")) {
-						data[1] = sb.toString();
-						data[2] = "";
-					} else {
-						data[2] = sb.toString();
-						data[1] = "";
-					}
-				}
-				
-			}
-			
-		} catch (Exception e) {
-			log.error("Error executing ReportDAO.getWorkingArragements(): " + e.getMessage(), e);
-		}
-		
-		return new ArrayList<String[]>(templateSet.values());
+		return db.executeQuery(strSql);
 	}
 	
 	public List<String[]> getPotentialNonConformities(Date startDate, Date endDate) {

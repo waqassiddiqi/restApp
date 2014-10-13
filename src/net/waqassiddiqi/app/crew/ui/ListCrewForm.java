@@ -38,6 +38,7 @@ import org.apache.commons.lang.ArrayUtils;
 import com.alee.extended.date.WebDateField;
 import com.alee.extended.panel.GroupPanel;
 import com.alee.laf.button.WebButton;
+import com.alee.laf.checkbox.WebCheckBox;
 import com.alee.laf.combobox.WebComboBox;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.menu.WebMenuItem;
@@ -64,6 +65,7 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 	private WebTextField txtNameFilter;
 	private WebTextField txtLastNameFilter;
 	TableRowSorter<CrewTableModel> mSorter;
+	private WebCheckBox chkActive;
 	
 	public ListCrewForm(MainFrame owner) {
 		super(owner);
@@ -84,11 +86,21 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 		
 		txtLastNameFilter = new WebTextField(15);
 		txtLastNameFilter.addKeyListener(ListCrewForm.this);
-				
-		GroupPanel gp = new GroupPanel(new WebLabel("First Name") {{ setDrawShade(true); setMargin(10); }}, 
+		
+		chkActive = new WebCheckBox("Is Active?");
+		chkActive.setSelected(true);
+		chkActive.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				filter();
+			}
+		});
+		
+		GroupPanel gp = new GroupPanel(10, new WebLabel("First Name") {{ setDrawShade(true); }}, 
 				txtNameFilter, 
-				new WebLabel("Last Name") {{ setDrawShade(true); setMargin(10); }}, 
-				txtLastNameFilter);
+				new WebLabel("Last Name") {{ setDrawShade(true); }}, 
+				txtLastNameFilter, chkActive);
 		
 		getToolbar().add(gp);
 	}
@@ -160,12 +172,33 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 		return scrollPane;
 	}
 	
-	private void newFilter(String value, int columnIndex) {
+	private void filter() {
 	    RowFilter<CrewTableModel, Object> rf = null;
-
+	    ArrayList<RowFilter<Object, Object>> andFilters = new ArrayList<RowFilter<Object, Object>>();
+	    
 	    try {
 
-	    	rf = RowFilter.regexFilter("(?i)" + value, columnIndex);
+	    	//if(!txtNameFilter.getText().isEmpty() && !txtLastNameFilter.getText().isEmpty()) {
+	    			    		
+	    		andFilters.add(RowFilter.regexFilter("^(?i)" + txtNameFilter.getText(), 1));
+	    		andFilters.add(RowFilter.regexFilter("^(?i)" + txtLastNameFilter.getText(), 2));
+	    		
+	    		RowFilter<Object, Object> activeFilter = new RowFilter<Object, Object>() {
+
+	                @Override
+	                public boolean include(Entry<? extends Object, ? extends Object> entry) {
+	                    Boolean bol = (Boolean) entry.getValue(8);
+	                    return bol.booleanValue() == chkActive.isSelected();
+	                }
+	            };
+	            
+	            andFilters.add(activeFilter);
+	    		
+	    	//} else {
+	    	//	andFilters.add(RowFilter.regexFilter("(?i)" + value, columnIndex));
+	    	//}
+	    	
+	    	rf = RowFilter.andFilter(andFilters);
 	    	
 	    } catch (java.util.regex.PatternSyntaxException e) {
 	        return;
@@ -402,10 +435,7 @@ public class ListCrewForm extends BaseForm implements ActionListener, TableModel
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(e.getSource() == txtNameFilter)
-			newFilter(txtNameFilter.getText(), 1);
-		else if(e.getSource() == txtLastNameFilter)
-			newFilter(txtLastNameFilter.getText(), 2);		
+		filter();
 	}
 
 	@Override

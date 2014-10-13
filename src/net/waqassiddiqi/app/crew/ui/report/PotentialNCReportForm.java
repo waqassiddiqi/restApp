@@ -95,7 +95,7 @@ public class PotentialNCReportForm extends BaseForm {
 	@SuppressWarnings("serial")
 	@Override
 	public void setupToolBar() {
-		getToolbar().add(new WebLabel("Potential Non-Conformities") {{ setDrawShade(true); setMargin(10); }});
+		getToolbar().add(new WebLabel("Summary of Non-Conformities") {{ setDrawShade(true); setMargin(10); }});
 		
 		getToolbar().addSeparator();
 		

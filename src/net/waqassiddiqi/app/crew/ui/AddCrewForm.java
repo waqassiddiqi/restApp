@@ -39,6 +39,7 @@ import com.alee.laf.checkbox.WebCheckBox;
 import com.alee.laf.combobox.WebComboBox;
 import com.alee.laf.filechooser.WebFileChooser;
 import com.alee.laf.label.WebLabel;
+import com.alee.laf.optionpane.WebOptionPane;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.separator.WebSeparator;
@@ -248,9 +249,11 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 			}
 		}
 		
+		cmbRank.addItem("Select rank");
+		
 		int i = 0;
 		for(Rank r : listRanks) {
-			cmbRank.addItem(r.getRank());
+			cmbRank.addItem(r);
 			
 			if(currentCrew != null) {
 				if(r.getRank().equals(currentCrew.getRank())) {
@@ -260,6 +263,8 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 			
 			i++;
 		}
+		
+		
 		
 	}
 	
@@ -275,9 +280,14 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		if(currentCrew != null)
 			templates = new ScheduleTemplateDAO().getAllByCrew(currentCrew);
 		
-		if(templates.size() <= 0)
-			templates = new ScheduleTemplateDAO().getAllByRank(
-					listRanks.get(cmbRank.getSelectedIndex()));
+		if(templates.size() <= 0 && cmbRank.getSelectedIndex() > 0) {
+			int returnCode = WebOptionPane.showConfirmDialog(getOwner(), "Would you like to enter the default template exist for that Rank?", "Confirm", 
+					WebOptionPane.YES_NO_OPTION, WebOptionPane.QUESTION_MESSAGE);
+			
+			if(returnCode == 0) {
+				templates = new ScheduleTemplateDAO().getAllByRank((Rank) cmbRank.getSelectedItem());
+			}
+		}
 		
 		if(templates != null && templates.size() > 0) {
 			for(ScheduleTemplate t : templates) {

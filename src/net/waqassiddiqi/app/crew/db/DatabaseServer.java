@@ -14,7 +14,7 @@ public class DatabaseServer {
 
 	private static final String SERVER_IP = "127.0.0.1"; // fixed IP of the
 																// server
-	private static final String SERVER_PORT = "9092"; // fixed port the server
+	private static final String SERVER_PORT = "9090"; // fixed port the server
 														// is listening to
 
 	public void tcpServer() { // method responsible to create the tcp server

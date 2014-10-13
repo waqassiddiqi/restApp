@@ -31,6 +31,9 @@ public class ConnectionManager {
 	
 	private Connection createConnection() throws SQLException {
 		JdbcDataSource ds = new JdbcDataSource();
+		
+		//ds.setURL("jdbc:h2:tcp://localhost:9090/~/restdb;");
+		
 		ds.setURL("jdbc:h2:~/restdb;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9090;");
         ds.setUser("sa");
         ds.setPassword("sa");
@@ -120,7 +123,9 @@ public class ConnectionManager {
                 + "expiry bigint, "
                 + "product_key VARCHAR(24), "
                 + "app_used REAL, "
-                + "registered_on bigint "
+                + "registered_on bigint, "
+                + "system_id VARCHAR(100), "
+                + "usage_started_on bigint, "
                 + ")";	
 		
 		executeUpdate(strRegistrationDetail);

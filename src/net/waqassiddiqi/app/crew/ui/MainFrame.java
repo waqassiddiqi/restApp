@@ -8,11 +8,6 @@ import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.SQLException;
 
@@ -24,7 +19,6 @@ import net.waqassiddiqi.app.crew.controller.CrewFactory;
 import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
-import net.waqassiddiqi.app.crew.db.DatabaseServer;
 import net.waqassiddiqi.app.crew.license.LicenseManager;
 import net.waqassiddiqi.app.crew.model.RegistrationSetting;
 import net.waqassiddiqi.app.crew.model.Vessel;
@@ -49,7 +43,7 @@ import com.alee.laf.rootpane.WebDialog;
 import com.alee.laf.rootpane.WebFrame;
 import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.style.StyleManager;
-import com.alee.utils.ArrayUtils;
+import com.alee.managers.tooltip.TooltipManager;
 import com.alee.utils.ThreadUtils;
 
 public class MainFrame extends WebFrame implements ChangeListener {
@@ -84,15 +78,15 @@ public class MainFrame extends WebFrame implements ChangeListener {
 	public MainFrame() {
 		super();
 		
-		//mProgressDialog.setProgress(25);
-		
 		try {
+			
+			//DatabaseServer tcpServ = new DatabaseServer(); //create a new server object
+	        //tcpServ.tcpServer();
+			
 			ConnectionManager.getInstance().setupDatabase();
 		} catch (SQLException e) {
 			log.error(e.getMessage(), e);
 		}
-		
-		//mProgressDialog.setProgress(50);
 		
 		setTitle("Crew");
         
@@ -100,18 +94,16 @@ public class MainFrame extends WebFrame implements ChangeListener {
         
         initFactories();
         
-        //mProgressDialog.setProgress(75);
-        
 		contentPane = new WebPanel();		
-		setLayout (new BorderLayout());		
+		setLayout(new BorderLayout());
+		
+		contentPane.add(createRibbonBar(), BorderLayout.NORTH);
 		contentPane.add (createStatusBar(), BorderLayout.SOUTH);              
-        getContentPane().setBackground(new Color(252, 248, 252));
+        
+		getContentPane().setBackground(new Color(252, 248, 252));
         contentPane.setOpaque(false);
-        contentPane.add(createRibbonBar(), BorderLayout.NORTH);
         
 		add(contentPane, BorderLayout.CENTER);
-		
-		//mProgressDialog.setProgress(90);
 		
 		ThreadUtils.sleepSafely(500);
 		pack();
@@ -181,9 +173,45 @@ public class MainFrame extends WebFrame implements ChangeListener {
 
 		RegistrationSetting settings = LicenseManager.getRegistationDetail();
 		
-		if(!settings.isRegistered())
+		WebLabel lblStatus = new WebLabel();
+		
+		if(LicenseManager.isExpired()) {
+			
+			if(!settings.isRegistered()) {
+				TooltipManager.setTooltip(lblStatus, "<html><center>Your product evaluation period has expired. In order to activate it, <br/>" +
+						"please copy the System ID and send it to sales@shipip.com. <br/>" +
+						"You will receive an email containing your product activation within three <br/>" +
+						"business days of successful payments.</center></html>");
+				
+				lblStatus.setText("Product evaluation period has expired");
+				
+			} else {
+				
+				TooltipManager.setTooltip(lblStatus, "<html><center>Your product evaluation period has expired. In order to re-activate it, <br/>" +
+						"please copy the System ID and send it to sales@shipip.com. <br/>" +
+						"You will receive an email containing your product activation within three <br/>" +
+						"business days of successful payments.</center></html>");
+				
+				lblStatus.setText("Product registration has expired");
+			}
+			
+			
+			
+			statusBar.add(lblStatus);
+			this.ribbonBar.setEnabled(false);
+			
+		} else if(!settings.isRegistered()) {
+			
 			statusBar.add(new WebLabel("This is an evaluation version and will expire on " + 
 					CalendarUtil.format("dd MMM yyyy", settings.getExpiry())));
+			
+		} else {
+			
+			if(LicenseManager.validateLicense() == false) {
+				statusBar.add(new WebLabel("Invalid license details found, product has been locked"));
+				this.ribbonBar.setEnabled(false);
+			}
+		}
 		
 		statusBar.addSeparatorToEnd();
 		
@@ -267,50 +295,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 	}
 	
 	public static void main(String[] args) throws SQLException {
-		DatabaseServer tcpServ = new DatabaseServer(); //create a new server object
-        tcpServ.tcpServer();
 		runApplication();
-		//getMotherboardSN();
-		
-	}
-
-	public static byte[] getMotherboardSN() {
-		
-		byte[] motherboardSN = null;
-		
-		if (motherboardSN == null) {
-			String str1 = "";
-			File localFile = null;
-			try {
-				localFile = File.createTempFile("realhowto", ".vbs");
-				localFile.deleteOnExit();
-				FileWriter localFileWriter = new FileWriter(localFile);
-				String str2 = "Set objWMIService = GetObject(\"winmgmts:\\\\.\\root\\cimv2\")\nSet colItems = objWMIService.ExecQuery _ \n   (\"Select * from Win32_BaseBoard\") \nFor Each objItem in colItems \n    Wscript.Echo objItem.SerialNumber \n    exit for  ' do the first cpu only! \nNext \n";
-				localFileWriter.write(str2);
-				localFileWriter.close();
-				Process localProcess = Runtime.getRuntime().exec(
-						"cscript //NoLogo " + localFile.getPath());
-				BufferedReader localBufferedReader = new BufferedReader(
-						new InputStreamReader(localProcess.getInputStream()));
-				String str3;
-				while ((str3 = localBufferedReader.readLine()) != null) {
-					str1 = str1 + str3;
-				}
-				localBufferedReader.close();
-			} catch (IOException localIOException) {
-				//System.out.println("failed to exec realhowto");
-			}
-			motherboardSN = str1.trim().getBytes();
-			if ("none".equalsIgnoreCase(str1.trim())) {
-				//logger.info("none got");
-				//motherboardSN = getUUIDAsMBSN().getBytes();
-			}
-		}
-		//if (ArrayUtils.isEmpty(motherboardSN)) {
-		//	logger.info("empty got");
-		//	motherboardSN = getUUIDAsMBSN().getBytes();
-		//}
-		return motherboardSN;
 	}
 	
 	@Override

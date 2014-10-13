@@ -26,4 +26,9 @@ public class Rank {
 	public void setScheduleTemplate(ScheduleTemplate scheduleTemplate) {
 		this.scheduleTemplate = scheduleTemplate;
 	}
+	
+	@Override
+	public String toString() {
+		return this.rank;
+	}
 }

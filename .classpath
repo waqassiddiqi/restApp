@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="lib/xml-apis-xerces-2.9.1.jar"/>
 	<classpathentry kind="lib" path="lib/iText-2.0.8.jar"/>
 	<classpathentry kind="lib" path="lib/opencsv-3.0.jar"/>
+	<classpathentry kind="lib" path="lib/core-lic.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

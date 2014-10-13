@@ -10,6 +10,8 @@ public class RegistrationSetting {
 	private String productKey;
 	private Double used;
 	private Date registeredOn;
+	private String systemId;
+	private Date usageStartedOn;
 	
 	public int getId() {
 		return id;
@@ -58,5 +60,19 @@ public class RegistrationSetting {
 	}
 	public void setRegisteredOn(Date registeredOn) {
 		this.registeredOn = registeredOn;
+	}
+	
+	public String getSystemId() {
+		return systemId;
+	}
+	public void setSystemId(String systemId) {
+		this.systemId = systemId;
+	}
+	
+	public Date getUsageStartedOn() {
+		return usageStartedOn;
+	}
+	public void setUsageStartedOn(Date usageStartedOn) {
+		this.usageStartedOn = usageStartedOn;
 	}
 }

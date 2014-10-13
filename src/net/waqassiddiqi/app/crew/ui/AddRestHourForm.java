@@ -8,6 +8,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.text.AbstractDocument;
+
 import net.waqassiddiqi.app.crew.db.CrewDAO;
 import net.waqassiddiqi.app.crew.db.EntryTimeDAO;
 import net.waqassiddiqi.app.crew.db.ReportDAO;
@@ -18,6 +20,7 @@ import net.waqassiddiqi.app.crew.model.ErrorReportEntry;
 import net.waqassiddiqi.app.crew.model.ScheduleTemplate;
 import net.waqassiddiqi.app.crew.report.ErrorReport;
 import net.waqassiddiqi.app.crew.ui.control.BoundsPopupMenuListener;
+import net.waqassiddiqi.app.crew.ui.control.DocumentSizeFilter;
 import net.waqassiddiqi.app.crew.ui.control.ExWebCalendar;
 import net.waqassiddiqi.app.crew.ui.control.TimeSheet;
 import net.waqassiddiqi.app.crew.ui.control.TimeSheet.ChangeListener;
@@ -135,9 +138,12 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		timeSheet = new TimeSheet(20);
 		timeSheet.setChangeListener(this);
 		
-		txtComments = new WebTextArea ();
+		txtComments = new WebTextArea();
 		txtComments.setLineWrap (true);
 		txtComments.setWrapStyleWord(true);
+		
+		AbstractDocument pDoc=(AbstractDocument) txtComments.getDocument();
+		pDoc.setDocumentFilter(new DocumentSizeFilter(200));
 
         WebScrollPane areaScroll = new WebScrollPane(txtComments);
         areaScroll.setPreferredSize(new Dimension(300, 100));
@@ -310,6 +316,9 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 			
 			double totalWorkHours = 24 - time.getTotalRestHours();
 			
+			errorReportEntry = new ErrorReportEntry();
+			errorReportEntry.setEntryDate(getDate(currentDate));
+			errorReportEntry.setCrew(currentCrew);
 			
 			errorReportEntry.setRestIn24hours(time.getTotalRestHours());
 			errorReportEntry.setWorkIn24hours(totalWorkHours);

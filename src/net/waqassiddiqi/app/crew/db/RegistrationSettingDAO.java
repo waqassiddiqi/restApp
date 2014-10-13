@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-import net.waqassiddiqi.app.crew.model.Rank;
 import net.waqassiddiqi.app.crew.model.RegistrationSetting;
 
 import org.apache.log4j.Logger;
@@ -19,10 +18,12 @@ public class RegistrationSettingDAO {
 	
 	public int addRegistrationSetting(RegistrationSetting settings) {
 		
-		int generatedId = db.executeInsert("INSERT INTO reg_settings(username, is_registered, expiry, product_key, app_used, registered_on) VALUES(?, ?, ?, ?, ?, ?);", 
+		int generatedId = db.executeInsert("INSERT INTO reg_settings(username, is_registered, expiry, product_key, app_used, registered_on, system_id, usage_started_on) " +
+				"VALUES(?, ?, ?, ?, ?, ?, ?, ?);", 
 				new String[] { settings.getUsername(), settings.isRegistered() ? "1" : "0", 
 						Long.toString(settings.getExpiry().getTime()), settings.getProductKey(), Double.toString(settings.getUsed()),
-						(settings.getRegisteredOn() == null) ? Long.toString(0) : Long.toString(settings.getRegisteredOn().getTime()) });
+						(settings.getRegisteredOn() == null) ? Long.toString(0) : Long.toString(settings.getRegisteredOn().getTime()), settings.getSystemId(), 
+								Long.toString(settings.getUsageStartedOn().getTime()) });
 		
 		if(log.isDebugEnabled()) {
 			log.debug("New registration details added: " + generatedId);
@@ -31,16 +32,17 @@ public class RegistrationSettingDAO {
 		return generatedId;
 	}
 	
-	public int updateRank(Rank rank) {
+	public boolean updateRegistrationSetting(RegistrationSetting settings) {
+		int rows = db.executeUpdate("UPDATE reg_settings SET username=?, is_registered=?, expiry=?, product_key=?, app_used=?, registered_on=?, system_id=?, usage_started_on=?", 
+				new String[] { settings.getUsername(), settings.isRegistered() ? "1" : "0", 
+						Long.toString(settings.getExpiry().getTime()), settings.getProductKey(), Double.toString(settings.getUsed()),
+						(settings.getRegisteredOn() == null) ? Long.toString(0) : Long.toString(settings.getRegisteredOn().getTime()), 
+								settings.getSystemId(), Long.toString(settings.getUsageStartedOn().getTime()) });
 		
-		int rowsAffected = db.executeUpdate("UPDATE ranks SET rank = ? WHERE id = ?;", new String[] { 
-				rank.getRank(), String.valueOf(rank.getId()) });
+		if(rows > 0)
+			return true;
 		
-		if(log.isDebugEnabled()) {
-			log.debug("Rank has been updated");
-		}
-		
-		return rowsAffected;
+		return false;
 	}
 	
 	public RegistrationSetting get() {
@@ -60,6 +62,8 @@ public class RegistrationSettingDAO {
 					setExpiry(new Date(rs.getLong("expiry")));
 					setProductKey(rs.getString("product_key"));
 					setUsed(rs.getDouble("app_used"));
+					setSystemId(rs.getString("system_id"));
+					setUsageStartedOn(new Date(rs.getLong("usage_started_on")));
 					
 					if(isRegistered()) {
 						setRegisteredOn(new Date(rs.getLong("registered_on")));
