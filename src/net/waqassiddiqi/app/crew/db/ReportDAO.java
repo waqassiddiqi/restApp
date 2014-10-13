@@ -8,13 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import net.waqassiddiqi.app.crew.model.EntryTime;
 import net.waqassiddiqi.app.crew.model.ErrorReportEntry;
-import net.waqassiddiqi.app.crew.util.CalendarUtil;
 
 import org.apache.log4j.Logger;
 

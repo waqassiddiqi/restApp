@@ -365,12 +365,16 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 			if(restHoursIn24Hours < 10) {
 				sb.append("<li>Any 24-hour Total Period of REST &gt; 10 Hours</li>");
 				
+				errorReportEntry.setAnyRest24hours(restHoursIn24Hours);
+				
 				errorReportEntry.setTotalRest24hrsGreater10hrs(true);
 			}
 			
 			double restHoursIn7Days = errorReport.get7DayRestHours(cal.get(Calendar.DAY_OF_MONTH));
 			if(restHoursIn7Days < 77) {
 				sb.append("<li>Any 7-days Total Period of REST &gt; 77 Hours</li>");
+				
+				errorReportEntry.setRest7days(restHoursIn7Days);
 				
 				errorReportEntry.setTotalRest7daysGreater77hrs(true);
 			}

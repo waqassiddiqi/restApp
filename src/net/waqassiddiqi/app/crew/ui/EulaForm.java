@@ -77,8 +77,6 @@ public class EulaForm extends BaseForm {
 		
 		reportPane.setText(getEula());
 		
-		System.out.println(reportPane.getText());
-		
 	    scrollPane = new WebScrollPane(reportPane);
 	    scrollPane.setBackground(Color.white);
 		return scrollPane.setMargin(5);

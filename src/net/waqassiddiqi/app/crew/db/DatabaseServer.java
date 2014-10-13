@@ -10,22 +10,66 @@ import java.sql.Statement;
 import org.h2.tools.Server;
 
 public class DatabaseServer {
-	Server server; // the server's instance variable
+	private Server server;
+	private static final String SERVER_IP = "127.0.0.1";
+	private static final String SERVER_PORT = "9090";
+	private static DatabaseServer instance = null;
+	
+	private DatabaseServer() { }
+	
+	public static DatabaseServer getInstance() {
+		if(instance == null) {
+			instance = new DatabaseServer();
+		}
+		
+		return instance;
+	}
+	
+	public Server start() {
+		if(server == null) {
+			
+			try {
+				
+				server = Server.createTcpServer(new String[] { "-trace", "-tcpPort", SERVER_PORT, "-tcpAllowOthers" });
+				server.start();
+				
+			} catch(Exception e) {
+				
+			}
+		} else if(server.isRunning(true) == false) {
+			try {
+				
+				server.start();
+				
+			} catch(Exception e) {
+				
+			}
+		}
+		
+		return server;
+	}
+	
+	public boolean isRunning() {
+		if(this.server == null)
+			return false;
+		
+		return server.isRunning(true);
+	}
+	
+	public void stop() {
+		if(server != null) {
+			server.stop();
+		}
+	}
+	
+	public Server getServer() {
+		return server;
+	}
+	
+	public void tcpServer() {
 
-	private static final String SERVER_IP = "127.0.0.1"; // fixed IP of the
-																// server
-	private static final String SERVER_PORT = "9090"; // fixed port the server
-														// is listening to
-
-	public void tcpServer() { // method responsible to create the tcp server
-
-		try { // catches any server related errors, if the connection is broken
-				// etc.
-
-			// server uses the IP and port defined earlier, allows other
-			// computers in the LAN to connect and implements the secure socket
-			// layer (SSL) feature
-			server = Server.createTcpServer( // create tcp server
+		try {
+			server = Server.createTcpServer(
 					new String[] { "-trace", "-tcpPort", SERVER_PORT, "-tcpAllowOthers" }).start();
 
 			System.out.println(server.getStatus()); // prints out the server's
@@ -98,5 +142,4 @@ public class DatabaseServer {
 	    }
 	    return conn; //As the method is not void, a connection variable must be returned
 	}
-
 }

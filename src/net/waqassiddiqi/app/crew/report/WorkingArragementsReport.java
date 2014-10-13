@@ -75,8 +75,6 @@ public class WorkingArragementsReport {
 						
 						formattedHours = startHour + " - " + endHour;
 						
-						System.out.println(entry.getSchedule()[i] + " ---> " + formattedHours);
-						
 						timeMap.get(currentValue).add(formattedHours);
 						
 						startHour = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
@@ -87,8 +85,6 @@ public class WorkingArragementsReport {
 				
 				endHour = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
 				formattedHours = startHour + " - " + endHour;
-				
-				System.out.println(currentValue + " ---> " + formattedHours);
 				
 				timeMap.get(currentValue).add(formattedHours);
 				

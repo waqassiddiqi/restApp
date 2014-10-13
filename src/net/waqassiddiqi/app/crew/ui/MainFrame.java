@@ -19,6 +19,7 @@ import net.waqassiddiqi.app.crew.controller.CrewFactory;
 import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
+import net.waqassiddiqi.app.crew.db.DatabaseServer;
 import net.waqassiddiqi.app.crew.license.LicenseManager;
 import net.waqassiddiqi.app.crew.model.RegistrationSetting;
 import net.waqassiddiqi.app.crew.model.Vessel;
@@ -36,17 +37,22 @@ import com.alee.extended.panel.GroupPanel;
 import com.alee.extended.statusbar.WebMemoryBar;
 import com.alee.extended.statusbar.WebStatusBar;
 import com.alee.laf.WebLookAndFeel;
+import com.alee.laf.button.WebToggleButton;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.progressbar.WebProgressBar;
 import com.alee.laf.rootpane.WebDialog;
 import com.alee.laf.rootpane.WebFrame;
+import com.alee.managers.hotkey.Hotkey;
 import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.style.StyleManager;
 import com.alee.managers.tooltip.TooltipManager;
 import com.alee.utils.ThreadUtils;
 
 public class MainFrame extends WebFrame implements ChangeListener {
+	
+	public final static boolean isServer = true;
+	
 	private static final long serialVersionUID = 1L;
 	private Logger log = Logger.getLogger(getClass().getName());
 	private static MainFrame instance = null;
@@ -55,6 +61,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 	private RibbonbarTabControl ribbonBar;
 	private static WebDialog mProgressDialog;
 	private static WebProgressBar mProgressBar;
+	private IconsHelper iconHelper = null;
 	
 	public static MainFrame getInstance() {
 		if (instance == null) {
@@ -80,8 +87,9 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		
 		try {
 			
-			//DatabaseServer tcpServ = new DatabaseServer(); //create a new server object
-	        //tcpServ.tcpServer();
+			if(isServer) {
+				DatabaseServer.getInstance().start();
+			}
 			
 			ConnectionManager.getInstance().setupDatabase();
 		} catch (SQLException e) {
@@ -93,6 +101,8 @@ public class MainFrame extends WebFrame implements ChangeListener {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         initFactories();
+        
+        iconHelper = new IconsHelper();
         
 		contentPane = new WebPanel();		
 		setLayout(new BorderLayout());
@@ -211,6 +221,24 @@ public class MainFrame extends WebFrame implements ChangeListener {
 				statusBar.add(new WebLabel("Invalid license details found, product has been locked"));
 				this.ribbonBar.setEnabled(false);
 			}
+		}
+		
+		if(isServer) {
+			final WebToggleButton btnServerStatus = WebToggleButton.createIconWebButton(
+					iconHelper.loadIcon("common/start_16x16.png"));
+			
+			btnServerStatus.addHotkey(this, Hotkey.ALT_S );
+			
+			statusBar.addToEnd(btnServerStatus);
+			
+			if(DatabaseServer.getInstance().isRunning()) {
+				btnServerStatus.setEnabled(true);
+				TooltipManager.setTooltip(btnServerStatus, iconHelper.loadIcon("common/server_16x16.png"), "Rest Hour server is running" );
+			} else {
+				btnServerStatus.setEnabled(false);
+				TooltipManager.setTooltip(btnServerStatus, iconHelper.loadIcon("common/server_16x16.png"), "Rest Hour server is not running");
+			}
+			
 		}
 		
 		statusBar.addSeparatorToEnd();

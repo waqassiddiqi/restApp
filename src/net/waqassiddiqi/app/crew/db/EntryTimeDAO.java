@@ -115,9 +115,6 @@ public class EntryTimeDAO {
 	
 	public int addUpdateEntry(EntryTime entry) {
 		
-		
-		System.out.println("---> " + entry.getEntryDate().toString() + " <---");
-		
 		int count = db.executeUpdate("UPDATE entry_times SET schedule = ?, is_on_port = ?, work_in_24_hours = ?, " +
 				"rest_in_24_hours = ?, comments = ? WHERE crew_id = ? AND entry_date = ?",
 				new String[] {

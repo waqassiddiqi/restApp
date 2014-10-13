@@ -70,8 +70,16 @@ public class LicenseManager {
 	public static boolean registerProduct(String systemId, String serialKey) {
 		if(KeyValidator.PKV_CheckKey(serialKey, systemId) == Status.KEY_GOOD) {
 			
+			int seed = KeyValidator.extractSeed(serialKey);
+			
 			RegistrationSettingDAO regDao = new RegistrationSettingDAO();
 			RegistrationSetting settings = regDao.get();
+			
+			if(settings.getUsed() >= seed) {
+				return false;
+			}
+			
+			settings.setUsed((double) seed);
 			
 			settings.setRegisteredOn(new Date());
 			settings.setRegistered(true);

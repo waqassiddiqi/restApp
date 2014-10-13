@@ -75,10 +75,15 @@ public class ProductActivationForm extends BaseForm {
         	progressBar1.setMaximum(30);
         else {
         	progressBar1.setMaximum(365);
-        	btnActivate.setVisible(false);
+        	
+        	if(diffDays > 0)
+        		btnActivate.setVisible(false);
         }
         
-        progressBar1.setString(diffDays + " days remaining");
+        if(diffDays < 1)
+        	progressBar1.setString("Expired");
+        else
+        	progressBar1.setString(diffDays + " days remaining");
         
         progressBar1.setValue((int) diffDays);
         

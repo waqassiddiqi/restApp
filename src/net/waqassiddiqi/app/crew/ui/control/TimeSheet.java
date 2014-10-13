@@ -1,6 +1,5 @@
 package net.waqassiddiqi.app.crew.ui.control;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
@@ -10,9 +9,7 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 
 import net.waqassiddiqi.app.crew.ui.control.TimeBlock.BlockType;
@@ -184,9 +181,6 @@ public class TimeSheet {
 		groupPanel.add (createHorizontalSeparator(), "0,2," + ( columns.length - 1 ) + ",2" );
 		
 		int row = 3;
-		
-		Calendar cal = Calendar.getInstance();        
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         
         for(int i=2; i<26; i++) {
         	groupPanel.add(getLabel("|" + (i-2)), i + ",1");
