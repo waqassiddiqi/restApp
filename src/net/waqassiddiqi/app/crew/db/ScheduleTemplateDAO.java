@@ -55,6 +55,15 @@ public class ScheduleTemplateDAO {
 		return rowsAffected;
 	}
 	
+	public int removeScheduleTemplateByRank(Rank r) {
+		int rows = db.executeUpdate("DELETE FROM SCHEDULE_TEMPLATES s WHERE s.id IN(SELECT SCHEDULE_ID " +
+				"FROM ranks_schedule_template WHERE RANK_ID = ?);", new String[] { Integer.toString(r.getId()) });
+		
+		rows = db.executeUpdate("DELETE FROM RANKS_SCHEDULE_TEMPLATE WHERE RANK_ID = ?", new String[] { Integer.toString(r.getId()) });
+		
+		return rows;
+	}
+	
 	public int associateScheduleTemplate(Rank rank, ScheduleTemplate schedule) {
 		int generatedId = db.executeUpdate("INSERT INTO ranks_schedule_template(rank_id, schedule_id, is_on_port) VALUES(?, ?, ?);", 
 				new String[] { String.valueOf(rank.getId()), 

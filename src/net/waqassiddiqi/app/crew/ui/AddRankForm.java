@@ -38,6 +38,8 @@ public class AddRankForm extends BaseForm {
 	private TimeSheet timeSheetOnPortWatchKeeping;
 	private TimeSheet timeSheetOnPortNonWatchKeeping;
 	
+	ScheduleTemplateDAO scheduleDao;
+	
 	private WebTabbedPane tabPan;
 	private Rank currentRank = null;
 	
@@ -47,7 +49,9 @@ public class AddRankForm extends BaseForm {
 	
 	public AddRankForm(MainFrame owner, int id) {
 		super(owner);
+		
 		this.id = id;
+		scheduleDao = new ScheduleTemplateDAO();
 	}
 	
 	@SuppressWarnings("serial")
@@ -145,10 +149,7 @@ public class AddRankForm extends BaseForm {
 		
 		if(InputValidator.validateInput(owner, new JTextField[] { txtRankName }, "Rank cannot be empty")) {
 			
-			Boolean[] scheduleArrayOnSeaWatchkeeping = this.timeSheetOnSeaWatchkeeping.getSchedule();
-			Boolean[] scheduleArrayOnSeaNonWatchkeeping = this.timeSheetOnSeaNonWatchkeeping.getSchedule();
-			Boolean[] scheduleArrayOnPortWatchkeeping = this.timeSheetOnPortWatchKeeping.getSchedule();
-			Boolean[] scheduleArrayOnPortNonWatchkeeping = this.timeSheetOnPortNonWatchKeeping.getSchedule();
+			
 			
 			if(currentRank == null) {
 				this.id = rankDao.addRank(rank);
@@ -160,59 +161,7 @@ public class AddRankForm extends BaseForm {
 					
 					txtRankId.setText(Integer.toString(this.id));
 					
-					
-					
-					ScheduleTemplate template = new ScheduleTemplate();
-					template.setSchedule(scheduleArrayOnSeaWatchkeeping);
-					template.setOnPort(false);
-					template.setWatchKeeping(true);
-					
-					int scheduleId = scheduleDao.addScheduleTemplate(template);
-					
-					template.setId(scheduleId);
-					
-					if(scheduleId > 0) {
-						scheduleDao.associateScheduleTemplate(currentRank, template);
-					}
-					
-					template = new ScheduleTemplate();
-					template.setSchedule(scheduleArrayOnSeaNonWatchkeeping);
-					template.setOnPort(false);
-					template.setWatchKeeping(false);
-					
-					scheduleId = scheduleDao.addScheduleTemplate(template);
-					
-					template.setId(scheduleId);
-					
-					if(scheduleId > 0) {
-						scheduleDao.associateScheduleTemplate(currentRank, template);
-					}
-					
-					template = new ScheduleTemplate();
-					template.setSchedule(scheduleArrayOnPortWatchkeeping);
-					template.setOnPort(true);
-					template.setWatchKeeping(true);
-					
-					scheduleId = scheduleDao.addScheduleTemplate(template);
-					
-					template.setId(scheduleId);
-					
-					if(scheduleId > 0) {
-						scheduleDao.associateScheduleTemplate(currentRank, template);
-					}
-					
-					template = new ScheduleTemplate();
-					template.setSchedule(scheduleArrayOnPortNonWatchkeeping);
-					template.setOnPort(true);
-					template.setWatchKeeping(false);
-					
-					scheduleId = scheduleDao.addScheduleTemplate(template);
-					
-					template.setId(scheduleId);
-					
-					if(scheduleId > 0) {
-						scheduleDao.associateScheduleTemplate(currentRank, template);
-					}
+					associateDefaultTemplates();
 					
 					NotificationManager.showNotification("New rank has been added.");
 					
@@ -223,8 +172,71 @@ public class AddRankForm extends BaseForm {
 				currentRank.setRank(rank.getRank());
 				rankDao.updateRank(currentRank);
 				
+				scheduleDao.removeScheduleTemplateByRank(currentRank);
+				
+				associateDefaultTemplates();
+				
 				NotificationManager.showNotification("Rank has been updated.");
 			}
+		}
+	}
+	
+	private void associateDefaultTemplates() {
+		Boolean[] scheduleArrayOnSeaWatchkeeping = this.timeSheetOnSeaWatchkeeping.getSchedule();
+		Boolean[] scheduleArrayOnSeaNonWatchkeeping = this.timeSheetOnSeaNonWatchkeeping.getSchedule();
+		Boolean[] scheduleArrayOnPortWatchkeeping = this.timeSheetOnPortWatchKeeping.getSchedule();
+		Boolean[] scheduleArrayOnPortNonWatchkeeping = this.timeSheetOnPortNonWatchKeeping.getSchedule();
+		
+		ScheduleTemplate template = new ScheduleTemplate();
+		template.setSchedule(scheduleArrayOnSeaWatchkeeping);
+		template.setOnPort(false);
+		template.setWatchKeeping(true);
+		
+		int scheduleId = scheduleDao.addScheduleTemplate(template);
+		
+		template.setId(scheduleId);
+		
+		if(scheduleId > 0) {
+			scheduleDao.associateScheduleTemplate(currentRank, template);
+		}
+		
+		template = new ScheduleTemplate();
+		template.setSchedule(scheduleArrayOnSeaNonWatchkeeping);
+		template.setOnPort(false);
+		template.setWatchKeeping(false);
+		
+		scheduleId = scheduleDao.addScheduleTemplate(template);
+		
+		template.setId(scheduleId);
+		
+		if(scheduleId > 0) {
+			scheduleDao.associateScheduleTemplate(currentRank, template);
+		}
+		
+		template = new ScheduleTemplate();
+		template.setSchedule(scheduleArrayOnPortWatchkeeping);
+		template.setOnPort(true);
+		template.setWatchKeeping(true);
+		
+		scheduleId = scheduleDao.addScheduleTemplate(template);
+		
+		template.setId(scheduleId);
+		
+		if(scheduleId > 0) {
+			scheduleDao.associateScheduleTemplate(currentRank, template);
+		}
+		
+		template = new ScheduleTemplate();
+		template.setSchedule(scheduleArrayOnPortNonWatchkeeping);
+		template.setOnPort(true);
+		template.setWatchKeeping(false);
+		
+		scheduleId = scheduleDao.addScheduleTemplate(template);
+		
+		template.setId(scheduleId);
+		
+		if(scheduleId > 0) {
+			scheduleDao.associateScheduleTemplate(currentRank, template);
 		}
 	}
 	

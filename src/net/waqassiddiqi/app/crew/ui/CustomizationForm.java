@@ -31,16 +31,48 @@ public class CustomizationForm extends BaseForm {
 	private WebFileChooser fileChooser = null;
 	private File imageFile = null;
 	private ApplicationSetting settings;
-	private WebTextArea txtCustomText;
+	private WebTextArea txtRestHourCustomText;
+	private WebTextArea txtErrorReportCustomText;
+	private WebTextArea txtNCReportCustomText;
+	private WebTextArea txtPivotReportCustomText;
+	private WebTextArea txtWorkingArragementReportCustomText;
 	
 	public CustomizationForm(MainFrame owner) {
 		super(owner);
 		
-		txtCustomText = new WebTextArea();
-		txtCustomText.setLineWrap (true);
-		txtCustomText.setWrapStyleWord(true);
+		txtRestHourCustomText = new WebTextArea();
+		txtRestHourCustomText.setLineWrap (true);
+		txtRestHourCustomText.setWrapStyleWord(true);
 		
-		AbstractDocument pDoc=(AbstractDocument) txtCustomText.getDocument();
+		AbstractDocument pDoc = (AbstractDocument) txtRestHourCustomText.getDocument();
+		pDoc.setDocumentFilter(new DocumentSizeFilter(1000));
+		
+		txtErrorReportCustomText = new WebTextArea();
+		txtErrorReportCustomText.setLineWrap (true);
+		txtErrorReportCustomText.setWrapStyleWord(true);
+		
+		pDoc = (AbstractDocument) txtErrorReportCustomText.getDocument();
+		pDoc.setDocumentFilter(new DocumentSizeFilter(1000));
+		
+		txtNCReportCustomText = new WebTextArea();
+		txtNCReportCustomText.setLineWrap (true);
+		txtNCReportCustomText.setWrapStyleWord(true);
+		
+		pDoc = (AbstractDocument) txtNCReportCustomText.getDocument();
+		pDoc.setDocumentFilter(new DocumentSizeFilter(1000));
+		
+		txtPivotReportCustomText = new WebTextArea();
+		txtPivotReportCustomText.setLineWrap (true);
+		txtPivotReportCustomText.setWrapStyleWord(true);
+		
+		pDoc = (AbstractDocument) txtPivotReportCustomText.getDocument();
+		pDoc.setDocumentFilter(new DocumentSizeFilter(1000));
+		
+		txtWorkingArragementReportCustomText = new WebTextArea();
+		txtWorkingArragementReportCustomText.setLineWrap (true);
+		txtWorkingArragementReportCustomText.setWrapStyleWord(true);
+		
+		pDoc = (AbstractDocument) txtWorkingArragementReportCustomText.getDocument();
 		pDoc.setDocumentFilter(new DocumentSizeFilter(1000));
 		
 		settings = new ApplicationSettingDAO().get();
@@ -87,17 +119,49 @@ public class CustomizationForm extends BaseForm {
 				new WebLabel("<html>This logo will be displayed on reports <br/><i>(Recommended size is 80x80 pixels)</i></html>", JLabel.CENTER)).setMargin(20));
 		
 		if(settings != null) {
-			txtCustomText.setText(settings.getCustomText());
+			txtRestHourCustomText.setText(settings.getCustomText());
 		}
 		
-		WebScrollPane areaScroll = new WebScrollPane(txtCustomText);
+		WebScrollPane areaScroll = new WebScrollPane(txtRestHourCustomText);
         areaScroll.setPreferredSize(new Dimension(300, 100));
 		
-		final WebCollapsiblePane leftPaneRegInfo = new WebCollapsiblePane("Custom Text", new GroupPanel(10, false, areaScroll,
+		final WebCollapsiblePane leftPaneRegInfo = new WebCollapsiblePane("Custom Text", new GroupPanel(10, false,
+				getLabel("Resting hour report:"),
+				areaScroll,
+				
+				getLabel("Error report:"),
+				getTextAreaScroll(txtErrorReportCustomText),
+				
+				getLabel("Non-Conformity summary report:"),
+				getTextAreaScroll(txtNCReportCustomText),
+				
+				getLabel("Pivot report:"),
+				getTextAreaScroll(txtPivotReportCustomText),
+				
+				getLabel("Working arragements report:"),
+				getTextAreaScroll(txtWorkingArragementReportCustomText),
 				new WebLabel("<html>This text will be displayed under reports <br/><i>You can use html tags for formatting</i></html>", JLabel.CENTER)
 				).setMargin(10));
 		
-		return new GroupPanel(10, false, leftPane, leftPaneRegInfo);
+		
+		WebScrollPane sp = new WebScrollPane(new GroupPanel(10, false, leftPane, leftPaneRegInfo));
+		sp.setPreferredHeight(300);
+		
+		return sp;
+	}
+	
+	private WebLabel getLabel(String title) {
+		WebLabel label = new WebLabel(title);
+		label.setDrawShade(true);
+		
+		return label;
+	}
+	
+	private WebScrollPane getTextAreaScroll(WebTextArea textArea) {
+		WebScrollPane areaScroll = new WebScrollPane(textArea);
+        areaScroll.setPreferredSize(new Dimension(300, 100));
+        
+        return areaScroll;
 	}
 	
 	@Override
@@ -112,7 +176,7 @@ public class CustomizationForm extends BaseForm {
 			}
 			
 			if(settings != null) {
-				settings.setCustomText(txtCustomText.getText());
+				//settings.setCustomText(txtCustomText.getText());
 				dao.updateApplicationSetting(settings);
 				
 				NotificationManager.showNotification("Application settings have been saved");

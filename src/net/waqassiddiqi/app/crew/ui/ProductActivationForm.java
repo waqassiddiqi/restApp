@@ -135,7 +135,7 @@ public class ProductActivationForm extends BaseForm {
 		});
 		
 		WebLinkLabel el = new WebLinkLabel ();
-        el.setEmailLink("Email Serial No", "sales@shipip.com");
+        el.setEmailLink("Email Serial No", "support@shipip.com");
 		
 		content.add(l, "0,1");
 		content.add(new GroupPanel(10, txtUniqueId, lblCopy, el), "1,1");
