@@ -17,6 +17,7 @@ import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.ReportingFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.VesselDAO;
+import net.waqassiddiqi.app.crew.ui.CustomizationForm;
 import net.waqassiddiqi.app.crew.ui.EulaForm;
 import net.waqassiddiqi.app.crew.ui.MainFrame;
 import net.waqassiddiqi.app.crew.ui.ProductActivationForm;
@@ -80,31 +81,52 @@ public class RibbonbarTabControl {
 	
 	private WebPanel createApplicationSettingsPanel() {
 
-		WebButton btnRestHourReport = new WebButton("Vessel Details",
+		WebButton btnVesselSettings = new WebButton("Vessel Details", 
 				this.iconsHelper.loadIcon(getClass(), "ribbonbar/vessel_view_32x32.png"));
 
-		btnRestHourReport.setRolloverDecoratedOnly(true);
-		btnRestHourReport.setDrawFocus(false);
-		btnRestHourReport.setHorizontalTextPosition(AbstractButton.CENTER);
-		btnRestHourReport.setVerticalTextPosition(AbstractButton.BOTTOM);
+		btnVesselSettings.setRolloverDecoratedOnly(true);
+		btnVesselSettings.setDrawFocus(false);
+		btnVesselSettings.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnVesselSettings.setVerticalTextPosition(AbstractButton.BOTTOM);
 
-		btnRestHourReport.addActionListener(new ActionListener() {
+		btnVesselSettings.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {	
-				owner.addContent(VesselFactory.getInstance().getEdit(
-						Integer.toString(new VesselDAO().getAll().get(0).getId())));
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(VesselFactory.getInstance().getEdit(Integer.toString(new VesselDAO().getAll().get(0).getId())));
 			}
 		});
 
-		buttonList.add(btnRestHourReport);
+		buttonList.add(btnVesselSettings);
 		
-		GroupPanel gpanel = new GroupPanel(4, new WebLabel(" "), btnRestHourReport);
+		WebButton btnAppSettings = new WebButton("Customization", 
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/app_settings_32x32.png"));
+
+		btnAppSettings.setRolloverDecoratedOnly(true);
+		btnAppSettings.setDrawFocus(false);
+		btnAppSettings.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnAppSettings.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnAppSettings.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Component c = new CustomizationForm(owner).getView();
+				c.setName("customization");
+				owner.addContent(c);
+			}
+		});
+
+		buttonList.add(btnAppSettings);
+		
+		GroupPanel gpanel = new GroupPanel(4, btnVesselSettings, btnAppSettings);
 
 		WebPanel panel = getRibbonPanel("Application Settings");
 		panel.add(gpanel, BorderLayout.CENTER);
 
 		return panel;
+		
+		
 	}
 	
 	public void setupReportingTab(final JTabbedPane tabbedPane) {

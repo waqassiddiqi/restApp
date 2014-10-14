@@ -12,10 +12,13 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import javax.imageio.ImageIO;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileFilter;
 
+import net.waqassiddiqi.app.crew.db.ApplicationSettingDAO;
 import net.waqassiddiqi.app.crew.db.VesselDAO;
+import net.waqassiddiqi.app.crew.model.ApplicationSetting;
 import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.report.PotentialNCReport;
 import net.waqassiddiqi.app.crew.ui.BaseForm;
@@ -141,6 +144,19 @@ public class PotentialNCReportForm extends BaseForm {
 		
 		VelocityContext localVelocityContext = new VelocityContext();
 		localVelocityContext.put("currentVessel", vessel);
+		
+		ApplicationSetting settings = new ApplicationSettingDAO().get();
+		
+		try {
+			if(settings != null && settings.getLogo() != null) {
+				File outputfile = File.createTempFile("logo", ".png");
+
+				ImageIO.write(settings.getLogo(), "png", outputfile);
+				
+				logoPath = "file:/" + outputfile.getAbsolutePath();
+			}
+			
+		} catch(Exception e) { }
 		
 		if(this.logoPath == null) {
 			URL u = ClassLoader.class.getResource("/resource/template/logo.png");

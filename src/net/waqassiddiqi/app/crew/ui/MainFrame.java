@@ -8,6 +8,8 @@ import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.sql.SQLException;
 
@@ -18,9 +20,11 @@ import javax.swing.UIManager;
 import net.waqassiddiqi.app.crew.controller.CrewFactory;
 import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
+import net.waqassiddiqi.app.crew.db.ApplicationSettingDAO;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
 import net.waqassiddiqi.app.crew.db.DatabaseServer;
 import net.waqassiddiqi.app.crew.license.LicenseManager;
+import net.waqassiddiqi.app.crew.model.ApplicationSetting;
 import net.waqassiddiqi.app.crew.model.RegistrationSetting;
 import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.style.skin.DefaultSkin;
@@ -33,17 +37,17 @@ import net.waqassiddiqi.app.crew.util.ConfigurationUtil;
 import org.apache.log4j.Logger;
 
 import com.alee.extended.image.WebDecoratedImage;
+import com.alee.extended.layout.TableLayout;
 import com.alee.extended.panel.GroupPanel;
 import com.alee.extended.statusbar.WebMemoryBar;
 import com.alee.extended.statusbar.WebStatusBar;
 import com.alee.laf.WebLookAndFeel;
-import com.alee.laf.button.WebToggleButton;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.progressbar.WebProgressBar;
 import com.alee.laf.rootpane.WebDialog;
 import com.alee.laf.rootpane.WebFrame;
-import com.alee.managers.hotkey.Hotkey;
+import com.alee.laf.text.WebTextField;
 import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.style.StyleManager;
 import com.alee.managers.tooltip.TooltipManager;
@@ -87,11 +91,14 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		
 		try {
 			
-			if(isServer) {
+			if (isServer) {
 				DatabaseServer.getInstance().start();
 			}
 			
 			ConnectionManager.getInstance().setupDatabase();
+			
+			initAppSettings();
+			
 		} catch (SQLException e) {
 			log.error(e.getMessage(), e);
 		}
@@ -203,9 +210,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 						"business days of successful payments.</center></html>");
 				
 				lblStatus.setText("Product registration has expired");
-			}
-			
-			
+			}			
 			
 			statusBar.add(lblStatus);
 			this.ribbonBar.setEnabled(false);
@@ -224,21 +229,61 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		}
 		
 		if(isServer) {
-			final WebToggleButton btnServerStatus = WebToggleButton.createIconWebButton(
-					iconHelper.loadIcon("common/start_16x16.png"));
 			
-			btnServerStatus.addHotkey(this, Hotkey.ALT_S );
+			statusBar.addSeparatorToEnd();
 			
-			statusBar.addToEnd(btnServerStatus);
+			final WebLabel lblServerStatus = new WebLabel();			
+			
+			final StringBuilder sb = new StringBuilder("<html>");
+			sb.append("Server IP:\t" + DatabaseServer.getInstance().getIp());
+			sb.append("<br/>");
+			sb.append("Server Port:\t" + DatabaseServer.getInstance().getPort());
+			sb.append("<br/>");
+			sb.append("Server Status:\t");
 			
 			if(DatabaseServer.getInstance().isRunning()) {
-				btnServerStatus.setEnabled(true);
-				TooltipManager.setTooltip(btnServerStatus, iconHelper.loadIcon("common/server_16x16.png"), "Rest Hour server is running" );
+				lblServerStatus.setIcon(iconHelper.loadIcon("common/server_start_16x16.png"));
+				TooltipManager.setTooltip(lblServerStatus, iconHelper.loadIcon("common/server_16x16.png"), "Rest Hour server is running" );
+				
+				sb.append("Running");
+				
 			} else {
-				btnServerStatus.setEnabled(false);
-				TooltipManager.setTooltip(btnServerStatus, iconHelper.loadIcon("common/server_16x16.png"), "Rest Hour server is not running");
+				lblServerStatus.setIcon(iconHelper.loadIcon("common/server_stop_16x16.png"));
+				TooltipManager.setTooltip(lblServerStatus, iconHelper.loadIcon("common/server_16x16.png"), "Rest Hour server is not running");
+				
+				sb.append("Not running");
 			}
 			
+			sb.append("</html>");
+			
+			
+			
+			lblServerStatus.addMouseListener(new MouseAdapter() {
+				@SuppressWarnings("serial")
+				@Override
+				public void mousePressed(final MouseEvent e) {
+					
+					TableLayout layout = new TableLayout(new double[][] {
+							{ TableLayout.PREFERRED, TableLayout.PREFERRED },
+							{ TableLayout.PREFERRED, TableLayout.PREFERRED } });
+					layout.setHGap(5);
+					layout.setVGap(5);
+					WebPanel content = new WebPanel(layout);
+					content.setOpaque(false);
+
+					content.add(new WebLabel("Server IP", WebLabel.TRAILING), "0,0");
+					content.add(new WebTextField(10) {{ setText(DatabaseServer.getInstance().getIp()); setEditable(false); }}, "1,0");
+					
+					content.add(new WebLabel("Server Port", WebLabel.TRAILING), "0,1");
+					content.add(new WebTextField(10) {{ setText(DatabaseServer.getInstance().getPort()); setEditable(false); }}, "1,1");
+					
+					net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, lblServerStatus, iconHelper.loadIcon("common/server_16x16.png"),
+							"Rest hour server", content);
+					
+				}
+			});
+			
+			statusBar.addToEnd(lblServerStatus);
 		}
 		
 		statusBar.addSeparatorToEnd();
@@ -250,6 +295,18 @@ public class MainFrame extends WebFrame implements ChangeListener {
 
 		NotificationManager.setMargin(0, 0, statusBar.getPreferredSize().height, 0);
 		return statusBar;
+	}
+	
+	private void initAppSettings() {
+		ApplicationSettingDAO dao = new ApplicationSettingDAO();
+		if(dao.get() == null) {
+			ApplicationSetting settings = new ApplicationSetting();
+			settings.setCustomText("");
+			settings.setServer(isServer);
+			settings.setServerPort("9090");
+			
+			dao.addApplicationSetting(settings);
+		}
 	}
 	
 	public void display() {

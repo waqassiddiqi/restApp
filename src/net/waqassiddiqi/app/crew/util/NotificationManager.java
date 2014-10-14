@@ -4,6 +4,8 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+
 import net.waqassiddiqi.app.crew.ui.MainFrame;
 import net.waqassiddiqi.app.crew.ui.icons.IconsHelper;
 
@@ -81,6 +83,31 @@ public class NotificationManager {
 		popOver.show(target);
 	}
 
+	public static void showPopup(MainFrame owner, Component target, ImageIcon imgIcon, String title, Component c) {
+		final WebPopOver popOver = new WebPopOver(owner);
+		popOver.setMargin(10);
+		popOver.setModal(true);
+		popOver.setMovable(true);
+		popOver.setLayout(new VerticalFlowLayout());
+		final WebImage icon = new WebImage(imgIcon);
+		final WebLabel titleLabel = new WebLabel(title, WebLabel.CENTER);
+		final WebButton closeButton = new WebButton(new IconsHelper().loadIcon(
+				IconsHelper.class, "common/cross2_16x16.png"),
+				new ActionListener() {
+					@Override
+					public void actionPerformed(final ActionEvent e) {
+						popOver.dispose();
+					}
+				}).setUndecorated(true);
+		
+		popOver.add(new GroupPanel(GroupingType.fillMiddle, 4, icon,
+				titleLabel, closeButton).setMargin(0, 0, 10, 0));
+
+		popOver.add(c);
+
+		popOver.show(target);
+	}
+	
 	public static void showPopup(MainFrame owner, Component target,
 			String[] messages, String actionButtonText, ActionListener action) {
 

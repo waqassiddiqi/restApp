@@ -147,6 +147,17 @@ public class ConnectionManager {
 				"rest_hrs_greater_36_3_days REAL)";
 		
 		executeUpdate(strPivotReport);
+		
+		String strAppSettings = "CREATE TABLE IF NOT EXISTS app_settings("
+                + "id bigint auto_increment, "
+                + "is_server boolean, "
+                + "server_ip VARCHAR(25), "
+                + "server_port VARCHAR(5), "
+                + "logo_image blob, "
+                + "custom_short_text VARCHAR(1500)"
+                + ")";	
+		
+		executeUpdate(strAppSettings);
 	}
 	
 	public ResultSet executeQuery(String strSql) {

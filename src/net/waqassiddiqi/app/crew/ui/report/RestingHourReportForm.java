@@ -13,11 +13,14 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import javax.imageio.ImageIO;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileFilter;
 
+import net.waqassiddiqi.app.crew.db.ApplicationSettingDAO;
 import net.waqassiddiqi.app.crew.db.CrewDAO;
 import net.waqassiddiqi.app.crew.db.VesselDAO;
+import net.waqassiddiqi.app.crew.model.ApplicationSetting;
 import net.waqassiddiqi.app.crew.model.Crew;
 import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.report.RestingHourReport;
@@ -159,12 +162,28 @@ public class RestingHourReportForm extends BaseForm {
 		localVelocityContext.put("currentCrew", crew);
 		localVelocityContext.put("currentVessel", vessel);
 		
+		ApplicationSetting settings = new ApplicationSettingDAO().get();
+		
+		try {
+			if(settings != null && settings.getLogo() != null) {
+				File outputfile = File.createTempFile("logo", ".png");
+
+				ImageIO.write(settings.getLogo(), "png", outputfile);
+				
+				logoPath = "file:/" + outputfile.getAbsolutePath();
+			}
+			
+		} catch(Exception e) { }
+		
+		
+		
 		if(this.logoPath == null) {
 			URL u = ClassLoader.class.getResource("/resource/template/logo.png");
 			if(u != null) logoPath = u.toString(); 
 		}
 		
 		localVelocityContext.put("logo", logoPath);
+		localVelocityContext.put("customText", settings.getCustomText());		
 		
 		restingHourReport = new RestingHourReport(crew, vessel, month, year);
 	    restingHourReport.generateReport();		

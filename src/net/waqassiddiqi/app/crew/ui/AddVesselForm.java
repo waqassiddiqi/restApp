@@ -101,9 +101,9 @@ public class AddVesselForm extends BaseForm implements ActionListener {
 			txtFlag.setText(currentVessel.getFlag());
 			txtImo.setText(currentVessel.getImo());
 			
-			txtName.setEnabled(false);
-			txtFlag.setEnabled(false);
-			txtImo.setEnabled(false);
+			txtName.setEditable(false);
+			txtFlag.setEditable(false);
+			txtImo.setEditable(false);
 		}
 	}
 	
