@@ -3,7 +3,6 @@ package net.waqassiddiqi.app.crew.ui.report;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.StringWriter;
@@ -46,16 +45,11 @@ import com.alee.laf.filechooser.WebFileChooser;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.text.WebTextPane;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.pdf.PdfWriter;
 
 public class RestingHourReportForm extends BaseForm {
 
 	private Logger log = Logger.getLogger(getClass().getName());
 	private WebFileChooser fileChooser = null;
-	private static String sourceImage = "";
 	private File saveFileTarget = null;
 	private WebTextPane reportPane;
 	private WebComboBox cmbCrew;
@@ -173,17 +167,17 @@ public class RestingHourReportForm extends BaseForm {
 				logoPath = "file:/" + outputfile.getAbsolutePath();
 			}
 			
-		} catch(Exception e) { }
+		} catch(Exception e) {  }
 		
 		
 		
 		if(this.logoPath == null) {
-			URL u = ClassLoader.class.getResource("/resource/template/logo.png");
+			URL u = ClassLoader.class.getResource("/resource/template/logo.jpg");
 			if(u != null) logoPath = u.toString(); 
 		}
 		
 		localVelocityContext.put("logo", logoPath);
-		localVelocityContext.put("customText", settings.getCustomText());		
+		localVelocityContext.put("customText", settings.getCustomRestReportText());
 		
 		restingHourReport = new RestingHourReport(crew, vessel, month, year);
 	    restingHourReport.generateReport();		
@@ -241,42 +235,6 @@ public class RestingHourReportForm extends BaseForm {
 		}
 		
 		return filePath;
-	}
-	
-	@SuppressWarnings("unused")
-	private void _generatePdf(String path) {
-		ByteArrayOutputStream localByteArrayOutputStream = null;
-		Document localDocument = null;
-		PdfWriter localPdfWriter = null;
-		
-		try {
-
-			localByteArrayOutputStream = new ByteArrayOutputStream();
-			localDocument = new Document(PageSize.A4_LANDSCAPE.rotate());
-
-			localPdfWriter = PdfWriter.getInstance(localDocument, new FileOutputStream(path));
-			localPdfWriter.setStrictImageSequence(true);
-			localDocument.open();
-			Image localImage = Image.getInstance(sourceImage + ".png");
-			localImage.scaleToFit(650.0F, 600.0F);
-			localDocument.add(localImage);
-			localDocument.close();
-			localByteArrayOutputStream.flush();
-
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-		
-		try {
-			File localFile = new File(sourceImage + ".png");
-			if (localFile.delete()) {
-				log.info(localFile.getName() + " is deleted!");
-			} else {
-				log.info("Delete operation is failed.");
-			}
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
 	}
 	
 	@Override

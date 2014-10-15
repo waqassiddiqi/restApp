@@ -34,7 +34,6 @@ public class CustomizationForm extends BaseForm {
 	private WebTextArea txtRestHourCustomText;
 	private WebTextArea txtErrorReportCustomText;
 	private WebTextArea txtNCReportCustomText;
-	private WebTextArea txtPivotReportCustomText;
 	private WebTextArea txtWorkingArragementReportCustomText;
 	
 	public CustomizationForm(MainFrame owner) {
@@ -59,13 +58,6 @@ public class CustomizationForm extends BaseForm {
 		txtNCReportCustomText.setWrapStyleWord(true);
 		
 		pDoc = (AbstractDocument) txtNCReportCustomText.getDocument();
-		pDoc.setDocumentFilter(new DocumentSizeFilter(1000));
-		
-		txtPivotReportCustomText = new WebTextArea();
-		txtPivotReportCustomText.setLineWrap (true);
-		txtPivotReportCustomText.setWrapStyleWord(true);
-		
-		pDoc = (AbstractDocument) txtPivotReportCustomText.getDocument();
 		pDoc.setDocumentFilter(new DocumentSizeFilter(1000));
 		
 		txtWorkingArragementReportCustomText = new WebTextArea();
@@ -112,14 +104,17 @@ public class CustomizationForm extends BaseForm {
 		if(settings != null && settings.getLogo() != null) {
 			drop.setImage(settings.getLogo());
 		} else {
-			drop.setImage(ImageUtils.getBufferedImage(ClassLoader.class.getResource("/resource/template/logo.png")));
+			drop.setImage(ImageUtils.getBufferedImage(ClassLoader.class.getResource("/resource/template/logo.jpg")));
 		}
 				
 		final WebCollapsiblePane leftPane = new WebCollapsiblePane("Company Logo", new GroupPanel(10, false, drop, 
 				new WebLabel("<html>This logo will be displayed on reports <br/><i>(Recommended size is 80x80 pixels)</i></html>", JLabel.CENTER)).setMargin(20));
 		
 		if(settings != null) {
-			txtRestHourCustomText.setText(settings.getCustomText());
+			txtRestHourCustomText.setText(settings.getCustomRestReportText());
+			txtErrorReportCustomText.setText(settings.getCustomErrorReportText());
+			txtNCReportCustomText.setText(settings.getCustomNCReportText());
+			txtWorkingArragementReportCustomText.setText(settings.getCustomWorkingReportText());
 		}
 		
 		WebScrollPane areaScroll = new WebScrollPane(txtRestHourCustomText);
@@ -135,12 +130,9 @@ public class CustomizationForm extends BaseForm {
 				getLabel("Non-Conformity summary report:"),
 				getTextAreaScroll(txtNCReportCustomText),
 				
-				getLabel("Pivot report:"),
-				getTextAreaScroll(txtPivotReportCustomText),
-				
 				getLabel("Working arragements report:"),
 				getTextAreaScroll(txtWorkingArragementReportCustomText),
-				new WebLabel("<html>This text will be displayed under reports <br/><i>You can use html tags for formatting</i></html>", JLabel.CENTER)
+				new WebLabel("<html>This text will be displayed in report's footer</html>", JLabel.CENTER)
 				).setMargin(10));
 		
 		
@@ -176,7 +168,11 @@ public class CustomizationForm extends BaseForm {
 			}
 			
 			if(settings != null) {
-				//settings.setCustomText(txtCustomText.getText());
+				settings.setCustomRestReportText(txtRestHourCustomText.getText());
+				settings.setCustomErrorReportText(txtErrorReportCustomText.getText());
+				settings.setCustomNCReportText(txtNCReportCustomText.getText());
+				settings.setCustomWorkingReportText(txtWorkingArragementReportCustomText.getText());
+				
 				dao.updateApplicationSetting(settings);
 				
 				NotificationManager.showNotification("Application settings have been saved");

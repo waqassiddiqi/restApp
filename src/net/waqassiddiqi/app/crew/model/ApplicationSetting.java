@@ -9,7 +9,17 @@ public class ApplicationSetting {
 	private String serverIP;
 	private String serverPort;
 	private BufferedImage logo;
-	private String customText;
+	private String customRestReportText;
+	private String customErrorReportText;
+	private String customNCReportText;
+	private String customWorkingReportText;
+	
+	public ApplicationSetting() {
+		customRestReportText = "";
+		customErrorReportText = "";
+		customNCReportText = "";
+		customWorkingReportText = "";
+	}
 	
 	public int getId() {
 		return id;
@@ -41,10 +51,32 @@ public class ApplicationSetting {
 	public void setLogo(BufferedImage logo) {
 		this.logo = logo;
 	}
-	public String getCustomText() {
-		return customText;
+	
+	public String getCustomRestReportText() {
+		return customRestReportText;
 	}
-	public void setCustomText(String customText) {
-		this.customText = customText;
+	public void setCustomRestReportText(String customRestReportText) {
+		this.customRestReportText = customRestReportText;
+	}
+	
+	public String getCustomErrorReportText() {
+		return customErrorReportText;
+	}
+	public void setCustomErrorReportText(String customErrorReportText) {
+		this.customErrorReportText = customErrorReportText;
+	}
+	
+	public String getCustomNCReportText() {
+		return customNCReportText;
+	}
+	public void setCustomNCReportText(String customNCReportText) {
+		this.customNCReportText = customNCReportText;
+	}
+	
+	public String getCustomWorkingReportText() {
+		return customWorkingReportText;
+	}
+	public void setCustomWorkingReportText(String customWorkingReportText) {
+		this.customWorkingReportText = customWorkingReportText;
 	}
 }

@@ -58,6 +58,7 @@ public class DatabaseServer {
 				
 			} catch(Exception e) {
 				log.error("Unable to start rest hour server", e);
+				return null;
 			}
 		} else if(server.isRunning(true) == false) {
 			try {
@@ -70,6 +71,7 @@ public class DatabaseServer {
 				
 			} catch(Exception e) {
 				log.error("Unable to start rest hour server", e);
+				return null;
 			}
 		}
 		

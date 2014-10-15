@@ -12,11 +12,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import net.waqassiddiqi.app.crew.Constant;
 import net.waqassiddiqi.app.crew.controller.CrewFactory;
 import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
@@ -43,6 +47,7 @@ import com.alee.extended.statusbar.WebMemoryBar;
 import com.alee.extended.statusbar.WebStatusBar;
 import com.alee.laf.WebLookAndFeel;
 import com.alee.laf.label.WebLabel;
+import com.alee.laf.optionpane.WebOptionPane;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.progressbar.WebProgressBar;
 import com.alee.laf.rootpane.WebDialog;
@@ -51,11 +56,10 @@ import com.alee.laf.text.WebTextField;
 import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.style.StyleManager;
 import com.alee.managers.tooltip.TooltipManager;
+import com.alee.utils.ImageUtils;
 import com.alee.utils.ThreadUtils;
 
 public class MainFrame extends WebFrame implements ChangeListener {
-	
-	public final static boolean isServer = true;
 	
 	private static final long serialVersionUID = 1L;
 	private Logger log = Logger.getLogger(getClass().getName());
@@ -91,25 +95,39 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		
 		try {
 			
-			if (isServer) {
-				DatabaseServer.getInstance().start();
+			if (Constant.isServer) {
+				if(DatabaseServer.getInstance().start() == null)
+					throw new SQLException("Server is already running");
 			}
 			
 			ConnectionManager.getInstance().setupDatabase();
 			
-			initAppSettings();
-			
 		} catch (SQLException e) {
 			log.error(e.getMessage(), e);
+			
+			WebOptionPane.showMessageDialog (
+					this, "An application instance is already running or application data has corrupted", 
+					"Error", WebOptionPane.ERROR_MESSAGE );
+			
+			System.exit(1);
 		}
 		
-		setTitle("Crew");
-        
+		initAppSettings();
+		
+		setTitle("REST HOURS VALIDATOR " + Constant.version);
+		
+		iconHelper = new IconsHelper();
+		
+		List<ImageIcon> iconList = new ArrayList<ImageIcon>();
+		iconList.add(iconHelper.loadIcon("common/app_icon_128.jpg"));
+		iconList.add(iconHelper.loadIcon("common/app_icon_64.jpg"));
+		iconList.add(iconHelper.loadIcon("common/app_icon_32.jpg"));
+		iconList.add(iconHelper.loadIcon("common/app_icon_16.jpg"));
+		
+		setIconImages(ImageUtils.toImagesList(iconList));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         initFactories();
-        
-        iconHelper = new IconsHelper();
         
 		contentPane = new WebPanel();		
 		setLayout(new BorderLayout());
@@ -228,7 +246,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 			}
 		}
 		
-		if(isServer) {
+		if(Constant.isServer) {
 			
 			statusBar.addSeparatorToEnd();
 			
@@ -301,8 +319,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		ApplicationSettingDAO dao = new ApplicationSettingDAO();
 		if(dao.get() == null) {
 			ApplicationSetting settings = new ApplicationSetting();
-			settings.setCustomText("");
-			settings.setServer(isServer);
+			settings.setServer(Constant.isServer);
 			settings.setServerPort("9090");
 			
 			dao.addApplicationSetting(settings);

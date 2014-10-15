@@ -26,9 +26,11 @@ public class ApplicationSettingDAO {
 	
 	public int addApplicationSetting(ApplicationSetting settings) {
 		
-		int generatedId = db.executeInsert("INSERT INTO app_settings(is_server, server_ip, server_port, custom_short_text) " +
-				"VALUES(?, ?, ?, ?);", 
-				new String[] { settings.isServer() ? "1" : "0", settings.getServerIP(), settings.getServerPort(), settings.getCustomText() } );
+		int generatedId = db.executeInsert("INSERT INTO app_settings(is_server, server_ip, server_port, " +
+				"custom_text_rest_report, custom_text_error_report, custom_text_nc_report, custom_text_working_report) " +
+				"VALUES(?, ?, ?, ?, ?, ?, ?);", 
+				new String[] { settings.isServer() ? "1" : "0", settings.getServerIP(), settings.getServerPort(), 
+						settings.getCustomRestReportText(), settings.getCustomErrorReportText(), settings.getCustomNCReportText(), settings.getCustomWorkingReportText() } );
 		
 		if(log.isDebugEnabled()) {
 			log.debug("New application settings added: " + generatedId);
@@ -38,8 +40,10 @@ public class ApplicationSettingDAO {
 	}
 	
 	public boolean updateApplicationSetting(ApplicationSetting settings) {
-		int rows = db.executeUpdate("UPDATE app_settings SET is_server=?, server_ip=?, server_port=?, custom_short_text=?", 
-				new String[] { settings.isServer() ? "1" : "0", settings.getServerIP(), settings.getServerPort(), settings.getCustomText() });
+		int rows = db.executeUpdate("UPDATE app_settings SET is_server=?, server_ip=?, server_port=?, " +
+				"custom_text_rest_report=?, custom_text_error_report=?, custom_text_nc_report=?, custom_text_working_report=?", 
+				new String[] { settings.isServer() ? "1" : "0", settings.getServerIP(), settings.getServerPort(), 
+						settings.getCustomRestReportText(), settings.getCustomErrorReportText(), settings.getCustomNCReportText(), settings.getCustomWorkingReportText() });
 		
 		if(rows > 0)
 			return true;
@@ -110,7 +114,12 @@ public class ApplicationSettingDAO {
 					setServer(rs.getBoolean("is_server"));
 					setServerIP(rs.getString("server_ip"));
 					setServerPort(rs.getString("server_port"));
-					setCustomText(rs.getString("custom_short_text"));
+					
+					setCustomRestReportText(rs.getString("custom_text_rest_report"));
+					setCustomErrorReportText(rs.getString("custom_text_error_report"));
+					setCustomNCReportText(rs.getString("custom_text_nc_report"));
+					setCustomWorkingReportText(rs.getString("custom_text_working_report"));
+					
 					
 					Blob blob = rs.getBlob("logo_image");
 					if(blob != null) {

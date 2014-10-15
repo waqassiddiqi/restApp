@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<title>Error Report</title>
+	<style type="text/css">
+		@page { margin: 0px 0px 0px; size: A4 landscape;}
+
+		
+		@font-face {
+			font-family: 'Carrois Gothic';	
+			-fs-pdf-font-embed: embed;
+			-fs-pdf-font-encoding: Identity-H;
+		}
+		
+		.value {
+			background-color: #F0F0F0;
+		}
+		
+		.filled {
+			background-color: gray;
+		}
+		
+		.mediumFont {
+			font-size: 11pt;
+		}
+	</style>
+</head>	
+<body style="font-family: Carrois Gothic;">
+	<table border="0" cellpadding="0" cellspacing="0" style="width:100%; border:solid 0px black;" class="mediumFont">
+		<tr>
+			<td style="width: 1px">&nbsp;</td>
+			<td style="padding: 2px; width: 1%">
+				<img alt="" src="$!{logo}" style="width: 80px; height: 80px;" />
+			</td>
+			<td style="width:20%">
+				<p><span style="font-size: 20px; font-weight: bold;">Error Log Report</span></p>
+				<p>$host.getFormattedMonth() $host.getYear()</p>
+			</td>
+			<td>
+				<table border="0" cellpadding="5" cellspacing="5" style="width:100%; border:solid 0px black;">
+					<tr>
+						<td style="width:10%">Vessel Name:</td>
+						<td style="width:20%" class="value">$!{currentVessel.Name}</td>
+						
+						<td style="width:1%">Crew:</td>
+						<td style="width:20%" class="value">$!{currentCrew.FirstName}&nbsp;$!{currentCrew.LastName}</td>
+					</tr>
+					
+					<tr>
+						<td style="width:10%">IMO:</td>
+						<td style="width:20%" class="value">$!{currentVessel.Imo}</td>
+						
+						<td style="width:1%">Rank:</td>
+						<td style="width:20%" class="value">$!{currentCrew.Rank}</td>
+					</tr>
+					
+					<tr>
+						<td style="width:10%">Flag:</td>
+						<td style="width:20%" class="value">$!{currentVessel.Flag}</td>
+						
+						<td style="width:1%">Watchkeeper:</td>
+						<td style="width:20%" class="value">#if($currentCrew.watchKeeper)YES#{else}NO#end</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<br/>
+	<table border="1" cellpadding="1" cellspacing="0" style="width:100%; border:solid 1px black; font-size: 10px;">
+		<tr>
+			<th rowspan="4" align="center" valign="middle" class="value">DAY</th>
+			<th rowspan="4" align="center" valign="middle" class="value"
+				scope="col">DATE</th>
+			<th colspan="4" rowspan="2" class="value" scope="col">HOURS</th>
+			<th colspan="7" align="center" valign="middle" class="filled"
+				scope="col">ERRORS</th>
+			<th align="center" valign="middle" class="filled" scope="col">EXCEPTIONS</th>
+		</tr>
+		<tr>
+			<td colspan="2" align="center" valign="middle" bgcolor="#FFFFFF">CURRENT
+				DAY</td>
+			<td colspan="2" align="center" valign="middle" bgcolor="#FFFFFF">IN
+				ANY</td>
+			<td colspan="2" align="center" valign="middle" bgcolor="#FFFFFF">REST</td>
+			<td align="center" valign="middle" bgcolor="#FFFFFF">OPA 90</td>
+			<td rowspan="3" bgcolor="#FFFFFF" align="center" valign="middle">Comments
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="2" align="center" valign="middle" class="value">Work
+				in 24-hour Period</td>
+			<td colspan="3" align="center" class="value">Rest</td>
+			<td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">Total
+				period of REST &gt; 10 Hrs</td>
+			<td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">Total
+				Period of WORK &lt; 14 Hrs</td>
+			<td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">24-hour
+				Total Period of REST &gt; 10 Hrs</td>
+			<td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">7-days
+				Total Period of REST &gt; 77 Hrs</td>
+			<td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">At
+				least one period of rest 6 hours in length</td>
+			<td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">Total
+				Number of Rest Periods More than 2</td>
+			<td rowspan="2" align="center" valign="middle" bgcolor="#FFFFFF">Rest
+				Hours &gt; 36 hours in any 3 days</td>
+		</tr>
+		<tr>
+			<td align="center" valign="middle" class="value">in 24-hour
+				Period</td>
+			<td align="center" valign="middle" class="value">in any
+				24-hour Period</td>
+			<td align="center" valign="middle" class="value">in any 7
+				Day Period</td>
+		</tr>
+
+
+		#foreach( $entryTime in $lstEntryTimes ) #set( $totalWorkHours = 24 -
+		$entryTime.getTotalRestHours()) #set( $restHoursIn24Hours =
+		$host.get24HourRestHours($velocityCount)) #set( $restHoursIn7Days =
+		$host.get7DayRestHours($velocityCount)) #set( $restPeriodCounter =
+		$host.getRestPeriodCounter($velocityCount))
+		<tr>
+			<th align="center" valign="middle" bgcolor="#009999">$velocityCount</th>
+			<th bgcolor="#FFFFFF" scope="col">$entryTime.getFormattedDate()</th>
+			<td bgcolor="#FFFFFF">$totalWorkHours</td>
+			<td bgcolor="#FFFFFF">$entryTime.getTotalRestHours()</td>
+			<td bgcolor="#FFFFFF">$restHoursIn24Hours</td>
+			<td bgcolor="#FFFFFF">$restHoursIn7Days</td>
+			<td bgcolor="#FFFFFF">#if($entryTime.getTotalRestHours()<10)ERROR#end</td>
+			<td bgcolor="#FFFFFF">#if($totalWorkHours > 14)ERROR#end</td>
+			<td bgcolor="#FFFFFF">#if($restHoursIn24Hours < 10)ERROR#end</td>
+			<td bgcolor="#FFFFFF">#if($restHoursIn7Days < 77)ERROR#end</td>
+			<td bgcolor="#FFFFFF">#if(!$host.contain6HourContinuousRest($velocityCount))ERROR#end</td>
+			<td bgcolor="#FFFFFF">$restPeriodCounter</td>
+			<td bgcolor="#FFFFFF">$host.getLast3DayTotalRestHours($velocityCount)</td>
+			<td bgcolor="#FFFFFF">$!{entryTime.comments}</td>
+		</tr>
+		#end
+	</table>
+	<br/>
+	$!{customText}
+</body>
+</html>

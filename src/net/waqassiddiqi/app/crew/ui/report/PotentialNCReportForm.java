@@ -159,11 +159,12 @@ public class PotentialNCReportForm extends BaseForm {
 		} catch(Exception e) { }
 		
 		if(this.logoPath == null) {
-			URL u = ClassLoader.class.getResource("/resource/template/logo.png");
+			URL u = ClassLoader.class.getResource("/resource/template/logo.jpg");
 			if(u != null) logoPath = u.toString(); 
 		}
 		
 		localVelocityContext.put("logo", logoPath);
+		localVelocityContext.put("customText", settings.getCustomNCReportText());
 		
 		pNcReport = new PotentialNCReport(month, year);
 		List<String[]> data = pNcReport.generateReport();		

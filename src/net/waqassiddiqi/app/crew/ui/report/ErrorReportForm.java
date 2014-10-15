@@ -1,22 +1,25 @@
 package net.waqassiddiqi.app.crew.ui.report;
 
-import gui.ava.html.image.generator.HtmlImageGenerator;
-
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.StringWriter;
+import java.net.URL;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import javax.imageio.ImageIO;
+import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileFilter;
 
+import net.waqassiddiqi.app.crew.db.ApplicationSettingDAO;
 import net.waqassiddiqi.app.crew.db.CrewDAO;
 import net.waqassiddiqi.app.crew.db.VesselDAO;
+import net.waqassiddiqi.app.crew.model.ApplicationSetting;
 import net.waqassiddiqi.app.crew.model.Crew;
 import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.report.ErrorReport;
@@ -31,8 +34,10 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import com.alee.extended.panel.GroupPanel;
+import com.alee.extended.progress.WebProgressOverlay;
 import com.alee.global.StyleConstants;
 import com.alee.laf.button.WebButton;
 import com.alee.laf.combobox.WebComboBox;
@@ -40,22 +45,23 @@ import com.alee.laf.filechooser.WebFileChooser;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.text.WebTextPane;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.pdf.PdfWriter;
 
 public class ErrorReportForm extends BaseForm {
 
 	private Logger log = Logger.getLogger(getClass().getName());
 	private WebFileChooser fileChooser = null;
-	private static String sourceImage = "";
 	private File saveFileTarget = null;
 	private WebTextPane reportPane;
 	private WebComboBox cmbCrew;
 	private WebComboBox cmbYear;
 	private WebComboBox cmbMonth;
 	private ErrorReport errorReport;
+	private String logoPath;
+	private final WebProgressOverlay poBtnPdf;
+	private URL urlCustomFont = null;
+	private String generatedHtml = "";
+	private final WebProgressOverlay progressOverlay;
+	private WebScrollPane scrollPane;
 	
 	@SuppressWarnings("unchecked")
 	public ErrorReportForm(MainFrame owner) {
@@ -90,6 +96,12 @@ public class ErrorReportForm extends BaseForm {
         		cmbMonth.setSelectedIndex(i);
         	}
         }
+        
+        poBtnPdf = new WebProgressOverlay();
+        poBtnPdf.setConsumeEvents(false);
+        
+        progressOverlay = new WebProgressOverlay();
+        progressOverlay.setConsumeEvents(false);
 	}
 
 	@SuppressWarnings("serial")
@@ -104,7 +116,8 @@ public class ErrorReportForm extends BaseForm {
 		btnSaveAsPdf.putClientProperty("command", "pdf");
 		btnSaveAsPdf.addActionListener(this);
 		btnSaveAsPdf.setToolTipText("Save as PDF");
-		getToolbar().add(btnSaveAsPdf);
+		poBtnPdf.setComponent(btnSaveAsPdf);		
+		getToolbar().add(poBtnPdf);
 		
 		getToolbar().addSeparator();
 		
@@ -113,7 +126,9 @@ public class ErrorReportForm extends BaseForm {
 		WebButton btnFilter = new WebButton("Generate Report", getIconsHelper().loadIcon("common/settings_16x16.png"));
 		btnFilter.putClientProperty("command", "filter");
 		btnFilter.addActionListener(this);
-		GroupPanel gp = new GroupPanel(cmbCrew, cmbMonth, cmbYear, btnFilter);
+		progressOverlay.setComponent(btnFilter);
+		
+		GroupPanel gp = new GroupPanel(cmbCrew, cmbMonth, cmbYear, progressOverlay);
 		
 		getToolbar().add(gp);
 	}
@@ -131,12 +146,35 @@ public class ErrorReportForm extends BaseForm {
 		return scrollPane.setMargin(5);
 	}
 	
-	private void generateReport(Crew crew, Vessel vessel, int month, int year) {
+	private String generateReport(Crew crew, Vessel vessel, int month, int year) {
 		
 		VelocityContext localVelocityContext = new VelocityContext();
 		localVelocityContext.put("currentCrew", crew);
 		localVelocityContext.put("currentVessel", vessel);
+	
+		ApplicationSetting settings = new ApplicationSettingDAO().get();
+		
+		try {
+			if(settings != null && settings.getLogo() != null) {
+				File outputfile = File.createTempFile("logo", ".png");
+
+				ImageIO.write(settings.getLogo(), "png", outputfile);
 				
+				logoPath = "file:/" + outputfile.getAbsolutePath();
+			}
+			
+		} catch(Exception e) { }
+		
+		
+		
+		if(this.logoPath == null) {
+			URL u = ClassLoader.class.getResource("/resource/template/logo.jpg");
+			if(u != null) logoPath = u.toString(); 
+		}
+		
+		localVelocityContext.put("logo", logoPath);
+		localVelocityContext.put("customText", settings.getCustomRestReportText());
+		
 		errorReport = new ErrorReport(crew, vessel, month, year);
 		errorReport.generateReport();		
 		
@@ -147,55 +185,62 @@ public class ErrorReportForm extends BaseForm {
 	    ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath"); 
 	    ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
 	    
-	    Template reportTemplate = ve.getTemplate("resource/template/errorReport.vm");
+	    Template reportTemplate = ve.getTemplate("resource/template/error_report.html");
 	    
 	    StringWriter writer = new StringWriter();
 	    
 	    reportTemplate.merge(localVelocityContext, writer);
 	    
-	    reportPane.setText(writer.toString());
+	    generatedHtml = writer.toString();
+	    
+	    if(log.isDebugEnabled()) {
+	    	log.debug(generatedHtml);
+	    }
+	    
+	    return generatedHtml;
 	}
 	
-	private void generatePdf(String path) {
-		ByteArrayOutputStream localByteArrayOutputStream = null;
-		Document localDocument = null;
-		PdfWriter localPdfWriter = null;
+	private String generatePdf(String filePath) {
+		
+		if(filePath.contains(".pdf") == false)
+			filePath = filePath.trim() + ".pdf";
+		
+		ITextRenderer renderer = new ITextRenderer();
 		
 		try {
-
-			localByteArrayOutputStream = new ByteArrayOutputStream();
-			localDocument = new Document(PageSize.A4_LANDSCAPE.rotate());
-
-			localPdfWriter = PdfWriter.getInstance(localDocument, new FileOutputStream(path));
-			localPdfWriter.setStrictImageSequence(true);
-			localDocument.open();
-			Image localImage = Image.getInstance(sourceImage + ".png");
-			localImage.scaleToFit(650.0F, 600.0F);
-			localDocument.add(localImage);
-			localDocument.close();
-			localByteArrayOutputStream.flush();
-
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
 		
-		try {
-			File localFile = new File(sourceImage + ".png");
-			if (localFile.delete()) {
-				log.info(localFile.getName() + " is deleted!");
-			} else {
-				log.info("Delete operation is failed.");
+			if(urlCustomFont == null) {
+				urlCustomFont = ClassLoader.class.getResource("/resource/template/CarroisGothic-Regular.ttf");
+				renderer.getFontResolver().addFont(urlCustomFont.toString(), true);
 			}
+			
+			renderer.setDocumentFromString(generatedHtml);
+			renderer.layout();
+			
+			String fileNameWithPath = filePath;
+			FileOutputStream fos = new FileOutputStream(fileNameWithPath);
+			renderer.createPDF(fos);
+			fos.close();
+				
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("Failed to generate PDF", e);
+			
+			return null;
+		} finally {
+			renderer = null;
 		}
+		
+		return filePath;
 	}
+	
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		WebButton btnSource = (WebButton) e.getSource();
 		
 		if(btnSource.getClientProperty("command").equals("pdf")) {
+			poBtnPdf.setShowLoad(!progressOverlay.isShowLoad());
 			saveAsPdf();
 		} else if(btnSource.getClientProperty("command").equals("filter")) {
 			
@@ -213,13 +258,50 @@ public class ErrorReportForm extends BaseForm {
 				
 				Vessel currentVessel = new VesselDAO().getAll().get(0);
 				
-				generateReport( (Crew) cmbCrew.getSelectedItem(), currentVessel, cmbMonth.getSelectedIndex() - 1, 
-						(int) cmbYear.getSelectedItem());
+				progressOverlay.setShowLoad(!progressOverlay.isShowLoad());
+				
+				new GenerateReportTask((Crew) cmbCrew.getSelectedItem(), currentVessel, cmbMonth.getSelectedIndex() - 1, 
+						(int) cmbYear.getSelectedItem()).execute();
+				
 				
 			} else {
 				NotificationManager.showPopup(getOwner(), cmbCrew, new String[] { "Please select crew" });
 				return;
 			}			
+		}
+	}
+	
+	public final class GenerateReportTask extends SwingWorker<String, Void> {
+
+		private Crew crew;
+		private Vessel vessel;
+		private int month;
+		private int year;
+		
+		public GenerateReportTask(Crew c, Vessel v, int month, int year) {
+			this.crew = c;
+			this.vessel = v;
+			this.month = month;
+			this.year = year;
+		}
+		
+		@Override
+		protected String doInBackground() throws Exception {
+			
+			return generateReport(crew, vessel, month, year);
+		}
+		
+		@Override
+		protected void done() {
+			reportPane.setText(generatedHtml);
+			
+			progressOverlay.setShowLoad(!progressOverlay.isShowLoad());
+			
+			javax.swing.SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					scrollPane.getVerticalScrollBar().setValue(0);
+				}
+			});
 		}
 	}
 	
@@ -229,13 +311,39 @@ public class ErrorReportForm extends BaseForm {
 			public void approveSelection() {
 				super.approveSelection();
 				ErrorReportForm.this.saveFileTarget = getSelectedFile();
-				ErrorReportForm.sourceImage = ErrorReportForm.this.saveFileTarget.toString();
 				
-				if (!FilesUtil.getExtension(ErrorReportForm.this.saveFileTarget).equalsIgnoreCase(".pdf")) {
-					HtmlImageGenerator localHtmlImageGenerator = new HtmlImageGenerator();
-					localHtmlImageGenerator.loadHtml(ErrorReportForm.this.reportPane.getText());
-					localHtmlImageGenerator.saveAsImage(ErrorReportForm.sourceImage + ".png");
-					ErrorReportForm.this.generatePdf(ErrorReportForm.sourceImage + ".pdf");
+				if (!FilesUtil.getExtension(ErrorReportForm.this.saveFileTarget).equalsIgnoreCase(".pdf")) {					
+					SwingWorker<String, Void> worker = new SwingWorker<String, Void>() {
+
+						@Override
+						protected String doInBackground() throws Exception {
+							return generatePdf(ErrorReportForm.this.saveFileTarget.toString());
+						}
+						
+						@Override
+						protected void done() {
+							
+							String notificationMsg = "";
+							
+							try {
+								String path = get();
+								
+								if(path != null) {
+									notificationMsg = "PDF has been generated at: " + path;
+								} else {
+									notificationMsg = "PDF generation failed";
+								}
+								
+							} catch (InterruptedException | ExecutionException e) {
+								notificationMsg = "PDF generation failed";
+							}
+							
+							NotificationManager.showNotification(notificationMsg);
+							poBtnPdf.setShowLoad(!poBtnPdf.isShowLoad());
+						}
+					};
+					
+					worker.execute();
 				}
 			}
 		};

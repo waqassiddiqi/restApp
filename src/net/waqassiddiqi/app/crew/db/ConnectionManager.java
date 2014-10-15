@@ -32,11 +32,11 @@ public class ConnectionManager {
 	private Connection createConnection() throws SQLException {
 		JdbcDataSource ds = new JdbcDataSource();
 		
-		ds.setURL("jdbc:h2:tcp://localhost:9090/~/restdb;");
+		ds.setURL("jdbc:h2:tcp://localhost:9090/./resource/restdb;IFEXISTS=TRUE");
 		
 		//ds.setURL("jdbc:h2:~/restdb;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9090;");
-        ds.setUser("sa");
-        ds.setPassword("sa");
+        ds.setUser("shipip");
+        ds.setPassword("letmeinasadmin");
         
         return ds.getConnection();
 	}
@@ -154,7 +154,10 @@ public class ConnectionManager {
                 + "server_ip VARCHAR(25), "
                 + "server_port VARCHAR(5), "
                 + "logo_image blob, "
-                + "custom_short_text VARCHAR(1500)"
+                + "custom_text_rest_report VARCHAR(1500), "
+                + "custom_text_error_report VARCHAR(1500), "
+                + "custom_text_nc_report VARCHAR(1500), "
+                + "custom_text_working_report VARCHAR(1500), "
                 + ")";	
 		
 		executeUpdate(strAppSettings);
