@@ -346,7 +346,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 			//}
 			
 			errorReport.getEntryTimeList().get(cal.get(Calendar.DAY_OF_MONTH) - 1).setSchedule(timeSheet.getSchedule());
-			//errorReport.refresh();
+			errorReport.refresh();
 			
 			if(errorReport.getRestPeriodCounter(cal.get(Calendar.DAY_OF_MONTH)) > 2) {
 				sb.append("<li>Total number of REST period is more than 2</li>");
@@ -379,7 +379,8 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 				errorReportEntry.setTotalRest7daysGreater77hrs(true);
 			}
 			
-			System.out.println(errorReportEntry);
+			double last3DayTotalRestHours = errorReport.getLast3DayTotalRestHours(cal.get(Calendar.DAY_OF_MONTH));
+			errorReportEntry.setRestHour3daysGreater36hrs(last3DayTotalRestHours);
 		}
 		
 		sb.append("</ul></html>");
