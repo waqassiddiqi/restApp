@@ -99,7 +99,28 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 	@SuppressWarnings("serial")
 	@Override
 	public Component prepareView() {
-		tabPan = new WebTabbedPane ();
+		
+		tabPan = new WebTabbedPane () {
+		
+			@Override
+			public void setSelectedIndex(int newIndex) {
+				
+				if(this.getSelectedIndex() == 1) {
+					save();
+				}
+				
+				if(newIndex == 0)
+					super.setSelectedIndex(newIndex);
+				else if(InputValidator.validateInput(getOwner(), new JTextField[] { txtFirstName, txtLastName, txtNationality, txtPassport, txtSignonDate }, 
+						"This field cannot be empty")) {
+					
+					if(save())
+						super.setSelectedIndex(newIndex);
+				}
+			}
+			
+		};
+		
         tabPan.setOpaque(false);
         tabPan.setTabPlacement(WebTabbedPane.TOP);
         
@@ -329,9 +350,7 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		}
 	}
 	
-	private void save() {
-		tabPan.setSelectedIndex(0);
-		
+	private boolean save() {
 		final List<Vessel> listVessel = new VesselDAO().getAll();
 		if(listVessel.size() <= 0) {
 			net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(getOwner(), getOwner(), "No Vessel Found",
@@ -347,12 +366,12 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 							getOwner().addContent(VesselFactory.getInstance().getAdd());
 						}
 					}, true);
-			return;
+			return false;
 		}
 		
 		if(listRanks.size() <= 0) {
 			NotificationManager.showPopup(getOwner(), cmbRank, new String[] { "Please add a rank first from Rank Options above" });
-			return;
+			return false;
 		}	
 		
 		CrewDAO crewDao = new CrewDAO();
@@ -376,7 +395,7 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 				
 				if(crewDao.isPassportExists(txtPassport.getText().trim(), 0)) {
 					NotificationManager.showPopup(getOwner(), txtPassport, new String[] { "Passport / Book number must be unique" });
-					return;
+					return false;
 				}
 				
 				this.id = crewDao.addCrew(crew);
@@ -389,15 +408,19 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 					
 					NotificationManager.showNotification("New crew has been added");
 					
+					return true;
+					
 				} else {
 					NotificationManager.showNotification("An error has occured while adding new rank");
+					
+					return false;
 				}
 				
 			} else {
 				
 				if(crewDao.isPassportExists(txtPassport.getText().trim(), currentCrew.getId())) {
 					NotificationManager.showPopup(getOwner(), txtPassport, new String[] { "This passport number is already associated with other member of crew" });
-					return;
+					return false;
 				}
 				
 				currentCrew.setFirstName(txtFirstName.getText().trim());
@@ -415,8 +438,11 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 				associateDefaultTemplates();
 				
 				NotificationManager.showNotification("Crew has been updated.");
+				
+				return true;
 			}
 		}
+		return false;
 	}
 	
 	private void associateDefaultTemplates() {

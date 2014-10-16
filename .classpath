@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/weblaf-complete-1.28.jar"/>
+	<classpathentry kind="lib" path="lib/weblaf-complete-1.28.jar" sourcepath="/demo/src"/>
 	<classpathentry kind="lib" path="lib/h2-1.4.181.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="lib" path="lib/iText-5.0.6.jar"/>

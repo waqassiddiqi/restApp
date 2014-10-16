@@ -114,7 +114,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		
 		initAppSettings();
 		
-		setTitle("REST HOURS VALIDATOR " + Constant.version);
+		setTitle("SHIP IP LTD - REST HOURS VALIDATOR " + Constant.version);
 		
 		iconHelper = new IconsHelper();
 		

@@ -115,4 +115,35 @@ public class ErrorReportEntry {
 	public void setRestHour3daysGreater36hrs(double restHour3daysGreater36hrs) {
 		this.restHour3daysGreater36hrs = restHour3daysGreater36hrs;
 	}
+	
+	@Override
+	public String toString() {
+		return "ErrorReportEntry [id=" + id + ", crew=" + crew + ", entryDate="
+				+ entryDate + ", workIn24hours=" + workIn24hours
+				+ ", restIn24hours=" + restIn24hours + ", anyRest24hours="
+				+ anyRest24hours + ", rest7days=" + rest7days
+				+ ", restGreater10hrs=" + restGreater10hrs + ", workLess14hrs="
+				+ workLess14hrs + ", totalRest24hrsGreater10hrs="
+				+ totalRest24hrsGreater10hrs + ", totalRest7daysGreater77hrs="
+				+ totalRest7daysGreater77hrs + ", oneRestPeriod6hrs="
+				+ oneRestPeriod6hrs + ", totalRestPeriods=" + totalRestPeriods
+				+ ", restHour3daysGreater36hrs=" + restHour3daysGreater36hrs
+				+ ", getId()=" + getId() + ", getCrew()=" + getCrew()
+				+ ", getEntryDate()=" + getEntryDate()
+				+ ", getWorkIn24hours()=" + getWorkIn24hours()
+				+ ", getRestIn24hours()=" + getRestIn24hours()
+				+ ", getAnyRest24hours()=" + getAnyRest24hours()
+				+ ", getRest7days()=" + getRest7days()
+				+ ", isRestGreater10hrs()=" + isRestGreater10hrs()
+				+ ", isWorkLess14hrs()=" + isWorkLess14hrs()
+				+ ", isTotalRest24hrsGreater10hrs()="
+				+ isTotalRest24hrsGreater10hrs()
+				+ ", isTotalRest7daysGreater77hrs()="
+				+ isTotalRest7daysGreater77hrs() + ", isOneRestPeriod6hrs()="
+				+ isOneRestPeriod6hrs() + ", getTotalRestPeriods()="
+				+ getTotalRestPeriods() + ", getRestHour3daysGreater36hrs()="
+				+ getRestHour3daysGreater36hrs() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
+	}
 }

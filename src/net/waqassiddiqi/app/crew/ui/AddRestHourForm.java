@@ -378,6 +378,8 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 				
 				errorReportEntry.setTotalRest7daysGreater77hrs(true);
 			}
+			
+			System.out.println(errorReportEntry);
 		}
 		
 		sb.append("</ul></html>");

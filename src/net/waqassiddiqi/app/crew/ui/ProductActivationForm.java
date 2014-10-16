@@ -10,11 +10,13 @@ import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 
+import net.waqassiddiqi.app.crew.Constant;
 import net.waqassiddiqi.app.crew.db.RegistrationSettingDAO;
 import net.waqassiddiqi.app.crew.db.VesselDAO;
 import net.waqassiddiqi.app.crew.license.LicenseManager;
 import net.waqassiddiqi.app.crew.model.RegistrationSetting;
 import net.waqassiddiqi.app.crew.model.Vessel;
+import net.waqassiddiqi.app.crew.ui.control.ExWebLinkLabel;
 import net.waqassiddiqi.app.crew.util.NotificationManager;
 import net.waqassiddiqi.crewapp.license.util.SystemUtil;
 
@@ -41,11 +43,14 @@ public class ProductActivationForm extends BaseForm {
 	
 	final WebProgressBar progressBar1;
 	
+	final Vessel currentVessel;
+	
 	public ProductActivationForm(MainFrame owner) {
 		super(owner);
 		
 		progressBar1 = new WebProgressBar(0, 100);
 		btnActivate = new WebButton("Activate");
+		currentVessel = new VesselDAO().getAll().get(0);
 	}
 	
 	@Override
@@ -134,8 +139,17 @@ public class ProductActivationForm extends BaseForm {
 			}
 		});
 		
-		WebLinkLabel el = new WebLinkLabel ();
-        el.setEmailLink("Email Serial No", "support@shipip.com");
+		StringBuilder sb = new StringBuilder();
+		sb.append("Vessel name: " + currentVessel.getName());
+		sb.append("%0A");
+		sb.append("Vessel IMO: " + currentVessel.getImo());
+		sb.append("%0A");
+		sb.append("System ID: " + txtUniqueId.getText());
+		
+		
+		ExWebLinkLabel el = new ExWebLinkLabel ();
+        el.setEmailLink("Email Serial No", "support@shipip.com", 
+        		"Rest Hour Validation " + Constant.version + " activation", sb.toString());
 		
 		content.add(l, "0,1");
 		content.add(new GroupPanel(10, txtUniqueId, lblCopy, el), "1,1");
@@ -181,7 +195,7 @@ public class ProductActivationForm extends BaseForm {
 		content.add(l, "0,2");
 		content.add(txtImo, "1,2");
 
-		Vessel currentVessel = new VesselDAO().getAll().get(0);
+		
 		txtName.setText(currentVessel.getName());
 		txtImo.setText(currentVessel.getImo());
 		
