@@ -4,17 +4,15 @@
 	<classpathentry kind="lib" path="lib/weblaf-complete-1.28.jar" sourcepath="/demo/src"/>
 	<classpathentry kind="lib" path="lib/h2-1.4.181.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="lib/iText-5.0.6.jar"/>
 	<classpathentry kind="lib" path="lib/velocity-1.7.jar"/>
 	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
-	<classpathentry kind="lib" path="lib/html2image-0.9.jar"/>
 	<classpathentry kind="lib" path="lib/core-renderer.jar"/>
 	<classpathentry kind="lib" path="lib/core-renderer-minimal.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis-xerces-2.9.1.jar"/>
-	<classpathentry kind="lib" path="lib/iText-2.0.8.jar"/>
 	<classpathentry kind="lib" path="lib/opencsv-3.0.jar"/>
 	<classpathentry kind="lib" path="lib/core-lic.jar"/>
+	<classpathentry kind="lib" path="lib/iText-2.0.8.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
