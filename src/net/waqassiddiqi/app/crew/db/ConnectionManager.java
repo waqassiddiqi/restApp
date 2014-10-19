@@ -32,9 +32,8 @@ public class ConnectionManager {
 	private Connection createConnection() throws SQLException {
 		JdbcDataSource ds = new JdbcDataSource();
 		
-		ds.setURL("jdbc:h2:tcp://localhost:9090/./resource/restdb;IFEXISTS=TRUE");
+		ds.setURL("jdbc:h2:tcp://localhost:9090/./resource/restdb;IFEXISTS=TRUE;");
 		
-		//ds.setURL("jdbc:h2:~/restdb;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9090;");
         ds.setUser("shipip");
         ds.setPassword("letmeinasadmin");
         

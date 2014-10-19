@@ -1,0 +1,46 @@
+2014-10-19 22:24:04,305 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-10-19 22:24:04,856 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-10-19 22:25:03,929 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-10-19 22:25:04,433 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-10-19 22:25:37,247 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-10-19 22:25:37,812 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-10-19 22:26:16,237 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-10-19 22:26:17,144 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-10-19 22:27:04,118 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-10-19 22:27:05,134 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-10-19 22:27:56,516 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-10-19 22:27:57,130 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-10-19 22:28:36,180 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-10-19 22:28:36,832 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-10-19 22:28:43,224 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: CREATE TABLE IF NOT EXISTS vessels(id bigint auto_increment, name VARCHAR(30), imo VARCHAR(30), flag VARCHAR(30) )
+2014-10-19 22:28:51,999 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - result: 0
+2014-10-19 22:28:54,032 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: CREATE TABLE IF NOT EXISTS crews(id bigint auto_increment, vessel_id bigint, first_name VARCHAR(30), last_name VARCHAR(30), rank VARCHAR(30), nationality VARCHAR(30), book_number_or_passport VARCHAR(30), signon_date bigint, is_watch_keeper BOOLEAN, is_active BOOLEAN DEFAULT true)
+2014-10-19 22:28:54,037 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - result: 0
+2014-10-19 22:28:54,972 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: CREATE TABLE IF NOT EXISTS schedule_templates(id bigint auto_increment, schedule VARCHAR(48), is_on_port BOOLEAN, is_watch_keeping BOOLEAN )
+2014-10-19 22:28:54,975 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - result: 0
+2014-10-19 22:28:55,890 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: CREATE TABLE IF NOT EXISTS ranks(id bigint auto_increment, rank VARCHAR(30) )
+2014-10-19 22:28:55,893 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - result: 0
+2014-10-19 22:28:56,754 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: CREATE TABLE IF NOT EXISTS ranks_schedule_template(id bigint auto_increment, rank_id bigint, schedule_id bigint, is_on_port BOOLEAN )
+2014-10-19 22:28:56,758 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - result: 0
+2014-10-19 22:28:57,596 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: CREATE TABLE IF NOT EXISTS crew_schedule_template(id bigint auto_increment, crew_id bigint, schedule_id bigint, is_on_port BOOLEAN )
+2014-10-19 22:28:57,599 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - result: 0
+2014-10-19 22:28:58,510 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: CREATE TABLE IF NOT EXISTS entry_times(id bigint auto_increment, crew_id bigint, entry_date bigint, schedule VARCHAR(48), is_on_port BOOLEAN, work_in_24_hours REAL, rest_in_24_hours REAL, comments VARCHAR(500) )
+2014-10-19 22:28:58,516 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - result: 0
+2014-10-19 22:28:59,428 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: CREATE TABLE IF NOT EXISTS reg_settings(id bigint auto_increment, username VARCHAR(250), is_registered BOOLEAN, expiry bigint, product_key VARCHAR(24), app_used REAL, registered_on bigint, system_id VARCHAR(100), usage_started_on bigint, )
+2014-10-19 22:28:59,433 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - result: 0
+2014-10-19 22:29:00,284 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: CREATE TABLE IF NOT EXISTS error_report(id bigint auto_increment, crew_id bigint, entry_date bigint, work_24hr REAL, rest_24hr REAL, any_rest_24hr REAL, rest_7days REAL, rest_greater_10hrs BOOLEAN, work_less_14hrs BOOLEAN, total_rest_24hr_greater_10hrs BOOLEAN, total_rest_7days_greater_77hrs BOOLEAN, one_rest_period_6hrs BOOLEAN, total_rest_periods BIGINT, rest_hrs_greater_36_3_days REAL)
+2014-10-19 22:29:00,290 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - result: 0
+2014-10-19 22:29:01,755 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: CREATE TABLE IF NOT EXISTS app_settings(id bigint auto_increment, is_server boolean, server_ip VARCHAR(25), server_port VARCHAR(5), logo_image blob, custom_text_rest_report VARCHAR(1500), custom_text_error_report VARCHAR(1500), custom_text_nc_report VARCHAR(1500), custom_text_working_report VARCHAR(1500), )
+2014-10-19 22:29:01,757 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - result: 0
+2014-10-19 22:29:01,763 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: SELECT * FROM app_settings
+2014-10-19 22:29:01,908 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-10-19 22:29:02,277 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: SELECT * FROM reg_settings
+2014-10-19 22:29:02,282 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - Executing: UPDATE reg_settings SET username=?, is_registered=?, expiry=?, product_key=?, app_used=?, registered_on=?, system_id=?, usage_started_on=? with parameters: [ , 0, 1415905200001, , 0.0, 0, null, 1413658800001 ]
+2014-10-19 22:29:02,294 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: SELECT * FROM reg_settings
+2014-10-19 22:29:03,342 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: SELECT * FROM vessels
+2014-10-19 22:29:03,378 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: SELECT * FROM vessels
+2014-10-19 22:29:03,409 [main ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: SELECT * FROM reg_settings
+2014-10-19 22:29:08,258 [AWT-EventQueue-0 ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: SELECT * FROM ranks
+2014-10-19 22:29:14,352 [SwingWorker-pool-3-thread-1 ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: SELECT * FROM vessels
+2014-10-19 22:29:14,353 [SwingWorker-pool-3-thread-1 ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: SELECT * FROM app_settings
+2014-10-19 22:29:14,379 [SwingWorker-pool-3-thread-1 ] DEBUG net.waqassiddiqi.app.crew.db.ConnectionManager - executing: SELECT CONCAT(c.FIRST_NAME, ' ', c.LAST_NAME, ' / ', c.RANK) AS CREW, c.id AS CREW_ID, c.is_watch_keeper, t.* FROM SCHEDULE_TEMPLATES t INNER JOIN CREW_SCHEDULE_TEMPLATE ct ON ct.schedule_id = t.id INNER JOIN CREWS c ON c.id = ct.crew_id WHERE c.IS_ACTIVE = true AND c.IS_WATCH_KEEPER = IS_WATCH_KEEPING ORDER BY c.id
