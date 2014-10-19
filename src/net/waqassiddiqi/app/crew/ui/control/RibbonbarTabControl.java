@@ -208,7 +208,7 @@ public class RibbonbarTabControl {
 
 		buttonList.add(btnPotentialNCReport);
 		
-		WebButton btnWorkArragementReport = new WebButton("Working Arragements Report",
+		WebButton btnWorkArragementReport = new WebButton("Working Arrangements Report",
 				this.iconsHelper.loadIcon(getClass(), "ribbonbar/work_arragement_report_32x32.png"));
 
 		btnWorkArragementReport.setRolloverDecoratedOnly(true);

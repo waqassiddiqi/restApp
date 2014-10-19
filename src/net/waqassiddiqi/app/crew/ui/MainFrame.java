@@ -18,6 +18,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 
 import net.waqassiddiqi.app.crew.Constant;
@@ -26,9 +27,11 @@ import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.ApplicationSettingDAO;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
+import net.waqassiddiqi.app.crew.db.DatabaseClient;
 import net.waqassiddiqi.app.crew.db.DatabaseServer;
 import net.waqassiddiqi.app.crew.license.LicenseManager;
 import net.waqassiddiqi.app.crew.model.ApplicationSetting;
+import net.waqassiddiqi.app.crew.model.ApplicationSetting.ApplicationMode;
 import net.waqassiddiqi.app.crew.model.RegistrationSetting;
 import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.style.skin.DefaultSkin;
@@ -43,9 +46,14 @@ import org.apache.log4j.Logger;
 import com.alee.extended.image.WebDecoratedImage;
 import com.alee.extended.layout.TableLayout;
 import com.alee.extended.panel.GroupPanel;
+import com.alee.extended.panel.GroupingType;
+import com.alee.extended.panel.SingleAlignPanel;
+import com.alee.extended.progress.WebProgressOverlay;
 import com.alee.extended.statusbar.WebMemoryBar;
 import com.alee.extended.statusbar.WebStatusBar;
+import com.alee.extended.window.WebPopOver;
 import com.alee.laf.WebLookAndFeel;
+import com.alee.laf.button.WebButton;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.optionpane.WebOptionPane;
 import com.alee.laf.panel.WebPanel;
@@ -70,6 +78,10 @@ public class MainFrame extends WebFrame implements ChangeListener {
 	private static WebDialog mProgressDialog;
 	private static WebProgressBar mProgressBar;
 	private IconsHelper iconHelper = null;
+	private ApplicationSetting appSettings = null;
+	private WebStatusBar statusBar;
+	private boolean isConnected = false;
+	private WebLabel lblServerStatus;
 	
 	public static MainFrame getInstance() {
 		if (instance == null) {
@@ -90,16 +102,14 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		VesselFactory.getInstance().setOwner(this);
 	}
 	
-	public MainFrame() {
-		super();
-		
+	private void initServer() {
 		try {
 			
-			if (Constant.isServer) {
-				if(DatabaseServer.getInstance().start() == null)
-					throw new SQLException("Server is already running");
-			}
+			if(DatabaseServer.getInstance().start() == null)
+				throw new SQLException("Server is already running");
 			
+			ConnectionManager.getInstance().setLocal(false);
+			ConnectionManager.getInstance().closeConnection();
 			ConnectionManager.getInstance().setupDatabase();
 			
 		} catch (SQLException e) {
@@ -111,8 +121,37 @@ public class MainFrame extends WebFrame implements ChangeListener {
 			
 			System.exit(1);
 		}
+	}
+	
+	private void initClient() {
 		
-		initAppSettings();
+		try {
+			
+			if(ApplicationSetting.getApplicationMode() == ApplicationMode.Unknown) {
+				
+				throw new SQLException("Unable to get application settings from database");
+				
+			} else if(ApplicationSetting.getApplicationMode() == ApplicationMode.Client) {
+				
+				ConnectionManager.getInstance().setLocal(false);
+				ConnectionManager.getInstance().closeConnection();
+				
+			}	
+			
+		} catch (SQLException e) {
+			log.error(e.getMessage(), e);
+			
+			WebOptionPane.showMessageDialog (
+					this, "An application instance is already running or application data has corrupted", 
+					"Error", WebOptionPane.ERROR_MESSAGE );
+			
+			System.exit(1);
+		}
+	}
+	
+	@SuppressWarnings("serial")
+	public MainFrame() {
+		super();
 		
 		setTitle("SHIP IP LTD - REST HOURS VALIDATOR " + Constant.version);
 		
@@ -127,51 +166,200 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		setIconImages(ImageUtils.toImagesList(iconList));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
+        lblServerStatus = new WebLabel();
+        
         initFactories();
-        
-		contentPane = new WebPanel();		
-		setLayout(new BorderLayout());
 		
+        contentPane = new WebPanel();		
+		setLayout(new BorderLayout());
 		contentPane.add(createRibbonBar(), BorderLayout.NORTH);
-		contentPane.add (createStatusBar(), BorderLayout.SOUTH);              
-        
 		getContentPane().setBackground(new Color(252, 248, 252));
         contentPane.setOpaque(false);
         
 		add(contentPane, BorderLayout.CENTER);
 		
+		ConnectionManager.getInstance().setLocal(true);
+		appSettings = new ApplicationSettingDAO().get();
+		
+		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Server) {
+			initServer();
+		} else {
+			initClient();
+		}
+		
+		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Client) {
+			
+			if(new DatabaseClient().isServerAvailable(appSettings.getServerIP().trim(), 
+					appSettings.getServerPort().trim()) == false) {
+				
+				this.ribbonBar.setEnabled(false);
+				
+				showConnectionDialog();
+				
+			} else {
+				isConnected = true;
+				if(ConfigurationUtil.isVesselConfigured() == false) {
+					
+					this.ribbonBar.setEnabled(false);
+					
+					net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, MainFrame.this, "No Vessel Found",
+							new String[] { 
+								"In order to continue, vessel details should be entered first",
+								"Click on the button below to enter vessel details"
+							}, 
+								"Add new vessel", 
+							new ActionListener() {
+								
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									addContent(VesselFactory.getInstance().getAdd());
+								}
+							}, false);
+				}
+				
+			}
+		} else {
+			if(ConfigurationUtil.isVesselConfigured() == false) {
+				
+				this.ribbonBar.setEnabled(false);
+				
+				net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, MainFrame.this, "No Vessel Found",
+						new String[] { 
+							"In order to continue, vessel details should be entered first",
+							"Click on the button below to enter vessel details"
+						}, 
+							"Add new vessel", 
+						new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								addContent(VesselFactory.getInstance().getAdd());
+							}
+						}, false);
+			} else {
+				Component c = new ProductActivationForm(this).getView();
+				c.setName("license");
+				addContent(c);
+			}
+		}
+		
+		contentPane.add (createStatusBar(), BorderLayout.SOUTH);
+		
 		ThreadUtils.sleepSafely(500);
 		pack();
 		setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 		
+	}
+	
+	@SuppressWarnings("serial")
+	private void showConnectionDialog() {
+		TableLayout layout = new TableLayout(new double[][] {
+				{ TableLayout.FILL, TableLayout.FILL },
+				{ TableLayout.FILL, TableLayout.FILL } });
+		layout.setHGap(5);
+		layout.setVGap(5);
+		WebPanel content = new WebPanel(layout);
+		content.setOpaque(false);
+
+		final WebTextField txtServerIP = new WebTextField(10) {{ setText(appSettings.getServerIP()); }};
+		final WebTextField txtServerPort = new WebTextField(10) {{ setText(appSettings.getServerPort()); }};
 		
+		content.add(new WebLabel("Server IP"), "0,0");
+		content.add(txtServerIP, "1,0");
 		
-		if(ConfigurationUtil.isVesselConfigured() == false) {
+		content.add(new WebLabel("Server Port"), "0,1");
+		content.add(txtServerPort, "1,1");
+		
+		final WebProgressOverlay progressOverlay = new WebProgressOverlay ();
+        progressOverlay.setConsumeEvents ( false );
+		
+		final WebButton button = new WebButton( "Test Connection");
+        progressOverlay.setComponent(button);
+        
+		GroupPanel gp = new GroupPanel(GroupingType.fillLast, 10, false, new WebLabel("<html><div style=\"text-align: center;\">Please verify the connection " +
+				"settings to<br/>Rest Hours Validator Server</div></html>"), content, new SingleAlignPanel(progressOverlay, SingleAlignPanel.RIGHT)
+				.setMargin(10, 0, 0, 0));
+		
+		final WebPopOver popOver = net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, MainFrame.this, false, iconHelper.loadIcon("common/server_16x16.png"), 
+				"Server Connection Failed",
+				gp);
+		
+		button.addActionListener(new ActionListener() {
 			
-			this.ribbonBar.setEnabled(false);
-			
-			net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, MainFrame.this, "No Vessel Found",
-					new String[] { 
-						"In order to continue, vessel details should be entered first",
-						"Click on the button below to enter vessel details"
-					}, 
-						"Add new vessel", 
-					new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				progressOverlay.setShowLoad(true);
+				
+				SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
+
+					@Override
+					protected Boolean doInBackground() throws Exception {
+						return new DatabaseClient().isServerAvailable(txtServerIP.getText().trim(), txtServerPort.getText().trim());
+					}
+					
+					@Override
+					protected void done() {
 						
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							addContent(VesselFactory.getInstance().getAdd());
+						try {
+							
+							if(!get()) {
+								net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, 
+										txtServerIP, new String[] { "Unable to connect to server" });
+								
+								lblServerStatus.setIcon(iconHelper.loadIcon("common/disconnect_16x61.png"));
+								TooltipManager.setTooltip(lblServerStatus, iconHelper.loadIcon("common/server_16x16.png"), "Not conntected to Rest Hours Validator Server");
+								
+							} else {
+								
+								ConnectionManager.getInstance().closeConnection();
+								ConnectionManager.getInstance().setLocal(true);
+								
+								ApplicationSettingDAO appDao = new ApplicationSettingDAO();
+								appSettings = appDao.get();
+								
+								appSettings.setServerIP(txtServerIP.getText().trim());
+								appSettings.setServerPort(txtServerPort.getText().trim());
+								
+								appDao.updateApplicationSetting(appSettings);
+								ConnectionManager.getInstance().closeConnection();
+								
+								
+								isConnected = true;
+								ribbonBar.setEnabled(true);
+								popOver.dispose();
+								
+								lblServerStatus.setIcon(iconHelper.loadIcon("common/connect_16x16.png"));
+								TooltipManager.setTooltip(lblServerStatus, iconHelper.loadIcon("common/server_16x16.png"), "Connnected to Rest Hours Validator Server" );
+							}
+							
+						} catch (Exception e) {
+							
 						}
-					}, false);
-		} else {
-			Component c = new ProductActivationForm(this).getView();
-			c.setName("license");
-			addContent(c);
-		}
-		
+						
+						progressOverlay.setShowLoad(false);
+					}
+				};
+				
+				worker.execute();
+			}
+		});
 	}
 	
 	public void addContent(Component view) {
+		
+		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Client) {
+			if(new DatabaseClient().isServerAvailable(ApplicationSetting.getGlobalApplicationSettings().getServerIP(), 
+					ApplicationSetting.getGlobalApplicationSettings().getServerPort()) == false) {
+				
+				this.ribbonBar.setEnabled(false);
+				showConnectionDialog();
+				
+				activeComponent = view;
+				
+				return;
+				
+			}
+		}
 		
 		if(activeComponent == null) {
 			contentPane.add(view, BorderLayout.CENTER);
@@ -203,50 +391,69 @@ public class MainFrame extends WebFrame implements ChangeListener {
 	}
 	
 	private WebStatusBar createStatusBar() {
-		final WebStatusBar statusBar = new WebStatusBar();
+		statusBar = new WebStatusBar();
 		statusBar.addSpacing();
-
-		RegistrationSetting settings = LicenseManager.getRegistationDetail();
 		
 		WebLabel lblStatus = new WebLabel();
 		
-		if(LicenseManager.isExpired()) {
+		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Standalone || 
+				ApplicationSetting.getApplicationMode() == ApplicationMode.Server) {
 			
-			if(!settings.isRegistered()) {
-				TooltipManager.setTooltip(lblStatus, "<html><center>Your product evaluation period has expired. In order to activate it, <br/>" +
-						"please copy the System ID and send it to sales@shipip.com. <br/>" +
-						"You will receive an email containing your product activation within three <br/>" +
-						"business days of successful payments.</center></html>");
+			RegistrationSetting settings = LicenseManager.getRegistationDetail();
+			
+			if(LicenseManager.isExpired()) {
 				
-				lblStatus.setText("Product evaluation period has expired");
+				if(!settings.isRegistered()) {
+					TooltipManager.setTooltip(lblStatus, "<html><center>Your product evaluation period has expired. In order to activate it, <br/>" +
+							"please copy the System ID and send it to sales@shipip.com. <br/>" +
+							"You will receive an email containing your product activation within three <br/>" +
+							"business days of successful payments.</center></html>");
+					
+					lblStatus.setText("Product evaluation period has expired");
+					
+				} else {
+					
+					TooltipManager.setTooltip(lblStatus, "<html><center>Your product evaluation period has expired. In order to re-activate it, <br/>" +
+							"please copy the System ID and send it to sales@shipip.com. <br/>" +
+							"You will receive an email containing your product activation within three <br/>" +
+							"business days of successful payments.</center></html>");
+					
+					lblStatus.setText("Product registration has expired");
+				}			
+				
+				statusBar.add(lblStatus);
+				this.ribbonBar.setEnabled(false);
+				
+			} else if(!settings.isRegistered()) {
+				
+				statusBar.add(new WebLabel("This is an evaluation version and will expire on " + 
+						CalendarUtil.format("dd MMM yyyy", settings.getExpiry())));
 				
 			} else {
 				
-				TooltipManager.setTooltip(lblStatus, "<html><center>Your product evaluation period has expired. In order to re-activate it, <br/>" +
-						"please copy the System ID and send it to sales@shipip.com. <br/>" +
-						"You will receive an email containing your product activation within three <br/>" +
-						"business days of successful payments.</center></html>");
-				
-				lblStatus.setText("Product registration has expired");
-			}			
-			
-			statusBar.add(lblStatus);
-			this.ribbonBar.setEnabled(false);
-			
-		} else if(!settings.isRegistered()) {
-			
-			statusBar.add(new WebLabel("This is an evaluation version and will expire on " + 
-					CalendarUtil.format("dd MMM yyyy", settings.getExpiry())));
-			
-		} else {
-			
-			if(LicenseManager.validateLicense() == false) {
-				statusBar.add(new WebLabel("Invalid license details found, product has been locked"));
-				this.ribbonBar.setEnabled(false);
+				if(LicenseManager.validateLicense() == false) {
+					statusBar.add(new WebLabel("Invalid license details found, product has been locked"));
+					this.ribbonBar.setEnabled(false);
+				}
 			}
 		}
 		
-		if(Constant.isServer) {
+		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Client) {
+			statusBar.addSeparatorToEnd();
+			
+			statusBar.addToEnd(lblServerStatus);
+			
+			if(isConnected) {
+				lblServerStatus.setIcon(iconHelper.loadIcon("common/connect_16x16.png"));
+				TooltipManager.setTooltip(lblServerStatus, iconHelper.loadIcon("common/server_16x16.png"), "Connnected to Rest Hours Validator Server" );
+
+			} else {
+				lblServerStatus.setIcon(iconHelper.loadIcon("common/disconnect_16x61.png"));
+				TooltipManager.setTooltip(lblServerStatus, iconHelper.loadIcon("common/server_16x16.png"), "Not conntected to Rest Hours Validator Server");
+			}
+		}
+		
+		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Server) {
 			
 			statusBar.addSeparatorToEnd();
 			
@@ -295,7 +502,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 					content.add(new WebLabel("Server Port", WebLabel.TRAILING), "0,1");
 					content.add(new WebTextField(10) {{ setText(DatabaseServer.getInstance().getPort()); setEditable(false); }}, "1,1");
 					
-					net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, lblServerStatus, iconHelper.loadIcon("common/server_16x16.png"),
+					net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, lblServerStatus, true, iconHelper.loadIcon("common/server_16x16.png"),
 							"Rest hour server", content);
 					
 				}
@@ -313,17 +520,6 @@ public class MainFrame extends WebFrame implements ChangeListener {
 
 		NotificationManager.setMargin(0, 0, statusBar.getPreferredSize().height, 0);
 		return statusBar;
-	}
-	
-	private void initAppSettings() {
-		ApplicationSettingDAO dao = new ApplicationSettingDAO();
-		if(dao.get() == null) {
-			ApplicationSetting settings = new ApplicationSetting();
-			settings.setServer(Constant.isServer);
-			settings.setServerPort("9090");
-			
-			dao.addApplicationSetting(settings);
-		}
 	}
 	
 	public void display() {

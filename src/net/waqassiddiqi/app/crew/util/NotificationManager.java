@@ -83,10 +83,10 @@ public class NotificationManager {
 		popOver.show(target);
 	}
 
-	public static void showPopup(MainFrame owner, Component target, ImageIcon imgIcon, String title, Component c) {
+	public static WebPopOver showPopup(MainFrame owner, Component target, boolean isModal, ImageIcon imgIcon, String title, Component c) {
 		final WebPopOver popOver = new WebPopOver(owner);
 		popOver.setMargin(10);
-		popOver.setModal(true);
+		popOver.setModal(isModal);
 		popOver.setMovable(true);
 		popOver.setLayout(new VerticalFlowLayout());
 		final WebImage icon = new WebImage(imgIcon);
@@ -105,7 +105,7 @@ public class NotificationManager {
 
 		popOver.add(c);
 
-		popOver.show(target);
+		return popOver.show(target);
 	}
 	
 	public static void showPopup(MainFrame owner, Component target,

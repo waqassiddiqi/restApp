@@ -13,6 +13,9 @@ public class ConnectionManager {
 	private static ConnectionManager instance = null;
 	private Connection connection = null;
 	private Logger log = Logger.getLogger(getClass().getName());
+	private String localConnectionString = "jdbc:h2:file:./resource/restdb;IFEXISTS=TRUE";
+	private String serverConnectionString = "jdbc:h2:tcp://localhost:9090/./resource/restdb;IFEXISTS=TRUE";
+	private boolean isLocal = false;
 	
 	public synchronized static ConnectionManager getInstance() {
 		if(instance == null) {
@@ -20,6 +23,12 @@ public class ConnectionManager {
 		}
 		return instance;
 	}
+	
+	public void setLocal(boolean isLocal) {
+		this.isLocal = isLocal;
+	}
+	
+	private ConnectionManager() { }
 	
 	public Connection getConnection() throws SQLException {
 		if(this.connection == null) {
@@ -31,14 +40,28 @@ public class ConnectionManager {
 	
 	private Connection createConnection() throws SQLException {
 		JdbcDataSource ds = new JdbcDataSource();
+	
+		if(this.isLocal)
+			ds.setURL(this.localConnectionString);
+		else
+			ds.setUrl(this.serverConnectionString);
 		
-		ds.setURL("jdbc:h2:tcp://localhost:9090/./resource/restdb;IFEXISTS=TRUE");
-		
-		//ds.setURL("jdbc:h2:~/restdb;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9090;");
         ds.setUser("shipip");
         ds.setPassword("letmeinasadmin");
         
         return ds.getConnection();
+	}
+	
+	public void closeConnection() {
+		if(this.connection != null) {
+			try {
+				this.connection.close();
+			} catch (SQLException e) {
+				log.error("Unable to close database", e);
+			}
+			
+			this.connection = null;
+		}
 	}
 	
 	public void setupDatabase() throws SQLException {

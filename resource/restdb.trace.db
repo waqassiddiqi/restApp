@@ -7,3 +7,13 @@ CREW_SCHEDULE_TEMPLATE SELECT * FROM CREWS [42001-181]
 10-16 22:08:08 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "DELETE FROM ENTRY_TIMES ,[*]ERROR_REPORT "; SQL statement:
 delete from ENTRY_TIMES ,ERROR_REPORT [42000-181]
+10-18 17:08:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "APP_SETTINGS[*] SELECT * FROM ENTRY_TIMES"; expected "ALTER, ANALYZE, {"; SQL statement:
+APP_SETTINGS SELECT * FROM ENTRY_TIMES [42001-181]
+10-18 17:09:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM APP_SETTINGS 
+
+UPDATE APP_SETTINGS[*]  SET SERVER_IP = '127.0.0.1', SERVER_PORT = '9090', IS_SERVER=FALSE "; SQL statement:
+SELECT * FROM APP_SETTINGS 
+
+update APP_SETTINGS  set server_ip = '127.0.0.1', server_port = '9090', is_server=false [42000-181]

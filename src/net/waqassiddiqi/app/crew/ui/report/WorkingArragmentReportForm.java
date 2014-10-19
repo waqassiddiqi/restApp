@@ -66,7 +66,7 @@ public class WorkingArragmentReportForm extends BaseForm {
 	@SuppressWarnings("serial")
 	@Override
 	public void setupToolBar() {
-		getToolbar().add(new WebLabel("Shipboard working arragements report") {{ setDrawShade(true); setMargin(10); }});
+		getToolbar().add(new WebLabel("Shipboard working arrangements report") {{ setDrawShade(true); setMargin(10); }});
 		
 		getToolbar().addSeparator();
 		
