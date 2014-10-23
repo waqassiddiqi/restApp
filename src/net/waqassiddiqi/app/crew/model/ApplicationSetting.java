@@ -96,7 +96,7 @@ public class ApplicationSetting {
 	}
 	
 	public static ApplicationMode getApplicationMode() {
-		
+		/*
 		if(appInstance == null)
 			appInstance = new ApplicationSettingDAO().get();
 		
@@ -109,6 +109,7 @@ public class ApplicationSetting {
 			return ApplicationMode.Standalone;
 		} else {
 			return ApplicationMode.Client;
-		}
+		}*/
+		return ApplicationMode.Client;
 	}
 }

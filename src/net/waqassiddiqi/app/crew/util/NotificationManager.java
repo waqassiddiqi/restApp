@@ -83,7 +83,7 @@ public class NotificationManager {
 		popOver.show(target);
 	}
 
-	public static WebPopOver showPopup(MainFrame owner, Component target, boolean isModal, ImageIcon imgIcon, String title, Component c) {
+	public static WebPopOver showPopup(MainFrame owner, Component target, boolean isModal, boolean isCloseable, ImageIcon imgIcon, String title, Component c) {
 		final WebPopOver popOver = new WebPopOver(owner);
 		popOver.setMargin(10);
 		popOver.setModal(isModal);
@@ -91,18 +91,24 @@ public class NotificationManager {
 		popOver.setLayout(new VerticalFlowLayout());
 		final WebImage icon = new WebImage(imgIcon);
 		final WebLabel titleLabel = new WebLabel(title, WebLabel.CENTER);
-		final WebButton closeButton = new WebButton(new IconsHelper().loadIcon(
-				IconsHelper.class, "common/cross2_16x16.png"),
-				new ActionListener() {
-					@Override
-					public void actionPerformed(final ActionEvent e) {
-						popOver.dispose();
-					}
-				}).setUndecorated(true);
 		
-		popOver.add(new GroupPanel(GroupingType.fillMiddle, 4, icon,
-				titleLabel, closeButton).setMargin(0, 0, 10, 0));
-
+		if(isCloseable) {
+			final WebButton closeButton = new WebButton(new IconsHelper().loadIcon(
+					IconsHelper.class, "common/cross2_16x16.png"),
+					new ActionListener() {
+						@Override
+						public void actionPerformed(final ActionEvent e) {
+							popOver.dispose();
+						}
+					}).setUndecorated(true);
+			
+			popOver.add(new GroupPanel(GroupingType.fillMiddle, 4, icon,
+					titleLabel, closeButton).setMargin(0, 0, 10, 0));
+		} else {
+			popOver.add(new GroupPanel(GroupingType.fillMiddle, 4, icon,
+					titleLabel).setMargin(0, 0, 10, 0));
+		}
+		
 		popOver.add(c);
 
 		return popOver.show(target);

@@ -8,8 +8,6 @@ import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,10 +23,8 @@ import net.waqassiddiqi.app.crew.Constant;
 import net.waqassiddiqi.app.crew.controller.CrewFactory;
 import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
-import net.waqassiddiqi.app.crew.db.ApplicationSettingDAO;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
 import net.waqassiddiqi.app.crew.db.DatabaseClient;
-import net.waqassiddiqi.app.crew.db.DatabaseServer;
 import net.waqassiddiqi.app.crew.license.LicenseManager;
 import net.waqassiddiqi.app.crew.model.ApplicationSetting;
 import net.waqassiddiqi.app.crew.model.ApplicationSetting.ApplicationMode;
@@ -40,6 +36,7 @@ import net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl;
 import net.waqassiddiqi.app.crew.ui.icons.IconsHelper;
 import net.waqassiddiqi.app.crew.util.CalendarUtil;
 import net.waqassiddiqi.app.crew.util.ConfigurationUtil;
+import net.waqassiddiqi.app.crew.util.PrefsUtil;
 
 import org.apache.log4j.Logger;
 
@@ -102,31 +99,11 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		VesselFactory.getInstance().setOwner(this);
 	}
 	
-	private void initServer() {
-		try {
-			
-			if(DatabaseServer.getInstance().start() == null)
-				throw new SQLException("Server is already running");
-			
-			ConnectionManager.getInstance().setLocal(false);
-			ConnectionManager.getInstance().closeConnection();
-			ConnectionManager.getInstance().setupDatabase();
-			
-		} catch (SQLException e) {
-			log.error(e.getMessage(), e);
-			
-			WebOptionPane.showMessageDialog (
-					this, "An application instance is already running or application data has corrupted", 
-					"Error", WebOptionPane.ERROR_MESSAGE );
-			
-			System.exit(1);
-		}
-	}
-	
 	private void initClient() {
 		
 		try {
 			
+						
 			if(ApplicationSetting.getApplicationMode() == ApplicationMode.Unknown) {
 				
 				throw new SQLException("Unable to get application settings from database");
@@ -138,7 +115,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 				
 			}	
 			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			
 			WebOptionPane.showMessageDialog (
@@ -149,7 +126,6 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		}
 	}
 	
-	@SuppressWarnings("serial")
 	public MainFrame() {
 		super();
 		
@@ -178,19 +154,18 @@ public class MainFrame extends WebFrame implements ChangeListener {
         
 		add(contentPane, BorderLayout.CENTER);
 		
-		ConnectionManager.getInstance().setLocal(true);
-		appSettings = new ApplicationSettingDAO().get();
+		ConnectionManager.getInstance().setServerIP(PrefsUtil.getString(PrefsUtil.PREF_SERVER_IP, "127.0.0.1"));
+		ConnectionManager.getInstance().setServerPort(PrefsUtil.getString(PrefsUtil.PREF_SERVER_PORT, "9090"));
 		
-		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Server) {
-			initServer();
-		} else {
-			initClient();
+		if(true) {
+			
 		}
 		
 		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Client) {
 			
-			if(new DatabaseClient().isServerAvailable(appSettings.getServerIP().trim(), 
-					appSettings.getServerPort().trim()) == false) {
+			if(new DatabaseClient().isServerAvailable(
+					PrefsUtil.getString(PrefsUtil.PREF_SERVER_IP, "127.0.0.1"), 
+					PrefsUtil.getString(PrefsUtil.PREF_SERVER_PORT, "9090")) == false) {
 				
 				this.ribbonBar.setEnabled(false);
 				
@@ -261,8 +236,8 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		WebPanel content = new WebPanel(layout);
 		content.setOpaque(false);
 
-		final WebTextField txtServerIP = new WebTextField(10) {{ setText(appSettings.getServerIP()); }};
-		final WebTextField txtServerPort = new WebTextField(10) {{ setText(appSettings.getServerPort()); }};
+		final WebTextField txtServerIP = new WebTextField(10) {{ setText(PrefsUtil.getString(PrefsUtil.PREF_SERVER_IP, "127.0.0.1")); }};
+		final WebTextField txtServerPort = new WebTextField(10) {{ setText(PrefsUtil.getString(PrefsUtil.PREF_SERVER_PORT, "9090")); }};
 		
 		content.add(new WebLabel("Server IP"), "0,0");
 		content.add(txtServerIP, "1,0");
@@ -280,7 +255,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 				"settings to<br/>Rest Hours Validator Server</div></html>"), content, new SingleAlignPanel(progressOverlay, SingleAlignPanel.RIGHT)
 				.setMargin(10, 0, 0, 0));
 		
-		final WebPopOver popOver = net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, MainFrame.this, false, iconHelper.loadIcon("common/server_16x16.png"), 
+		final WebPopOver popOver = net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, MainFrame.this, false, false, iconHelper.loadIcon("common/server_16x16.png"), 
 				"Server Connection Failed",
 				gp);
 		
@@ -311,7 +286,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 								
 							} else {
 								
-								ConnectionManager.getInstance().closeConnection();
+								/*ConnectionManager.getInstance().closeConnection();
 								ConnectionManager.getInstance().setLocal(true);
 								
 								ApplicationSettingDAO appDao = new ApplicationSettingDAO();
@@ -321,7 +296,10 @@ public class MainFrame extends WebFrame implements ChangeListener {
 								appSettings.setServerPort(txtServerPort.getText().trim());
 								
 								appDao.updateApplicationSetting(appSettings);
-								ConnectionManager.getInstance().closeConnection();
+								ConnectionManager.getInstance().closeConnection();*/
+								
+								PrefsUtil.setString(PrefsUtil.PREF_SERVER_IP, txtServerIP.getText().trim()); 
+								PrefsUtil.setString(PrefsUtil.PREF_SERVER_PORT, txtServerPort.getText().trim());
 								
 								
 								isConnected = true;
@@ -348,8 +326,9 @@ public class MainFrame extends WebFrame implements ChangeListener {
 	public void addContent(Component view) {
 		
 		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Client) {
-			if(new DatabaseClient().isServerAvailable(ApplicationSetting.getGlobalApplicationSettings().getServerIP(), 
-					ApplicationSetting.getGlobalApplicationSettings().getServerPort()) == false) {
+			if(new DatabaseClient().isServerAvailable(
+					PrefsUtil.getString(PrefsUtil.PREF_SERVER_IP, "127.0.0.1"), 
+					PrefsUtil.getString(PrefsUtil.PREF_SERVER_PORT, "9090")) == false) {
 				
 				this.ribbonBar.setEnabled(false);
 				showConnectionDialog();
@@ -396,8 +375,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		
 		WebLabel lblStatus = new WebLabel();
 		
-		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Standalone || 
-				ApplicationSetting.getApplicationMode() == ApplicationMode.Server) {
+		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Standalone) {
 			
 			RegistrationSetting settings = LicenseManager.getRegistationDetail();
 			
@@ -451,64 +429,6 @@ public class MainFrame extends WebFrame implements ChangeListener {
 				lblServerStatus.setIcon(iconHelper.loadIcon("common/disconnect_16x61.png"));
 				TooltipManager.setTooltip(lblServerStatus, iconHelper.loadIcon("common/server_16x16.png"), "Not conntected to Rest Hours Validator Server");
 			}
-		}
-		
-		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Server) {
-			
-			statusBar.addSeparatorToEnd();
-			
-			final WebLabel lblServerStatus = new WebLabel();			
-			
-			final StringBuilder sb = new StringBuilder("<html>");
-			sb.append("Server IP:\t" + DatabaseServer.getInstance().getIp());
-			sb.append("<br/>");
-			sb.append("Server Port:\t" + DatabaseServer.getInstance().getPort());
-			sb.append("<br/>");
-			sb.append("Server Status:\t");
-			
-			if(DatabaseServer.getInstance().isRunning()) {
-				lblServerStatus.setIcon(iconHelper.loadIcon("common/server_start_16x16.png"));
-				TooltipManager.setTooltip(lblServerStatus, iconHelper.loadIcon("common/server_16x16.png"), "Rest Hour server is running" );
-				
-				sb.append("Running");
-				
-			} else {
-				lblServerStatus.setIcon(iconHelper.loadIcon("common/server_stop_16x16.png"));
-				TooltipManager.setTooltip(lblServerStatus, iconHelper.loadIcon("common/server_16x16.png"), "Rest Hour server is not running");
-				
-				sb.append("Not running");
-			}
-			
-			sb.append("</html>");
-			
-			
-			
-			lblServerStatus.addMouseListener(new MouseAdapter() {
-				@SuppressWarnings("serial")
-				@Override
-				public void mousePressed(final MouseEvent e) {
-					
-					TableLayout layout = new TableLayout(new double[][] {
-							{ TableLayout.PREFERRED, TableLayout.PREFERRED },
-							{ TableLayout.PREFERRED, TableLayout.PREFERRED } });
-					layout.setHGap(5);
-					layout.setVGap(5);
-					WebPanel content = new WebPanel(layout);
-					content.setOpaque(false);
-
-					content.add(new WebLabel("Server IP", WebLabel.TRAILING), "0,0");
-					content.add(new WebTextField(10) {{ setText(DatabaseServer.getInstance().getIp()); setEditable(false); }}, "1,0");
-					
-					content.add(new WebLabel("Server Port", WebLabel.TRAILING), "0,1");
-					content.add(new WebTextField(10) {{ setText(DatabaseServer.getInstance().getPort()); setEditable(false); }}, "1,1");
-					
-					net.waqassiddiqi.app.crew.util.NotificationManager.showPopup(MainFrame.this, lblServerStatus, true, iconHelper.loadIcon("common/server_16x16.png"),
-							"Rest hour server", content);
-					
-				}
-			});
-			
-			statusBar.addToEnd(lblServerStatus);
 		}
 		
 		statusBar.addSeparatorToEnd();

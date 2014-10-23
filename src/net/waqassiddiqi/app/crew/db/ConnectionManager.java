@@ -16,7 +16,25 @@ public class ConnectionManager {
 	private String localConnectionString = "jdbc:h2:file:./resource/restdb;IFEXISTS=TRUE";
 	private String serverConnectionString = "jdbc:h2:tcp://localhost:9090/./resource/restdb;IFEXISTS=TRUE";
 	private boolean isLocal = false;
+	private String serverIP;
+	private String serverPort; 
 	
+	public String getServerIP() {
+		return serverIP;
+	}
+
+	public void setServerIP(String serverIP) {
+		this.serverIP = serverIP;
+	}
+
+	public String getServerPort() {
+		return serverPort;
+	}
+
+	public void setServerPort(String severPort) {
+		this.serverPort = severPort;
+	}
+
 	public synchronized static ConnectionManager getInstance() {
 		if(instance == null) {
 			instance = new ConnectionManager();
@@ -44,7 +62,7 @@ public class ConnectionManager {
 		if(this.isLocal)
 			ds.setURL(this.localConnectionString);
 		else
-			ds.setUrl(this.serverConnectionString);
+			ds.setUrl("jdbc:h2:tcp://" + getServerIP() + ":" + getServerPort() + "/./resource/restdb;IFEXISTS=TRUE");
 		
         ds.setUser("shipip");
         ds.setPassword("letmeinasadmin");
