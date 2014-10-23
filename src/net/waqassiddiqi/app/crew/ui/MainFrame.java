@@ -26,7 +26,6 @@ import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
 import net.waqassiddiqi.app.crew.db.DatabaseClient;
 import net.waqassiddiqi.app.crew.license.LicenseManager;
-import net.waqassiddiqi.app.crew.model.ApplicationSetting;
 import net.waqassiddiqi.app.crew.model.ApplicationSetting.ApplicationMode;
 import net.waqassiddiqi.app.crew.model.RegistrationSetting;
 import net.waqassiddiqi.app.crew.model.Vessel;
@@ -34,11 +33,10 @@ import net.waqassiddiqi.app.crew.style.skin.DefaultSkin;
 import net.waqassiddiqi.app.crew.ui.AddVesselForm.ChangeListener;
 import net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl;
 import net.waqassiddiqi.app.crew.ui.icons.IconsHelper;
+import net.waqassiddiqi.app.crew.util.ApplicationUtil;
 import net.waqassiddiqi.app.crew.util.CalendarUtil;
 import net.waqassiddiqi.app.crew.util.ConfigurationUtil;
 import net.waqassiddiqi.app.crew.util.PrefsUtil;
-
-import org.apache.log4j.Logger;
 
 import com.alee.extended.image.WebDecoratedImage;
 import com.alee.extended.layout.TableLayout;
@@ -52,7 +50,6 @@ import com.alee.extended.window.WebPopOver;
 import com.alee.laf.WebLookAndFeel;
 import com.alee.laf.button.WebButton;
 import com.alee.laf.label.WebLabel;
-import com.alee.laf.optionpane.WebOptionPane;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.progressbar.WebProgressBar;
 import com.alee.laf.rootpane.WebDialog;
@@ -67,7 +64,6 @@ import com.alee.utils.ThreadUtils;
 public class MainFrame extends WebFrame implements ChangeListener {
 	
 	private static final long serialVersionUID = 1L;
-	private Logger log = Logger.getLogger(getClass().getName());
 	private static MainFrame instance = null;
 	private final WebPanel contentPane;
 	private WebMemoryBar memoryBar;
@@ -75,7 +71,6 @@ public class MainFrame extends WebFrame implements ChangeListener {
 	private static WebDialog mProgressDialog;
 	private static WebProgressBar mProgressBar;
 	private IconsHelper iconHelper = null;
-	private ApplicationSetting appSettings = null;
 	private WebStatusBar statusBar;
 	private boolean isConnected = false;
 	private WebLabel lblServerStatus;
@@ -97,33 +92,6 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		RankFactory.getInstance().setOwner(this);
 		CrewFactory.getInstance().setOwner(this);
 		VesselFactory.getInstance().setOwner(this);
-	}
-	
-	private void initClient() {
-		
-		try {
-			
-						
-			if(ApplicationSetting.getApplicationMode() == ApplicationMode.Unknown) {
-				
-				throw new SQLException("Unable to get application settings from database");
-				
-			} else if(ApplicationSetting.getApplicationMode() == ApplicationMode.Client) {
-				
-				ConnectionManager.getInstance().setLocal(false);
-				ConnectionManager.getInstance().closeConnection();
-				
-			}	
-			
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			
-			WebOptionPane.showMessageDialog (
-					this, "An application instance is already running or application data has corrupted", 
-					"Error", WebOptionPane.ERROR_MESSAGE );
-			
-			System.exit(1);
-		}
 	}
 	
 	public MainFrame() {
@@ -154,14 +122,10 @@ public class MainFrame extends WebFrame implements ChangeListener {
         
 		add(contentPane, BorderLayout.CENTER);
 		
-		ConnectionManager.getInstance().setServerIP(PrefsUtil.getString(PrefsUtil.PREF_SERVER_IP, "127.0.0.1"));
-		ConnectionManager.getInstance().setServerPort(PrefsUtil.getString(PrefsUtil.PREF_SERVER_PORT, "9090"));
-		
-		if(true) {
+		if(ApplicationUtil.getApplicationMode() == ApplicationMode.Client) {
 			
-		}
-		
-		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Client) {
+			ConnectionManager.getInstance().setServerIP(PrefsUtil.getString(PrefsUtil.PREF_SERVER_IP, "127.0.0.1"));
+			ConnectionManager.getInstance().setServerPort(PrefsUtil.getString(PrefsUtil.PREF_SERVER_PORT, "9090"));
 			
 			if(new DatabaseClient().isServerAvailable(
 					PrefsUtil.getString(PrefsUtil.PREF_SERVER_IP, "127.0.0.1"), 
@@ -194,6 +158,9 @@ public class MainFrame extends WebFrame implements ChangeListener {
 				
 			}
 		} else {
+			
+			ConnectionManager.getInstance().setLocal(true);
+			
 			if(ConfigurationUtil.isVesselConfigured() == false) {
 				
 				this.ribbonBar.setEnabled(false);
@@ -286,18 +253,6 @@ public class MainFrame extends WebFrame implements ChangeListener {
 								
 							} else {
 								
-								/*ConnectionManager.getInstance().closeConnection();
-								ConnectionManager.getInstance().setLocal(true);
-								
-								ApplicationSettingDAO appDao = new ApplicationSettingDAO();
-								appSettings = appDao.get();
-								
-								appSettings.setServerIP(txtServerIP.getText().trim());
-								appSettings.setServerPort(txtServerPort.getText().trim());
-								
-								appDao.updateApplicationSetting(appSettings);
-								ConnectionManager.getInstance().closeConnection();*/
-								
 								PrefsUtil.setString(PrefsUtil.PREF_SERVER_IP, txtServerIP.getText().trim()); 
 								PrefsUtil.setString(PrefsUtil.PREF_SERVER_PORT, txtServerPort.getText().trim());
 								
@@ -325,7 +280,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 	
 	public void addContent(Component view) {
 		
-		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Client) {
+		if(ApplicationUtil.getApplicationMode() == ApplicationMode.Client) {
 			if(new DatabaseClient().isServerAvailable(
 					PrefsUtil.getString(PrefsUtil.PREF_SERVER_IP, "127.0.0.1"), 
 					PrefsUtil.getString(PrefsUtil.PREF_SERVER_PORT, "9090")) == false) {
@@ -375,7 +330,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		
 		WebLabel lblStatus = new WebLabel();
 		
-		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Standalone) {
+		if(ApplicationUtil.getApplicationMode() == ApplicationMode.Standalone) {
 			
 			RegistrationSetting settings = LicenseManager.getRegistationDetail();
 			
@@ -416,7 +371,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 			}
 		}
 		
-		if(ApplicationSetting.getApplicationMode() == ApplicationMode.Client) {
+		if(ApplicationUtil.getApplicationMode() == ApplicationMode.Client) {
 			statusBar.addSeparatorToEnd();
 			
 			statusBar.addToEnd(lblServerStatus);

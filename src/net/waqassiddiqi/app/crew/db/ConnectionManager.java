@@ -14,7 +14,6 @@ public class ConnectionManager {
 	private Connection connection = null;
 	private Logger log = Logger.getLogger(getClass().getName());
 	private String localConnectionString = "jdbc:h2:file:./resource/restdb;IFEXISTS=TRUE";
-	private String serverConnectionString = "jdbc:h2:tcp://localhost:9090/./resource/restdb;IFEXISTS=TRUE";
 	private boolean isLocal = false;
 	private String serverIP;
 	private String serverPort; 

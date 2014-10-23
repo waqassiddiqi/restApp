@@ -2,8 +2,6 @@ package net.waqassiddiqi.app.crew.model;
 
 import java.awt.image.BufferedImage;
 
-import net.waqassiddiqi.app.crew.db.ApplicationSettingDAO;
-
 
 public class ApplicationSetting {
 	private int id;
@@ -84,32 +82,5 @@ public class ApplicationSetting {
 	}
 	public void setCustomWorkingReportText(String customWorkingReportText) {
 		this.customWorkingReportText = customWorkingReportText;
-	}
-	
-	private static ApplicationSetting appInstance = null;
-	
-	public static ApplicationSetting getGlobalApplicationSettings() {
-		if(appInstance == null)
-			appInstance = new ApplicationSettingDAO().get();
-		
-		return appInstance;
-	}
-	
-	public static ApplicationMode getApplicationMode() {
-		/*
-		if(appInstance == null)
-			appInstance = new ApplicationSettingDAO().get();
-		
-		if(appInstance == null)
-			return ApplicationMode.Unknown;
-		
-		if(appInstance.isServer == true) {
-			return ApplicationMode.Server;
-		} else if(appInstance.getServerIP().trim().isEmpty()) {
-			return ApplicationMode.Standalone;
-		} else {
-			return ApplicationMode.Client;
-		}*/
-		return ApplicationMode.Client;
 	}
 }

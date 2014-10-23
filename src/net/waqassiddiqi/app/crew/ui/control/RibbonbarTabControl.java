@@ -17,11 +17,13 @@ import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.ReportingFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.VesselDAO;
+import net.waqassiddiqi.app.crew.model.ApplicationSetting.ApplicationMode;
 import net.waqassiddiqi.app.crew.ui.CustomizationForm;
 import net.waqassiddiqi.app.crew.ui.EulaForm;
 import net.waqassiddiqi.app.crew.ui.MainFrame;
 import net.waqassiddiqi.app.crew.ui.ProductActivationForm;
 import net.waqassiddiqi.app.crew.ui.icons.IconsHelper;
+import net.waqassiddiqi.app.crew.util.ApplicationUtil;
 
 import org.apache.log4j.Logger;
 
@@ -423,8 +425,14 @@ public class RibbonbarTabControl {
 
 		buttonList.add(btnAgreement);
 		
-		GroupPanel gpanel = new GroupPanel(4, btnProductReg, btnAgreement);
+		GroupPanel gpanel = null;
 
+		if(ApplicationUtil.getApplicationMode() == ApplicationMode.Client) {
+			gpanel = new GroupPanel(4, btnAgreement);
+		} else {
+			gpanel = new GroupPanel(4, btnProductReg, btnAgreement);
+		}
+		
 		WebPanel panel = getRibbonPanel("Product Registation");
 		panel.add(gpanel, BorderLayout.CENTER);
 
