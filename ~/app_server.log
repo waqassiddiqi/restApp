@@ -1,0 +1,324 @@
+2014-12-02 13:39:46,151 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-02 13:39:46,538 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-02 13:39:46,695 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-02 13:42:33,016 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-02 13:42:33,399 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-02 13:42:33,548 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-02 13:45:33,363 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-02 13:45:33,712 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-02 13:45:33,844 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-02 13:48:02,235 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-02 13:48:02,290 [main ] ERROR net.waqassiddiqi.app.crew.db.DatabaseServer - Unable to start rest hour server
+org.h2.jdbc.JdbcSQLException: ?????? ??? ???????? ????? "9090" (???? ????? ??? ??????????????), ???????: "java.net.BindException: Address already in use: JVM_Bind"
+Exception opening port "9090" (port may be in use), cause: "java.net.BindException: Address already in use: JVM_Bind" [90061-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:194)
+	at org.h2.util.NetUtils.createServerSocket(NetUtils.java:160)
+	at org.h2.server.TcpServer.start(TcpServer.java:232)
+	at org.h2.tools.Server.start(Server.java:474)
+	at net.waqassiddiqi.app.crew.db.DatabaseServer.start(DatabaseServer.java:55)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:99)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:190)
+	... 8 more
+2014-12-02 13:48:02,294 [main ] ERROR net.waqassiddiqi.app.crew.ui.MainFrame - Server is already running
+java.sql.SQLException: Server is already running
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:100)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+2014-12-02 13:48:13,955 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-02 13:48:14,292 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-02 13:48:14,425 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-02 13:49:38,412 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-02 13:49:38,731 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-02 13:49:38,872 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-02 13:51:46,341 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-02 13:51:46,400 [main ] ERROR net.waqassiddiqi.app.crew.db.DatabaseServer - Unable to start rest hour server
+org.h2.jdbc.JdbcSQLException: ?????? ??? ???????? ????? "9090" (???? ????? ??? ??????????????), ???????: "java.net.BindException: Address already in use: JVM_Bind"
+Exception opening port "9090" (port may be in use), cause: "java.net.BindException: Address already in use: JVM_Bind" [90061-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:194)
+	at org.h2.util.NetUtils.createServerSocket(NetUtils.java:160)
+	at org.h2.server.TcpServer.start(TcpServer.java:232)
+	at org.h2.tools.Server.start(Server.java:474)
+	at net.waqassiddiqi.app.crew.db.DatabaseServer.start(DatabaseServer.java:55)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:99)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:190)
+	... 8 more
+2014-12-02 13:51:46,403 [main ] ERROR net.waqassiddiqi.app.crew.ui.MainFrame - Server is already running
+java.sql.SQLException: Server is already running
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:100)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+2014-12-02 14:05:08,307 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-02 14:05:08,757 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-02 14:05:08,919 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-02 14:06:03,227 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-02 14:06:03,649 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-02 14:06:03,819 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-02 14:08:12,932 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-02 14:08:13,357 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-02 14:08:18,112 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-02 14:12:24,505 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-02 14:12:24,950 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-02 14:12:25,112 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-02 14:14:19,720 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-02 14:14:20,113 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-02 14:14:20,273 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-02 14:15:38,372 [SwingWorker-pool-3-thread-2 ] ERROR net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm - Failed to generate PDF
+java.io.IOException: ARIALUNI.TTF not found as file or resource.
+	at com.lowagie.text.pdf.RandomAccessFileOrArray.<init>(Unknown Source)
+	at com.lowagie.text.pdf.RandomAccessFileOrArray.<init>(Unknown Source)
+	at com.lowagie.text.pdf.TrueTypeFont.process(Unknown Source)
+	at com.lowagie.text.pdf.TrueTypeFontUnicode.<init>(Unknown Source)
+	at com.lowagie.text.pdf.BaseFont.createFont(Unknown Source)
+	at com.lowagie.text.pdf.BaseFont.createFont(Unknown Source)
+	at com.lowagie.text.pdf.BaseFont.createFont(Unknown Source)
+	at org.xhtmlrenderer.pdf.ITextFontResolver.addFont(ITextFontResolver.java:164)
+	at org.xhtmlrenderer.pdf.ITextFontResolver.addFont(ITextFontResolver.java:157)
+	at net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm.generatePdf(RestingHourReportForm.java:222)
+	at net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm.access$7(RestingHourReportForm.java:208)
+	at net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm$3$1.doInBackground(RestingHourReportForm.java:329)
+	at net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm$3$1.doInBackground(RestingHourReportForm.java:1)
+	at javax.swing.SwingWorker$1.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at javax.swing.SwingWorker.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+2014-12-02 14:16:43,722 [SwingWorker-pool-3-thread-4 ] ERROR net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm - Failed to generate PDF
+java.io.IOException: ARIALUNI.TTF not found as file or resource.
+	at com.lowagie.text.pdf.RandomAccessFileOrArray.<init>(Unknown Source)
+	at com.lowagie.text.pdf.RandomAccessFileOrArray.<init>(Unknown Source)
+	at com.lowagie.text.pdf.TrueTypeFont.process(Unknown Source)
+	at com.lowagie.text.pdf.TrueTypeFontUnicode.<init>(Unknown Source)
+	at com.lowagie.text.pdf.BaseFont.createFont(Unknown Source)
+	at com.lowagie.text.pdf.BaseFont.createFont(Unknown Source)
+	at com.lowagie.text.pdf.BaseFont.createFont(Unknown Source)
+	at org.xhtmlrenderer.pdf.ITextFontResolver.addFont(ITextFontResolver.java:164)
+	at org.xhtmlrenderer.pdf.ITextFontResolver.addFont(ITextFontResolver.java:157)
+	at net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm.generatePdf(RestingHourReportForm.java:222)
+	at net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm.access$7(RestingHourReportForm.java:208)
+	at net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm$3$1.doInBackground(RestingHourReportForm.java:329)
+	at net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm$3$1.doInBackground(RestingHourReportForm.java:1)
+	at javax.swing.SwingWorker$1.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at javax.swing.SwingWorker.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+2014-12-02 14:17:05,677 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-02 14:17:06,084 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-02 14:17:06,260 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-03 22:10:07,011 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:10:07,419 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-03 22:10:07,602 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-03 22:12:02,392 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:12:02,725 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-03 22:12:02,870 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-03 22:16:00,764 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:16:01,136 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-03 22:16:01,287 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-03 22:18:03,315 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:18:03,368 [main ] ERROR net.waqassiddiqi.app.crew.db.DatabaseServer - Unable to start rest hour server
+org.h2.jdbc.JdbcSQLException: ?????? ??? ???????? ????? "9090" (???? ????? ??? ??????????????), ???????: "java.net.BindException: Address already in use: JVM_Bind"
+Exception opening port "9090" (port may be in use), cause: "java.net.BindException: Address already in use: JVM_Bind" [90061-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:194)
+	at org.h2.util.NetUtils.createServerSocket(NetUtils.java:160)
+	at org.h2.server.TcpServer.start(TcpServer.java:232)
+	at org.h2.tools.Server.start(Server.java:474)
+	at net.waqassiddiqi.app.crew.db.DatabaseServer.start(DatabaseServer.java:55)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:99)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:190)
+	... 8 more
+2014-12-03 22:18:03,372 [main ] ERROR net.waqassiddiqi.app.crew.ui.MainFrame - Server is already running
+java.sql.SQLException: Server is already running
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:100)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+2014-12-03 22:18:10,950 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:18:11,332 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-03 22:18:11,469 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-03 22:20:11,248 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:20:11,578 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-03 22:20:11,724 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-03 22:22:15,223 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:22:15,300 [main ] ERROR net.waqassiddiqi.app.crew.db.DatabaseServer - Unable to start rest hour server
+org.h2.jdbc.JdbcSQLException: ?????? ??? ???????? ????? "9090" (???? ????? ??? ??????????????), ???????: "java.net.BindException: Address already in use: JVM_Bind"
+Exception opening port "9090" (port may be in use), cause: "java.net.BindException: Address already in use: JVM_Bind" [90061-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:194)
+	at org.h2.util.NetUtils.createServerSocket(NetUtils.java:160)
+	at org.h2.server.TcpServer.start(TcpServer.java:232)
+	at org.h2.tools.Server.start(Server.java:474)
+	at net.waqassiddiqi.app.crew.db.DatabaseServer.start(DatabaseServer.java:55)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:99)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:190)
+	... 8 more
+2014-12-03 22:22:15,306 [main ] ERROR net.waqassiddiqi.app.crew.ui.MainFrame - Server is already running
+java.sql.SQLException: Server is already running
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:100)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+2014-12-03 22:22:30,411 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:22:30,767 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-03 22:22:30,920 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-03 22:24:38,391 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:24:38,448 [main ] ERROR net.waqassiddiqi.app.crew.db.DatabaseServer - Unable to start rest hour server
+org.h2.jdbc.JdbcSQLException: ?????? ??? ???????? ????? "9090" (???? ????? ??? ??????????????), ???????: "java.net.BindException: Address already in use: JVM_Bind"
+Exception opening port "9090" (port may be in use), cause: "java.net.BindException: Address already in use: JVM_Bind" [90061-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:194)
+	at org.h2.util.NetUtils.createServerSocket(NetUtils.java:160)
+	at org.h2.server.TcpServer.start(TcpServer.java:232)
+	at org.h2.tools.Server.start(Server.java:474)
+	at net.waqassiddiqi.app.crew.db.DatabaseServer.start(DatabaseServer.java:55)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:99)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:190)
+	... 8 more
+2014-12-03 22:24:38,451 [main ] ERROR net.waqassiddiqi.app.crew.ui.MainFrame - Server is already running
+java.sql.SQLException: Server is already running
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:100)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+2014-12-03 22:24:46,770 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:24:47,252 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-03 22:24:47,466 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-03 22:28:36,719 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:28:36,730 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:28:36,801 [main ] ERROR net.waqassiddiqi.app.crew.db.DatabaseServer - Unable to start rest hour server
+org.h2.jdbc.JdbcSQLException: ?????? ??? ???????? ????? "9090" (???? ????? ??? ??????????????), ???????: "java.net.BindException: Address already in use: JVM_Bind"
+Exception opening port "9090" (port may be in use), cause: "java.net.BindException: Address already in use: JVM_Bind" [90061-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:194)
+	at org.h2.util.NetUtils.createServerSocket(NetUtils.java:160)
+	at org.h2.server.TcpServer.start(TcpServer.java:232)
+	at org.h2.tools.Server.start(Server.java:474)
+	at net.waqassiddiqi.app.crew.db.DatabaseServer.start(DatabaseServer.java:55)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:99)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:190)
+	... 8 more
+2014-12-03 22:28:36,807 [main ] ERROR net.waqassiddiqi.app.crew.ui.MainFrame - Server is already running
+java.sql.SQLException: Server is already running
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:100)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+2014-12-03 22:28:36,918 [main ] ERROR net.waqassiddiqi.app.crew.db.DatabaseServer - Unable to start rest hour server
+org.h2.jdbc.JdbcSQLException: ?????? ??? ???????? ????? "9090" (???? ????? ??? ??????????????), ???????: "java.net.BindException: Address already in use: JVM_Bind"
+Exception opening port "9090" (port may be in use), cause: "java.net.BindException: Address already in use: JVM_Bind" [90061-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:194)
+	at org.h2.util.NetUtils.createServerSocket(NetUtils.java:160)
+	at org.h2.server.TcpServer.start(TcpServer.java:232)
+	at org.h2.tools.Server.start(Server.java:474)
+	at net.waqassiddiqi.app.crew.db.DatabaseServer.start(DatabaseServer.java:55)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:99)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:190)
+	... 8 more
+2014-12-03 22:28:36,923 [main ] ERROR net.waqassiddiqi.app.crew.ui.MainFrame - Server is already running
+java.sql.SQLException: Server is already running
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:100)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+2014-12-03 22:29:19,196 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:29:19,600 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-03 22:29:19,749 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-03 22:35:50,926 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:35:51,300 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-03 22:35:51,441 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2014-12-03 22:39:44,248 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2014-12-03 22:39:44,635 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2014-12-03 22:39:44,788 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl

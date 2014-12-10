@@ -45,6 +45,7 @@ import com.alee.laf.filechooser.WebFileChooser;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.text.WebTextPane;
+import com.lowagie.text.pdf.BaseFont;
 
 public class RestingHourReportForm extends BaseForm {
 
@@ -157,7 +158,7 @@ public class RestingHourReportForm extends BaseForm {
 		localVelocityContext.put("currentVessel", vessel);
 		
 		ApplicationSetting settings = new ApplicationSettingDAO().get();
-		
+		/*
 		try {
 			if(settings != null && settings.getLogo() != null) {
 				File outputfile = File.createTempFile("logo", ".png");
@@ -178,7 +179,7 @@ public class RestingHourReportForm extends BaseForm {
 		
 		localVelocityContext.put("logo", logoPath);
 		localVelocityContext.put("customText", settings.getCustomRestReportText());
-		
+		*/
 		restingHourReport = new RestingHourReport(crew, vessel, month, year);
 	    restingHourReport.generateReport();		
 		
@@ -197,9 +198,6 @@ public class RestingHourReportForm extends BaseForm {
 	    
 	    generatedHtml = writer.toString();
 	    
-	    if(log.isDebugEnabled()) {
-	    	log.debug(generatedHtml);
-	    }
 	    
 	    return generatedHtml;
 	}
@@ -214,9 +212,11 @@ public class RestingHourReportForm extends BaseForm {
 		try {
 		
 			if(urlCustomFont == null) {
-				urlCustomFont = ClassLoader.class.getResource("/resource/template/CarroisGothic-Regular.ttf");
-				renderer.getFontResolver().addFont(urlCustomFont.toString(), true);
+				urlCustomFont = ClassLoader.class.getResource("/resource/template/arialuni.ttf");
+				renderer.getFontResolver().addFont(urlCustomFont.toString(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 			}
+			
+			generatedHtml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + generatedHtml;
 			
 			renderer.setDocumentFromString(generatedHtml);
 			renderer.layout();

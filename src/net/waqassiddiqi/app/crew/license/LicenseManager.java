@@ -1,5 +1,6 @@
 package net.waqassiddiqi.app.crew.license;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,6 +11,8 @@ import net.waqassiddiqi.crewapp.license.KeyValidator.Status;
 import net.waqassiddiqi.crewapp.license.util.SystemUtil;
 
 import com.alee.utils.TimeUtils;
+import com.sun.jna.platform.win32.Advapi32Util;
+import com.sun.jna.platform.win32.WinReg;
 
 public class LicenseManager {
 	
@@ -21,8 +24,21 @@ public class LicenseManager {
 		if(settings == null) {
 			
 			settings = new RegistrationSetting();
-			
+
 			Date today = TimeUtils.getStartOfDay(new Date());
+			
+			try {
+				
+				String checksum = Advapi32Util.registryGetStringValue(WinReg.HKEY_LOCAL_MACHINE, 
+						"Software\\SHIP IP\\Rest Hours Validator\\Settings", "Checksum");
+				
+				if(checksum != null && !checksum.isEmpty()) {
+					today = new SimpleDateFormat("ddMMyyyy").parse(checksum);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 			Calendar expiryCal = Calendar.getInstance();
 			expiryCal.setTime(today);

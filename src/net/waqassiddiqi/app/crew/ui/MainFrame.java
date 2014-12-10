@@ -346,7 +346,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		mProgressDialog = getWebProgressDialog();
 		mProgressDialog.setVisible(true);
 		
-		setFont();
+		//setFont();
 		
 		MainFrame.getInstance().display();
 	}

@@ -38,6 +38,7 @@ import com.alee.laf.filechooser.WebFileChooser;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.text.WebTextPane;
+import com.lowagie.text.pdf.BaseFont;
 
 public class WorkingArragmentReportForm extends BaseForm {
 
@@ -165,9 +166,11 @@ public class WorkingArragmentReportForm extends BaseForm {
 		try {
 		
 			if(urlCustomFont == null) {
-				urlCustomFont = ClassLoader.class.getResource("/resource/template/CarroisGothic-Regular.ttf");
-				renderer.getFontResolver().addFont(urlCustomFont.toString(), true);
+				urlCustomFont = ClassLoader.class.getResource("/resource/template/arialuni.ttf");
+				renderer.getFontResolver().addFont(urlCustomFont.toString(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 			}
+			
+			generatedHtml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + generatedHtml;
 			
 			renderer.setDocumentFromString(generatedHtml);
 			renderer.layout();
