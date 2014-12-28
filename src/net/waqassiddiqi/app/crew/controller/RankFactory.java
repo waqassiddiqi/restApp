@@ -34,7 +34,10 @@ public class RankFactory extends BaseFactory {
 
 	@Override
 	public Component getEdit(String id) {
-		return null;
+		Component c = new AddRankForm(getOwner(), Integer.parseInt(id)).getView();
+		c.setName("getRank");
+		
+		return c;
 	}
 
 	@Override
@@ -46,7 +49,14 @@ public class RankFactory extends BaseFactory {
 
 	@Override
 	public Component getEdit(String id, Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		return null;
+		AddRankForm f = new AddRankForm(getOwner(), Integer.parseInt(id));
+		
+		if(params.containsKey("defaultView"))
+			f.setDefaultTabIndex((int) params.get("defaultView"));
+		
+		Component c = f.getView();
+		c.setName("getRank");
+		
+		return c;
 	}
 }

@@ -1,6 +1,5 @@
 package net.waqassiddiqi.app.crew.report;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -49,7 +48,8 @@ public class PotentialNCReport {
 		cal.set(Calendar.YEAR, year);
 		cal.set(Calendar.MONTH, month);
 		
-		return new SimpleDateFormat("MMM").format(cal.getTime());
+		String[] monthNames = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+		return monthNames[month];
 	}
 	
 	public boolean isInFuture(String date) {

@@ -165,7 +165,9 @@ public class ReportDAO {
 				
 				row[3] = sb.toString();
 				row[4] = rs.getString(11);
-				data.add(row);
+				
+				if(row[3].trim().length() > 0)
+					data.add(row);
 			}
 			
 		} catch (Exception e) {

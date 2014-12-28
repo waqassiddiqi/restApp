@@ -293,9 +293,9 @@ public class RibbonbarTabControl {
 
 		buttonList.add(btnAddCrew);
 		buttonList.add(btnListCrew);
-		buttonList.add(btnDeleteCrew);
+		//buttonList.add(btnDeleteCrew);
 		
-		GroupPanel gpanel = new GroupPanel(4, btnAddCrew, btnListCrew, btnDeleteCrew);
+		GroupPanel gpanel = new GroupPanel(4, btnAddCrew, btnListCrew);
 
 		WebPanel panel = getRibbonPanel("Manage Crew");
 		panel.add(gpanel, BorderLayout.CENTER);

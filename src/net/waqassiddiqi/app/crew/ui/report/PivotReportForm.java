@@ -77,8 +77,10 @@ public class PivotReportForm extends BaseForm {
 		cmbMonth = new WebComboBox();
 		cmbMonth.addItem("Select Month");
 		String[] months = new DateFormatSymbols().getMonths();
+		String[] monthNames = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+		
         for (int i = 0; i < months.length && i < 12; i++) {
-        	cmbMonth.addItem(months[i]);
+        	cmbMonth.addItem(monthNames[i]);
         	
         	if(i == Calendar.getInstance().get(Calendar.MONTH) + 1) {
         		cmbMonth.setSelectedIndex(i);

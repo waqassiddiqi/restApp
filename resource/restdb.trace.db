@@ -1,9 +1,0 @@
-10-15 18:27:51 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "DELETE FROM APP_SETTINGS ,[*] CREWS "; SQL statement:
-delete FROM APP_SETTINGS , CREWS [42000-181]
-10-15 18:28:40 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREW_SCHEDULE_TEMPLATE[*] SELECT * FROM CREWS"; expected "COMMIT, CREATE, CALL, CHECKPOINT, COMMENT, {"; SQL statement:
-CREW_SCHEDULE_TEMPLATE SELECT * FROM CREWS [42001-181]
-10-16 22:08:08 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "DELETE FROM ENTRY_TIMES ,[*]ERROR_REPORT "; SQL statement:
-delete from ENTRY_TIMES ,ERROR_REPORT [42000-181]

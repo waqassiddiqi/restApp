@@ -10,6 +10,7 @@ import java.net.URL;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
 import javax.imageio.ImageIO;
@@ -90,9 +91,12 @@ public class RestingHourReportForm extends BaseForm {
 		
 		cmbMonth = new WebComboBox();
 		cmbMonth.addItem("Select Month");
+		
+		String[] monthNames = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+		
 		String[] months = new DateFormatSymbols().getMonths();
         for (int i = 0; i < months.length && i < 12; i++) {
-        	cmbMonth.addItem(months[i]);
+        	cmbMonth.addItem(monthNames[i]);
         	
         	if(i == Calendar.getInstance().get(Calendar.MONTH) + 1) {
         		cmbMonth.setSelectedIndex(i);
@@ -158,7 +162,7 @@ public class RestingHourReportForm extends BaseForm {
 		localVelocityContext.put("currentVessel", vessel);
 		
 		ApplicationSetting settings = new ApplicationSettingDAO().get();
-		/*
+		
 		try {
 			if(settings != null && settings.getLogo() != null) {
 				File outputfile = File.createTempFile("logo", ".png");
@@ -179,7 +183,7 @@ public class RestingHourReportForm extends BaseForm {
 		
 		localVelocityContext.put("logo", logoPath);
 		localVelocityContext.put("customText", settings.getCustomRestReportText());
-		*/
+		
 		restingHourReport = new RestingHourReport(crew, vessel, month, year);
 	    restingHourReport.generateReport();		
 		
@@ -187,8 +191,15 @@ public class RestingHourReportForm extends BaseForm {
 	    localVelocityContext.put("host", restingHourReport);
 	    
 	    VelocityEngine ve = new VelocityEngine();
-	    ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath"); 
-	    ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+	    
+	    Properties props = new Properties();
+	    props.put("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.SimpleLog4JLogSystem");
+	    props.put("runtime.log.logsystem.log4j.category", "velocity");
+	    props.put("runtime.log.logsystem.log4j.logger", "velocity");
+	    props.put(RuntimeConstants.RESOURCE_LOADER, "classpath");
+	    props.put("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+
+	    ve.init(props);
 	    
 	    Template reportTemplate = ve.getTemplate("resource/template/restinghour_report.html");
 	    
@@ -211,12 +222,14 @@ public class RestingHourReportForm extends BaseForm {
 		
 		try {
 		
-			if(urlCustomFont == null) {
-				urlCustomFont = ClassLoader.class.getResource("/resource/template/arialuni.ttf");
-				renderer.getFontResolver().addFont(urlCustomFont.toString(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-			}
+			urlCustomFont = ClassLoader.class.getResource("/resource/template/arialuni.ttf");
+			renderer.getFontResolver().addFont(urlCustomFont.toString(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 			
-			generatedHtml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + generatedHtml;
+			if(generatedHtml == null)
+				return "";
+			
+			if(!generatedHtml.startsWith("<?xml version="))
+				generatedHtml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + generatedHtml;
 			
 			renderer.setDocumentFromString(generatedHtml);
 			renderer.layout();
@@ -243,7 +256,6 @@ public class RestingHourReportForm extends BaseForm {
 		
 		if(btnSource.getClientProperty("command").equals("pdf")) {
 			poBtnPdf.setShowLoad(!progressOverlay.isShowLoad());
-			
 			saveAsPdf();
 			
 			
@@ -344,8 +356,9 @@ public class RestingHourReportForm extends BaseForm {
 								notificationMsg = "PDF generation failed";
 							}
 							
-							NotificationManager.showNotification(notificationMsg);
 							poBtnPdf.setShowLoad(!poBtnPdf.isShowLoad());
+							
+							NotificationManager.showNotification(notificationMsg);
 						}
 					};
 					

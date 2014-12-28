@@ -62,6 +62,30 @@ public class RankDAO {
 		return false;
 	}
 	
+	public Rank getById(int id) {
+		
+		final ResultSet rs = this.db.executeQuery("SELECT * FROM ranks where id = " + id);
+		Rank rank = null;
+		
+		try {
+			if(rs.next()) {
+				rank = new Rank(); 
+				rank.setId(rs.getInt("id"));
+				rank.setRank(rs.getString("rank"));
+			}
+		} catch (Exception e) {
+			log.error("Error executing RankDAO.getById(): " + e.getMessage(), e);
+		} finally {
+			try {
+				if (rs != null) rs.close();
+			} catch (SQLException ex) {
+				log.error("failed to close db resources: " + ex.getMessage(), ex);
+			}
+		}
+		
+		return rank;
+	}
+	
 	public List<Rank> getAll() {
 		
 		List<Rank> list = new ArrayList<Rank>();

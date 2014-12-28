@@ -3,17 +3,27 @@ package net.waqassiddiqi.app.crew.ui;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.db.RankDAO;
 import net.waqassiddiqi.app.crew.model.Rank;
+import net.waqassiddiqi.app.crew.util.NotificationManager;
 
+import com.alee.laf.button.WebButton;
 import com.alee.laf.label.WebLabel;
+import com.alee.laf.menu.WebMenuItem;
+import com.alee.laf.menu.WebPopupMenu;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.tabbedpane.WebTabbedPane;
 import com.alee.laf.table.WebTable;
@@ -26,6 +36,8 @@ public class ListRankForm extends BaseForm implements ActionListener {
 	
 	private Object[][] data;
 	private String[] columnNames = { "S.No.", "Rank" };
+	
+	List<Rank> listRank;
 	
 	public ListRankForm(MainFrame owner) {
 		super(owner);
@@ -59,7 +71,44 @@ public class ListRankForm extends BaseForm implements ActionListener {
 		
 		table.setFocusable(false);
 		
+		table.addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseReleased(MouseEvent e) {
+		        int r = table.rowAtPoint(e.getPoint());
+		        if (r >= 0 && r < table.getRowCount()) {
+		            table.setRowSelectionInterval(r, r);
+		        } else {
+		            table.clearSelection();
+		        }
+
+		        int rowindex = table.getSelectedRow();
+		        if (rowindex < 0)
+		            return;
+		        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+		            JPopupMenu popup = getActionMenu(listRank.get(rowindex).getId(), rowindex);
+		            popup.show(e.getComponent(), e.getX(), e.getY());
+		        }
+		    }
+		});
+		
 		return scrollPane;
+	}
+	
+	private WebPopupMenu getActionMenu(int rankId, int selectedRowIndex) {
+		final WebPopupMenu popupMenu = new WebPopupMenu ();
+		popupMenu.add(getPopupMeunuItem("Edit details", Integer.toString(rankId), selectedRowIndex));
+		popupMenu.add(getPopupMeunuItem("Edit rest hour template", Integer.toString(rankId), selectedRowIndex));
+        
+        return popupMenu;
+	}
+	
+	private WebMenuItem getPopupMeunuItem(String name, String rankId, int rowIndex) {
+		WebMenuItem item = new WebMenuItem (name);
+		item.addActionListener(ListRankForm.this);
+		item.putClientProperty("rankId", rankId);
+		item.putClientProperty("rowIndex", rowIndex);
+		
+		return item;
 	}
 	
 	private void initColumnSizes(JTable table) {
@@ -90,12 +139,12 @@ public class ListRankForm extends BaseForm implements ActionListener {
 	private Object[][] getData() {
 		this.data = null;
 		
-		List<Rank> list = new RankDAO().getAll();
-		this.data = new Object[list.size()][columnNames.length];
+		listRank = new RankDAO().getAll();
+		this.data = new Object[listRank.size()][columnNames.length];
 		
-		for(int i=0; i<list.size(); i++) {
+		for(int i=0; i<listRank.size(); i++) {
 			data[i][0] = i+1;
-			data[i][1] = list.get(i).getRank();
+			data[i][1] = listRank.get(i).getRank();
 		}
 		
 		return this.data;
@@ -103,6 +152,30 @@ public class ListRankForm extends BaseForm implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() instanceof WebMenuItem) {
+			WebMenuItem item = (WebMenuItem) e.getSource();
+			
+			if(item.getActionCommand().equals("Edit details")) {
+				getOwner().addContent(RankFactory.getInstance().getEdit((String) item.getClientProperty("rankId")));
+			} else if(item.getActionCommand().equals("Edit rest hour template")) {
+				Map<String, Object> params = new HashMap<String , Object>();
+				params.put("defaultView", 1);
+				
+				getOwner().addContent(RankFactory.getInstance().getEdit((String) item.getClientProperty("rankId"), params));
+			}
+		} else if(e.getSource() instanceof WebButton) {
+			WebButton btnSource = (WebButton) e.getSource();
+			
+			if(btnSource.getClientProperty("command").equals("save")) {
+				RankDAO rankDao = new RankDAO();
+				
+				for(int i=0; i<listRank.size(); i++)
+					rankDao.updateRank(listRank.get(i));
+				
+				NotificationManager.showNotification("Rank data has been saved");
+			}
+		}
 	}
 	
 	public class RanksTableModel extends DefaultTableModel {
@@ -146,7 +219,26 @@ public class ListRankForm extends BaseForm implements ActionListener {
 
 		@Override
 		public void setValueAt(Object value, int row, int col) {
+			
+			if(col == 1) {
+				for(int i=0; i<listRank.size(); i++) {
+					if(i != row) {
+						if(listRank.get(i).getRank().equals(value.toString())) {
+							
+							Component comp = table.getDefaultRenderer(tableModel.getColumnClass(col)).getTableCellRendererComponent(table, longValues[col], false,
+											false, 0, col);
+							
+							NotificationManager.showPopup(getOwner(), comp, new String[] { "This passport number is already associated with other member of crew" });
+							return;
+						}
+					}
+				}
+			}
+			
 			data[row][col] = value;
+			
+			listRank.get(row).setRank(value.toString());
+			
 			fireTableCellUpdated(row, col);
 		}
 	}

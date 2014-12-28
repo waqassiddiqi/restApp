@@ -164,14 +164,19 @@
 			
 			#foreach( $index in [0..47] )
 				<td>
-					<div style="border: solid 1px #F0F0F0; width: #if( ($index+1) % 2 == 0 ) 80% else 100% #end;" #if( $entryTime.getSchedule()[$index] ) class="filled" #end>&nbsp;</div>
+					<div style="border: solid 1px #F0F0F0; width: #if( ($index+1) % 2 == 0 ) 80% else 100% #end;" #if( $host.isFilled($entryTime, $index) ) class="filled" #end>&nbsp;</div>
 				</td>
 			#end
 			
-			<td align="center">$entryTime.getTotalRestHours()</td>
-			<td align="center">#set(
-					$totalRestHours = 24 - $entryTime.getTotalRestHours())
-					$totalRestHours</td>
+			<td align="center">#if( $host.isBeforeSignOnDateOrNoEntry($entryTime) == false ) $entryTime.getTotalRestHours() #else 24.0 #end</td>
+			<td align="center">
+				#if( $host.isBeforeSignOnDateOrNoEntry($entryTime) == false )
+					#set($totalRestHours = 24 - $entryTime.getTotalRestHours())
+				#else
+					#set($totalRestHours = 0.0)
+				#end
+				
+				$totalRestHours</td>
 			<td align="center">$!{entryTime.comments}</td>
 			<td align="center">$host.get24HourRestHours($velocityCount)</td>
 			<td align="center">$host.get7DayRestHours($velocityCount)</td>

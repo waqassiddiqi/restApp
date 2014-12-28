@@ -71,7 +71,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		super(owner);
 				
 		currentDate = new Date();
-		calendar = new ExWebCalendar(currentDate);
+		calendar = new ExWebCalendar(currentDate, null);
 		entryTimeDao = new EntryTimeDAO();
 	}
 	
@@ -161,9 +161,8 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
         
 		GroupPanel rightPanel = new GroupPanel(false, 
 				new WebLabel("Resting Hours") {{ setDrawShade(true); }}, 
-				timeSheet.getView(), new GroupPanel(30, getGrid(), new GroupPanel(false, new WebLabel("Comments: "), areaScroll)), panelNonConformity);
-		
-		
+				timeSheet.getView(), new GroupPanel(30, getGrid(), 
+						new GroupPanel(false, new WebLabel("Comments: "), areaScroll)), panelNonConformity);
 		
 		return new GroupPanel(GroupingType.fillLast, 20, leftPanel, rightPanel).setMargin(10);
 	}
@@ -192,8 +191,6 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		
 		content.add(new WebLabel("Hours of work in 24 hours period"), "0,2");
 		content.add(txtHoursOfWork24Hrs, "1,2");
-		
-		
 		
 		return content;
 	}
@@ -229,6 +226,12 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 					currentCrew = (Crew) cmbCrew.getSelectedItem();
 
 					if(currentCrew != null) {
+						
+						//calendar = null;
+						//calendar = new ExWebCalendar(currentDate, currentCrew.getSignOnDate());
+						
+						calendar.refresh(currentCrew.getSignOnDate());
+						
 						errorReportEntry = new ErrorReportEntry();
 						errorReportEntry.setEntryDate(getDate(currentDate));
 						errorReportEntry.setCrew(currentCrew);
@@ -335,15 +338,8 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 				errorReportEntry.setWorkLess14hrs(true);
 			}
 			
-			//if(errorReport == null) {
-				errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
-				errorReport.generateReport();
-			//}// else {
-				//if(errorReport.getMonth() != month || errorReport.getYear() != cal.get(Calendar.YEAR)) {
-				//	errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
-				//	errorReport.generateReport();
-				//}
-			//}
+			errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
+			errorReport.generateReport();
 			
 			errorReport.getEntryTimeList().get(cal.get(Calendar.DAY_OF_MONTH) - 1).setSchedule(timeSheet.getSchedule());
 			errorReport.refresh();

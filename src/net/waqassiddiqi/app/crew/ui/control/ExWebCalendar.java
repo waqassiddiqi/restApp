@@ -12,7 +12,6 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 
-import com.alee.extended.date.WebCalendar;
 import com.alee.global.StyleConstants;
 import com.alee.laf.button.WebButton;
 import com.alee.laf.button.WebToggleButton;
@@ -23,15 +22,16 @@ public class ExWebCalendar extends WebCalendar {
 	private static final long serialVersionUID = 1L;
 
 	private List<WebToggleButton> currentMonthButtons;
+	private List<WebToggleButton> toggleButtons;
 	
 	public ExWebCalendar() {
-		this(null);
+		this(null, null);
 	}
 	
-	public ExWebCalendar(Date currentDate) {
-		super(currentDate);		
+	public ExWebCalendar(Date currentDate, Date crewSignOnDate) {
+		super(currentDate, crewSignOnDate);
 	}
-
+	
 	public void moveToNext() {
 		Calendar calNext = Calendar.getInstance();
 		calNext.setTime(date);
@@ -46,9 +46,28 @@ public class ExWebCalendar extends WebCalendar {
 		}			
 	}
 	
+	public void refresh(Date signOnDate) {
+		
+		crewSignOnDate = signOnDate;
+		
+		for(int i=0; i<toggleButtons.size(); i++) {
+			if(signOnDate == null)
+				return;
+			
+			if(signOnDate.after( (Date) toggleButtons.get(i).getClientProperty("date")))
+				toggleButtons.get(i).setEnabled(false);
+			else
+				toggleButtons.get(i).setEnabled(true);
+		}
+	}
+	
 	@Override
 	protected void updateMonth (final JPanel monthDays) {
 		monthDays.removeAll();
+		
+		if(toggleButtons == null)
+			toggleButtons = new ArrayList<WebToggleButton>();
+		
 		lastSelectedDayButton = null;
 
 		monthDays.add(new WebSeparator(WebSeparator.VERTICAL), "1,0,1,5");
@@ -71,7 +90,7 @@ public class ExWebCalendar extends WebCalendar {
 		int col = 0;
 		int row = 0;
 
-		// Month before
+		//Month before
 		final int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 		final int shift;
 		switch (dayOfWeek) {
@@ -132,7 +151,12 @@ public class ExWebCalendar extends WebCalendar {
 					|| ((actualCurrentYear >= thisCurrentYear) && actualCurrentMonth < thisCurrentMonth)) {
 				day.setEnabled(false);
 			}
+			
 			day.setEnabled(false);
+			
+			day.putClientProperty("date", thisDate);
+			toggleButtons.add(day);
+			
 			dates.add(day);
 
 			TimeUtils.increaseByDay(calendar);
@@ -149,7 +173,7 @@ public class ExWebCalendar extends WebCalendar {
 		else
 			currentMonthButtons.clear();
 		
-		// Current month
+		//Current month
 		do {
 			final boolean weekend = calendar.get(Calendar.DAY_OF_WEEK) == 1
 					|| calendar.get(Calendar.DAY_OF_WEEK) == 7;
@@ -200,8 +224,17 @@ public class ExWebCalendar extends WebCalendar {
 					day.setEnabled(false);
 				}
 			}
+			
+			if(day.isEnabled() && crewSignOnDate != null) {
+				if(crewSignOnDate.after(calendar.getTime()))
+					day.setEnabled(false);
+			}
+			
 			dates.add(day);
 
+			day.putClientProperty("date", thisDate);
+			toggleButtons.add(day);
+			
 			if (selected) {
 				lastSelectedDayButton = day;
 			}
@@ -215,7 +248,7 @@ public class ExWebCalendar extends WebCalendar {
 			}
 		} while (calendar.get(Calendar.DAY_OF_MONTH) > 1);
 
-		// Month after
+		//Month after
 		final int left = 6 * 7 - (monthDays.getComponentCount() - 6);
 		for (int i = 1; i <= left; i++) {
 			final Date thisDate = calendar.getTime();
@@ -239,12 +272,16 @@ public class ExWebCalendar extends WebCalendar {
 			if (dateCustomizer != null) {
 				dateCustomizer.customize(day, thisDate);
 			}
+			
 			monthDays.add(day, col * 2 + "," + row);
 
 			day.setEnabled(false);
 
 			dates.add(day);
 
+			day.putClientProperty("date", thisDate);
+			toggleButtons.add(day);
+			
 			TimeUtils.increaseByDay(calendar);
 
 			col++;
