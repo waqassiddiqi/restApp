@@ -313,70 +313,77 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		sb.append("<html><ul>");
 		
 		if(currentCrew != null) {
+			
+			try {
 				
-			EntryTime time = new EntryTime();
-			time.setSchedule(timeSheet.getSchedule());
-			
-			double totalWorkHours = 24 - time.getTotalRestHours();
-			
-			errorReportEntry = new ErrorReportEntry();
-			errorReportEntry.setEntryDate(getDate(currentDate));
-			errorReportEntry.setCrew(currentCrew);
-			
-			errorReportEntry.setRestIn24hours(time.getTotalRestHours());
-			errorReportEntry.setWorkIn24hours(totalWorkHours);
-			
-			if(time.getTotalRestHours() < 10) {
-				sb.append("<li>Total period of REST > 10 Hours</li>");
+				EntryTime time = new EntryTime();
+				time.setSchedule(timeSheet.getSchedule());
 				
-				errorReportEntry.setRestGreater10hrs(true);
-			}
-			
-			if(totalWorkHours > 14) {
-				sb.append("<li>Total period of WORK &lt; 14 Hours</li>");
+				double totalWorkHours = 24 - time.getTotalRestHours();
 				
-				errorReportEntry.setWorkLess14hrs(true);
-			}
-			
-			errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
-			errorReport.generateReport();
-			
-			errorReport.getEntryTimeList().get(cal.get(Calendar.DAY_OF_MONTH) - 1).setSchedule(timeSheet.getSchedule());
-			errorReport.refresh();
-			
-			if(errorReport.getRestPeriodCounter(cal.get(Calendar.DAY_OF_MONTH)) > 2) {
-				sb.append("<li>Total number of REST period is more than 2</li>");
+				errorReportEntry = new ErrorReportEntry();
+				errorReportEntry.setEntryDate(getDate(currentDate));
+				errorReportEntry.setCrew(currentCrew);
 				
-				errorReportEntry.setTotalRestPeriods(errorReport.getRestPeriodCounter(cal.get(Calendar.DAY_OF_MONTH)));
-			}
-			
-			if(!errorReport.contain6HourContinuousRest(cal.get(Calendar.DAY_OF_MONTH))) {
-				sb.append("<li>At least one period of rest must be of 6 hours in length</li>");
+				errorReportEntry.setRestIn24hours(time.getTotalRestHours());
+				errorReportEntry.setWorkIn24hours(totalWorkHours);
 				
-				errorReportEntry.setOneRestPeriod6hrs(true);
-			}
-			
-			
-			double restHoursIn24Hours = errorReport.get24HourRestHours(cal.get(Calendar.DAY_OF_MONTH));
-			if(restHoursIn24Hours < 10) {
-				sb.append("<li>Any 24-hour Total Period of REST &gt; 10 Hours</li>");
+				if(time.getTotalRestHours() < 10) {
+					sb.append("<li>Total period of REST > 10 Hours</li>");
+					
+					errorReportEntry.setRestGreater10hrs(true);
+				}
 				
-				errorReportEntry.setAnyRest24hours(restHoursIn24Hours);
+				if(totalWorkHours > 14) {
+					sb.append("<li>Total period of WORK &lt; 14 Hours</li>");
+					
+					errorReportEntry.setWorkLess14hrs(true);
+				}
 				
-				errorReportEntry.setTotalRest24hrsGreater10hrs(true);
-			}
+				errorReport = new ErrorReport(currentCrew, null, month, cal.get(Calendar.YEAR));
+				errorReport.generateReport();
+				
+				if(errorReport.getEntryTimeList().size() >= cal.get(Calendar.DAY_OF_MONTH) - 1) {
+					errorReport.getEntryTimeList().get(cal.get(Calendar.DAY_OF_MONTH) - 1).setSchedule(timeSheet.getSchedule());
+					errorReport.refresh();
+				}
+				
+				if(errorReport.getRestPeriodCounter(cal.get(Calendar.DAY_OF_MONTH)) > 2) {
+					sb.append("<li>Total number of REST period is more than 2</li>");
+					
+					errorReportEntry.setTotalRestPeriods(errorReport.getRestPeriodCounter(cal.get(Calendar.DAY_OF_MONTH)));
+				}
+				
+				if(!errorReport.contain6HourContinuousRest(cal.get(Calendar.DAY_OF_MONTH))) {
+					sb.append("<li>At least one period of rest must be of 6 hours in length</li>");
+					
+					errorReportEntry.setOneRestPeriod6hrs(true);
+				}
+				
+				
+				double restHoursIn24Hours = errorReport.get24HourRestHours(cal.get(Calendar.DAY_OF_MONTH));
+				if(restHoursIn24Hours < 10) {
+					sb.append("<li>Any 24-hour Total Period of REST &gt; 10 Hours</li>");
+					
+					errorReportEntry.setAnyRest24hours(restHoursIn24Hours);
+					
+					errorReportEntry.setTotalRest24hrsGreater10hrs(true);
+				}
+				
+				double restHoursIn7Days = errorReport.get7DayRestHours(cal.get(Calendar.DAY_OF_MONTH));
+				if(restHoursIn7Days < 77) {
+					sb.append("<li>Any 7-days Total Period of REST &gt; 77 Hours</li>");
+					
+					errorReportEntry.setRest7days(restHoursIn7Days);
+					
+					errorReportEntry.setTotalRest7daysGreater77hrs(true);
+				}
+				
+				double last3DayTotalRestHours = errorReport.getLast3DayTotalRestHours(cal.get(Calendar.DAY_OF_MONTH));
+				errorReportEntry.setRestHour3daysGreater36hrs(last3DayTotalRestHours);
+				
+			} catch(Exception e) { }
 			
-			double restHoursIn7Days = errorReport.get7DayRestHours(cal.get(Calendar.DAY_OF_MONTH));
-			if(restHoursIn7Days < 77) {
-				sb.append("<li>Any 7-days Total Period of REST &gt; 77 Hours</li>");
-				
-				errorReportEntry.setRest7days(restHoursIn7Days);
-				
-				errorReportEntry.setTotalRest7daysGreater77hrs(true);
-			}
-			
-			double last3DayTotalRestHours = errorReport.getLast3DayTotalRestHours(cal.get(Calendar.DAY_OF_MONTH));
-			errorReportEntry.setRestHour3daysGreater36hrs(last3DayTotalRestHours);
 		}
 		
 		sb.append("</ul></html>");

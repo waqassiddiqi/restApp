@@ -63,7 +63,8 @@ public class ConnectionManager {
                 + "book_number_or_passport VARCHAR(30), "
                 + "signon_date bigint, "
                 + "is_watch_keeper BOOLEAN, "
-                + "is_active BOOLEAN DEFAULT true"
+                + "is_active BOOLEAN DEFAULT true, "
+                + "signoff_date bigint, "
                 + ")";	
 		
 		executeUpdate(strSqlCrew);
@@ -110,7 +111,10 @@ public class ConnectionManager {
                 + "is_on_port BOOLEAN, "
                 + "work_in_24_hours REAL, "
                 + "rest_in_24_hours REAL, "
-                + "comments VARCHAR(500) "
+                + "comments VARCHAR(500), "
+                + "day bigint, "
+                + "month bigint, "
+                + "year bigint "
                 + ")";	
 		
 		executeUpdate(strSqlEntryTime);

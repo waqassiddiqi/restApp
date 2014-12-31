@@ -1,6 +1,7 @@
 package net.waqassiddiqi.app.crew.model;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 
 import net.waqassiddiqi.app.crew.util.CalendarUtil;
@@ -17,9 +18,16 @@ public class EntryTime {
 	
 	public EntryTime() {
 		schedule = new Boolean[48];
-		Arrays.fill(schedule, Boolean.TRUE);
+		Arrays.fill(schedule, Boolean.FALSE);
 	}
 
+	public Calendar getEntryCalendar() {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(entryDate);
+		
+		return cal;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -226,10 +234,16 @@ public class EntryTime {
 				return false;
 			
 		} else {
-			if (entryDate.getTime() != other.entryDate.getTime())
-				return false;
+			Calendar calOther = Calendar.getInstance();
+			calOther.setTime(other.entryDate);
+			
+			if(getEntryCalendar().get(Calendar.DAY_OF_MONTH) == calOther.get(Calendar.DAY_OF_MONTH)
+					&& getEntryCalendar().get(Calendar.MONTH) == calOther.get(Calendar.MONTH)
+					&& getEntryCalendar().get(Calendar.YEAR) == calOther.get(Calendar.YEAR)) {
+				return true;
+			}
 		}
 			
-		return true;
+		return false;
 	}
 }

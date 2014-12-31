@@ -2,15 +2,17 @@ package net.waqassiddiqi.app.crew.report;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-
-import com.alee.utils.TimeUtils;
 
 import net.waqassiddiqi.app.crew.db.EntryTimeDAO;
 import net.waqassiddiqi.app.crew.model.Crew;
 import net.waqassiddiqi.app.crew.model.EntryTime;
 import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.util.CalendarUtil;
+
+import com.alee.utils.TimeUtils;
 
 public class RestingHourReport {
 	private Crew crew;
@@ -85,6 +87,17 @@ public class RestingHourReport {
 					calStart.add(Calendar.DAY_OF_MONTH, 1);
 				}
 			}
+			
+			
+			
+			Collections.sort(lstEntryTimes, new Comparator<EntryTime>() {
+
+				@Override
+				public int compare(EntryTime e1, EntryTime e2) {
+					return Integer.valueOf(e1.getEntryCalendar().get(Calendar.DAY_OF_MONTH)).compareTo(
+							e2.getEntryCalendar().get(Calendar.DAY_OF_MONTH));
+				}				
+			});
 		}
 		
 	}
