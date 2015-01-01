@@ -77,7 +77,7 @@ public class AddRankForm extends BaseForm {
 			@Override
 			public void setSelectedIndex(int newIndex) {
 				
-				if(this.getSelectedIndex() == 1) {
+				if(this.getSelectedIndex() == 1 && txtRankName.getText().trim().length() > 0) {
 					save();
 				}
 				
@@ -324,6 +324,11 @@ public class AddRankForm extends BaseForm {
 			
 			txtRankId.setText("");
 			txtRankName.setText("");
+			
+			timeSheetOnPortWatchKeeping.setSchedule(defaultScheduleList);
+			timeSheetOnPortNonWatchKeeping.setSchedule(defaultScheduleList);
+			timeSheetOnSeaWatchkeeping.setSchedule(defaultScheduleList);
+			timeSheetOnSeaNonWatchkeeping.setSchedule(defaultScheduleList);
 			
 		} else if(btnSource.getClientProperty("command").equals("save")) {
 			save();			

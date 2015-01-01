@@ -1548,3 +1548,66 @@ java.sql.SQLException: Server is already running
 2014-12-31 12:56:04,351 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
 2014-12-31 12:56:04,524 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
 2014-12-31 12:56:04,604 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-01 13:19:36,419 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-01 13:19:36,600 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-01 13:19:36,678 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-01 13:19:57,909 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-01 13:19:58,081 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-01 13:19:58,168 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-01 13:20:35,154 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-01 13:20:35,334 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-01 13:20:35,418 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-01 13:20:45,144 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-01 13:20:45,331 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-01 13:20:45,412 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-01 13:45:48,866 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-01 13:45:49,056 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-01 13:45:49,137 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-01 13:47:08,544 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-01 13:47:08,568 [main ] ERROR net.waqassiddiqi.app.crew.db.DatabaseServer - Unable to start rest hour server
+org.h2.jdbc.JdbcSQLException: Exception opening port "9090" (port may be in use), cause: "java.net.BindException: Address already in use: JVM_Bind" [90061-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:194)
+	at org.h2.util.NetUtils.createServerSocket(NetUtils.java:160)
+	at org.h2.server.TcpServer.start(TcpServer.java:232)
+	at org.h2.tools.Server.start(Server.java:474)
+	at net.waqassiddiqi.app.crew.db.DatabaseServer.start(DatabaseServer.java:55)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:99)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(DualStackPlainSocketImpl.java:106)
+	at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:376)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:190)
+	at java.net.ServerSocket.bind(ServerSocket.java:376)
+	at java.net.ServerSocket.<init>(ServerSocket.java:237)
+	at java.net.ServerSocket.<init>(ServerSocket.java:128)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:190)
+	... 8 more
+2015-01-01 13:47:08,571 [main ] ERROR net.waqassiddiqi.app.crew.ui.MainFrame - Server is already running
+java.sql.SQLException: Server is already running
+	at net.waqassiddiqi.app.crew.ui.MainFrame.<init>(MainFrame.java:100)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.getInstance(MainFrame.java:76)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.runApplication(MainFrame.java:351)
+	at net.waqassiddiqi.app.crew.ui.MainFrame.main(MainFrame.java:400)
+2015-01-01 13:47:13,325 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-01 13:47:13,503 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-01 13:47:13,581 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-01 14:01:41,670 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-01 14:01:41,852 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-01 14:01:41,928 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-01 14:02:47,571 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-01 14:02:47,765 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-01 14:02:47,861 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-01 14:04:11,949 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-01 14:04:12,141 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-01 14:04:12,224 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-01 15:42:31,983 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-01 15:42:32,163 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-01 15:42:32,241 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-01 15:43:53,310 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-01 15:43:53,496 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-01 15:43:53,575 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
