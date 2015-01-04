@@ -3,6 +3,9 @@ package net.waqassiddiqi.app.crew.ui;
 import java.awt.Component;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JTextField;
 
@@ -43,6 +46,10 @@ public class AddRankForm extends BaseForm {
 	private WebTabbedPane tabPan;
 	private Rank currentRank = null;
 	
+	protected Boolean[] defaultScheduleList = new Boolean[48];
+	
+	private int defaultTabIndex = 0;
+	
 	public AddRankForm(MainFrame owner) {
 		this(owner, -1);
 	}
@@ -51,6 +58,7 @@ public class AddRankForm extends BaseForm {
 		super(owner);
 		
 		this.id = id;
+		Arrays.fill(defaultScheduleList, Boolean.TRUE);
 		scheduleDao = new ScheduleTemplateDAO();
 	}
 	
@@ -65,11 +73,27 @@ public class AddRankForm extends BaseForm {
 	@Override
 	public Component prepareView() {
         
-		tabPan = new WebTabbedPane ();
+		tabPan = new WebTabbedPane () {
+			@Override
+			public void setSelectedIndex(int newIndex) {
+				
+				if(this.getSelectedIndex() == 1 && txtRankName.getText().trim().length() > 0) {
+					save();
+				}
+				
+				if(newIndex == 0)
+					super.setSelectedIndex(newIndex);
+				else if(InputValidator.validateInput(getOwner(), new JTextField[] { 
+						txtRankName }, 
+						"This field cannot be empty")) {
+					
+					if(save())
+						super.setSelectedIndex(newIndex);
+				}
+			}
+		};
         tabPan.setOpaque(false);
         tabPan.setTabPlacement(WebTabbedPane.TOP);
-        
-        tabPan.addTab("  Rank Details  ", getForm());
         
         timeSheetOnSeaWatchkeeping = new TimeSheet(25, false, "Watch keeping Hours: ");
         timeSheetOnSeaNonWatchkeeping = new TimeSheet(25, false, "Non Watchkeeping Hours: ");
@@ -85,9 +109,13 @@ public class AddRankForm extends BaseForm {
 						timeSheetOnPortWatchKeeping.getView(), 
 						timeSheetOnPortNonWatchKeeping.getView())).setMargin(5));
         
+        tabPan.addTab("  Rank Details  ", getForm());
+        
         tabPan.addTab("  Schedule Template ", scrollPane);
         
         tabPan.setContentInsets(new Insets(10, 10, 10, 10));
+        
+        tabPan.setSelectedIndex(defaultTabIndex);
         
         return tabPan;
 	}
@@ -108,19 +136,57 @@ public class AddRankForm extends BaseForm {
 		txtRankId.setVisible(false);
 		
 		txtRankName = new WebTextField(15);
-		
-		//content.add(new WebLabel("Rank ID", WebLabel.TRAILING), "0,0");		
-		//content.add(txtRankId, "1,0");
 
 		content.add(new WebLabel("Rank", WebLabel.TRAILING), "0,1");
 		content.add(txtRankName, "1,1");
+		
+		bindData();
 		
 		thisComponent = content;
 		
 		return content;
 	}
+	
+	private void bindData() {
+		
+		if(this.id > 0) {
+			currentRank = new RankDAO().getById(id);
+			
+			txtRankName.setText(currentRank.getRank());
+			
+			getDefaultScheduleTemplate();
+		}
+	}
+	
+	private void getDefaultScheduleTemplate() {
+		
+		timeSheetOnPortWatchKeeping.setSchedule(defaultScheduleList);
+		timeSheetOnPortNonWatchKeeping.setSchedule(defaultScheduleList);
+		timeSheetOnSeaWatchkeeping.setSchedule(defaultScheduleList);
+		timeSheetOnSeaNonWatchkeeping.setSchedule(defaultScheduleList);
+		
+		
+		List<ScheduleTemplate> templates = new ArrayList<ScheduleTemplate>(); 
+		if(currentRank != null) {
+			templates = new ScheduleTemplateDAO().getAllByRank(currentRank);
+			
+			if(templates != null && templates.size() > 0) {
+				for(ScheduleTemplate t : templates) {
+					if(t.isOnPort() && t.isWatchKeeping()) {
+						timeSheetOnPortWatchKeeping.setSchedule(t.getSchedule());
+					} else if(t.isOnPort() && !t.isWatchKeeping()) {
+						timeSheetOnPortNonWatchKeeping.setSchedule(t.getSchedule());
+					} else if(!t.isOnPort() && t.isWatchKeeping()) {
+						timeSheetOnSeaWatchkeeping.setSchedule(t.getSchedule());
+					} else if(!t.isOnPort() && !t.isWatchKeeping()) {
+						timeSheetOnSeaNonWatchkeeping.setSchedule(t.getSchedule());
+					}
+				}
+			}
+		}
+	}
 
-	private void save() {
+	private boolean save() {
 		if(txtRankName.getText().trim().isEmpty()) {
 			tabPan.setSelectedIndex(0);
 		}
@@ -135,21 +201,19 @@ public class AddRankForm extends BaseForm {
 			
 			NotificationManager.showPopup(owner, 
 					txtRankName, new String[] { txtRankName.getText().trim() + " already exists" });
-			return;
+			return false;
 			
 		} else if(rankDao.isExists(rank) && currentRank == null) {
 			
 			NotificationManager.showPopup(owner, 
 					txtRankName, new String[] { txtRankName.getText().trim() + " already exists" });
 			
-			return;
+			return false;
 		}
 		
 		ScheduleTemplateDAO scheduleDao = new ScheduleTemplateDAO();
 		
 		if(InputValidator.validateInput(owner, new JTextField[] { txtRankName }, "Rank cannot be empty")) {
-			
-			
 			
 			if(currentRank == null) {
 				this.id = rankDao.addRank(rank);
@@ -164,9 +228,11 @@ public class AddRankForm extends BaseForm {
 					associateDefaultTemplates();
 					
 					NotificationManager.showNotification("New rank has been added.");
+					return true;
 					
 				} else {
 					NotificationManager.showNotification("An error has occured while adding new rank");
+					return false;
 				}
 			} else {
 				currentRank.setRank(rank.getRank());
@@ -177,8 +243,11 @@ public class AddRankForm extends BaseForm {
 				associateDefaultTemplates();
 				
 				NotificationManager.showNotification("Rank has been updated.");
+				return true;
 			}
 		}
+		
+		return false;
 	}
 	
 	private void associateDefaultTemplates() {
@@ -256,8 +325,17 @@ public class AddRankForm extends BaseForm {
 			txtRankId.setText("");
 			txtRankName.setText("");
 			
+			timeSheetOnPortWatchKeeping.setSchedule(defaultScheduleList);
+			timeSheetOnPortNonWatchKeeping.setSchedule(defaultScheduleList);
+			timeSheetOnSeaWatchkeeping.setSchedule(defaultScheduleList);
+			timeSheetOnSeaNonWatchkeeping.setSchedule(defaultScheduleList);
+			
 		} else if(btnSource.getClientProperty("command").equals("save")) {
 			save();			
 		}
+	}
+	
+	public void setDefaultTabIndex(int index) {
+		this.defaultTabIndex = index;
 	}
 }

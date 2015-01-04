@@ -151,8 +151,11 @@ public class ConnectionManager {
                 + "is_on_port BOOLEAN, "
                 + "work_in_24_hours REAL, "
                 + "rest_in_24_hours REAL, "
-                + "comments VARCHAR(500) "
-                + ")";	
+                + "comments VARCHAR(500), "
+                + "day bigint, "
+                + "month bigint, "
+                + "year bigint "
+                + ")";
 		
 		executeUpdate(strSqlEntryTime);
 		

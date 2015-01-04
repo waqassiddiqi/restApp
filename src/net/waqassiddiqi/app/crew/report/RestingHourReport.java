@@ -1,8 +1,9 @@
 package net.waqassiddiqi.app.crew.report;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import net.waqassiddiqi.app.crew.db.EntryTimeDAO;
@@ -11,6 +12,8 @@ import net.waqassiddiqi.app.crew.model.EntryTime;
 import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.util.CalendarUtil;
 
+import com.alee.utils.TimeUtils;
+
 public class RestingHourReport {
 	private Crew crew;
 	private int month;
@@ -18,11 +21,13 @@ public class RestingHourReport {
 	private List<EntryTime> lstEntryTimes;
 	private EntryTime previousDay = null;
 	private List<EntryTime> last7Day = null;
+	private EntryTimeDAO entryTimeDao = null;
 	
 	public RestingHourReport(Crew c, Vessel v, int month, int year) {
 		this.crew = c;
 		this.month = month;
 		this.year = year;
+		entryTimeDao = new EntryTimeDAO();
 	}
 	
 	public void generateReport() {
@@ -82,6 +87,17 @@ public class RestingHourReport {
 					calStart.add(Calendar.DAY_OF_MONTH, 1);
 				}
 			}
+			
+			
+			
+			Collections.sort(lstEntryTimes, new Comparator<EntryTime>() {
+
+				@Override
+				public int compare(EntryTime e1, EntryTime e2) {
+					return Integer.valueOf(e1.getEntryCalendar().get(Calendar.DAY_OF_MONTH)).compareTo(
+							e2.getEntryCalendar().get(Calendar.DAY_OF_MONTH));
+				}				
+			});
 		}
 		
 	}
@@ -172,10 +188,44 @@ public class RestingHourReport {
 		cal.set(Calendar.YEAR, year);
 		cal.set(Calendar.MONTH, month);
 		
-		return new SimpleDateFormat("MMM").format(cal.getTime());
+		String[] monthNames = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+		
+		return monthNames[month];
 	}
 	
 	public int getYear() {
 		return this.year;
+	}
+	
+	public boolean isFilled(EntryTime entry, int index) {
+		
+		if(TimeUtils.isSameDay(crew.getSignOnDate(), entry.getEntryDate())) {
+			return entry.getSchedule()[index];
+		}
+		
+		if(crew.getSignOnDate().after(entry.getEntryDate())) {
+			return false;
+		}
+		
+		if(entryTimeDao.getByDateAndCrew(entry.getEntryDate(), crew) == null)
+			return false;
+		
+		return entry.getSchedule()[index];
+	}
+	
+	public boolean isBeforeSignOnDateOrNoEntry(EntryTime entry) {
+		
+		if(TimeUtils.isSameDay(crew.getSignOnDate(), entry.getEntryDate())) {
+			return false;
+		}
+		
+		if(crew.getSignOnDate().after(entry.getEntryDate())) {
+			return true;
+		}
+		
+		if(entryTimeDao.getByDateAndCrew(entry.getEntryDate(), crew) == null)
+			return true;
+		
+		return false;
 	}
 }

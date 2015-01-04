@@ -10,6 +10,7 @@ import java.net.URL;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
 import javax.imageio.ImageIO;
@@ -43,6 +44,7 @@ import com.alee.laf.filechooser.WebFileChooser;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.text.WebTextPane;
+import com.lowagie.text.pdf.BaseFont;
 
 public class PotentialNCReportForm extends BaseForm {
 
@@ -80,8 +82,10 @@ public class PotentialNCReportForm extends BaseForm {
 		cmbMonth = new WebComboBox();
 		cmbMonth.addItem("Select Month");
 		String[] months = new DateFormatSymbols().getMonths();
+		String[] monthNames = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+		
         for (int i = 0; i < months.length && i < 12; i++) {
-        	cmbMonth.addItem(months[i]);
+        	cmbMonth.addItem(monthNames[i]);
         	
         	if(i == Calendar.getInstance().get(Calendar.MONTH) + 1) {
         		cmbMonth.setSelectedIndex(i);
@@ -174,8 +178,16 @@ public class PotentialNCReportForm extends BaseForm {
 		localVelocityContext.put("host", pNcReport);
 		
 	    VelocityEngine ve = new VelocityEngine();
-	    ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath"); 
-	    ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+	    
+	    Properties props = new Properties();
+	    props.put("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.SimpleLog4JLogSystem");
+	    props.put("runtime.log.logsystem.log4j.category", "velocity");
+	    props.put("runtime.log.logsystem.log4j.logger", "velocity");
+	    
+	    props.put(RuntimeConstants.RESOURCE_LOADER, "classpath");
+	    props.put("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+
+	    ve.init(props);
 	    
 	    Template reportTemplate = ve.getTemplate("resource/template/potential_nc_detailed_report.html");
 	    
@@ -201,10 +213,14 @@ public class PotentialNCReportForm extends BaseForm {
 		
 		try {
 		
-			if(urlCustomFont == null) {
-				urlCustomFont = ClassLoader.class.getResource("/resource/template/CarroisGothic-Regular.ttf");
-				renderer.getFontResolver().addFont(urlCustomFont.toString(), true);
-			}
+			urlCustomFont = ClassLoader.class.getResource("/resource/template/arialuni.ttf");
+			renderer.getFontResolver().addFont(urlCustomFont.toString(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+			
+			if(generatedHtml == null)
+				return "";
+			
+			if(!generatedHtml.startsWith("<?xml version="))
+				generatedHtml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + generatedHtml;
 			
 			renderer.setDocumentFromString(generatedHtml);
 			renderer.layout();
@@ -323,8 +339,8 @@ public class PotentialNCReportForm extends BaseForm {
 								notificationMsg = "PDF generation failed";
 							}
 							
-							NotificationManager.showNotification(notificationMsg);
 							poBtnPdf.setShowLoad(!poBtnPdf.isShowLoad());
+							NotificationManager.showNotification(notificationMsg);
 						}
 					};
 					

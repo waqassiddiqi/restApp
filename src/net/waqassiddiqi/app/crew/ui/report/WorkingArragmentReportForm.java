@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.StringWriter;
 import java.net.URL;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
 import javax.imageio.ImageIO;
@@ -38,6 +39,7 @@ import com.alee.laf.filechooser.WebFileChooser;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.text.WebTextPane;
+import com.lowagie.text.pdf.BaseFont;
 
 public class WorkingArragmentReportForm extends BaseForm {
 
@@ -137,8 +139,16 @@ public class WorkingArragmentReportForm extends BaseForm {
 		localVelocityContext.put("host", waReport);
 		
 	    VelocityEngine ve = new VelocityEngine();
-	    ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath"); 
-	    ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+
+	    Properties props = new Properties();
+	    props.put("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.SimpleLog4JLogSystem");
+	    props.put("runtime.log.logsystem.log4j.category", "velocity");
+	    props.put("runtime.log.logsystem.log4j.logger", "velocity");
+	    
+	    props.put(RuntimeConstants.RESOURCE_LOADER, "classpath");
+	    props.put("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+
+	    ve.init(props);
 	    
 	    Template reportTemplate = ve.getTemplate("resource/template/working_arragment_report.html");
 	    
@@ -147,10 +157,6 @@ public class WorkingArragmentReportForm extends BaseForm {
 	    reportTemplate.merge(localVelocityContext, writer);
 	    
 	    generatedHtml = writer.toString();
-	    
-	    if(log.isDebugEnabled()) {
-	    	//log.debug(generatedHtml);
-	    }
 	    
 	    return generatedHtml;
 	}
@@ -164,10 +170,14 @@ public class WorkingArragmentReportForm extends BaseForm {
 		
 		try {
 		
-			if(urlCustomFont == null) {
-				urlCustomFont = ClassLoader.class.getResource("/resource/template/CarroisGothic-Regular.ttf");
-				renderer.getFontResolver().addFont(urlCustomFont.toString(), true);
-			}
+			urlCustomFont = ClassLoader.class.getResource("/resource/template/arialuni.ttf");
+			renderer.getFontResolver().addFont(urlCustomFont.toString(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+			
+			if(generatedHtml == null)
+				return "";
+			
+			if(!generatedHtml.startsWith("<?xml version="))
+				generatedHtml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + generatedHtml;
 			
 			renderer.setDocumentFromString(generatedHtml);
 			renderer.layout();
@@ -258,8 +268,8 @@ public class WorkingArragmentReportForm extends BaseForm {
 								notificationMsg = "PDF generation failed";
 							}
 							
-							NotificationManager.showNotification(notificationMsg);
 							poBtnPdf.setShowLoad(!poBtnPdf.isShowLoad());
+							NotificationManager.showNotification(notificationMsg);							
 						}
 					};
 					
