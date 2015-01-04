@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+
 import net.waqassiddiqi.app.crew.util.CalendarUtil;
 
 public class EntryTime {
@@ -15,6 +17,8 @@ public class EntryTime {
 	private float workIn24Hours;
 	private float restIn24Hours;
 	private String comments;
+	
+	private Logger log = Logger.getLogger(getClass().getName());
 	
 	public EntryTime() {
 		schedule = new Boolean[48];
@@ -241,6 +245,8 @@ public class EntryTime {
 					&& getEntryCalendar().get(Calendar.MONTH) == calOther.get(Calendar.MONTH)
 					&& getEntryCalendar().get(Calendar.YEAR) == calOther.get(Calendar.YEAR)) {
 				return true;
+			} else {
+				log.info("Difference: " + getEntryCalendar().getTime().toString() + " AND " + calOther.getTime().toString());
 			}
 		}
 			

@@ -1611,3 +1611,658 @@ java.sql.SQLException: Server is already running
 2015-01-01 15:43:53,310 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
 2015-01-01 15:43:53,496 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
 2015-01-01 15:43:53,575 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-02 13:31:36,920 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-02 13:31:37,263 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-02 13:31:37,416 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-02 14:59:36,471 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-02 14:59:36,853 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-02 14:59:37,000 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-02 15:00:22,714 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-02 15:00:23,096 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-02 15:00:23,261 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-02 15:13:45,073 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-02 15:13:45,455 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-02 15:13:45,596 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-02 15:16:54,621 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-02 15:16:54,959 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-02 15:16:55,146 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-02 15:23:59,453 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-02 15:23:59,776 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-02 15:23:59,922 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-02 19:17:21,324 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-02 19:17:21,808 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-02 19:17:21,994 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-02 19:17:23,496 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 3 , Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:17:23,497 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:17:23,497 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:17:23,497 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:17:23,497 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:17:23,498 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:17:23,498 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:17:23,498 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:17:23,498 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:17:23,498 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:17:23,499 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:17:23,499 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:17:23,499 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:17:23,499 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:17:23,500 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:17:23,500 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 09 03:00:00 PKT 2015
+2015-01-02 19:17:23,500 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Mon Jan 19 03:00:00 PKT 2015
+2015-01-02 19:17:23,500 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 02 13:00:00 PKT 2015
+2015-01-02 19:17:23,500 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sat Jan 17 03:00:00 PKT 2015
+2015-01-02 19:17:23,501 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sun Jan 18 03:00:00 PKT 2015
+2015-01-02 19:18:50,529 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-02 19:18:50,883 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-02 19:18:51,032 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-02 19:18:52,505 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 3 , Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:18:52,505 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:18:52,505 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:18:52,505 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:18:52,506 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:18:52,506 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:18:52,506 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:18:52,506 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:18:52,507 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:18:52,507 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:18:52,507 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:18:52,507 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:18:52,507 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:18:52,508 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:18:52,508 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:18:52,508 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 09 03:00:00 PKT 2015
+2015-01-02 19:18:52,508 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Mon Jan 19 03:00:00 PKT 2015
+2015-01-02 19:18:52,509 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 02 13:00:00 PKT 2015
+2015-01-02 19:18:52,509 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sat Jan 17 03:00:00 PKT 2015
+2015-01-02 19:18:52,509 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sun Jan 18 03:00:00 PKT 2015
+2015-01-02 19:19:04,558 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 01 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,559 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 01 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,559 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 01 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,560 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 01 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,560 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 01 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,561 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 02 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,562 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 02 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,562 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 02 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,562 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 02 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,563 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 02 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,563 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 02 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,564 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 02 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,564 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 02 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,565 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 02 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,566 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 02 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,566 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 02 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,567 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 02 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,567 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 03 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,568 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 03 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,568 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 03 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,569 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 03 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,569 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 03 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,570 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 03 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,570 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 03 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,571 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 03 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,571 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 03 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,572 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 03 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,572 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 03 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,573 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 03 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,574 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 03 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,574 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 04 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,575 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 04 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,575 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 04 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,576 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 04 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,576 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 04 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,577 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 04 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,577 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 04 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,578 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 05 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,578 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 05 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,579 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 05 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,579 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 05 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,580 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 05 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,580 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 05 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,581 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 05 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,581 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 05 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,582 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 06 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,583 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 06 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,583 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 06 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,583 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 06 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,584 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 06 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,584 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 06 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,585 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 06 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,585 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 06 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,586 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 06 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,586 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 07 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,587 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 07 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,587 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 07 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,587 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 07 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,588 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 07 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,588 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 07 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,589 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 07 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,589 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 07 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,589 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 07 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,590 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 07 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,590 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 08 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,591 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 08 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,591 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 08 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,592 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 08 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,593 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 08 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,593 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 08 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,594 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 08 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,594 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 08 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,594 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 08 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,595 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 08 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,595 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 08 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,596 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 09 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,596 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 09 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,596 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 09 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,597 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 09 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,597 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 09 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,597 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 09 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,598 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,599 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,599 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,599 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,600 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,600 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,600 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,601 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,601 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,601 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,602 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,602 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,603 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,603 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 10 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,603 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,604 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,604 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,604 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,605 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,605 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,606 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,606 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,606 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,607 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,607 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,607 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,608 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,608 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,609 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 11 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,609 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,609 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,610 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,610 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,611 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,611 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,611 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,612 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,612 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,612 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,613 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,613 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,613 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,614 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,614 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,615 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 12 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,615 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,615 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,616 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,616 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,617 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,617 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,617 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,618 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,618 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,618 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,619 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,619 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,620 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,620 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,620 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,621 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,621 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 13 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,621 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,622 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,622 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,622 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,623 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,623 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,623 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,624 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,624 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,625 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,625 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,628 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,629 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,629 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,629 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,630 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,630 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,630 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 14 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,631 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,631 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,632 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,632 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,632 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,633 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,633 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,633 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,634 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,634 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,635 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,635 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,635 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,636 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Wed Jan 14 00:00:00 PKT 2015
+2015-01-02 19:19:04,636 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,636 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,637 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,637 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,637 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 15 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,638 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,638 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,639 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,639 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,639 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,640 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,640 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,640 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,641 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,641 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,641 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,642 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,642 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,642 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Wed Jan 14 00:00:00 PKT 2015
+2015-01-02 19:19:04,643 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Thu Jan 15 00:00:00 PKT 2015
+2015-01-02 19:19:04,643 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,644 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,644 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,644 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,645 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 16 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,645 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,646 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,646 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,646 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,647 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,647 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,647 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,648 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,648 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,649 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,650 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,650 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,650 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,651 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Wed Jan 14 00:00:00 PKT 2015
+2015-01-02 19:19:04,651 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Thu Jan 15 00:00:00 PKT 2015
+2015-01-02 19:19:04,652 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Fri Jan 16 00:00:00 PKT 2015
+2015-01-02 19:19:04,652 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,652 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,654 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,655 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,656 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 17 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,656 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,656 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,657 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,657 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,657 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,657 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,658 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,658 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,658 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,659 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,659 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,659 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,659 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,660 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Wed Jan 14 00:00:00 PKT 2015
+2015-01-02 19:19:04,660 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Thu Jan 15 00:00:00 PKT 2015
+2015-01-02 19:19:04,660 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Fri Jan 16 00:00:00 PKT 2015
+2015-01-02 19:19:04,661 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Sat Jan 17 00:00:00 PKT 2015
+2015-01-02 19:19:04,661 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,661 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,662 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,662 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,662 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 18 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,662 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,663 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,663 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,663 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,664 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,664 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,664 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,664 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,665 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,665 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,665 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,666 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,666 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,666 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Wed Jan 14 00:00:00 PKT 2015
+2015-01-02 19:19:04,666 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Thu Jan 15 00:00:00 PKT 2015
+2015-01-02 19:19:04,667 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Fri Jan 16 00:00:00 PKT 2015
+2015-01-02 19:19:04,667 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Sat Jan 17 00:00:00 PKT 2015
+2015-01-02 19:19:04,667 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Sun Jan 18 00:00:00 PKT 2015
+2015-01-02 19:19:04,668 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,668 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,668 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,668 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,669 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 19 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,669 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,669 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,669 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,670 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,670 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,670 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,671 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,671 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,671 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,671 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,672 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,672 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,672 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,672 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Wed Jan 14 00:00:00 PKT 2015
+2015-01-02 19:19:04,673 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Thu Jan 15 00:00:00 PKT 2015
+2015-01-02 19:19:04,673 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Fri Jan 16 00:00:00 PKT 2015
+2015-01-02 19:19:04,673 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Sat Jan 17 00:00:00 PKT 2015
+2015-01-02 19:19:04,673 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Sun Jan 18 00:00:00 PKT 2015
+2015-01-02 19:19:04,674 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Mon Jan 19 00:00:00 PKT 2015
+2015-01-02 19:19:04,674 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,674 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,674 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,675 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,675 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 20 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,675 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,675 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,676 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,676 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,676 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,676 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,677 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,677 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,677 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,678 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,678 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,678 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,678 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,679 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Wed Jan 14 00:00:00 PKT 2015
+2015-01-02 19:19:04,679 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Thu Jan 15 00:00:00 PKT 2015
+2015-01-02 19:19:04,679 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Fri Jan 16 00:00:00 PKT 2015
+2015-01-02 19:19:04,680 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Sat Jan 17 00:00:00 PKT 2015
+2015-01-02 19:19:04,680 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Sun Jan 18 00:00:00 PKT 2015
+2015-01-02 19:19:04,680 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Mon Jan 19 00:00:00 PKT 2015
+2015-01-02 19:19:04,680 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Tue Jan 20 00:00:00 PKT 2015
+2015-01-02 19:19:04,681 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,681 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,681 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,681 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,682 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 21 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,682 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,683 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,683 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,683 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,684 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,684 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,685 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,685 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,685 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,685 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,686 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,686 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,686 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,686 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Wed Jan 14 00:00:00 PKT 2015
+2015-01-02 19:19:04,687 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Thu Jan 15 00:00:00 PKT 2015
+2015-01-02 19:19:04,687 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Fri Jan 16 00:00:00 PKT 2015
+2015-01-02 19:19:04,687 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Sat Jan 17 00:00:00 PKT 2015
+2015-01-02 19:19:04,688 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Sun Jan 18 00:00:00 PKT 2015
+2015-01-02 19:19:04,688 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Mon Jan 19 00:00:00 PKT 2015
+2015-01-02 19:19:04,688 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Tue Jan 20 00:00:00 PKT 2015
+2015-01-02 19:19:04,688 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Wed Jan 21 00:00:00 PKT 2015
+2015-01-02 19:19:04,689 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,689 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,689 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,689 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,690 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 22 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,690 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 23 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,691 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 23 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,691 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 23 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,691 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 23 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,692 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sun Jan 25 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,693 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,693 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,693 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,693 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,694 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,694 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,694 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,694 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,695 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,695 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,695 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,695 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,696 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,696 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Wed Jan 14 00:00:00 PKT 2015
+2015-01-02 19:19:04,696 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Thu Jan 15 00:00:00 PKT 2015
+2015-01-02 19:19:04,697 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Fri Jan 16 00:00:00 PKT 2015
+2015-01-02 19:19:04,697 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Sat Jan 17 00:00:00 PKT 2015
+2015-01-02 19:19:04,697 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Sun Jan 18 00:00:00 PKT 2015
+2015-01-02 19:19:04,697 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Mon Jan 19 00:00:00 PKT 2015
+2015-01-02 19:19:04,698 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Tue Jan 20 00:00:00 PKT 2015
+2015-01-02 19:19:04,698 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Wed Jan 21 00:00:00 PKT 2015
+2015-01-02 19:19:04,698 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Thu Jan 22 00:00:00 PKT 2015
+2015-01-02 19:19:04,699 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,699 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,699 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,699 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,700 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Mon Jan 26 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,700 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,700 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,701 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,701 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,701 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,702 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,702 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,702 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,702 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,703 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,703 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,703 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,704 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,704 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Wed Jan 14 00:00:00 PKT 2015
+2015-01-02 19:19:04,704 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Thu Jan 15 00:00:00 PKT 2015
+2015-01-02 19:19:04,704 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Fri Jan 16 00:00:00 PKT 2015
+2015-01-02 19:19:04,705 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Sat Jan 17 00:00:00 PKT 2015
+2015-01-02 19:19:04,705 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Sun Jan 18 00:00:00 PKT 2015
+2015-01-02 19:19:04,705 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Mon Jan 19 00:00:00 PKT 2015
+2015-01-02 19:19:04,706 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Tue Jan 20 00:00:00 PKT 2015
+2015-01-02 19:19:04,706 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Wed Jan 21 00:00:00 PKT 2015
+2015-01-02 19:19:04,706 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Thu Jan 22 00:00:00 PKT 2015
+2015-01-02 19:19:04,706 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,707 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,707 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,707 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Mon Jan 26 00:00:00 PKT 2015
+2015-01-02 19:19:04,721 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,721 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Tue Jan 27 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,722 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,722 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,722 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,723 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,723 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,723 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,724 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,724 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,725 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,725 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,725 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,726 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,726 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,726 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Wed Jan 14 00:00:00 PKT 2015
+2015-01-02 19:19:04,727 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Thu Jan 15 00:00:00 PKT 2015
+2015-01-02 19:19:04,727 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Fri Jan 16 00:00:00 PKT 2015
+2015-01-02 19:19:04,728 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Sat Jan 17 00:00:00 PKT 2015
+2015-01-02 19:19:04,728 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Sun Jan 18 00:00:00 PKT 2015
+2015-01-02 19:19:04,729 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Mon Jan 19 00:00:00 PKT 2015
+2015-01-02 19:19:04,729 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Tue Jan 20 00:00:00 PKT 2015
+2015-01-02 19:19:04,729 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Wed Jan 21 00:00:00 PKT 2015
+2015-01-02 19:19:04,730 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Thu Jan 22 00:00:00 PKT 2015
+2015-01-02 19:19:04,730 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,730 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,731 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,731 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Mon Jan 26 00:00:00 PKT 2015
+2015-01-02 19:19:04,731 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Tue Jan 27 00:00:00 PKT 2015
+2015-01-02 19:19:04,732 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,732 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Wed Jan 28 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,733 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,733 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,733 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,734 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,734 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,735 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,735 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,735 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,736 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,736 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,736 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,737 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,737 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,737 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Wed Jan 14 00:00:00 PKT 2015
+2015-01-02 19:19:04,738 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Thu Jan 15 00:00:00 PKT 2015
+2015-01-02 19:19:04,738 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Fri Jan 16 00:00:00 PKT 2015
+2015-01-02 19:19:04,739 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Sat Jan 17 00:00:00 PKT 2015
+2015-01-02 19:19:04,739 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Sun Jan 18 00:00:00 PKT 2015
+2015-01-02 19:19:04,739 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Mon Jan 19 00:00:00 PKT 2015
+2015-01-02 19:19:04,740 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Tue Jan 20 00:00:00 PKT 2015
+2015-01-02 19:19:04,740 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Wed Jan 21 00:00:00 PKT 2015
+2015-01-02 19:19:04,741 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Thu Jan 22 00:00:00 PKT 2015
+2015-01-02 19:19:04,741 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,741 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,742 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,742 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Mon Jan 26 00:00:00 PKT 2015
+2015-01-02 19:19:04,742 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Tue Jan 27 00:00:00 PKT 2015
+2015-01-02 19:19:04,743 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Wed Jan 28 00:00:00 PKT 2015
+2015-01-02 19:19:04,743 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,744 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Thu Jan 29 00:00:00 PKT 2015 AND Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,744 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 30 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,744 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 30 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,745 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Fri Jan 30 00:00:00 PKT 2015 AND Sat Jan 31 13:00:00 PKT 2015
+2015-01-02 19:19:04,745 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 31 00:00:00 PKT 2015 AND Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,745 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport$2 - Difference: Sat Jan 31 00:00:00 PKT 2015 AND Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,746 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - Size 1: 31
+2015-01-02 19:19:04,746 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - Size 2: 31
+2015-01-02 19:19:04,757 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - Size 3: 31
+2015-01-02 19:19:04,757 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 0 - Thu Jan 01 13:00:00 PKT 2015
+2015-01-02 19:19:04,757 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 1 - Fri Jan 02 03:00:00 PKT 2015
+2015-01-02 19:19:04,758 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 2 - Sat Jan 03 13:00:00 PKT 2015
+2015-01-02 19:19:04,758 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 3 - Sun Jan 04 13:00:00 PKT 2015
+2015-01-02 19:19:04,758 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 4 - Mon Jan 05 03:00:00 PKT 2015
+2015-01-02 19:19:04,758 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 5 - Tue Jan 06 13:00:00 PKT 2015
+2015-01-02 19:19:04,758 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 6 - Wed Jan 07 13:00:00 PKT 2015
+2015-01-02 19:19:04,758 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 7 - Thu Jan 08 13:00:00 PKT 2015
+2015-01-02 19:19:04,758 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 8 - Fri Jan 09 13:00:00 PKT 2015
+2015-01-02 19:19:04,759 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 9 - Sat Jan 10 00:00:00 PKT 2015
+2015-01-02 19:19:04,759 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 10 - Sun Jan 11 00:00:00 PKT 2015
+2015-01-02 19:19:04,759 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 11 - Mon Jan 12 00:00:00 PKT 2015
+2015-01-02 19:19:04,759 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 12 - Tue Jan 13 00:00:00 PKT 2015
+2015-01-02 19:19:04,759 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 13 - Wed Jan 14 00:00:00 PKT 2015
+2015-01-02 19:19:04,759 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 14 - Thu Jan 15 00:00:00 PKT 2015
+2015-01-02 19:19:04,759 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 15 - Fri Jan 16 00:00:00 PKT 2015
+2015-01-02 19:19:04,760 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 16 - Sat Jan 17 00:00:00 PKT 2015
+2015-01-02 19:19:04,760 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 17 - Sun Jan 18 00:00:00 PKT 2015
+2015-01-02 19:19:04,760 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 18 - Mon Jan 19 00:00:00 PKT 2015
+2015-01-02 19:19:04,760 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 19 - Tue Jan 20 00:00:00 PKT 2015
+2015-01-02 19:19:04,760 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 20 - Wed Jan 21 00:00:00 PKT 2015
+2015-01-02 19:19:04,760 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 21 - Thu Jan 22 00:00:00 PKT 2015
+2015-01-02 19:19:04,761 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 22 - Fri Jan 23 13:00:00 PKT 2015
+2015-01-02 19:19:04,761 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 23 - Sat Jan 24 13:00:00 PKT 2015
+2015-01-02 19:19:04,761 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 24 - Sun Jan 25 13:00:00 PKT 2015
+2015-01-02 19:19:04,761 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 25 - Mon Jan 26 00:00:00 PKT 2015
+2015-01-02 19:19:04,761 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 26 - Tue Jan 27 00:00:00 PKT 2015
+2015-01-02 19:19:04,761 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 27 - Wed Jan 28 00:00:00 PKT 2015
+2015-01-02 19:19:04,762 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 28 - Thu Jan 29 00:00:00 PKT 2015
+2015-01-02 19:19:04,762 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 29 - Fri Jan 30 13:00:00 PKT 2015
+2015-01-02 19:19:04,762 [SwingWorker-pool-3-thread-1 ] INFO  net.waqassiddiqi.app.crew.report.RestingHourReport - 30 - Sat Jan 31 13:00:00 PKT 2015
+2015-01-03 12:17:50,495 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-03 12:17:50,852 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-03 12:17:51,037 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-03 12:18:02,844 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 3 , Thu Jan 01 12:18:02 PKT 2015
+2015-01-03 12:18:02,845 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 24 12:18:02 PKT 2015
+2015-01-03 12:18:02,845 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 25 12:18:02 PKT 2015
+2015-01-03 12:18:02,845 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 31 12:18:02 PKT 2015
+2015-01-03 12:18:02,845 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 30 12:18:02 PKT 2015
+2015-01-03 12:18:02,846 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 23 12:18:02 PKT 2015
+2015-01-03 12:18:02,846 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 01 12:18:02 PKT 2015
+2015-01-03 12:18:02,846 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 09 12:18:02 PKT 2015
+2015-01-03 12:18:02,847 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 04 12:18:02 PKT 2015
+2015-01-03 12:18:02,847 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Mon Jan 05 12:18:02 PKT 2015
+2015-01-03 12:18:02,847 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Tue Jan 06 12:18:02 PKT 2015
+2015-01-03 12:18:02,847 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Wed Jan 07 12:18:02 PKT 2015
+2015-01-03 12:18:02,848 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 08 12:18:02 PKT 2015
+2015-01-03 12:18:02,848 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 02 12:18:02 PKT 2015
+2015-01-03 12:18:02,848 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 03 12:18:02 PKT 2015
+2015-01-03 12:18:02,848 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 09 12:18:02 PKT 2015
+2015-01-03 12:18:02,849 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Mon Jan 19 12:18:02 PKT 2015
+2015-01-03 12:18:02,849 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 02 12:18:02 PKT 2015
+2015-01-03 12:18:02,849 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sat Jan 17 12:18:02 PKT 2015
+2015-01-03 12:18:02,850 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sun Jan 18 12:18:02 PKT 2015
+2015-01-03 12:44:20,570 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-03 12:44:20,906 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-03 12:44:21,079 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-03 12:44:22,329 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 3 , Thu Jan 01 12:44:22 PKT 2015
+2015-01-03 12:44:22,330 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 24 12:44:22 PKT 2015
+2015-01-03 12:44:22,330 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 25 12:44:22 PKT 2015
+2015-01-03 12:44:22,330 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 31 12:44:22 PKT 2015
+2015-01-03 12:44:22,330 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 30 12:44:22 PKT 2015
+2015-01-03 12:44:22,330 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 23 12:44:22 PKT 2015
+2015-01-03 12:44:22,331 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 01 12:44:22 PKT 2015
+2015-01-03 12:44:22,331 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 09 12:44:22 PKT 2015
+2015-01-03 12:44:22,331 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 04 12:44:22 PKT 2015
+2015-01-03 12:44:22,331 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Mon Jan 05 12:44:22 PKT 2015
+2015-01-03 12:44:22,331 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Tue Jan 06 12:44:22 PKT 2015
+2015-01-03 12:44:22,332 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Wed Jan 07 12:44:22 PKT 2015
+2015-01-03 12:44:22,332 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 08 12:44:22 PKT 2015
+2015-01-03 12:44:22,332 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 02 12:44:22 PKT 2015
+2015-01-03 12:44:22,332 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 03 12:44:22 PKT 2015
+2015-01-03 12:44:22,332 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 09 12:44:22 PKT 2015
+2015-01-03 12:44:22,333 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Mon Jan 19 12:44:22 PKT 2015
+2015-01-03 12:44:22,333 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 02 12:44:22 PKT 2015
+2015-01-03 12:44:22,333 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sat Jan 17 12:44:22 PKT 2015
+2015-01-03 12:44:22,333 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sun Jan 18 12:44:22 PKT 2015
+2015-01-04 20:34:58,167 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-04 20:34:58,563 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-04 20:34:58,830 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-04 20:35:00,647 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 3 , Thu Jan 01 20:35:00 PKT 2015
+2015-01-04 20:35:00,648 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 24 20:35:00 PKT 2015
+2015-01-04 20:35:00,648 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 25 20:35:00 PKT 2015
+2015-01-04 20:35:00,648 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 31 20:35:00 PKT 2015
+2015-01-04 20:35:00,648 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 30 20:35:00 PKT 2015
+2015-01-04 20:35:00,648 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 23 20:35:00 PKT 2015
+2015-01-04 20:35:00,648 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 01 20:35:00 PKT 2015
+2015-01-04 20:35:00,649 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 09 20:35:00 PKT 2015
+2015-01-04 20:35:00,649 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 04 20:35:00 PKT 2015
+2015-01-04 20:35:00,649 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Mon Jan 05 20:35:00 PKT 2015
+2015-01-04 20:35:00,649 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Tue Jan 06 20:35:00 PKT 2015
+2015-01-04 20:35:00,650 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Wed Jan 07 20:35:00 PKT 2015
+2015-01-04 20:35:00,650 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 08 20:35:00 PKT 2015
+2015-01-04 20:35:00,650 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 02 20:35:00 PKT 2015
+2015-01-04 20:35:00,650 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 03 20:35:00 PKT 2015
+2015-01-04 20:35:00,651 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 09 20:35:00 PKT 2015
+2015-01-04 20:35:00,651 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Mon Jan 19 20:35:00 PKT 2015
+2015-01-04 20:35:00,651 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 02 20:35:00 PKT 2015
+2015-01-04 20:35:00,651 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sat Jan 17 20:35:00 PKT 2015
+2015-01-04 20:35:00,652 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sun Jan 18 20:35:00 PKT 2015
+2015-01-04 21:40:32,161 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-04 21:40:32,572 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-04 21:40:32,748 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-04 21:40:34,236 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 3 , Thu Jan 01 21:40:34 PKT 2015
+2015-01-04 21:40:34,236 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 24 21:40:34 PKT 2015
+2015-01-04 21:40:34,236 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 25 21:40:34 PKT 2015
+2015-01-04 21:40:34,237 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 31 21:40:34 PKT 2015
+2015-01-04 21:40:34,237 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 30 21:40:34 PKT 2015
+2015-01-04 21:40:34,237 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 23 21:40:34 PKT 2015
+2015-01-04 21:40:34,237 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 01 21:40:34 PKT 2015
+2015-01-04 21:40:34,237 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 09 21:40:34 PKT 2015
+2015-01-04 21:40:34,238 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 04 21:40:34 PKT 2015
+2015-01-04 21:40:34,238 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Mon Jan 05 21:40:34 PKT 2015
+2015-01-04 21:40:34,238 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Tue Jan 06 21:40:34 PKT 2015
+2015-01-04 21:40:34,238 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Wed Jan 07 21:40:34 PKT 2015
+2015-01-04 21:40:34,239 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 08 21:40:34 PKT 2015
+2015-01-04 21:40:34,239 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 02 21:40:34 PKT 2015
+2015-01-04 21:40:34,239 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 03 21:40:34 PKT 2015
+2015-01-04 21:40:34,239 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 09 21:40:34 PKT 2015
+2015-01-04 21:40:34,240 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Mon Jan 19 21:40:34 PKT 2015
+2015-01-04 21:40:34,240 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 02 21:40:34 PKT 2015
+2015-01-04 21:40:34,240 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sat Jan 17 21:40:34 PKT 2015
+2015-01-04 21:40:34,241 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sun Jan 18 21:40:34 PKT 2015

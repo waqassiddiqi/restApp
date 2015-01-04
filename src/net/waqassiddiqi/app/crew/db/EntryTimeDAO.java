@@ -40,7 +40,14 @@ public class EntryTimeDAO {
 			if(rs.next()) {
 				entry = new EntryTime();
 				
-				entry.setEntryDate(date);
+				//entry.setEntryDate(date);
+				
+				Calendar calDate = Calendar.getInstance();
+				calDate.set(Calendar.YEAR, rs.getInt("year"));
+				calDate.set(Calendar.MONTH, rs.getInt("month"));
+				calDate.set(Calendar.DAY_OF_MONTH, rs.getInt("day"));
+				entry.setEntryDate(calDate.getTime());
+				
 				entry.setCrewId(crew.getId());
 				entry.setComments(rs.getString("comments"));
 				entry.setOnPort(rs.getBoolean("is_on_port"));
@@ -86,7 +93,14 @@ public class EntryTimeDAO {
 			while(rs.next()) {
 				entry = new EntryTime();
 				
-				entry.setEntryDate(new Date(rs.getLong("entry_date")));
+				//entry.setEntryDate(new Date(rs.getLong("entry_date")));
+				
+				Calendar calDate = Calendar.getInstance();
+				calDate.set(Calendar.YEAR, rs.getInt("year"));
+				calDate.set(Calendar.MONTH, rs.getInt("month"));
+				calDate.set(Calendar.DAY_OF_MONTH, rs.getInt("day"));
+				entry.setEntryDate(calDate.getTime());
+				
 				entry.setCrewId(crew.getId());
 				entry.setComments(rs.getString("comments"));
 				entry.setOnPort(rs.getBoolean("is_on_port"));
@@ -180,14 +194,21 @@ public class EntryTimeDAO {
 		
 		List<EntryTime> list = new ArrayList<EntryTime>();
 		EntryTime entry = null;
-		final ResultSet rs = this.db.executeQuery("SELECT * FROM entry_times");
+		final ResultSet rs = this.db.executeQuery("SELECT * FROM entry_times order by crew_id");
 		
 		try {
 			while(rs.next()) {
 				entry = new EntryTime();
 				
 				entry.setId(rs.getInt("id"));
-				entry.setEntryDate(new Date(rs.getLong("entry_date")));
+				//entry.setEntryDate(new Date(rs.getLong("entry_date")));
+				
+				Calendar calDate = Calendar.getInstance();
+				calDate.set(Calendar.YEAR, rs.getInt("year"));
+				calDate.set(Calendar.MONTH, rs.getInt("month"));
+				calDate.set(Calendar.DAY_OF_MONTH, rs.getInt("day"));
+				entry.setEntryDate(calDate.getTime());
+				
 				entry.setCrewId(rs.getInt("crew_id"));
 				entry.setComments(rs.getString("comments"));
 				entry.setOnPort(rs.getBoolean("is_on_port"));

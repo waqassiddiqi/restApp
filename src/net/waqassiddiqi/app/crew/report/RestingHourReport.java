@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import org.apache.log4j.Logger;
 
 import net.waqassiddiqi.app.crew.db.EntryTimeDAO;
 import net.waqassiddiqi.app.crew.model.Crew;
@@ -22,6 +26,8 @@ public class RestingHourReport {
 	private EntryTime previousDay = null;
 	private List<EntryTime> last7Day = null;
 	private EntryTimeDAO entryTimeDao = null;
+	
+	private Logger log = Logger.getLogger(getClass().getName());
 	
 	public RestingHourReport(Crew c, Vessel v, int month, int year) {
 		this.crew = c;
@@ -88,7 +94,20 @@ public class RestingHourReport {
 				}
 			}
 			
+			log.info("Size 1: " + lstEntryTimes.size());
 			
+			Set<EntryTime> entSet = new HashSet<EntryTime>();
+			
+			for(int i=0; i<lstEntryTimes.size(); i++) {
+				entSet.add(lstEntryTimes.get(i));
+			}
+			
+			lstEntryTimes.clear();
+			
+			log.info("Size 2: " + entSet.size());
+			
+			for(EntryTime e : entSet)
+				lstEntryTimes.add(e);
 			
 			Collections.sort(lstEntryTimes, new Comparator<EntryTime>() {
 
@@ -98,6 +117,12 @@ public class RestingHourReport {
 							e2.getEntryCalendar().get(Calendar.DAY_OF_MONTH));
 				}				
 			});
+			
+			log.info("Size 3: " + lstEntryTimes.size());
+			
+			for(int i=0; i<lstEntryTimes.size(); i++) {
+				log.info(i + " - " + lstEntryTimes.get(i).getEntryDate().toString());
+			}
 		}
 		
 	}

@@ -71,7 +71,7 @@ public class ErrorReportForm extends BaseForm {
 		
 		cmbCrew = new WebComboBox();
 		cmbCrew.addItem("Select Crew");
-		List<Crew> listCrew = new CrewDAO().getAll();
+		List<Crew> listCrew = new CrewDAO().getAllActive();
 		for(Crew c : listCrew) {
 			cmbCrew.addItem(c);
 		}

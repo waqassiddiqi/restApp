@@ -27,8 +27,10 @@ import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.ApplicationSettingDAO;
 import net.waqassiddiqi.app.crew.db.ConnectionManager;
 import net.waqassiddiqi.app.crew.db.DatabaseServer;
+import net.waqassiddiqi.app.crew.db.EntryTimeDAO;
 import net.waqassiddiqi.app.crew.license.LicenseManager;
 import net.waqassiddiqi.app.crew.model.ApplicationSetting;
+import net.waqassiddiqi.app.crew.model.EntryTime;
 import net.waqassiddiqi.app.crew.model.RegistrationSetting;
 import net.waqassiddiqi.app.crew.model.Vessel;
 import net.waqassiddiqi.app.crew.style.skin.DefaultSkin;
@@ -169,6 +171,11 @@ public class MainFrame extends WebFrame implements ChangeListener {
 			addContent(c);
 		}
 		
+		EntryTimeDAO d = new EntryTimeDAO();
+		List<EntryTime> l = d.getAll();
+		for(EntryTime e : l) {
+			log.info("C: " + e.getCrewId() + " , " + e.getEntryCalendar().getTime().toString());
+		}
 	}
 	
 	public void addContent(Component view) {
