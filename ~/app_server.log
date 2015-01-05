@@ -2266,3 +2266,26 @@ java.sql.SQLException: Server is already running
 2015-01-04 21:40:34,240 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 02 21:40:34 PKT 2015
 2015-01-04 21:40:34,240 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sat Jan 17 21:40:34 PKT 2015
 2015-01-04 21:40:34,241 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sun Jan 18 21:40:34 PKT 2015
+2015-01-05 12:08:18,677 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Starting rest hour server..
+2015-01-05 12:08:18,879 [main ] INFO  net.waqassiddiqi.app.crew.db.DatabaseServer - Rest hour server has started..
+2015-01-05 12:08:18,963 [main ] INFO  net.waqassiddiqi.app.crew.ui.control.RibbonbarTabControl - Initializing RibbonbarTabControl
+2015-01-05 12:08:20,184 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 3 , Thu Jan 01 12:08:20 PKT 2015
+2015-01-05 12:08:20,184 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 24 12:08:20 PKT 2015
+2015-01-05 12:08:20,184 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 25 12:08:20 PKT 2015
+2015-01-05 12:08:20,184 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 31 12:08:20 PKT 2015
+2015-01-05 12:08:20,184 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 30 12:08:20 PKT 2015
+2015-01-05 12:08:20,184 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 23 12:08:20 PKT 2015
+2015-01-05 12:08:20,185 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 01 12:08:20 PKT 2015
+2015-01-05 12:08:20,185 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 09 12:08:20 PKT 2015
+2015-01-05 12:08:20,185 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sun Jan 04 12:08:20 PKT 2015
+2015-01-05 12:08:20,185 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Mon Jan 05 12:08:20 PKT 2015
+2015-01-05 12:08:20,185 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Tue Jan 06 12:08:20 PKT 2015
+2015-01-05 12:08:20,185 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Wed Jan 07 12:08:20 PKT 2015
+2015-01-05 12:08:20,185 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Thu Jan 08 12:08:20 PKT 2015
+2015-01-05 12:08:20,185 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Fri Jan 02 12:08:20 PKT 2015
+2015-01-05 12:08:20,185 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 4 , Sat Jan 03 12:08:20 PKT 2015
+2015-01-05 12:08:20,186 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 09 12:08:20 PKT 2015
+2015-01-05 12:08:20,186 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Mon Jan 19 12:08:20 PKT 2015
+2015-01-05 12:08:20,186 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Fri Jan 02 12:08:20 PKT 2015
+2015-01-05 12:08:20,186 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sat Jan 17 12:08:20 PKT 2015
+2015-01-05 12:08:20,186 [main ] INFO  net.waqassiddiqi.app.crew.ui.MainFrame - C: 5 , Sun Jan 18 12:08:20 PKT 2015

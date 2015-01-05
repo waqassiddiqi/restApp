@@ -2,9 +2,13 @@ package net.waqassiddiqi.app.crew.report;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.waqassiddiqi.app.crew.db.EntryTimeDAO;
 import net.waqassiddiqi.app.crew.model.Crew;
@@ -93,6 +97,31 @@ public class ErrorReport {
 					calStart.add(Calendar.DAY_OF_MONTH, 1);
 				}
 			}
+			
+			Set<EntryTime> entSet = new HashSet<EntryTime>();
+			
+			for(int i=0; i<lstEntryTimes.size(); i++) {
+				entSet.add(lstEntryTimes.get(i));
+			}
+			
+			lstEntryTimes.clear();
+			
+			
+			
+			for(EntryTime e : entSet)
+				lstEntryTimes.add(e);
+			
+			Collections.sort(lstEntryTimes, new Comparator<EntryTime>() {
+
+				@Override
+				public int compare(EntryTime e1, EntryTime e2) {
+					return Integer.valueOf(
+							e1.getEntryCalendar().get(Calendar.DAY_OF_MONTH))
+							.compareTo(
+									e2.getEntryCalendar().get(
+											Calendar.DAY_OF_MONTH));
+				}
+			});
 			
 			refresh();
 		}

@@ -104,7 +104,7 @@ public class RestingHourReport {
 			
 			lstEntryTimes.clear();
 			
-			log.info("Size 2: " + entSet.size());
+			
 			
 			for(EntryTime e : entSet)
 				lstEntryTimes.add(e);
@@ -113,16 +113,13 @@ public class RestingHourReport {
 
 				@Override
 				public int compare(EntryTime e1, EntryTime e2) {
-					return Integer.valueOf(e1.getEntryCalendar().get(Calendar.DAY_OF_MONTH)).compareTo(
-							e2.getEntryCalendar().get(Calendar.DAY_OF_MONTH));
-				}				
+					return Integer.valueOf(
+							e1.getEntryCalendar().get(Calendar.DAY_OF_MONTH))
+							.compareTo(
+									e2.getEntryCalendar().get(
+											Calendar.DAY_OF_MONTH));
+				}
 			});
-			
-			log.info("Size 3: " + lstEntryTimes.size());
-			
-			for(int i=0; i<lstEntryTimes.size(); i++) {
-				log.info(i + " - " + lstEntryTimes.get(i).getEntryDate().toString());
-			}
 		}
 		
 	}
