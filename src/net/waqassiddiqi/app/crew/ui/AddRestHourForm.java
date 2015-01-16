@@ -8,15 +8,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
 
 import net.waqassiddiqi.app.crew.db.CrewDAO;
 import net.waqassiddiqi.app.crew.db.EntryTimeDAO;
+import net.waqassiddiqi.app.crew.db.QuickCommentDAO;
 import net.waqassiddiqi.app.crew.db.ReportDAO;
 import net.waqassiddiqi.app.crew.db.ScheduleTemplateDAO;
 import net.waqassiddiqi.app.crew.model.Crew;
 import net.waqassiddiqi.app.crew.model.EntryTime;
 import net.waqassiddiqi.app.crew.model.ErrorReportEntry;
+import net.waqassiddiqi.app.crew.model.QuickComment;
 import net.waqassiddiqi.app.crew.model.ScheduleTemplate;
 import net.waqassiddiqi.app.crew.report.ErrorReport;
 import net.waqassiddiqi.app.crew.ui.control.BoundsPopupMenuListener;
@@ -36,6 +39,7 @@ import com.alee.laf.button.WebButton;
 import com.alee.laf.checkbox.WebCheckBox;
 import com.alee.laf.combobox.WebComboBox;
 import com.alee.laf.label.WebLabel;
+import com.alee.laf.optionpane.WebOptionPane;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.tabbedpane.WebTabbedPane;
@@ -62,6 +66,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 	private EntryTimeDAO entryTimeDao;
 	private WebTextArea txtComments;
 	private ErrorReportEntry errorReportEntry;	
+	private WebComboBox cmbCommentList;
 	
 	public AddRestHourForm(MainFrame owner) {
 		this(owner, -1);
@@ -106,7 +111,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
         return tabPan;
 	}
 	
-	@SuppressWarnings("serial")
+	@SuppressWarnings({ "serial", "unchecked" })
 	private Component getForm() {	
 		
 		calendar.addDateSelectionListener(this);
@@ -143,10 +148,10 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		txtComments.setWrapStyleWord(true);
 		
 		AbstractDocument pDoc=(AbstractDocument) txtComments.getDocument();
-		pDoc.setDocumentFilter(new DocumentSizeFilter(200));
+		pDoc.setDocumentFilter(new DocumentSizeFilter(45));
 
         WebScrollPane areaScroll = new WebScrollPane(txtComments);
-        areaScroll.setPreferredSize(new Dimension(300, 100));
+        areaScroll.setPreferredSize(new Dimension(300, 50));
         
         WebTextArea txtNonConformities = new WebTextArea ();
         txtNonConformities.setLineWrap (true);
@@ -155,6 +160,70 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
         WebScrollPane ncScroll = new WebScrollPane(txtNonConformities);
         ncScroll.setPreferredSize(new Dimension(200, 150));
 		
+        cmbCommentList = new WebComboBox();
+        cmbCommentList.addItem("Select quick comment ...");
+        
+        final QuickCommentDAO qCommentDao = new QuickCommentDAO();
+        final List<QuickComment> qCommentsList = qCommentDao.getAll();
+        
+        for(QuickComment qComment : qCommentsList) {
+        	cmbCommentList.addItem(qComment);
+        }
+        
+        cmbCommentList.addItem("...or add new quick comment");
+        
+        
+        
+        cmbCommentList.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(cmbCommentList.getSelectedIndex() == cmbCommentList.getItemCount() - 1) {
+					Object value = WebOptionPane.showInputDialog (getOwner(), "Add new quick comment:", "Quick Comment", 
+							JOptionPane.QUESTION_MESSAGE, null, null, "" );
+					
+					if(value != null && value.toString().trim().length() > 0) {
+						txtComments.setText(value.toString());
+						
+						if(qCommentsList.size() > 0) {
+							boolean bFound = false;
+							
+							for(int i=0; i<qCommentsList.size(); i++) {
+								QuickComment q = qCommentsList.get(i);
+								
+								if(q.getQuickComment().equalsIgnoreCase(value.toString()) == true) {
+									bFound = true;
+									break;
+								}
+							}	
+							
+							if(!bFound) {
+								qCommentDao.addQuickComment(value.toString());
+								
+								QuickComment newQuickComment = new QuickComment();
+								newQuickComment.setQuickComment(value.toString());
+								
+								qCommentsList.add(newQuickComment);
+								
+								cmbCommentList.insertItemAt(newQuickComment, cmbCommentList.getItemCount() - 1);
+							}
+							
+						} else {
+							QuickComment newQuickComment = new QuickComment();
+							newQuickComment.setQuickComment(value.toString());
+							
+							qCommentsList.add(newQuickComment);
+							
+							cmbCommentList.insertItemAt(newQuickComment, cmbCommentList.getItemCount() - 2);
+						}
+						
+					}
+				} else if(cmbCommentList.getSelectedIndex() > 0) {
+					txtComments.setText(cmbCommentList.getSelectedItem().toString());
+				}
+			}
+		});
+        
         lblNonConformities = new WebLabel();
         
         GroupPanel panelNonConformity = new GroupPanel(false, new WebLabel("Non-Conformities:"), lblNonConformities);
@@ -162,7 +231,7 @@ public class AddRestHourForm extends BaseForm implements ActionListener, ChangeL
 		GroupPanel rightPanel = new GroupPanel(false, 
 				new WebLabel("Resting Hours") {{ setDrawShade(true); }}, 
 				timeSheet.getView(), new GroupPanel(30, getGrid(), 
-						new GroupPanel(false, new WebLabel("Comments: "), areaScroll)), panelNonConformity);
+						new GroupPanel(false, new WebLabel("Comments: "), areaScroll, cmbCommentList)), panelNonConformity);
 		
 		return new GroupPanel(GroupingType.fillLast, 20, leftPanel, rightPanel).setMargin(10);
 	}

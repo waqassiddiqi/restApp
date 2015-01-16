@@ -64,6 +64,7 @@ public class RibbonbarTabControl {
 		setupCrewTab(ribbonBarPan);
 		setupReportingTab(ribbonBarPan);
 		setupSettingsTab(ribbonBarPan);
+		setupHelpTab(ribbonBarPan);
 		
 		ribbonBarPan.setSelectedIndex(1);
 		
@@ -72,6 +73,39 @@ public class RibbonbarTabControl {
 		return new GroupPanel(
 				GroupingType.fillAll, 
 				ribbonBarPan) { { setBackground(new Color(252, 248, 252)); setOpaque(true); setFocusable(false); } }.setMargin(this.margin);
+	}
+	
+	public void setupHelpTab(final JTabbedPane tabbedPane) {
+		tabbedPane.addTab("  Help  ", new GroupPanel(4,
+				createHelpPanel()));
+	}
+	
+	private WebPanel createHelpPanel() {
+
+		WebButton btnProductManual = new WebButton("Product Manual", 
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/help_manual_32x32.png"));
+
+		btnProductManual.setRolloverDecoratedOnly(true);
+		btnProductManual.setDrawFocus(false);
+		btnProductManual.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnProductManual.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnProductManual.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(VesselFactory.getInstance().getEdit(Integer.toString(new VesselDAO().getAll().get(0).getId())));
+			}
+		});
+
+		buttonList.add(btnProductManual);
+		
+		GroupPanel gpanel = new GroupPanel(4, btnProductManual);
+
+		WebPanel panel = getRibbonPanel("Help Content");
+		panel.add(gpanel, BorderLayout.CENTER);
+
+		return panel;
 	}
 	
 	public void setupSettingsTab(final JTabbedPane tabbedPane) {
@@ -125,8 +159,6 @@ public class RibbonbarTabControl {
 		panel.add(gpanel, BorderLayout.CENTER);
 
 		return panel;
-		
-		
 	}
 	
 	public void setupReportingTab(final JTabbedPane tabbedPane) {

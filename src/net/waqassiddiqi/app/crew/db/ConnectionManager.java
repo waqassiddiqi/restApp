@@ -147,7 +147,11 @@ public class ConnectionManager {
 				"total_rest_7days_greater_77hrs BOOLEAN, " +
 				"one_rest_period_6hrs BOOLEAN, " +
 				"total_rest_periods BIGINT, " +
-				"rest_hrs_greater_36_3_days REAL)";
+				"rest_hrs_greater_36_3_days REAL,"
+                + "day bigint, "
+                + "month bigint, "
+                + "year bigint "
+				+ ")";
 		
 		executeUpdate(strPivotReport);
 		
@@ -160,10 +164,17 @@ public class ConnectionManager {
                 + "custom_text_rest_report VARCHAR(1500), "
                 + "custom_text_error_report VARCHAR(1500), "
                 + "custom_text_nc_report VARCHAR(1500), "
-                + "custom_text_working_report VARCHAR(1500), "
+                + "custom_text_working_report VARCHAR(1500) "
                 + ")";	
 		
 		executeUpdate(strAppSettings);
+		
+		String strQuickComment = "CREATE TABLE IF NOT EXISTS quick_comments("
+				+ "id bigint auto_increment, "
+				+ "quick_comment VARCHAR(45) "
+				+ ")";	
+		
+		executeUpdate(strQuickComment);
 	}
 	
 	public ResultSet executeQuery(String strSql) {

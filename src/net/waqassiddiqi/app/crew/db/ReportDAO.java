@@ -26,8 +26,17 @@ public class ReportDAO {
 	
 	public void addErrorReportEntry(ErrorReportEntry entry) {
 		
-		db.executeUpdate("DELETE FROM error_report WHERE entry_date = ? AND crew_id = ?", new String[] { 
-				Long.toString(entry.getEntryDate().getTime()), Integer.toString(entry.getCrew().getId()) });
+		//db.executeUpdate("DELETE FROM error_report WHERE entry_date = ? AND crew_id = ?", new String[] { 
+		//		Long.toString(entry.getEntryDate().getTime()), Integer.toString(entry.getCrew().getId()) });
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(entry.getEntryDate());
+		
+		db.executeUpdate("DELETE FROM error_report WHERE day = ? AND month = ? AND year = ? AND crew_id = ?", new String[] { 
+				Long.toString(cal.get(Calendar.DAY_OF_MONTH)), 
+				Long.toString(cal.get(Calendar.MONTH)),
+				Long.toString(cal.get(Calendar.YEAR)),
+				Integer.toString(entry.getCrew().getId()) });
 		
 		db.executeInsert("INSERT INTO error_report(" +
 				"crew_id, " +
@@ -42,7 +51,7 @@ public class ReportDAO {
 				"total_rest_7days_greater_77hrs, " +
 				"one_rest_period_6hrs, " +
 				"total_rest_periods, " +
-				"rest_hrs_greater_36_3_days) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				"rest_hrs_greater_36_3_days, day, month, year) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				new String[] { 
 					Integer.toString(entry.getCrew().getId()),
 					Long.toString(entry.getEntryDate().getTime()),
@@ -56,7 +65,10 @@ public class ReportDAO {
 					entry.isTotalRest7daysGreater77hrs() == true ? "1" : "0",
 					entry.isOneRestPeriod6hrs() == true ? "1" : "0",
 					Integer.toString(entry.getTotalRestPeriods()),
-					Double.toString(entry.getRestHour3daysGreater36hrs())
+					Double.toString(entry.getRestHour3daysGreater36hrs()),
+					Long.toString(cal.get(Calendar.DAY_OF_MONTH)), 
+					Long.toString(cal.get(Calendar.MONTH)),
+					Long.toString(cal.get(Calendar.YEAR))
 				}
 				
 				
@@ -70,6 +82,12 @@ public class ReportDAO {
 		ResultSet rs = null;
 		
 		int hoursOffset = Calendar.getInstance().getTimeZone().getOffset(new Date().getTime()) / 1000;
+		
+		Calendar calStart = Calendar.getInstance();
+		Calendar calEnd = Calendar.getInstance();
+		
+		calStart.setTime(startDate);
+		calEnd.setTime(endDate);
 		
 		String strSql = "select FORMATDATETIME(DATEADD('SECOND', (e.entry_date/1000) + " + hoursOffset + ", DATE '1970-01-01'), 'MMMYYYY') MONTH, v.NAME VESSELNAME,  " +
 					"V.IMO IMONUMBER, CONCAT(c.FIRST_NAME, c.LAST_NAME) CREWNAME, book_number_or_passport PASSPORT, RANK, " +
@@ -86,8 +104,12 @@ public class ReportDAO {
 					"INNER JOIN CREWS c ON c.id = e.crew_id " + 
 					"INNER JOIN VESSELS v on v.id = c.vessel_id " +
 					"WHERE c.is_active = true AND " +
-					"e.entry_date >= " + 
-					startDate.getTime() + " AND e.entry_date <= " + endDate.getTime() + " ORDER BY e.entry_date";
+					"e.entry_date >= " +
+					"e.month = " + calStart.get(Calendar.MONTH) + " AND e.year = " + calStart.get(Calendar.YEAR) + 
+					" AND (e.day >= " + calStart.get(Calendar.DAY_OF_MONTH) + " AND e.day <= " + calEnd.get(Calendar.DAY_OF_MONTH) + ")"; 
+					
+					
+					//startDate.getTime() + " AND e.entry_date <= " + endDate.getTime() + " ORDER BY e.entry_date";
 		
 		try {
 			
