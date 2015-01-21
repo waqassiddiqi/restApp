@@ -13,6 +13,7 @@ import javax.swing.AbstractButton;
 import javax.swing.JTabbedPane;
 
 import net.waqassiddiqi.app.crew.controller.CrewFactory;
+import net.waqassiddiqi.app.crew.controller.OvertimeFactory;
 import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.ReportingFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
@@ -63,6 +64,7 @@ public class RibbonbarTabControl {
 		setupHomeTab(ribbonBarPan);
 		setupCrewTab(ribbonBarPan);
 		setupReportingTab(ribbonBarPan);
+		setupOvertimeTab(ribbonBarPan);
 		setupSettingsTab(ribbonBarPan);
 		setupHelpTab(ribbonBarPan);
 		
@@ -73,6 +75,57 @@ public class RibbonbarTabControl {
 		return new GroupPanel(
 				GroupingType.fillAll, 
 				ribbonBarPan) { { setBackground(new Color(252, 248, 252)); setOpaque(true); setFocusable(false); } }.setMargin(this.margin);
+	}
+	
+	public void setupOvertimeTab(final JTabbedPane tabbedPane) {
+		tabbedPane.addTab("  Overtime  ", new GroupPanel(4,
+				createOvertimePanel()));
+	}
+	
+	private WebPanel createOvertimePanel() {
+
+		WebButton btnOvertime = new WebButton("Add Holidays", 
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/help_manual_32x32.png"));
+
+		btnOvertime.setRolloverDecoratedOnly(true);
+		btnOvertime.setDrawFocus(false);
+		btnOvertime.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnOvertime.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnOvertime.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(OvertimeFactory.getInstance().getAdd());
+			}
+		});
+		
+		buttonList.add(btnOvertime);
+		
+		WebButton btnViewHolidays = new WebButton("View Holidays List", 
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/help_manual_32x32.png"));
+
+		btnViewHolidays.setRolloverDecoratedOnly(true);
+		btnViewHolidays.setDrawFocus(false);
+		btnViewHolidays.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnViewHolidays.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnViewHolidays.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(OvertimeFactory.getInstance().getAdd());
+			}
+		});
+
+		buttonList.add(btnViewHolidays);
+		
+		GroupPanel gpanel = new GroupPanel(4, btnOvertime, btnViewHolidays);
+
+		WebPanel panel = getRibbonPanel("Overtime / Holidays");
+		panel.add(gpanel, BorderLayout.CENTER);
+
+		return panel;
 	}
 	
 	public void setupHelpTab(final JTabbedPane tabbedPane) {
