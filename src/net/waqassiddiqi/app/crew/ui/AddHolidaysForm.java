@@ -4,13 +4,18 @@ import java.awt.Component;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.SwingConstants;
 
+import net.waqassiddiqi.app.crew.ui.control.ExWebCalendar;
+
+import com.alee.extended.date.DateSelectionListener;
 import com.alee.extended.date.WebDateField;
 import com.alee.extended.layout.TableLayout;
 import com.alee.extended.panel.GroupPanel;
+import com.alee.extended.panel.GroupingType;
 import com.alee.laf.button.WebButton;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
@@ -24,7 +29,7 @@ public class AddHolidaysForm extends BaseForm implements ActionListener {
 	private WebTextField txtHolidayName;
 	private WebDateField txtValidFrom;
 	private WebDateField txtValidTo;
-
+	private ExWebCalendar calendar;
 	private WebTabbedPane tabPan;
 	
 	private int defaultTabIndex = 0;
@@ -69,7 +74,7 @@ public class AddHolidaysForm extends BaseForm implements ActionListener {
         WebScrollPane scrollPane = new WebScrollPane(new GroupPanel(false, new WebLabel("List of days")).setMargin(5));
         
         tabPan.addTab("  Holiday Details   ", getForm());
-        tabPan.addTab("  Holiday Dates ", scrollPane);
+        tabPan.addTab("  Holiday Dates ", getHolidyasForm());
         
         tabPan.setSelectedIndex(defaultTabIndex);
         
@@ -78,7 +83,21 @@ public class AddHolidaysForm extends BaseForm implements ActionListener {
         return tabPan;
 	}
 	
-	@SuppressWarnings("serial")
+	private Component getHolidyasForm() {
+		calendar = new ExWebCalendar(new Date(), new Date());
+		
+		GroupPanel leftPanel = new GroupPanel(false, 
+				new GroupPanel(10, new WebLabel("Holiday dates")),
+				new GroupPanel(10, false, calendar));
+		
+		GroupPanel rightPanel = new GroupPanel(false, 
+				new WebLabel("Resting Hours") {{ setDrawShade(true); }}, 
+				new WebLabel("Comments: "));
+		
+		return new GroupPanel(GroupingType.fillLast, 20, leftPanel, rightPanel).setMargin(10);
+	}
+	
+	
 	private Component getForm() {
 		TableLayout layout = new TableLayout(new double[][] {
 				{ TableLayout.PREFERRED, TableLayout.PREFERRED },
@@ -96,11 +115,34 @@ public class AddHolidaysForm extends BaseForm implements ActionListener {
 		txtValidFrom.setDate(new Date());
 		txtValidFrom.setInputPromptPosition (SwingConstants.CENTER);
 		
+		Calendar calNext = Calendar.getInstance();
+		calNext.setTime(new Date());
+		calNext.add(Calendar.DAY_OF_MONTH, 1);
+		
 		txtValidTo = new WebDateField ();
 		txtValidTo.setInputPrompt ("Select date...");
-		txtValidTo.setDate(new Date());
+		txtValidTo.setDate(calNext.getTime());
 		txtValidTo.setInputPromptPosition (SwingConstants.CENTER);
 		
+		txtValidFrom.addDateSelectionListener(new DateSelectionListener() {
+			
+			@Override
+			public void dateSelected(Date date) {
+				if(date.compareTo(txtValidTo.getDate()) > 0) {
+					txtValidTo.setDate(txtValidFrom.getDate());
+				}
+			}
+		});
+		
+		txtValidTo.addDateSelectionListener(new DateSelectionListener() {
+			
+			@Override
+			public void dateSelected(Date date) {
+				if(date.compareTo(txtValidFrom.getDate()) < 0) {
+					txtValidTo.setDate(txtValidFrom.getDate());
+				}
+			}
+		});
 		
 		txtHolidayName = new WebTextField(15);
 

@@ -139,6 +139,7 @@ public class WebCalendar extends WebPanel {
 	protected WebToggleButton lastSelectedDayButton;
 
 	protected Date crewSignOnDate = null;
+	protected Date maxEnabledDate = null;
 	
 	/**
 	 * Constructs new calendar without selected date.
@@ -147,15 +148,10 @@ public class WebCalendar extends WebPanel {
 		this(null, null);
 	}
 
-	/**
-	 * Constructs new calendar with the specified selected date.
-	 * 
-	 * @param date
-	 *            selected date
-	 */
-	public WebCalendar(final Date date, final Date crewSignOnDate) {
+	public WebCalendar(final Date date, final Date crewSignOnDate, final Date maxEnabledDate) {
 		super(true);
 
+		this.maxEnabledDate = maxEnabledDate;
 		this.crewSignOnDate = crewSignOnDate;
 		this.date = date != null ? new Date(date.getTime()) : null;
 		this.shownDate = date != null ? new Date(date.getTime()) : new Date();
@@ -272,6 +268,16 @@ public class WebCalendar extends WebPanel {
 			}
 		});
 		centerPanel.add(monthDaysTransition, BorderLayout.CENTER);
+	}
+	
+	/**
+	 * Constructs new calendar with the specified selected date.
+	 * 
+	 * @param date
+	 *            selected date
+	 */
+	public WebCalendar(final Date date, final Date crewSignOnDate) {
+		this(date, crewSignOnDate, null);
 	}
 
 	/**
