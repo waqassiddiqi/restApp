@@ -5,6 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.waqassiddiqi.app.crew.model.EntryTime;
+import net.waqassiddiqi.app.crew.model.ErrorReportEntry;
 
 import org.apache.log4j.Logger;
 import org.h2.jdbcx.JdbcDataSource;
@@ -44,6 +49,19 @@ public class ConnectionManager {
 		
 		createConnection();
 		
+		String strSqlUpgrade = "CREATE TABLE IF NOT EXISTS upgrade("
+                + "id bigint auto_increment, "
+                + "version VARCHAR(30), "
+                + "upgrade_required BOOLEAN, " 
+                + "release_date VARCHAR(30), "
+                + "tables VARCHAR(1500) " +
+                ")";
+		
+		executeUpdate(strSqlUpgrade);
+		prepareForUpgrade();
+		
+		List<String> tablesToUprade = upgrade();
+		
 		String strSqlVessels = "CREATE TABLE IF NOT EXISTS vessels("
                 + "id bigint auto_increment, "
                 + "name VARCHAR(30), "
@@ -64,7 +82,7 @@ public class ConnectionManager {
                 + "signon_date bigint, "
                 + "is_watch_keeper BOOLEAN, "
                 + "is_active BOOLEAN DEFAULT true, "
-                + "signoff_date bigint, "
+                + "signoff_date bigint "
                 + ")";	
 		
 		executeUpdate(strSqlCrew);
@@ -103,21 +121,34 @@ public class ConnectionManager {
 		
 		executeUpdate(strSqlCrewScheduleTemplate);
 		
-		String strSqlEntryTime = "CREATE TABLE IF NOT EXISTS entry_times("
-                + "id bigint auto_increment, "
-                + "crew_id bigint, "
-                + "entry_date bigint, "
-                + "schedule VARCHAR(48), "
-                + "is_on_port BOOLEAN, "
-                + "work_in_24_hours REAL, "
-                + "rest_in_24_hours REAL, "
-                + "comments VARCHAR(500), "
-                + "day bigint, "
-                + "month bigint, "
-                + "year bigint "
-                + ")";	
-		
-		executeUpdate(strSqlEntryTime);
+		if(tablesToUprade.contains("entry_times")) {
+			EntryTimeDAO dao = new EntryTimeDAO();
+			
+			List<EntryTime> le = dao.getAll();
+			executeUpdate("DROP TABLE entry_times");
+			
+			String strSqlEntryTime = "CREATE TABLE IF NOT EXISTS entry_times("
+	                + "id bigint auto_increment, "
+	                + "crew_id bigint, "
+	                + "entry_date bigint, "
+	                + "schedule VARCHAR(48), "
+	                + "is_on_port BOOLEAN, "
+	                + "work_in_24_hours REAL, "
+	                + "rest_in_24_hours REAL, "
+	                + "comments VARCHAR(500), "
+	                + "day bigint, "
+	                + "month bigint, "
+	                + "year bigint "
+	                + ")";	
+			
+			executeUpdate(strSqlEntryTime);
+			
+			for(EntryTime e: le) {
+				dao.addUpdateEntry(e);
+			}
+			
+			log.info("entry_times table updated and backed up");
+ 		}
 		
 		String strRegistrationDetail = "CREATE TABLE IF NOT EXISTS reg_settings("
                 + "id bigint auto_increment, "
@@ -133,27 +164,39 @@ public class ConnectionManager {
 		
 		executeUpdate(strRegistrationDetail);
 		
-		String strPivotReport = "CREATE TABLE IF NOT EXISTS error_report(" +
-				"id bigint auto_increment, " +
-				"crew_id bigint, " +
-				"entry_date bigint, " +
-				"work_24hr REAL, " +
-				"rest_24hr REAL, " +
-				"any_rest_24hr REAL, " +
-				"rest_7days REAL, " +
-				"rest_greater_10hrs BOOLEAN, " +
-				"work_less_14hrs BOOLEAN, " +
-				"total_rest_24hr_greater_10hrs BOOLEAN, " +
-				"total_rest_7days_greater_77hrs BOOLEAN, " +
-				"one_rest_period_6hrs BOOLEAN, " +
-				"total_rest_periods BIGINT, " +
-				"rest_hrs_greater_36_3_days REAL,"
-                + "day bigint, "
-                + "month bigint, "
-                + "year bigint "
-				+ ")";
-		
-		executeUpdate(strPivotReport);
+		if(tablesToUprade.contains("error_report")) {
+			ReportDAO rptDao = new ReportDAO();
+			List<ErrorReportEntry> eList = rptDao.getAll();
+			executeUpdate("DROP TABLE error_report");
+			
+			String strPivotReport = "CREATE TABLE IF NOT EXISTS error_report(" +
+					"id bigint auto_increment, " +
+					"crew_id bigint, " +
+					"entry_date bigint, " +
+					"work_24hr REAL, " +
+					"rest_24hr REAL, " +
+					"any_rest_24hr REAL, " +
+					"rest_7days REAL, " +
+					"rest_greater_10hrs BOOLEAN, " +
+					"work_less_14hrs BOOLEAN, " +
+					"total_rest_24hr_greater_10hrs BOOLEAN, " +
+					"total_rest_7days_greater_77hrs BOOLEAN, " +
+					"one_rest_period_6hrs BOOLEAN, " +
+					"total_rest_periods BIGINT, " +
+					"rest_hrs_greater_36_3_days REAL,"
+	                + "day bigint, "
+	                + "month bigint, "
+	                + "year bigint "
+					+ ")";
+			
+			executeUpdate(strPivotReport);
+			
+			for(ErrorReportEntry e: eList) {
+				rptDao.addErrorReportEntry(e);
+			}
+			
+			log.info("error_report table updated and backed up");
+		}
 		
 		String strAppSettings = "CREATE TABLE IF NOT EXISTS app_settings("
                 + "id bigint auto_increment, "
@@ -175,6 +218,93 @@ public class ConnectionManager {
 				+ ")";	
 		
 		executeUpdate(strQuickComment);
+		
+		String strHolidayList = "CREATE TABLE IF NOT EXISTS holiday_list("
+				+ "id bigint auto_increment, "
+				+ "name VARCHAR(45), "
+				+ "from_day bigint, "
+				+ "from_month bigint, "
+				+ "from_year bigint, "
+				+ "to_day bigint, "
+				+ "to_month bigint, "
+				+ "to_year bigint "
+				+ ")";	
+		
+		executeUpdate(strHolidayList);
+		
+		String strHoliday = "CREATE TABLE IF NOT EXISTS holiday("
+				+ "id bigint auto_increment, "
+				+ "holiday_id bigint, "
+				+ "description VARCHAR(45), "
+				+ "day bigint, "
+				+ "month bigint, "
+				+ "year bigint "
+				+ ")";	
+		
+		executeUpdate(strHoliday);
+
+		String strWageRate = "CREATE TABLE IF NOT EXISTS wage("
+				+ "id bigint auto_increment, "
+				+ "crew_id bigint, "
+				+ "hours_paid_basic_weekday REAL, "
+				+ "hours_paid_basic_saturday REAL, "
+				+ "hours_paid_basic_sunday REAL, "
+				+ "hours_paid_basic_holidays REAL, "
+				+ "monthly_fixed_overttime_hours REAL, "
+				+ "hourly_rate REAL, "
+				+ "holiday_list_id bigint "
+				+ ")";	
+		
+		executeUpdate(strWageRate);
+		
+		executeUpdate("UPDATE upgrade SET upgrade_required = false");
+	}
+	
+	public void prepareForUpgrade() {
+		ResultSet rs = null;
+		
+		try {
+			rs = executeQuery("SELECT * FROM upgrade");
+			if(rs.next() == false) {
+				executeUpdate("INSERT INTO upgrade VALUES(1, '0.1', true, '2015-02-17', 'ENTRY_TIMES,ERROR_REPORT')");
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		} finally {
+			rs = null;
+		}
+	}
+	
+	public List<String> upgrade() throws SQLException {
+		ResultSet rs = null;
+		boolean bUpgradeRequired = false;
+		List<String> listTables = new ArrayList<String>();
+		
+		try {
+		
+			rs = executeQuery("SELECT * FROM upgrade");
+		
+			if(rs != null && rs.next()) {
+				bUpgradeRequired = rs.getBoolean("upgrade_required");
+				if(bUpgradeRequired) {
+					String csvTables = rs.getString("tables");
+					if(csvTables != null) {
+						String[] tables = csvTables.split(",");
+						for(String tableName : tables) {
+							listTables.add(tableName.trim().toLowerCase());
+						}
+					}
+				}
+			}
+			
+		} catch (SQLException e) {
+			log.error(e.getMessage(), e);
+			throw e;
+		} finally {
+			rs = null;
+		}
+		
+		return listTables;
 	}
 	
 	public ResultSet executeQuery(String strSql) {

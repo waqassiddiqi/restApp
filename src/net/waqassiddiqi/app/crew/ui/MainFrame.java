@@ -22,6 +22,7 @@ import javax.swing.UIManager;
 
 import net.waqassiddiqi.app.crew.Constant;
 import net.waqassiddiqi.app.crew.controller.CrewFactory;
+import net.waqassiddiqi.app.crew.controller.OvertimeFactory;
 import net.waqassiddiqi.app.crew.controller.RankFactory;
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.ApplicationSettingDAO;
@@ -90,6 +91,7 @@ public class MainFrame extends WebFrame implements ChangeListener {
 		RankFactory.getInstance().setOwner(this);
 		CrewFactory.getInstance().setOwner(this);
 		VesselFactory.getInstance().setOwner(this);
+		OvertimeFactory.getInstance().setOwner(this);
 	}
 	
 	public MainFrame() {
@@ -169,12 +171,6 @@ public class MainFrame extends WebFrame implements ChangeListener {
 			Component c = new ProductActivationForm(this).getView();
 			c.setName("license");
 			addContent(c);
-		}
-		
-		EntryTimeDAO d = new EntryTimeDAO();
-		List<EntryTime> l = d.getAll();
-		for(EntryTime e : l) {
-			log.info("C: " + e.getCrewId() + " , " + e.getEntryCalendar().getTime().toString());
 		}
 	}
 	

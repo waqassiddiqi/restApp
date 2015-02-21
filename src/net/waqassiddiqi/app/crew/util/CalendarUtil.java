@@ -3,6 +3,7 @@ package net.waqassiddiqi.app.crew.util;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Utility class providng factory and
@@ -36,6 +37,13 @@ public final class CalendarUtil {
     	SimpleDateFormat sdf = new SimpleDateFormat(format);
     	
     	return sdf.format(date);
+    }
+    
+    public static String getDayOfWeek(Date date) {
+    	
+    	Calendar cal = Calendar.getInstance();
+    	cal.setTime(date);
+    	return cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.US);
     }
     
     public static Date getLastDayOfMonth(Date today) {

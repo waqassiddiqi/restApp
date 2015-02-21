@@ -201,13 +201,22 @@ public class EntryTimeDAO {
 				entry = new EntryTime();
 				
 				entry.setId(rs.getInt("id"));
-				//entry.setEntryDate(new Date(rs.getLong("entry_date")));
 				
-				Calendar calDate = Calendar.getInstance();
-				calDate.set(Calendar.YEAR, rs.getInt("year"));
-				calDate.set(Calendar.MONTH, rs.getInt("month"));
-				calDate.set(Calendar.DAY_OF_MONTH, rs.getInt("day"));
-				entry.setEntryDate(calDate.getTime());
+				try {
+					
+					Calendar calDate = Calendar.getInstance();
+					calDate.set(Calendar.YEAR, rs.getInt("year"));
+					calDate.set(Calendar.MONTH, rs.getInt("month"));
+					calDate.set(Calendar.DAY_OF_MONTH, rs.getInt("day"));
+					entry.setEntryDate(calDate.getTime());
+					
+				} catch (Exception e) {
+					
+					log.warn(e.getMessage());
+					log.info("Using a compatibility version to get entry date");
+					
+					entry.setEntryDate(new Date(rs.getLong("entry_date")));
+				}
 				
 				entry.setCrewId(rs.getInt("crew_id"));
 				entry.setComments(rs.getString("comments"));

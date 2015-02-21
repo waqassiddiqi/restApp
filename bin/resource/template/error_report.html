@@ -119,11 +119,11 @@
 		</tr>
 
 
-		#foreach( $entryTime in $lstEntryTimes ) #set( $totalWorkHours = 24 -
-		$entryTime.getTotalRestHours()) #set( $restHoursIn24Hours =
-		$host.get24HourRestHours($velocityCount)) #set( $restHoursIn7Days =
-		$host.get7DayRestHours($velocityCount)) #set( $restPeriodCounter =
-		$host.getRestPeriodCounter($velocityCount))
+		#foreach( $entryTime in $lstEntryTimes )
+			#set( $totalWorkHours = 24 -$entryTime.getTotalRestHours()) 
+			#set( $restHoursIn24Hours = $host.get24HourRestHours($velocityCount)) 
+			#set( $restHoursIn7Days = $host.get7DayRestHours($velocityCount)) 
+			#set( $restPeriodCounter = $host.getRestPeriodCounter($velocityCount))
 		<tr>
 			<th align="center" valign="middle" bgcolor="#009999">$velocityCount</th>
 			<th bgcolor="#FFFFFF" scope="col">$entryTime.getFormattedDate()</th>
@@ -136,7 +136,7 @@
 			<td bgcolor="#FFFFFF">#if($restHoursIn24Hours < 10)ERROR#end</td>
 			<td bgcolor="#FFFFFF">#if($restHoursIn7Days < 77)ERROR#end</td>
 			<td bgcolor="#FFFFFF">#if(!$host.contain6HourContinuousRest($velocityCount))ERROR#end</td>
-			<td bgcolor="#FFFFFF">$restPeriodCounter</td>
+			<td bgcolor="#FFFFFF">#if($host.getContainMoreThan2RestPeriods($velocityCount) == true) ERROR #end</td>
 			<td bgcolor="#FFFFFF">$host.getLast3DayTotalRestHours($velocityCount)</td>
 			<td bgcolor="#FFFFFF">$!{entryTime.comments}</td>
 		</tr>

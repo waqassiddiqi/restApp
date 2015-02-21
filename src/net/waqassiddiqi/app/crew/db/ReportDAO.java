@@ -7,10 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import net.waqassiddiqi.app.crew.model.Crew;
+import net.waqassiddiqi.app.crew.model.EntryTime;
 import net.waqassiddiqi.app.crew.model.ErrorReportEntry;
+import net.waqassiddiqi.app.crew.report.ErrorReport;
 
 import org.apache.log4j.Logger;
 
@@ -22,6 +27,52 @@ public class ReportDAO {
 	
 	public ReportDAO() {
 		db = ConnectionManager.getInstance();
+	}
+	
+	public List<ErrorReportEntry> getAll() {
+		ResultSet rs = null;
+		ErrorReportEntry e = null;
+		List<ErrorReportEntry> eList = new ArrayList<ErrorReportEntry>();
+		
+		try {
+		
+			rs = db.executeQuery("SELECT * FROM error_report");
+			while(rs.next()) {
+				e = new ErrorReportEntry();
+				
+				final int crewId = rs.getInt("crew_id");
+				
+				e.setCrew(new Crew() {{ setId(crewId); }});
+				
+				e.setId(rs.getInt("id"));
+				e.setEntryDate(new Date(rs.getLong("entry_date")));
+				e.setWorkIn24hours(rs.getDouble("work_24hr"));
+				e.setRestIn24hours(rs.getDouble("rest_24hr"));
+				e.setAnyRest24hours(rs.getDouble("any_rest_24hr"));
+				e.setRest7days(rs.getDouble("rest_7days"));
+				e.setRestGreater10hrs(rs.getBoolean("rest_greater_10hrs"));
+				e.setWorkLess14hrs(rs.getBoolean("work_less_14hrs"));
+				e.setTotalRest24hrsGreater10hrs(rs.getBoolean("total_rest_24hr_greater_10hrs"));
+				e.setTotalRest7daysGreater77hrs(rs.getBoolean("total_rest_7days_greater_77hrs"));
+				e.setOneRestPeriod6hrs(rs.getBoolean("one_rest_period_6hrs"));
+				e.setTotalRestPeriods(rs.getInt("total_rest_periods"));
+				e.setRestHour3daysGreater36hrs(rs.getDouble("rest_hrs_greater_36_3_days"));
+				
+				eList.add(e);
+			}
+			
+		} catch (Exception ex) {
+			log.error("Error executing ReportDAO.getAll(): " + ex.getMessage(), ex);
+		} finally {
+			try {
+				if (rs != null) 
+					rs.close();
+			} catch (SQLException sqlE) {
+				log.error("failed to close db resources: " + sqlE.getMessage(), sqlE);
+			}
+		}
+		
+		return eList;
 	}
 	
 	public void addErrorReportEntry(ErrorReportEntry entry) {
@@ -139,12 +190,121 @@ public class ReportDAO {
 				"INNER JOIN CREW_SCHEDULE_TEMPLATE ct ON ct.schedule_id = t.id " +
 				"INNER JOIN CREWS c " +
 				"ON c.id = ct.crew_id " +
-				"WHERE c.IS_ACTIVE = true AND c.IS_WATCH_KEEPER = IS_WATCH_KEEPING ORDER BY c.id";
+				"WHERE c.IS_ACTIVE = true ORDER BY c.id";
 		
 		return db.executeQuery(strSql);
 	}
 	
+	
+	class NonConformityEntry {
+		public int day;
+		public int month;
+		public String crew;
+		public StringBuilder nonConformity = new StringBuilder();
+		public String description;
+	}
+	
+	@SuppressWarnings("unused")
+	public List<String[]> getPotentialNonConformities(int month, int year) {
+		ErrorReport errorReport = null;
+		NonConformityEntry entry = null;
+		List<NonConformityEntry> entries = new ArrayList<NonConformityEntry>();
+		List<Crew> crews = new CrewDAO().getAllActive();
+		
+		for(Crew crew : crews) {
+			errorReport = new ErrorReport(crew, null, month, year);
+			errorReport.generateReport();
+			
+			int index = 1;
+			for(EntryTime entryTime : errorReport.getEntryTimeList()) {
+				
+				entry = new NonConformityEntry();
+				entry.month = month;
+				entry.day = index;
+				entry.crew = crew.getFirstName() + " / " + crew.getRank();
+				
+				double totalWorkHours = 24 - entryTime.getTotalRestHours();
+				double restHoursIn24Hours = errorReport.get24HourRestHours(index);
+				double restHoursIn7Days = errorReport.get7DayRestHours(index);
+				double restPeriodCounter = errorReport.getRestPeriodCounter(index);
+				
+				if(entryTime.getTotalRestHours() < 10) {
+					entry.nonConformity.append("Total period of REST > 10 Hours");
+					entry.nonConformity.append(System.getProperty("line.separator"));
+				}
+				
+				if(totalWorkHours > 14) {
+					entry.nonConformity.append("Total period of WORK &lt; 14 Hours");
+					entry.nonConformity.append(System.getProperty("line.separator"));
+				}
+				
+				if(errorReport.getContainMoreThan2RestPeriods(index) == true) {
+					entry.nonConformity.append("Total number of REST periods are more than 2");
+					entry.nonConformity.append(System.getProperty("line.separator"));
+				}
+				
+				if(!errorReport.contain6HourContinuousRest(index)) {
+					entry.nonConformity.append("At least one period of rest must be of 6 hours in length");
+					entry.nonConformity.append(System.getProperty("line.separator"));
+				}
+				
+				if(restHoursIn24Hours < 10) {
+					entry.nonConformity.append("Any 24-hour Total Period of REST &gt; 10 Hours");
+					entry.nonConformity.append(System.getProperty("line.separator"));
+				}
+				
+				if(restHoursIn7Days < 77) {
+					entry.nonConformity.append("Any 7-days Total Period of REST &gt; 77 Hours");
+					entry.nonConformity.append(System.getProperty("line.separator"));
+				}
+				
+				if(errorReport.getLast3DayTotalRestHours(index) < 36) {
+					entry.nonConformity.append("Rest hours in last 3 days are &lt; 36 Hours");
+					entry.nonConformity.append(System.getProperty("line.separator"));
+				}
+				
+				
+				if(entry.nonConformity.length() > 0) {
+					entries.add(entry);
+				}
+				
+				index++;
+			}
+		}
+		
+		Collections.sort(entries, new Comparator<NonConformityEntry>() {
+
+			@Override
+			public int compare(NonConformityEntry o1, NonConformityEntry o2) {
+				return Integer.valueOf(o1.day).compareTo(o2.day);
+			}
+			
+		});
+		
+		List<String[]> data = new ArrayList<String[]>();
+		String[] row;
+		
+		for(int i=0; i<entries.size(); i++) {
+			row = new String[5];
+			
+			row[0] = String.format("%02d/%02d", entries.get(i).day, entries.get(i).month + 1);
+			row[1] = entries.get(i).crew;
+			row[2] = "";
+			row[3] = entries.get(i).nonConformity.toString();
+			
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.DAY_OF_MONTH, entries.get(i).day);
+			cal.set(Calendar.MONTH, entries.get(i).month);
+			row[4] = Long.toString(cal.getTimeInMillis());
+			
+			data.add(row);
+		}
+		
+		return data;
+	}
+	
 	public List<String[]> getPotentialNonConformities(Date startDate, Date endDate) {
+		
 		List<String[]> data = new ArrayList<String[]>();
 		String[] row;
 		StringBuilder sb = new StringBuilder();

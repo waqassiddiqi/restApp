@@ -3,9 +3,8 @@ package net.waqassiddiqi.app.crew.controller;
 import java.awt.Component;
 import java.util.Map;
 
-import net.waqassiddiqi.app.crew.ui.AddCrewForm;
 import net.waqassiddiqi.app.crew.ui.AddHolidaysForm;
-import net.waqassiddiqi.app.crew.ui.ListCrewForm;
+import net.waqassiddiqi.app.crew.ui.ListHolidaysForm;
 
 public class OvertimeFactory extends BaseFactory {
 
@@ -23,8 +22,8 @@ public class OvertimeFactory extends BaseFactory {
 	
 	@Override
 	public Component get() {
-		Component c = new ListCrewForm(getOwner()).getView();
-		c.setName("listCrew");
+		Component c = new ListHolidaysForm(getOwner()).getView();
+		c.setName("listHolidaysList");
 		
 		return c;
 	}
@@ -36,8 +35,8 @@ public class OvertimeFactory extends BaseFactory {
 
 	@Override
 	public Component getEdit(String id) {
-		Component c = new AddCrewForm(getOwner(), Integer.parseInt(id)).getView();
-		c.setName("addCrew");
+		Component c = new AddHolidaysForm(getOwner(), Integer.parseInt(id)).getView();
+		c.setName("addHolidays");
 		
 		return c;
 	}
@@ -53,13 +52,10 @@ public class OvertimeFactory extends BaseFactory {
 
 	@Override
 	public Component getEdit(String id, Map<String, Object> params) {
-		AddCrewForm f = new AddCrewForm(getOwner(), Integer.parseInt(id));
-		
-		if(params.containsKey("defaultView"))
-			f.setDefaultTabIndex((int) params.get("defaultView"));
+		AddHolidaysForm f = new AddHolidaysForm(getOwner(), Integer.parseInt(id));
 		
 		Component c = f.getView();
-		c.setName("addCrew");
+		c.setName("addHolidays");
 		
 		return c;
 	}

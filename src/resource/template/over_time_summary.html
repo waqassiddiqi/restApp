@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<title>Crew Overtime Summary</title>
+	<style type="text/css">
+		@page { margin: 0px 0px 0px; size: A4 landscape;}
+
+		
+		@font-face {
+			font-family: 'Arial Unicode MS';	
+			-fs-pdf-font-embed: embed;
+			-fs-pdf-font-encoding: UTF-8;
+		}
+		
+		.value {
+			background-color: #F0F0F0;
+		}
+		
+		.filled {
+			background-color: gray;
+			}
+		
+		.mediumFont {
+			font-size: 11pt;
+		}
+		
+		.future {
+			font-style: italic;
+		}
+		
+		body { 
+			font-family: Arial Unicode MS;
+		}
+	</style>
+</head>	
+<body>
+	<table border="0" cellpadding="0" cellspacing="0" style="width:100%; border:solid 0px black;" class="mediumFont">
+		<tr>
+			<td style="width: 1px">&nbsp;</td>
+			<td style="padding: 2px;" width="1%">
+				<img alt="" src="$!{logo}" style="width: 80px; height: 80px;" />
+			</td>
+			<td style="width:60%">
+				<p><span style="font-size: 20px; font-weight: bold;">Crew Overtime Summary</span></p>
+				<p>$host.getFormattedMonth() $host.getYear()</p>
+			</td>
+			<td width="30%">
+				<table border="0" cellpadding="5" cellspacing="5" style="width:100%; border:solid 0px black;">
+					<tr>
+						<td style="width:10%">Vessel Name:</td>
+						<td style="width:20%" class="value">$!{currentVessel.Name}</td>
+					</tr>
+					
+					<tr>
+						<td style="width:10%">IMO:</td>
+						<td style="width:20%" class="value">$!{currentVessel.Imo}</td>
+					</tr>
+					
+					<tr>
+						<td style="width:10%">Flag:</td>
+						<td style="width:20%" class="value">$!{currentVessel.Flag}</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	
+	<table border="0" cellpadding="0" cellspacing="0" style="width:100%; border:solid 1px black;" class="mediumFont">
+		<tr>
+			<td>
+				<table border="0" cellpadding="0" cellspacing="0" style="width:100%; border:none;">
+					<tr class="value">
+						<td width="5%" style="border-left: solid 0px black;" align="center"><b>No.</b></td>
+						<td width="25%" style="border-left: solid 0px black;" align="center"><b>Name / Rank</b></td>
+						<td width="10%" style="border-left: solid 0px black;" align="center"><b>Total hours</b></td>
+						<td width="10%" style="border-left: solid 0px black;" align="center"><b>Fixed overtime</b></td>
+						<td width="10%" style="border-left: solid 0px black;" align="center"><b>Excess overtime</b></td>
+						<td width="10%" style="border-left: solid 0px black;" align="center"><b>Holiday</b></td>
+						<td width="10%" style="border-left: solid 0px black;" align="center"><b>Total Overtime</b></td>
+					</tr>
+					
+					#foreach( $summary in $lstSummary )
+					<tr>
+						<td width="5%" align="center" style="border-top: solid 1px black;">1</td>
+						<td width="25%" style="border-top: solid 1px black; border-left: solid 1px black;" align="center">$summary.getCrew().toString()</td>
+						<td style="border-top: solid 1px black; padding:10px; border-left: solid 1px black;" align="center">$summary.getTotalHours() Hrs.</td>
+						<td width="25%" style="border-top: solid 1px black; border-left: solid 1px black; " align="center">$summary.getFixedOvertime() Hrs.</td>
+						<td width="25%" style="border-top: solid 1px black; border-left: solid 1px black; " align="center">$summary.getExcessOvertime() Hrs.</td>
+						<td width="25%" style="border-top: solid 1px black; border-left: solid 1px black; " align="center">$summary.getHoliday() Hrs.</td>
+						<td width="25%" style="border-top: solid 1px black; border-left: solid 1px black; " align="center">$summary.getTotalOvertime() Hrs.</td>
+					</tr>
+					#end
+				</table>
+			</td>
+		</tr>
+	</table>
+	<br/>
+	$!{customText}
+</body>
+</html>

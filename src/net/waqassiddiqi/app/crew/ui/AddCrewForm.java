@@ -14,17 +14,21 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import net.waqassiddiqi.app.crew.controller.VesselFactory;
 import net.waqassiddiqi.app.crew.db.CrewDAO;
+import net.waqassiddiqi.app.crew.db.HolidayDAO;
 import net.waqassiddiqi.app.crew.db.RankDAO;
 import net.waqassiddiqi.app.crew.db.ScheduleTemplateDAO;
 import net.waqassiddiqi.app.crew.db.VesselDAO;
 import net.waqassiddiqi.app.crew.model.Crew;
+import net.waqassiddiqi.app.crew.model.HolidayList;
 import net.waqassiddiqi.app.crew.model.Rank;
 import net.waqassiddiqi.app.crew.model.ScheduleTemplate;
 import net.waqassiddiqi.app.crew.model.Vessel;
+import net.waqassiddiqi.app.crew.model.WageDetails;
 import net.waqassiddiqi.app.crew.ui.control.TimeSheet;
 import net.waqassiddiqi.app.crew.util.InputValidator;
 import net.waqassiddiqi.app.crew.util.NotificationManager;
@@ -43,7 +47,9 @@ import com.alee.laf.optionpane.WebOptionPane;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.separator.WebSeparator;
+import com.alee.laf.spinner.WebSpinner;
 import com.alee.laf.tabbedpane.WebTabbedPane;
+import com.alee.laf.text.WebFormattedTextField;
 import com.alee.laf.text.WebTextField;
 import com.alee.utils.ImageUtils;
 
@@ -73,6 +79,12 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 	protected Boolean[] defaultScheduleList = new Boolean[48];
 	
 	private int defaultTabIndex = 0;
+	
+	private WebSpinner spinnerWeekDays, spinnerSundays, spinnerSatudays, spinnerHolidays, spinnerMonthlyFixedOverttimeHours;
+	private WebFormattedTextField txtHourlyRate;
+	private WebComboBox cmbListOfHolidays;
+	private List<HolidayList> listOfHolidays;
+	private WageDetails wageDetail = null;
 	
 	public AddCrewForm(MainFrame owner) {
 		this(owner, -1);
@@ -105,7 +117,7 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 			@Override
 			public void setSelectedIndex(int newIndex) {
 				
-				if(this.getSelectedIndex() == 1) {
+				if(this.getSelectedIndex() >= 1) {
 					save();
 				}
 				
@@ -117,6 +129,8 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 					if(save())
 						super.setSelectedIndex(newIndex);
 				}
+				
+				//super.setSelectedIndex(newIndex);
 			}
 			
 		};
@@ -139,6 +153,9 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 						timeSheetOnPortNonWatchKeeping.getView())).setMargin(5));
         
         tabPan.addTab("  Crew Details   ", getForm());
+        
+        //tabPan.addTab("  Overtime   ", getOvertimeForm());
+        
         tabPan.addTab("  Schedule Template ", scrollPane);
         
         tabPan.setSelectedIndex(defaultTabIndex);
@@ -146,6 +163,95 @@ public class AddCrewForm extends BaseForm implements ActionListener {
         tabPan.setContentInsets(new Insets(10, 10, 10, 10));
         
         return tabPan;
+	}
+	
+	@SuppressWarnings("serial")
+	private Component getOvertimeForm() {		
+		
+		SpinnerNumberModel modelWeek, modelSat, modelSun, modelHol, modelFixOvertime;
+		txtHourlyRate = new WebFormattedTextField();
+		
+		if(this.wageDetail != null) {
+			
+			modelWeek = new SpinnerNumberModel(wageDetail.getBasicWageWeekday(), 0.0d, 1000.0d, 0.5d);
+			modelSat = new SpinnerNumberModel(wageDetail.getBasicWageSaturday(), 0.0d, 1000.0d, 0.5d);
+			modelSun = new SpinnerNumberModel(wageDetail.getBasicWageSunday(), 0.0d, 1000.0d, 0.5d);
+			modelHol = new SpinnerNumberModel(wageDetail.getBasicWageHoliday(), 0.0d, 1000.0d, 0.5d);
+			modelFixOvertime = new SpinnerNumberModel(wageDetail.getMonthlyFixedOverrtimeHours(), 0.0d, 1000.0d, 0.5d);
+			
+			txtHourlyRate.setValue(wageDetail.getHourlyRates());
+			
+		} else {
+			modelWeek = new SpinnerNumberModel(0.0d, 0.0d, 1000.0d, 0.5d);
+			modelSat = new SpinnerNumberModel(0.0d, 0.0d, 1000.0d, 0.5d);
+			modelSun = new SpinnerNumberModel(0.0d, 0.0d, 1000.0d, 0.5d);
+			modelHol = new SpinnerNumberModel(0.0d, 0.0d, 1000.0d, 0.5d);
+			modelFixOvertime = new SpinnerNumberModel(0.0d, 0.0d, 1000.0d, 0.5d);
+			
+			txtHourlyRate.setValue(0.0d);
+		}
+		
+		spinnerWeekDays = new WebSpinner(modelWeek);
+		spinnerSatudays = new WebSpinner(modelSat);
+		spinnerSundays = new WebSpinner(modelSun);
+		spinnerHolidays = new WebSpinner(modelHol);
+		spinnerMonthlyFixedOverttimeHours = new WebSpinner(modelFixOvertime);
+		
+		TableLayout layoutInside = new TableLayout(new double[][] {
+				{ TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED },
+				{ TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED } });
+		layoutInside.setHGap(5);
+		layoutInside.setVGap(5);
+		
+		WebPanel contentRates = new WebPanel(layoutInside);
+		contentRates.setMargin(15, 30, 15, 30);
+		contentRates.setOpaque(false);
+		
+		
+		contentRates.add(new WebLabel("Week days"), "1,0");
+		contentRates.add(new WebLabel("Saturdays"), "2,0");
+		contentRates.add(new WebLabel("Sundays"), "3,0");
+		contentRates.add(new WebLabel("Holidays"), "4,0");
+		
+		contentRates.add(new WebLabel("Hours paid at basic wage rate"), "0,1");
+		contentRates.add(spinnerWeekDays, "1,1");
+		contentRates.add(spinnerSatudays, "2,1");
+		contentRates.add(spinnerSundays, "3,1");
+		contentRates.add(spinnerHolidays, "4,1");
+		
+		contentRates.add(new WebLabel("Monthly fixed overtime hours"), "0,2");
+		contentRates.add(spinnerMonthlyFixedOverttimeHours, "1,2");
+		
+		contentRates.add(new WebLabel("Hourly rate"), "0,3");
+		contentRates.add(txtHourlyRate, "1,3");
+
+		TableLayout tableHolidayList = new TableLayout(new double[][] {
+				{ TableLayout.PREFERRED, TableLayout.PREFERRED },
+				{ TableLayout.PREFERRED, TableLayout.PREFERRED } });
+		tableHolidayList.setHGap(5);
+		tableHolidayList.setVGap(30);
+		
+		WebPanel contentHolidayList = new WebPanel(tableHolidayList);
+		contentHolidayList.setMargin(15, 30, 15, 30);
+		contentHolidayList.setOpaque(false);
+		
+		listOfHolidays = new HolidayDAO().getAllHolidayList();
+		HolidayList[] arr = new HolidayList[listOfHolidays.size()];
+		for(int i=0; i<arr.length; i++) {
+			arr[i] = listOfHolidays.get(i);
+		}
+		cmbListOfHolidays = new WebComboBox(arr);
+		
+		contentHolidayList.add(new WebLabel("Holiday List"), "0,0");
+		contentHolidayList.add(cmbListOfHolidays, "1,0");
+		
+		GroupPanel panel = new GroupPanel(false,
+				contentRates,
+				new WebLabel("Please choose holiday list that applies to this crew member:") {{ setDrawShade(true); }},
+				contentHolidayList);
+		
+		
+		return panel;
 	}
 	
 	@SuppressWarnings("serial")
@@ -257,7 +363,10 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 	private void bindData() {
 		
 		if(this.id > 0) {
-			currentCrew = new CrewDAO().getById(id);
+			
+			CrewDAO crewDao = new CrewDAO();
+			
+			currentCrew = crewDao.getById(id);
 			
 			if(currentCrew != null) {
 				txtFirstName.setText(currentCrew.getFirstName());
@@ -267,6 +376,8 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 				txtSignonDate.setDate(currentCrew.getSignOnDate());
 				chkWatchkeeper.setSelected(currentCrew.isWatchKeeper());
 				chkActive.setSelected(currentCrew.isActive());
+				
+				//wageDetail = crewDao.getWageDetailsByCrewId(id);
 			}
 		}
 		
@@ -284,9 +395,6 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 			
 			i++;
 		}
-		
-		
-		
 	}
 	
 	private void getDefaultScheduleTemplate() {
@@ -378,6 +486,15 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 		
 		if(InputValidator.validateInput(getOwner(), new JTextField[] { txtFirstName, txtLastName, txtNationality, txtPassport, txtSignonDate }, 
 				"This field cannot be empty")) {
+		
+			/*WageDetails wageDetails = new WageDetails();
+			wageDetails.setBasicWageHoliday( (Double) spinnerHolidays.getValue() );
+			wageDetails.setBasicWageSaturday( (Double) spinnerSatudays.getValue() );
+			wageDetails.setBasicWageSunday( (Double) spinnerSundays.getValue() );
+			wageDetails.setBasicWageWeekday( (Double) spinnerWeekDays.getValue() );
+			wageDetails.setHolidayListId( ((HolidayList) cmbListOfHolidays.getSelectedItem()).getId() );
+			wageDetails.setHourlyRates( (Double) txtHourlyRate.getValue() );
+			wageDetails.setMonthlyFixedOverrtimeHours( (Double) spinnerMonthlyFixedOverttimeHours.getValue() );*/
 			
 			if(currentCrew == null) {
 				
@@ -405,13 +522,16 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 					this.currentCrew = crew;
 					
 					associateDefaultTemplates();
+
+					//wageDetails.setCrewId(id);
+					//crewDao.addUpdateWageDetails(wageDetails);
 					
 					NotificationManager.showNotification("New crew has been added");
 					
 					return true;
 					
 				} else {
-					NotificationManager.showNotification("An error has occured while adding new rank");
+					NotificationManager.showNotification("An error has occured while adding new crew");
 					
 					return false;
 				}
@@ -432,10 +552,13 @@ public class AddCrewForm extends BaseForm implements ActionListener {
 				currentCrew.setWatchKeeper(chkWatchkeeper.isSelected());
 				currentCrew.setActive(chkActive.isSelected());
 				
-				new CrewDAO().updateCrew(currentCrew);
+				crewDao.updateCrew(currentCrew);
 				scheduleDao.removeScheduleTemplateByCrew(currentCrew);
 				
 				associateDefaultTemplates();
+				
+				//wageDetails.setCrewId(currentCrew.getId());
+				//crewDao.addUpdateWageDetails(wageDetails);
 				
 				NotificationManager.showNotification("Crew has been updated.");
 				

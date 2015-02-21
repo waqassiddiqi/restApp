@@ -132,7 +132,7 @@ public class WorkingArragmentReportForm extends BaseForm {
 		localVelocityContext.put("customText", settings.getCustomWorkingReportText());
 		
 		waReport = new WorkingArragementsReport();
-		List<String[]> data = waReport.generateReport();		
+		List<String[]> data = waReport.generateReport();
 		
 		localVelocityContext.put("data", data);
 	    

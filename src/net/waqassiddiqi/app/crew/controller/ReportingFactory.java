@@ -5,6 +5,8 @@ import java.util.Map;
 
 import net.waqassiddiqi.app.crew.ui.AddRestHourForm;
 import net.waqassiddiqi.app.crew.ui.report.ErrorReportForm;
+import net.waqassiddiqi.app.crew.ui.report.MonthlyOvertimeRestReportForm;
+import net.waqassiddiqi.app.crew.ui.report.OvertimeSummaryReportForm;
 import net.waqassiddiqi.app.crew.ui.report.PivotReportForm;
 import net.waqassiddiqi.app.crew.ui.report.PotentialNCReportForm;
 import net.waqassiddiqi.app.crew.ui.report.RestingHourReportForm;
@@ -49,6 +51,12 @@ public class ReportingFactory extends BaseFactory {
 		} else if(id.equals("arragement")) {
 			c = new WorkingArragmentReportForm(getOwner()).getView();
 			c.setName("workArragementReport");
+		} else if(id.equals("overtimeSummary")) {
+			c = new OvertimeSummaryReportForm(getOwner()).getView();
+			c.setName("overtimeSummary");
+		} else if(id.equals("monthlyOvertime")) {
+			c = new MonthlyOvertimeRestReportForm(getOwner()).getView();
+			c.setName("monthlyOvertime");
 		}
 		
 		return c;

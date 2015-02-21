@@ -1,12 +1,14 @@
 package net.waqassiddiqi.app.crew.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-
-import org.apache.log4j.Logger;
+import java.util.List;
 
 import net.waqassiddiqi.app.crew.util.CalendarUtil;
+
+import org.apache.log4j.Logger;
 
 public class EntryTime {
 	private int id;
@@ -125,6 +127,10 @@ public class EntryTime {
 		return CalendarUtil.format("yyyy-MM-dd", this.entryDate);
 	}
 	
+	public String getDayOfWeek() {
+		return CalendarUtil.getDayOfWeek(this.entryDate);
+	}
+	
 	public double getTotalRestHours() {
 		double d = 0.0D;
 		if (this.schedule != null) {
@@ -150,6 +156,21 @@ public class EntryTime {
 		return d;
 	}
 
+	public Boolean[] getPreviousDaySectionAEntries() {
+		List<Boolean> list = new ArrayList<Boolean>();
+		if (this.schedule != null) {
+			//for (int i = this.schedule.length - 1; i >= schedule.length - 22; i--) {
+			//	list.add(schedule[i]);
+			//}
+			
+			for(int i=26; i<this.schedule.length; i++) {
+				list.add(schedule[i]);
+			}
+		}
+		
+		return list.toArray(new Boolean[list.size()]);
+	}
+	
 	public double getTodaySectionA() {
 		double d = 0.0D;
 		if (this.schedule != null) {
@@ -160,6 +181,17 @@ public class EntryTime {
 			}
 		}
 		return d;
+	}
+	
+	public Boolean[] getTodaySectionAEntries() {
+		List<Boolean> list = new ArrayList<Boolean>();
+		if (this.schedule != null) {
+			for (int i = 0; i < 26; i++) {
+				list.add(this.schedule[i]);
+			}
+		}
+		
+		return list.toArray(new Boolean[list.size()]);
 	}
 
 	public double getPreviousDaySectionB() {
@@ -172,6 +204,21 @@ public class EntryTime {
 			}
 		}
 		return d;
+	}
+	
+	public Boolean[] getPreviousDaySectionBEntries() {
+		List<Boolean> list = new ArrayList<Boolean>();
+		if (this.schedule != null) {
+			//for (int i = this.schedule.length - 1; i >= this.schedule.length - 12; i--) {
+			//	list.add(schedule[i]);
+			//}
+			
+			for(int i=36; i<this.schedule.length; i++) {
+				list.add(schedule[i]);
+			}
+		}
+		
+		return list.toArray(new Boolean[list.size()]);
 	}
 
 	public double getTodaySectionB() {
@@ -186,6 +233,17 @@ public class EntryTime {
 		return d;
 	}
 
+	public Boolean[] getTodaySectionBEntries() {
+		List<Boolean> list = new ArrayList<Boolean>();
+		if (this.schedule != null) {
+			for (int i = 0; i < 36; i++) {
+				list.add(this.schedule[i]);
+			}
+		}
+		
+		return list.toArray(new Boolean[list.size()]);
+	}
+	
 	public double getPreviousDaySectionC() {
 		double d = 0.0D;
 		if (this.schedule != null) {
@@ -196,6 +254,21 @@ public class EntryTime {
 			}
 		}
 		return d;
+	}
+	
+	public Boolean[] getPreviousDaySectionCEntries() {
+		List<Boolean> list = new ArrayList<Boolean>();
+		if (this.schedule != null) {
+			//for (int i = this.schedule.length - 1; i >= schedule.length - 36; i--) {
+			//	list.add(schedule[i]);
+			//}
+			
+			for (int i = 12; i < this.schedule.length; i++) {
+				list.add(this.schedule[i]);
+			}
+		}
+		
+		return list.toArray(new Boolean[list.size()]);
 	}
 
 	public double getTodaySectionC() {
@@ -210,6 +283,17 @@ public class EntryTime {
 		return d;
 	}
 
+	public Boolean[] getTodaySectionCEntries() {
+		List<Boolean> list = new ArrayList<Boolean>();
+		if (this.schedule != null) {
+			for (int i = 0; i < 12; i++) {
+				list.add(this.schedule[i]);
+			}
+		}
+		
+		return list.toArray(new Boolean[list.size()]);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

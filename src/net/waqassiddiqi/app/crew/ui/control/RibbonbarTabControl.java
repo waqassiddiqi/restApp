@@ -64,9 +64,9 @@ public class RibbonbarTabControl {
 		setupHomeTab(ribbonBarPan);
 		setupCrewTab(ribbonBarPan);
 		setupReportingTab(ribbonBarPan);
-		setupOvertimeTab(ribbonBarPan);
+		//setupOvertimeTab(ribbonBarPan);
 		setupSettingsTab(ribbonBarPan);
-		setupHelpTab(ribbonBarPan);
+		//setupHelpTab(ribbonBarPan);
 		
 		ribbonBarPan.setSelectedIndex(1);
 		
@@ -85,7 +85,7 @@ public class RibbonbarTabControl {
 	private WebPanel createOvertimePanel() {
 
 		WebButton btnOvertime = new WebButton("Add Holidays", 
-				this.iconsHelper.loadIcon(getClass(), "ribbonbar/help_manual_32x32.png"));
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/over_time_32x32.png"));
 
 		btnOvertime.setRolloverDecoratedOnly(true);
 		btnOvertime.setDrawFocus(false);
@@ -114,7 +114,7 @@ public class RibbonbarTabControl {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				owner.addContent(OvertimeFactory.getInstance().getAdd());
+				owner.addContent(OvertimeFactory.getInstance().get());
 			}
 		});
 
@@ -311,8 +311,44 @@ public class RibbonbarTabControl {
 
 		buttonList.add(btnWorkArragementReport);
 		
+		WebButton btnOvertimeSummaryReport = new WebButton("Overtime Summary Report",
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/view_report_32x32.png"));
+
+		btnOvertimeSummaryReport.setRolloverDecoratedOnly(true);
+		btnOvertimeSummaryReport.setDrawFocus(false);
+		btnOvertimeSummaryReport.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnOvertimeSummaryReport.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnOvertimeSummaryReport.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(ReportingFactory.getInstance().getById("overtimeSummary"));
+			}
+		});
+		
+		buttonList.add(btnOvertimeSummaryReport);
+		
+		WebButton btnOvertimeRestReport = new WebButton("Monthly Overtime Report",
+				this.iconsHelper.loadIcon(getClass(), "ribbonbar/view_report_32x32.png"));
+
+		btnOvertimeRestReport.setRolloverDecoratedOnly(true);
+		btnOvertimeRestReport.setDrawFocus(false);
+		btnOvertimeRestReport.setHorizontalTextPosition(AbstractButton.CENTER);
+		btnOvertimeRestReport.setVerticalTextPosition(AbstractButton.BOTTOM);
+
+		btnOvertimeRestReport.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				owner.addContent(ReportingFactory.getInstance().getById("monthlyOvertime"));
+			}
+		});
+		
+		buttonList.add(btnOvertimeRestReport);
+		
 		GroupPanel gpanel = new GroupPanel(4, btnRestHourReport, btnErrorReport, btnPivotReport, 
-				btnPotentialNCReport, btnWorkArragementReport);
+				btnPotentialNCReport, btnWorkArragementReport/*, btnOvertimeSummaryReport, btnOvertimeRestReport*/);
 
 		WebPanel panel = getRibbonPanel("Reporting");
 		panel.add(gpanel, BorderLayout.CENTER);

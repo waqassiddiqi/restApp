@@ -1,6 +1,7 @@
 package net.waqassiddiqi.app.crew.report;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -219,7 +220,51 @@ public class ErrorReport {
 
 	public boolean contain6HourContinuousRest(int paramInt) {
 		paramInt--;
+		
+		List<Boolean> a = get24HSectionA(paramInt);
+		List<Boolean> b = get24HSectionB(paramInt);
+		List<Boolean> c = get24HSectionC(paramInt);
+		
 		int i = 0;
+		
+		for(boolean bool : a) {
+			if (!bool) {
+				i++;
+				if (i >= 12) {
+					return true;
+				}
+			} else {
+				i = 0;
+			}
+		}
+		
+		i = 0;
+		
+		for(boolean bool : b) {
+			if (!bool) {
+				i++;
+				if (i >= 12) {
+					return true;
+				}
+			} else {
+				i = 0;
+			}
+		}
+		
+		i = 0;
+		
+		for(boolean bool : c) {
+			if (!bool) {
+				i++;
+				if (i >= 12) {
+					return true;
+				}
+			} else {
+				i = 0;
+			}
+		}
+		
+		i = 0;
 		
 		for(boolean bool : this.lstEntryTimes.get(paramInt).getSchedule()) {
 			if (!bool) {
@@ -235,12 +280,121 @@ public class ErrorReport {
 		return false;
 	}
 
+	public boolean getContainMoreThan2RestPeriods(int paramInt) {
+		paramInt--;
+		
+		List<Boolean> a = get24HSectionA(paramInt);
+		List<Boolean> b = get24HSectionB(paramInt);
+		List<Boolean> c = get24HSectionC(paramInt);
+		
+		if(getContainMoreThan2RestPeriods(a) == true)
+			return true;
+		
+		if(getContainMoreThan2RestPeriods(b) == true)
+			return true;
+		
+		if(getContainMoreThan2RestPeriods(c) == true)
+			return true;
+		
+		List<Boolean> d = Arrays.asList(lstEntryTimes.get(paramInt).getSchedule());
+		
+		if(getContainMoreThan2RestPeriods(d) == true)
+			return true;
+		
+		return false;
+	}
+	
+	private boolean getContainMoreThan2RestPeriods(List<Boolean> list) {
+		int restPeriods = 0, workPeriods = 0;
+		List<Integer> numberOfRestPeriod = new ArrayList<Integer>();
+		List<Integer> numberOfWorkdPeriod = new ArrayList<Integer>();
+		
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i) == false) {
+				
+				restPeriods++;
+				
+				if(workPeriods > 0) {
+					numberOfWorkdPeriod.add(workPeriods);
+					workPeriods = 0;
+				}
+				
+			} else {
+				workPeriods++;
+				
+				if(restPeriods > 0) {
+					numberOfRestPeriod.add(restPeriods);
+					restPeriods = 0;
+				}
+			}
+		}
+		
+		if(numberOfRestPeriod.size() <= 3)
+			return false;
+		
+		boolean bAnyRestPeriodGreateThan1Hour = true;
+		
+		for(Integer restPeriod : numberOfRestPeriod) {
+			if(restPeriod == 1)
+				return true;
+		}
+		
+		if(bAnyRestPeriodGreateThan1Hour) {
+		
+			int numberOfHalfHourWork = 0;
+			
+			for(Integer workPeriod : numberOfWorkdPeriod) {
+				if(workPeriod == 1)
+					numberOfHalfHourWork++;
+			}
+			
+			if(numberOfHalfHourWork <=2 )
+				return false;
+			else 
+				return true;
+			
+		} else {
+			return true;
+		}
+	}
+	
+	
 	public int getRestPeriodCounter(int paramInt) {
 		paramInt--;
 		int i = 0;
 		int j = 0;
 		
-		for(boolean bool : this.lstEntryTimes.get(paramInt).getSchedule()) {
+		List<Boolean> a = get24HSectionA(paramInt);
+		List<Boolean> b = get24HSectionB(paramInt);
+		List<Boolean> c = get24HSectionC(paramInt);
+			
+		for(boolean bool : a) {
+			if (!bool) {
+				if (j == 0) {
+					i++;
+				}
+				j = 1;
+			} else {
+				j = 0;
+			}
+		}
+		
+		j = 0;
+		
+		for(boolean bool : b) {
+			if (!bool) {
+				if (j == 0) {
+					i++;
+				}
+				j = 1;
+			} else {
+				j = 0;
+			}
+		}
+		
+		j = 0;
+		
+		for(boolean bool : c) {
 			if (!bool) {
 				if (j == 0) {
 					i++;
@@ -274,6 +428,93 @@ public class ErrorReport {
 		return d;
 	}
 
+	private List<Boolean> get24HSectionA(int paramInt) {
+		if((paramInt == 0) && (this.previousDay != null)) {
+			
+			return get24HSectionA(this.previousDay, this.lstEntryTimes.get(paramInt));
+			
+		} else if (paramInt > 0) {
+			
+			return get24HSectionA(this.lstEntryTimes.get(paramInt - 1), this.lstEntryTimes.get(paramInt));
+			
+		}
+		
+		return new ArrayList<Boolean>();
+	}
+	
+	private List<Boolean> get24HSectionA(EntryTime paramEntryTime1, EntryTime paramEntryTime2) {
+		
+		Boolean[] b1 = paramEntryTime1.getPreviousDaySectionAEntries();
+		Boolean[] b2 = paramEntryTime2.getTodaySectionAEntries();
+		
+		List<Boolean> l = new ArrayList<Boolean>();
+		for(int i=0; i<b1.length; i++)
+			l.add(b1[i]);
+		
+		for(int i=0; i<b2.length; i++)
+			l.add(b2[i]);
+		
+		return l;
+	}
+	
+	private List<Boolean> get24HSectionB(int paramInt) {
+		if((paramInt == 0) && (this.previousDay != null)) {
+			
+			return get24HSectionB(this.previousDay, this.lstEntryTimes.get(paramInt));
+			
+		} else if (paramInt > 0) {
+			
+			return get24HSectionB(this.lstEntryTimes.get(paramInt - 1), this.lstEntryTimes.get(paramInt));
+			
+		}
+		
+		return new ArrayList<Boolean>();
+	}
+	
+	private List<Boolean> get24HSectionB(EntryTime paramEntryTime1, EntryTime paramEntryTime2) {
+		
+		Boolean[] b1 = paramEntryTime1.getPreviousDaySectionBEntries();
+		Boolean[] b2 = paramEntryTime2.getTodaySectionBEntries();
+		
+		List<Boolean> l = new ArrayList<Boolean>();
+		for(int i=0; i<b1.length; i++)
+			l.add(b1[i]);
+		
+		for(int i=0; i<b2.length; i++)
+			l.add(b2[i]);
+		
+		return l;
+	}
+	
+	private List<Boolean> get24HSectionC(int paramInt) {
+		if((paramInt == 0) && (this.previousDay != null)) {
+			
+			return get24HSectionC(this.previousDay, this.lstEntryTimes.get(paramInt));
+			
+		} else if (paramInt > 0) {
+			
+			return get24HSectionC(this.lstEntryTimes.get(paramInt - 1), this.lstEntryTimes.get(paramInt));
+			
+		}
+		
+		return new ArrayList<Boolean>();
+	}
+	
+	private List<Boolean> get24HSectionC(EntryTime paramEntryTime1, EntryTime paramEntryTime2) {
+		
+		Boolean[] b1 = paramEntryTime1.getPreviousDaySectionCEntries();
+		Boolean[] b2 = paramEntryTime2.getTodaySectionCEntries();
+		
+		List<Boolean> l = new ArrayList<Boolean>();
+		for(int i=0; i<b1.length; i++)
+			l.add(b1[i]);
+		
+		for(int i=0; i<b2.length; i++)
+			l.add(b2[i]);
+		
+		return l;
+	}
+	
 	private double count24HSectionA(int paramInt) {
 		double d = 0.0D;
 		if ((paramInt == 0) && (this.previousDay != null)) {

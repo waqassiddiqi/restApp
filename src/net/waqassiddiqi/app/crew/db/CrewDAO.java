@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import net.waqassiddiqi.app.crew.model.Crew;
+import net.waqassiddiqi.app.crew.model.WageDetails;
 
 import org.apache.log4j.Logger;
 
@@ -200,5 +201,56 @@ public class CrewDAO {
 		}
 		
 		return c;
+	}
+	
+	public int addUpdateWageDetails(WageDetails wageDetail) {
+		this.db.executeUpdate("DELETE FROM wage WHERE crew_id = " + wageDetail.getCrewId());
+		
+		int generatedId = db.executeInsert("INSERT INTO wage(crew_id, hours_paid_basic_weekday, " +
+				"hours_paid_basic_saturday, hours_paid_basic_sunday, hours_paid_basic_holidays, " +
+				"monthly_fixed_overttime_hours, hourly_rate, holiday_list_id)" +
+				"VALUES(?, ?, ?, ?, ?, ?, ?, ?);", 
+				
+				new String[] { Integer.toString(wageDetail.getCrewId()), Double.toString(wageDetail.getBasicWageWeekday()), 
+					Double.toString(wageDetail.getBasicWageSaturday()), Double.toString(wageDetail.getBasicWageSunday()),
+					Double.toString(wageDetail.getBasicWageHoliday()), Double.toString(wageDetail.getMonthlyFixedOverrtimeHours()),
+					Double.toString(wageDetail.getHourlyRates()),
+					Integer.toString(wageDetail.getHolidayListId())
+				});
+		
+		return generatedId;
+	}
+	
+	public WageDetails getWageDetailsByCrewId(final int crewId) {
+		
+		WageDetails w = null;
+		final ResultSet rs = this.db.executeQuery("SELECT * FROM wage where crew_id = " + crewId);
+		
+		try {			
+			
+			if(rs.next()) {
+				w = new WageDetails() {{ setId(rs.getInt("id"));
+						setCrewId(crewId);
+						setBasicWageHoliday(rs.getDouble("hours_paid_basic_holidays"));
+						setBasicWageSaturday(rs.getDouble("hours_paid_basic_saturday"));
+						setBasicWageSunday(rs.getDouble("hours_paid_basic_sunday"));
+						setBasicWageWeekday(rs.getDouble("hours_paid_basic_weekday"));
+						setHourlyRates(rs.getDouble("hourly_rate"));
+						setMonthlyFixedOverrtimeHours(rs.getDouble("monthly_fixed_overttime_hours"));
+						setHolidayListId(rs.getInt("holiday_list_id"));
+					}};	
+			}
+				
+		} catch (Exception e) {
+			log.error("Error executing CrewDAO.getWageDetailsByCrewId(): " + e.getMessage(), e);
+		} finally {
+			try {
+				if (rs != null) rs.close();
+			} catch (SQLException ex) {
+				log.error("failed to close db resources: " + ex.getMessage(), ex);
+			}
+		}
+		
+		return w;
 	}
 }

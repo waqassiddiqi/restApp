@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head xmlns="http://www.w3.org/1999/xhtml">
+	<title>Monthly Overtime / Rest Report</title>
+	<style type="text/css">
+		@page { margin: 0px 0px 0px; size: A4 landscape;}
+
+		
+		@font-face {
+			font-family: 'Arial Unicode MS';	
+			-fs-pdf-font-embed: embed;
+			-fs-pdf-font-encoding: UTF-8;
+		}
+		
+		.value {
+			background-color: #F0F0F0;
+		}
+		
+		.filled {
+			background-color: gray;
+		}
+		
+		.mediumFont {
+			font-size: 11pt;
+		}
+		
+		body { 
+			font-family: Arial Unicode MS;
+		}
+		
+	</style>
+</head>	
+<body>
+	<table border="0" cellpadding="0" cellspacing="0" style="width:100%; border:solid 0px black;" class="mediumFont">
+		<tr>
+			<td style="width: 1px">&nbsp;</td>
+			<td style="padding: 2px; width: 1%">
+				<img alt="" src="$!{logo}" style="width: 80px; height: 80px;" />
+			</td>
+			<td style="width:20%">
+				<p><span style="font-size: 20px; font-weight: bold;">Overtime / Rest Report</span></p>
+				<p>$host.getFormattedMonth() $host.getYear()</p>
+			</td>
+			<td>
+				<table border="0" cellpadding="5" cellspacing="5" style="width:100%; border:solid 0px black;">
+					<tr>
+						<td style="width:10%">Vessel Name:</td>
+						<td style="width:20%" class="value">$!{currentVessel.Name}</td>
+						
+						<td style="width:1%">Crew:</td>
+						<td style="width:20%" class="value">$!{currentCrew.FirstName}&nbsp;$!{currentCrew.LastName}</td>
+					</tr>
+					
+					<tr>
+						<td style="width:10%">IMO:</td>
+						<td style="width:20%" class="value">$!{currentVessel.Imo}</td>
+						
+						<td style="width:1%">Rank:</td>
+						<td style="width:20%" class="value">$!{currentCrew.Rank}</td>
+					</tr>
+					
+					<tr>
+						<td style="width:10%">Flag:</td>
+						<td style="width:20%" class="value">$!{currentVessel.Flag}</td>
+						
+						<td style="width:1%">Watchkeeper:</td>
+						<td style="width:20%" class="value">#if($currentCrew.watchKeeper)YES#{else}NO#end</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	
+	<table border="0" cellpadding="0" cellspacing="0" style="width:100%; border:solid 1px black; font-size: 8px;">
+		<tr class="value">
+			
+			<td style="width:3%; padding: 2px; vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">
+				DOW
+			</td>
+			<td style="width:5%; padding: 2px; vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">
+				Date
+			</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">0</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">0</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">0</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">1</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">0</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">2</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">0</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">3</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">0</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">4</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">0</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">5</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">0</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">6</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">0</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">7</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">0</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">8</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">0</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">9</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">1</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">0</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">1</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">1</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">1</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">2</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">1</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">3</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">1</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">4</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">1</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">5</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">1</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">6</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">1</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">7</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">1</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">8</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">1</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">9</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">2</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">0</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">2</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">1</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">2</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">2</td>
+			
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">2</td>
+			<td style="vertical-align: bottom; border-bottom: solid 1px black;" valign="bottom">3</td>
+			
+			<td style="padding:2px; width:5%; border-left: solid 1px black; border-bottom: solid 1px black; text-align: center;" align="center">Normal Working Hours</td>
+			<td style="padding:2px; width:5%; border-left: solid 1px black; border-bottom: solid 1px black;" align="center">Total Hours Worked</td>
+			<td style="padding:2px; width:5%; border-left: solid 1px black; border-bottom: solid 1px black;" align="center">Overtime Hours</td>
+			<td style="width:22%; border-left: solid 1px black; text-align: center; border-bottom: solid 1px black;">Comments</td>
+			
+			<td style="width:8%; border-left: solid 1px black; text-align: center; border-bottom: solid 1px black;" align="center">NOT TO BE COMPLETED BY THE SEAFARER (HR'S)<br/>Any 24hr period</td>
+			<td style="width:8%; border-left: solid 1px black; text-align: center; border-bottom: solid 1px black;" align="center">NOT TO BE COMPLETED BY THE SEAFARER (HR'S)<br/>Any 7-day period</td>
+		</tr>
+		#set($totalNormalWorkingHours = 0.0)
+		#foreach( $entryTime in $lstEntryTimes )
+		<tr>
+			<td style="width:3%; padding: 2px;">
+				$entryTime.getDayOfWeek()
+			</td>
+			<td style="width:5%; padding: 2px;">
+				$entryTime.getFormattedDate()
+			</td>
+			
+			#foreach( $index in [0..47] )
+				<td>
+					<div style="border: solid 1px #F0F0F0; width: #if( ($index+1) % 2 == 0 ) 80% else 100% #end;" #if( $host.isFilled($entryTime, $index) ) class="filled" #end>&nbsp;</div>
+				</td>
+			#end
+			
+			<td align="center">
+				#set($normalWorkingHours = $host.getNormalWorkingHours($entryTime))
+				#set($totalNormalWorkingHours = $totalNormalWorkingHours + $normalWorkingHours)
+				$normalWorkingHours
+			</td>
+			<td align="center">
+				#if( $host.isBeforeSignOnDateOrNoEntry($entryTime) == false )
+					#set($totalRestHours = 24 - $entryTime.getTotalRestHours())
+				#else
+					#set($totalRestHours = 0.0)
+				#end
+				
+				$totalRestHours	
+			</td>
+			<td align="center">$host.getOvertimeHours($totalRestHours, $host.getNormalWorkingHours($entryTime))</td>
+			<td align="center">$!{entryTime.comments}</td>
+			<td align="center">$host.get24HourRestHours($velocityCount)</td>
+			<td align="center">$host.get7DayRestHours($velocityCount)</td>
+		</tr>
+		#end
+		<tr>
+			<td style="width:3%; padding: 2px;">
+			</td>
+			<td style="width:5%; padding: 2px;">
+			</td>
+			
+			#foreach( $index in [0..47] )
+				<td>
+					
+				</td>
+			#end
+			
+			<td align="center">$totalNormalWorkingHours</td>
+			<td align="center">$host.getTotalWorkingHours()</td>
+			<td align="center">$host.getTotalOvertimeHours()</td>
+			<td align="center"></td>
+			<td align="center"></td>
+			<td align="center"></td>
+		</tr>
+	</table>
+	
+	<table width="100%" align="center" class="mediumFont" style="font-size: 8px;">
+		<tbody>
+			<tr>
+				<td align="left" style="width: 20%">
+					<table border="0" cellpadding="2" cellspacing="2" style="width:100%; border:solid 0px black;">
+						<tr>
+							<td style="width:10%">Total Overtime hours:</td>
+							<td style="width:20%" class="value">$!{currentVessel.Name}</td>
+						</tr>
+						
+						<tr>
+							<td style="width:10%">Fixed Overtime hours:</td>
+							<td style="width:20%" class="value">$!{currentVessel.Imo}</td>
+						</tr>
+						
+						<tr>
+							<td style="width:10%">Payable overtime hours:</td>
+							<td style="width:20%" class="value">$!{currentVessel.Flag}</td>
+						</tr>
+						
+						<tr>
+							<td style="width:10%">Hourly rate:</td>
+							<td style="width:20%" class="value">$!{currentVessel.Flag}</td>
+						</tr>
+						
+						<tr>
+							<td style="width:10%">Total:</td>
+							<td style="width:20%" class="value">$!{currentVessel.Flag}</td>
+						</tr>
+					</table>
+				</td>
+				<td style="width: 20%"></td>
+				<td align="left" style="width: 30%">
+					<b>Name of Master or person authorized by master to sign this record: __________________</b><br/><br/><br/>
+					<b>Signature of Master or authorized person: ___________________________________________</b><br/><br/><br/>
+					<b>Signature of seafarer: ______________________________________________________________</b><br/>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br/>
+	$!{customText}
+</body>
+</html>

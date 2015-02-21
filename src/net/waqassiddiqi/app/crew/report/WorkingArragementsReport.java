@@ -35,7 +35,8 @@ public class WorkingArragementsReport {
 				
 				
 				if(templateSet.containsKey(rs.getInt("CREW_ID")) == false) {
-					data = new String[8];
+					
+					data = new String[] { "", "", "", "", "", "", "", "" };
 					
 					data[0] = rs.getString("CREW");
 					
@@ -100,23 +101,23 @@ public class WorkingArragementsReport {
 				if(rs.getBoolean("IS_ON_PORT")) {					
 					data[7] = Double.toString(entry.getTotalRestHours());	
 					
-					if(rs.getBoolean("is_watch_keeper")) {
-						data[3] = sb.toString();
-						data[4] = "";
+					if(rs.getBoolean("IS_WATCH_KEEPING")) {
+						if(sb.toString().trim().length() > 0)
+							data[3] = sb.toString();
 					} else {
-						data[3] = "";
-						data[4] = sb.toString();
+						if(sb.toString().trim().length() > 0)
+							data[4] = sb.toString();
 					}
 					
 				} else {					
 					data[6] = Double.toString(entry.getTotalRestHours());
 					
-					if(rs.getBoolean("is_watch_keeper")) {
-						data[1] = sb.toString();
-						data[2] = "";
+					if(rs.getBoolean("IS_WATCH_KEEPING")) {
+						if(sb.toString().trim().length() > 0)
+							data[1] = sb.toString();
 					} else {
-						data[2] = sb.toString();
-						data[1] = "";
+						if(sb.toString().trim().length() > 0)
+							data[2] = sb.toString();
 					}
 				}
 				

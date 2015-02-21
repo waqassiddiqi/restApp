@@ -39,7 +39,8 @@ public class PotentialNCReport {
 		
 		ReportDAO errRptDao = new ReportDAO();
 		
-		return errRptDao.getPotentialNonConformities(calStart.getTime(), calEnd.getTime());
+		//return errRptDao.getPotentialNonConformities(calStart.getTime(), calEnd.getTime());
+		return errRptDao.getPotentialNonConformities(month, year);
 		
 	}
 	
