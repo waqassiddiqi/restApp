@@ -127,7 +127,7 @@ public class LicenseManager {
 		if(SystemUtil.getRegistrationId().equals(settings.getSystemId())) {
 			return true;
 		} else {
-			return true;
+			return false;
 		} 
 	}
 	
